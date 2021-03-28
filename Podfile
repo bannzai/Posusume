@@ -6,6 +6,12 @@ target 'posusume' do
   use_frameworks!
 
   # Pods for posusume
+  pod 'Firebase/Core'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
+  pod 'Firebase/MLVision'
+  pod 'Firebase/Auth'
 
   target 'posusumeTests' do
     inherit! :search_paths
