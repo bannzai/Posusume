@@ -16,6 +16,9 @@
 		BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */; };
 		BAD9A8C22610B73100676F22 /* posusumeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8C12610B73100676F22 /* posusumeTests.swift */; };
 		BAD9A8CD2610B73200676F22 /* posusumeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */; };
+		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
+		BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */; };
+		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		BAD9A8C82610B73200676F22 /* PosusumeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PosusumeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeUITests.swift; sourceTree = "<group>"; };
 		BAD9A8CE2610B73200676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
+		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		BAFCCE1812034895D2F3946A /* Pods-posusumeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusumeTests.debug.xcconfig"; path = "Target Support Files/Pods-posusumeTests/Pods-posusumeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE0578CB842C51668216FB5F /* Pods-posusume.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusume.debug.xcconfig"; path = "Target Support Files/Pods-posusume/Pods-posusume.debug.xcconfig"; sourceTree = "<group>"; };
 		FE82855AA7BBE1094E671090 /* Pods_posusumeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_posusumeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +132,10 @@
 				BAD9A8B12610B72F00676F22 /* ContentView.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
+				BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */,
+				BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */,
 				BAD9A8B52610B73100676F22 /* Preview Content */,
+				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
 			);
 			path = Posusume;
 			sourceTree = "<group>";
@@ -278,7 +287,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */,
 				BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */,
+				BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */,
 				BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +418,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 			);

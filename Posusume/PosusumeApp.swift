@@ -10,8 +10,9 @@ import Firebase
 
 @main
 struct posusumeApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
-        FirebaseApp.configure()
         return WindowGroup {
             ContentView()
         }
