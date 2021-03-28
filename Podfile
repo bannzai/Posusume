@@ -1,9 +1,12 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
+source 'https://cdn.cocoapods.org/'
+
+install! 'cocoapods', incremental_installation: true, integrate_targets: false
 
 target 'posusume' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  use_frameworks! :linkage => :static
 
   # Pods for posusume
   pod 'Firebase/Core'
