@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct posusumeApp: App {
     var body: some Scene {
-        WindowGroup {
+        FirebaseApp.configure()
+        return WindowGroup {
             ContentView()
         }
     }
