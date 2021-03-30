@@ -4,7 +4,7 @@ source 'https://cdn.cocoapods.org/'
 
 install! 'cocoapods', generate_multiple_pod_projects: true, incremental_installation: true, integrate_targets: false
 
-target 'Posusume' do
+target 'Umbreall' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks! :linkage => :static
 
@@ -15,15 +15,5 @@ target 'Posusume' do
   pod 'FirebaseFirestoreSwift'
   pod 'GoogleMLKit/ImageLabeling'
   pod 'Firebase/Auth'
-
-  target 'PosusumeTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'PosusumeUITests' do
-    # Pods for testing
-  end
-
 end
  
