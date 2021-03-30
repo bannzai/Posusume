@@ -2,6 +2,8 @@
 platform :ios, '14.0'
 source 'https://cdn.cocoapods.org/'
 
+install! 'cocoapods', generate_multiple_pod_projects: true, incremental_installation: true, integrate_targets: false
+
 target 'Posusume' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks! :linkage => :static
@@ -24,3 +26,4 @@ target 'Posusume' do
   end
 
 end
+ 
