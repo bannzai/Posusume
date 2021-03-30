@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Posusume.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Umbrella/Umbrella.xcodeproj">
+   </FileRef>
 </Workspace>
