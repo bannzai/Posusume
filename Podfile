@@ -2,7 +2,7 @@
 platform :ios, '14.0'
 source 'https://cdn.cocoapods.org/'
 
-target 'posusume' do
+target 'Posusume' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks! :linkage => :static
 
@@ -14,12 +14,12 @@ target 'posusume' do
   pod 'GoogleMLKit/ImageLabeling'
   pod 'Firebase/Auth'
 
-  target 'posusumeTests' do
+  target 'PosusumeTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'posusumeUITests' do
+  target 'PosusumeUITests' do
     # Pods for testing
   end
 
