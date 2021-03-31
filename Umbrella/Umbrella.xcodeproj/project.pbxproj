@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BA979C1726131B8100997206 /* Umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA979C1526131B8100997206 /* Umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA979C2126134F0100997206 /* Config.base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BA979C2026134F0100997206 /* Config.base.xcconfig */; };
+		BA979C262613509300997206 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979C252613509300997206 /* Export.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA979C1226131B8100997206 /* Umbrella.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Umbrella.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA979C1526131B8100997206 /* Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Umbrella.h; sourceTree = "<group>"; };
 		BA979C1626131B8100997206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA979C2026134F0100997206 /* Config.base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.base.xcconfig; sourceTree = SOURCE_ROOT; };
+		BA979C252613509300997206 /* Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +50,10 @@
 		BA979C1426131B8100997206 /* Umbrella */ = {
 			isa = PBXGroup;
 			children = (
+				BA979C2026134F0100997206 /* Config.base.xcconfig */,
 				BA979C1526131B8100997206 /* Umbrella.h */,
 				BA979C1626131B8100997206 /* Info.plist */,
+				BA979C252613509300997206 /* Export.swift */,
 			);
 			path = Umbrella;
 			sourceTree = "<group>";
@@ -94,6 +100,7 @@
 				TargetAttributes = {
 					BA979C1126131B8100997206 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
@@ -120,6 +127,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA979C2126134F0100997206 /* Config.base.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA979C262613509300997206 /* Export.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +147,7 @@
 /* Begin XCBuildConfiguration section */
 		BA979C1826131B8100997206 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA979C2026134F0100997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -202,6 +212,7 @@
 		};
 		BA979C1926131B8100997206 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA979C2026134F0100997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -260,7 +271,9 @@
 		};
 		BA979C1B26131B8100997206 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA979C2026134F0100997206 /* Config.base.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
@@ -277,6 +290,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bannzai.posusume.Umbrella;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -284,7 +298,9 @@
 		};
 		BA979C1C26131B8100997206 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA979C2026134F0100997206 /* Config.base.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
