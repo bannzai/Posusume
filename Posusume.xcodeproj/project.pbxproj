@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		052B37BFF43366AC031824BD /* Pods_posusumeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE82855AA7BBE1094E671090 /* Pods_posusumeTests.framework */; };
-		0CD029887B46CC64ACF3829F /* Pods_posusume_posusumeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC5E62C28FC4369CEA6EEC63 /* Pods_posusume_posusumeUITests.framework */; };
-		1A0A9AD8D7A6AF43266E538B /* Pods_posusume.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C4AD48BABB37F8828E49502 /* Pods_posusume.framework */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
@@ -39,12 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B799B0F5269DD65A65558AE /* Pods-posusume.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusume.release.xcconfig"; path = "Target Support Files/Pods-posusume/Pods-posusume.release.xcconfig"; sourceTree = "<group>"; };
-		22755B5A1EEE5FFC75243FDE /* Pods-posusumeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusumeTests.release.xcconfig"; path = "Target Support Files/Pods-posusumeTests/Pods-posusumeTests.release.xcconfig"; sourceTree = "<group>"; };
-		553ABF279BC5F24426CEF577 /* Pods-posusume-posusumeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusume-posusumeUITests.release.xcconfig"; path = "Target Support Files/Pods-posusume-posusumeUITests/Pods-posusume-posusumeUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6C4AD48BABB37F8828E49502 /* Pods_posusume.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_posusume.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AA1B677A1A8DA9FCCF2DD69 /* Pods-posusume-posusumeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusume-posusumeUITests.debug.xcconfig"; path = "Target Support Files/Pods-posusume-posusumeUITests/Pods-posusume-posusumeUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		AC5E62C28FC4369CEA6EEC63 /* Pods_posusume_posusumeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_posusume_posusumeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B12610B72F00676F22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,9 +51,6 @@
 		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
 		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
-		BAFCCE1812034895D2F3946A /* Pods-posusumeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusumeTests.debug.xcconfig"; path = "Target Support Files/Pods-posusumeTests/Pods-posusumeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FE0578CB842C51668216FB5F /* Pods-posusume.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-posusume.debug.xcconfig"; path = "Target Support Files/Pods-posusume/Pods-posusume.debug.xcconfig"; sourceTree = "<group>"; };
-		FE82855AA7BBE1094E671090 /* Pods_posusumeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_posusumeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0A9AD8D7A6AF43266E538B /* Pods_posusume.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				052B37BFF43366AC031824BD /* Pods_posusumeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,23 +72,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CD029887B46CC64ACF3829F /* Pods_posusume_posusumeUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9708D3C37A6756335ED87515 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6C4AD48BABB37F8828E49502 /* Pods_posusume.framework */,
-				AC5E62C28FC4369CEA6EEC63 /* Pods_posusume_posusumeUITests.framework */,
-				FE82855AA7BBE1094E671090 /* Pods_posusumeTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BAD9A8A32610B72F00676F22 = {
 			isa = PBXGroup;
 			children = (
@@ -110,8 +85,6 @@
 				BAD9A8C02610B73100676F22 /* PosusumeTests */,
 				BAD9A8CB2610B73200676F22 /* PosusumeUITests */,
 				BAD9A8AD2610B72F00676F22 /* Products */,
-				BBBC8253773819AE4DD49A17 /* Pods */,
-				9708D3C37A6756335ED87515 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,19 +139,6 @@
 			path = PosusumeUITests;
 			sourceTree = "<group>";
 		};
-		BBBC8253773819AE4DD49A17 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FE0578CB842C51668216FB5F /* Pods-posusume.debug.xcconfig */,
-				1B799B0F5269DD65A65558AE /* Pods-posusume.release.xcconfig */,
-				8AA1B677A1A8DA9FCCF2DD69 /* Pods-posusume-posusumeUITests.debug.xcconfig */,
-				553ABF279BC5F24426CEF577 /* Pods-posusume-posusumeUITests.release.xcconfig */,
-				BAFCCE1812034895D2F3946A /* Pods-posusumeTests.debug.xcconfig */,
-				22755B5A1EEE5FFC75243FDE /* Pods-posusumeTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -186,11 +146,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BAD9A8D12610B73200676F22 /* Build configuration list for PBXNativeTarget "Posusume" */;
 			buildPhases = (
-				E1F7102F98DB9B36E70E233F /* [CP] Check Pods Manifest.lock */,
 				BAD9A8A82610B72F00676F22 /* Sources */,
 				BAD9A8A92610B72F00676F22 /* Frameworks */,
 				BAD9A8AA2610B72F00676F22 /* Resources */,
-				64C4392F2BCF59245E39F2F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -311,23 +269,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		64C4392F2BCF59245E39F2F4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-posusume/Pods-posusume-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-posusume/Pods-posusume-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-posusume/Pods-posusume-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9E427D0894465D78634A792C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,28 +324,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-posusume-posusumeUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E1F7102F98DB9B36E70E233F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-posusume-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -574,7 +493,6 @@
 		};
 		BAD9A8D22610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE0578CB842C51668216FB5F /* Pods-posusume.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -597,7 +515,6 @@
 		};
 		BAD9A8D32610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B799B0F5269DD65A65558AE /* Pods-posusume.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -620,7 +537,6 @@
 		};
 		BAD9A8D52610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAFCCE1812034895D2F3946A /* Pods-posusumeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -643,7 +559,6 @@
 		};
 		BAD9A8D62610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22755B5A1EEE5FFC75243FDE /* Pods-posusumeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -666,7 +581,6 @@
 		};
 		BAD9A8D82610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AA1B677A1A8DA9FCCF2DD69 /* Pods-posusume-posusumeUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -687,7 +601,6 @@
 		};
 		BAD9A8D92610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 553ABF279BC5F24426CEF577 /* Pods-posusume-posusumeUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
