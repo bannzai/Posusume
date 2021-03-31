@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 
 @main
 struct posusumeApp: App {
