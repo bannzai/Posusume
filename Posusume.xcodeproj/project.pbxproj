@@ -10,6 +10,7 @@
 		BA979C872614056500997206 /* Config.base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BA979C862614056500997206 /* Config.base.xcconfig */; };
 		BA979CA42614063B00997206 /* Umbrella.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979CA32614063B00997206 /* Umbrella.framework */; };
 		BA979CA52614063B00997206 /* Umbrella.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979CA32614063B00997206 /* Umbrella.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		BA979C862614056500997206 /* Config.base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.base.xcconfig; sourceTree = "<group>"; };
 		BA979CA32614063B00997206 /* Umbrella.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Umbrella.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B12610B72F00676F22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */,
 				BAD9A8B52610B73100676F22 /* Preview Content */,
 				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
+				BA979CAF26140A4600997206 /* Auth.swift */,
 			);
 			path = Posusume;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
+				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
