@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
-               BuildableName = "Posusume.app"
-               BlueprintName = "Posusume"
-               ReferencedContainer = "container:posusume.xcodeproj">
+               BlueprintIdentifier = "BA979C1126131B8100997206"
+               BuildableName = "Umbrella.framework"
+               BlueprintName = "Umbrella"
+               ReferencedContainer = "container:Umbrella.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BAD9A8BC2610B73100676F22"
-               BuildableName = "PosusumeTests.xctest"
-               BlueprintName = "PosusumeTests"
-               ReferencedContainer = "container:posusume.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BAD9A8C72610B73100676F22"
-               BuildableName = "PosusumeUITests.xctest"
-               BlueprintName = "PosusumeUITests"
-               ReferencedContainer = "container:posusume.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -60,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
-            BuildableName = "Posusume.app"
-            BlueprintName = "Posusume"
-            ReferencedContainer = "container:posusume.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -77,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
-            BuildableName = "Posusume.app"
-            BlueprintName = "Posusume"
-            ReferencedContainer = "container:posusume.xcodeproj">
+            BlueprintIdentifier = "BA979C1126131B8100997206"
+            BuildableName = "Umbrella.framework"
+            BlueprintName = "Umbrella"
+            ReferencedContainer = "container:Umbrella.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
