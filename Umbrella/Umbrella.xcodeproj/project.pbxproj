@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA979C1726131B8100997206 /* Umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA979C1526131B8100997206 /* Umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA979C2126134F0100997206 /* Config.base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BA979C2026134F0100997206 /* Config.base.xcconfig */; };
+		BA979CC7261412DA00997206 /* Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CC6261412DA00997206 /* Export.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		BA979C1526131B8100997206 /* Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Umbrella.h; sourceTree = "<group>"; };
 		BA979C1626131B8100997206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA979C2026134F0100997206 /* Config.base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.base.xcconfig; sourceTree = SOURCE_ROOT; };
+		BA979CC6261412DA00997206 /* Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Export.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 				BA979C2026134F0100997206 /* Config.base.xcconfig */,
 				BA979C1526131B8100997206 /* Umbrella.h */,
 				BA979C1626131B8100997206 /* Info.plist */,
+				BA979CC6261412DA00997206 /* Export.swift */,
 			);
 			path = Umbrella;
 			sourceTree = "<group>";
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA979CC7261412DA00997206 /* Export.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
