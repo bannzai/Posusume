@@ -6,13 +6,23 @@
 //
 
 import SwiftUI
+import MapKit
+
 
 struct ContentView: View {
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 35.655164046, longitude: 139.740663704), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+            Map(coordinateRegion: $region)
+            BarnBottomSheet()
+                .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
