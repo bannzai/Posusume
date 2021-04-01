@@ -20,3 +20,10 @@ struct BarnBottomSheet: View {
         }
     }
 }
+
+struct BarnBottomSheet_Previews: PreviewProvider {
+    static var previews: some View {
+        BarnBottomSheet()
+            .previewLayout(.sizeThatFits)
+    }
+}
