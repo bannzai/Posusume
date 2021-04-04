@@ -35,7 +35,16 @@ struct Spot: Identifiable {
     var imagePath: String?
 }
 
+struct SpotListCell: View {
+    let spot: Spot
+    var body: some View {
+        Image(uiImage: .init())
+            .frame(width: 90, height: 120)
+            .background(Color.red)
+    }
+}
 struct SpotListView: View {
+    typealias Cell = SpotListCell
     var spots: [Spot] = [
         .init(id: "identifier1", latitude: 100, longitude: 100, name: "spot 1", imagePath: nil),
         .init(id: "identifier2", latitude: 100, longitude: 100, name: "spot 2", imagePath: nil),
@@ -70,7 +79,7 @@ struct SpotListView: View {
         ScrollView(.horizontal) {
             LazyHStack {
                 ForEach(spots) { spot in
-                    Text(spot.name)
+                    Cell(spot: spot)
                 }
             }
         }
