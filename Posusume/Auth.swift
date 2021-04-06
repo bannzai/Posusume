@@ -1,5 +1,5 @@
 import Foundation
-import FirebaseAuth
+import Umbrella
 
 protocol AuthProtocol {
     func auth(closure: @escaping (Result<Void, Swift.Error>) -> Void)
@@ -10,7 +10,7 @@ struct Auth: AuthProtocol {
     fileprivate init() { }
     
     func auth(closure: @escaping (Result<Void, Swift.Error>) -> Void) {
-        FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
+        Auth.auth().signInAnonymously() { (result, error) in
             if let error = error {
                 closure(.failure(error))
                 return
