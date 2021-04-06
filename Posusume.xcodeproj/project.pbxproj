@@ -26,6 +26,7 @@
 		BAFF700D261C34A400584593 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF700C261C34A400584593 /* FirebaseCrashlytics */; };
 		BAFF700F261C34A400584593 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF700E261C34A400584593 /* FirebaseAuth */; };
 		BAFF7011261C34A400584593 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7010261C34A400584593 /* FirebaseFunctions */; };
+		BAFF7016261C374700584593 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7015261C374700584593 /* ComposableArchitecture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAFF7016261C374700584593 /* ComposableArchitecture in Frameworks */,
 				BAFF7009261C34A400584593 /* FirebaseStorageSwift-Beta in Frameworks */,
 				BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */,
@@ -200,6 +202,7 @@
 				BAFF700C261C34A400584593 /* FirebaseCrashlytics */,
 				BAFF700E261C34A400584593 /* FirebaseAuth */,
 				BAFF7010261C34A400584593 /* FirebaseFunctions */,
+				BAFF7015261C374700584593 /* ComposableArchitecture */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
@@ -277,6 +280,7 @@
 			mainGroup = BAD9A8A32610B72F00676F22;
 			packageReferences = (
 				BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = BAD9A8AD2610B72F00676F22 /* Products */;
 			projectDirPath = "";
@@ -719,6 +723,14 @@
 				minimumVersion = 7.9.1;
 			};
 		};
+		BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -766,6 +778,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFunctions;
+		};
+		BAFF7015261C374700584593 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
