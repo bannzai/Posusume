@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA979C872614056500997206 /* Config.base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = BA979C862614056500997206 /* Config.base.xcconfig */; };
-		BA979CA42614063B00997206 /* Umbrella.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA979CA32614063B00997206 /* Umbrella.framework */; };
-		BA979CA52614063B00997206 /* Umbrella.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA979CA32614063B00997206 /* Umbrella.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
@@ -46,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BA979CA52614063B00997206 /* Umbrella.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,8 +50,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BA979C862614056500997206 /* Config.base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.base.xcconfig; sourceTree = "<group>"; };
-		BA979CA32614063B00997206 /* Umbrella.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Umbrella.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
@@ -79,7 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA979CA42614063B00997206 /* Umbrella.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,14 +93,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BA979CA22614063B00997206 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BA979CA32614063B00997206 /* Umbrella.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		BAD9A8A32610B72F00676F22 = {
 			isa = PBXGroup;
 			children = (
@@ -115,7 +100,6 @@
 				BAD9A8C02610B73100676F22 /* PosusumeTests */,
 				BAD9A8CB2610B73200676F22 /* PosusumeUITests */,
 				BAD9A8AD2610B72F00676F22 /* Products */,
-				BA979CA22614063B00997206 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,7 +116,6 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
-				BA979C862614056500997206 /* Config.base.xcconfig */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B12610B72F00676F22 /* ContentView.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
@@ -280,7 +263,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */,
-				BA979C872614056500997206 /* Config.base.xcconfig in Resources */,
 				BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */,
 				BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */,
 				BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */,
@@ -413,7 +395,6 @@
 /* Begin XCBuildConfiguration section */
 		BAD9A8CF2610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -475,7 +456,6 @@
 		};
 		BAD9A8D02610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -531,7 +511,6 @@
 		};
 		BAD9A8D22610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -554,7 +533,6 @@
 		};
 		BAD9A8D32610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -577,7 +555,6 @@
 		};
 		BAD9A8D52610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -600,7 +577,6 @@
 		};
 		BAD9A8D62610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -623,7 +599,6 @@
 		};
 		BAD9A8D82610B73200676F22 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
@@ -644,7 +619,6 @@
 		};
 		BAD9A8D92610B73200676F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA979C862614056500997206 /* Config.base.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
