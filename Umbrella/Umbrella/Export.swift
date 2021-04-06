@@ -1,4 +1,4 @@
 // Keep any swift file
 
-@_exported import Firebase
-@_exported import FirebaseAnalytics
+//@_exported import FirebaseAuth
+//@_exported import FirebaseAnalytics
