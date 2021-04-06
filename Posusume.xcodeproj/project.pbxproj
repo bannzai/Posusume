@@ -17,8 +17,8 @@
 		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
 		BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */; };
 		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
-		BAE27627261B63F900ADEB3F /* Umbrella.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE275DD261B523900ADEB3F /* Umbrella.xcframework */; };
-		BAE27628261B63F900ADEB3F /* Umbrella.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE275DD261B523900ADEB3F /* Umbrella.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BAE27619261B605100ADEB3F /* Umbrella.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAE275DD261B523900ADEB3F /* Umbrella.xcframework */; };
+		BAE2761A261B605100ADEB3F /* Umbrella.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BAE275DD261B523900ADEB3F /* Umbrella.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,13 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BAE27629261B63F900ADEB3F /* Embed Frameworks */ = {
+		BAE2761B261B605100ADEB3F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BAE27628261B63F900ADEB3F /* Umbrella.xcframework in Embed Frameworks */,
+				BAE2761A261B605100ADEB3F /* Umbrella.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE27627261B63F900ADEB3F /* Umbrella.xcframework in Frameworks */,
+				BAE27619261B605100ADEB3F /* Umbrella.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +179,7 @@
 				BAD9A8A82610B72F00676F22 /* Sources */,
 				BAD9A8A92610B72F00676F22 /* Frameworks */,
 				BAD9A8AA2610B72F00676F22 /* Resources */,
-				BAE27629261B63F900ADEB3F /* Embed Frameworks */,
+				BAE2761B261B605100ADEB3F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -532,7 +532,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"posusume/Preview Content\"";
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
-				HEADER_SEARCH_PATHS = "/Users/hiroseyuudai/Library/Developer/Xcode/DerivedData/Umbrella-gdfbgggbzrpjoxhgygfznfzqtoec/SourcePackages/checkouts/CoreOnly/Sources/Firebase.h";
 				INFOPLIST_FILE = posusume/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -555,7 +554,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"posusume/Preview Content\"";
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
-				HEADER_SEARCH_PATHS = "/Users/hiroseyuudai/Library/Developer/Xcode/DerivedData/Umbrella-gdfbgggbzrpjoxhgygfznfzqtoec/SourcePackages/checkouts/CoreOnly/Sources/Firebase.h";
 				INFOPLIST_FILE = posusume/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
