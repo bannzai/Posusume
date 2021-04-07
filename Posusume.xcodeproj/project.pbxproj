@@ -17,6 +17,9 @@
 		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
 		BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */; };
 		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
+		BADF5301261D303C00431FEB /* SpotList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5300261D303C00431FEB /* SpotList.swift */; };
+		BADF5305261D307700431FEB /* SpotListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5304261D307700431FEB /* SpotListCell.swift */; };
+		BADF530C261D309D00431FEB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF530B261D309D00431FEB /* Spot.swift */; };
 		BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7000261C34A400584593 /* FirebaseFirestore */; };
 		BAFF7003261C34A400584593 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */; };
 		BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */; };
@@ -76,6 +79,9 @@
 		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
 		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		BADF5300261D303C00431FEB /* SpotList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotList.swift; sourceTree = "<group>"; };
+		BADF5304261D307700431FEB /* SpotListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCell.swift; sourceTree = "<group>"; };
+		BADF530B261D309D00431FEB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +142,7 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
+				BADF530A261D308C00431FEB /* Entity */,
 				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
@@ -184,11 +191,37 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		BADF52FE261D301E00431FEB /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				BADF52FF261D303400431FEB /* Spot */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		BADF52FF261D303400431FEB /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				BADF5300261D303C00431FEB /* SpotList.swift */,
+				BADF5304261D307700431FEB /* SpotListCell.swift */,
+			);
+			path = Spot;
+			sourceTree = "<group>";
+		};
+		BADF530A261D308C00431FEB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				BADF530B261D309D00431FEB /* Spot.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
 		BAFF701F261C3FB300584593 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				BAFF7020261C3FB300584593 /* Atoms */,
 				BAFF7022261C3FB300584593 /* Molocules */,
+				BADF52FE261D301E00431FEB /* Domain */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -425,9 +458,12 @@
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
+				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
+				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
+				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
