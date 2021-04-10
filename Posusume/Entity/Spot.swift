@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-enum SpotID: String, RawRepresentable, Codable, DocumentIDWrappable {
+enum SpotID: String, RawRepresentable, Equatable, Codable, DocumentIDWrappable {
     case id
     
     static func wrap(_ documentReference: DocumentReference) throws -> SpotID {
@@ -10,7 +10,7 @@ enum SpotID: String, RawRepresentable, Codable, DocumentIDWrappable {
     }
 }
 
-struct Spot: Identifiable {
+struct Spot: Codable, Identifiable, Equatable {
     @DocumentID var id: SpotID?
     let latitude: Double
     let longitude: Double

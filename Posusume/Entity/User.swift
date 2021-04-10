@@ -10,7 +10,7 @@ enum UserID: String, RawRepresentable, Codable, DocumentIDWrappable {
     }
 }
 
-struct User {
+struct User: Codable, Identifiable {
     @DocumentID var id: UserID?
     let anonymouseUserID: UserID
 }
