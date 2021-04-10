@@ -1,15 +1,17 @@
-//
-//  Spot.swift
-//  Posusume
-//
-//  Created by Yudai.Hirose on 2021/04/07.
-//
-
 import Foundation
 import FirebaseFirestoreSwift
+import FirebaseFirestore
+
+enum SpotID: String, RawRepresentable, Codable, DocumentIDWrappable {
+    case id
+    
+    static func wrap(_ documentReference: DocumentReference) throws -> SpotID {
+        SpotID(rawValue: documentReference.documentID)!
+    }
+}
 
 struct Spot: Identifiable {
-    @DocumentID var id: String?
+    @DocumentID var id: SpotID?
     let latitude: Double
     let longitude: Double
     let name: String
@@ -18,3 +20,5 @@ struct Spot: Identifiable {
     var deletedDate: Date? = nil
     var archivedDate: Date? = nil
 }
+
+extension Spot: ImagePath { }
