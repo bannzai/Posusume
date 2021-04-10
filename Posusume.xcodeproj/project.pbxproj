@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
 		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
+		BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8672621D015006555AE /* VoidEnvironment.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BA26C8672621D015006555AE /* VoidEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidEnvironment.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		BA26C8642621A03D006555AE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				BA26C8672621D015006555AE /* VoidEnvironment.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
+				BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
