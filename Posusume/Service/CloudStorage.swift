@@ -43,7 +43,7 @@ struct CloudStorage {
     enum FetchError: Error {
         case imagePathNotFound
     }
-    public func getData(imagePath: ImagePath) -> AnyPublisher<Data, Error> {
+    public func fetch(imagePath: ImagePath) -> AnyPublisher<Data, Error> {
         guard let imagePath = imagePath.imagePath else {
             return Combine.Fail(error: FetchError.imagePathNotFound).eraseToAnyPublisher()
         }
