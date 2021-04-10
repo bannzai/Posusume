@@ -10,6 +10,11 @@
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
 		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
 		BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8672621D015006555AE /* VoidEnvironment.swift */; };
+		BA26C86C2621D08D006555AE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C86B2621D08D006555AE /* Database.swift */; };
+		BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */; };
+		BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8782621F020006555AE /* CollectionReference+Combine.swift */; };
+		BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C87C2621F03A006555AE /* PathBuilder.swift */; };
+		BA26C8812621F05C006555AE /* CollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8802621F05C006555AE /* CollectionMapper.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
@@ -69,6 +74,11 @@
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA26C8672621D015006555AE /* VoidEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidEnvironment.swift; sourceTree = "<group>"; };
+		BA26C86B2621D08D006555AE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentReference+Combine.swift"; sourceTree = "<group>"; };
+		BA26C8782621F020006555AE /* CollectionReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionReference+Combine.swift"; sourceTree = "<group>"; };
+		BA26C87C2621F03A006555AE /* PathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBuilder.swift; sourceTree = "<group>"; };
+		BA26C8802621F05C006555AE /* CollectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionMapper.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
@@ -131,6 +141,17 @@
 				BA26C8672621D015006555AE /* VoidEnvironment.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		BA26C8712621EFDA006555AE /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */,
+				BA26C8782621F020006555AE /* CollectionReference+Combine.swift */,
+				BA26C87C2621F03A006555AE /* PathBuilder.swift */,
+				BA26C8802621F05C006555AE /* CollectionMapper.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		BAD9A8A32610B72F00676F22 = {
@@ -203,6 +224,8 @@
 			children = (
 				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA26C8512621939A006555AE /* CloudStorage.swift */,
+				BA26C86B2621D08D006555AE /* Database.swift */,
+				BA26C8712621EFDA006555AE /* Database */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -472,16 +495,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */,
+				BA26C86C2621D08D006555AE /* Database.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
+				BA26C8812621F05C006555AE /* CollectionMapper.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
+				BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
+				BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 				BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */,
 			);
