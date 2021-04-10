@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseStorage
+import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 struct CloudStorage {
@@ -11,36 +12,57 @@ struct CloudStorage {
     private func generateFileName() -> String {
         UUID().uuidString
     }
-    func upload(image: UIImage, closure: @escaping (Result<String, Swift.Error>) -> Void) {
-        _ = reference
-            .child(generateFileName() + ".jpg")
-            .putData(image.jpegData(compressionQuality: 1)!, metadata: nil) { (metadata, error) in
-                if let error = error {
-                    closure(.failure(error))
-                    return
+    
+    // MARK: - Upload
+    struct Uploaded {
+        let path: String
+    }
+    func upload(jpegData: Data) -> AnyPublisher<Uploaded, Error> {
+        var task: StorageUploadTask?
+        return Future { promise in
+            task = self
+                .reference
+                .child(generateFileName() + ".jpg")
+                .putData(jpegData, metadata: nil) { metadata, error in
+                    if let error = error {
+                        return promise(.failure(error))
+                    }
+                    guard let metadata = metadata, let path = metadata.path else {
+                        fatalError("Uh-oh, an error occurred!")
+                    }
+                    promise(.success(.init(path: path)))
                 }
-                guard let path = metadata?.path else {
-                    fatalError("Uh-oh, an error occurred!")
-                }
-                closure(.success(path))
-            }
+        }.handleEvents(receiveCancel: {
+            task?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
     
-    func fetch(path: ImagePath, closure: @escaping (UIImage?) -> Void) {
-        guard let imagePath = path.imagePath else {
-            return
+    
+    // MARK: - Fetch
+    enum FetchError: Error {
+        case imagePathNotFound
+    }
+    public func getData(imagePath: ImagePath) -> AnyPublisher<Data, Error> {
+        guard let imagePath = imagePath.imagePath else {
+            return Combine.Fail(error: FetchError.imagePathNotFound).eraseToAnyPublisher()
         }
-        reference.child(imagePath).getData(maxSize: maximumDataSize) { (data, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                DispatchQueue.main.async {
-                    if let image = data.map(UIImage.init(data:)) {
-                        closure(image)
-                    }
+        var task: StorageDownloadTask?
+        return Future<Data, Error> {  promise in
+            task = self.reference.child(imagePath).getData(maxSize: maximumDataSize) { (data, error) in
+                if let error = error {
+                    promise(.failure(error))
                 }
+                guard let data = data else {
+                    fatalError("Uh-oh, an error occurred!")
+                }
+                promise(.success(data))
             }
-        }
+        }.handleEvents(receiveCancel: {
+            task?.cancel()
+        })
+        .eraseToAnyPublisher()
+        
     }
 }
 
