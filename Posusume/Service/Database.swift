@@ -11,7 +11,7 @@ struct Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.document(path.path).get()
     }
-    func fetch<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<CollectionMapper<T>, Error> {
+    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<CollectionMapper<T>, Error> {
         Future { promise in
             database.collection(path.path).getDocuments { (snapshot, error) in
                 if let error = error {
