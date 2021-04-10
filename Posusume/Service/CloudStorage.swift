@@ -48,7 +48,7 @@ struct CloudStorage {
             return Combine.Fail(error: FetchError.imagePathNotFound).eraseToAnyPublisher()
         }
         var task: StorageDownloadTask?
-        return Future<Data, Error> {  promise in
+        return Future { promise in
             task = self.reference.child(imagePath).getData(maxSize: maximumDataSize) { (data, error) in
                 if let error = error {
                     promise(.failure(error))
