@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA26C8522621939A006555AE /* UserContentRemoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* UserContentRemoteStorage.swift */; };
+		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
 		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
@@ -65,7 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BA26C8512621939A006555AE /* UserContentRemoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContentRemoteStorage.swift; sourceTree = "<group>"; };
+		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +123,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA26C8642621A03D006555AE /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		BAD9A8A32610B72F00676F22 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +153,7 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
+				BA26C8642621A03D006555AE /* Utility */,
 				BADF530A261D308C00431FEB /* Entity */,
 				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
@@ -191,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				BA979CAF26140A4600997206 /* Auth.swift */,
-				BA26C8512621939A006555AE /* UserContentRemoteStorage.swift */,
+				BA26C8512621939A006555AE /* CloudStorage.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -465,7 +473,7 @@
 				BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
-				BA26C8522621939A006555AE /* UserContentRemoteStorage.swift in Sources */,
+				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,

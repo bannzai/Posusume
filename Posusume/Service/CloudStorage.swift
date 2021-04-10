@@ -2,7 +2,7 @@ import UIKit
 import FirebaseStorage
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
-struct UserContentRemoteStorage {
+struct CloudStorage {
     let reference: StorageReference
     init(userID: UserID) {
         reference = Storage.storage().reference().child("users").child(userID.rawValue)
