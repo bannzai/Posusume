@@ -14,4 +14,7 @@ struct Spot: Identifiable {
     let longitude: Double
     let name: String
     var imagePath: String?
+    private(set) var createdDate: Date = .init()
+    var deletedDate: Date? = nil
+    var archivedDate: Date? = nil
 }
