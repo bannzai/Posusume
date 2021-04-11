@@ -12,15 +12,15 @@ enum SpotListAction: Equatable {
     case fetched(Result<[Spot], EquatableError>)
 }
 
-let spotListReducer = Reducer<SpotListState, SpotListAction, VoidEnvironment> { (state, action, _) in
+let spotListReducer = Reducer<SpotListState, SpotListAction, SpotListEnvironment> { (state, action, environment) in
     struct Canceller: Hashable { }
     switch action {
     case .onAppear:
         return Effect(value: .fetch).eraseToEffect()
     case .fetch:
-        return auth.auth()
+        return environment.auth.auth()
             .map(DatabaseCollectionPathBuilder<Spot>.userSpots(userID:))
-            .flatMap(Database.shared.fetchList(path:))
+            .flatMap(environment.database.fetchList(path:))
             .map(\.compacted)
             .mapError(EquatableError.init(error:))
             .catchToEffect()
@@ -34,6 +34,11 @@ let spotListReducer = Reducer<SpotListState, SpotListAction, VoidEnvironment> { 
         state.error = error
         return .none
     }
+}
+
+struct SpotListEnvironment {
+    let database: Database
+    let auth: Auth
 }
 
 struct SpotList: View {
