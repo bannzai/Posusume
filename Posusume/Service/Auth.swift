@@ -1,29 +1,32 @@
 import Foundation
 import FirebaseAuth
+import Combine
 
 protocol AuthProtocol {
-    func auth(closure: @escaping (Result<UserID, Swift.Error>) -> Void)
-    func fetchUserID() -> UserID?
+    func auth() -> AnyPublisher<UserID, Error>
 }
 
 struct Auth: AuthProtocol {
     fileprivate init() { }
 
-    func auth(closure: @escaping (Result<UserID, Swift.Error>) -> Void) {
-        FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
-            if let error = error {
-                closure(.failure(error))
-                return
+    func auth() -> AnyPublisher<UserID, Error> {
+        Future { promise in
+            FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
+                if let error = error {
+                    promise(.failure(error))
+                    return
+                }
+                guard let result = result else {
+                    fatalError("unexpected pattern about result and error is nil")
+                }
+                let userID = UserID(rawValue: result.user.uid)!
+                self.store(userID: userID)
+                promise(.success(userID))
             }
-            guard let result = result else {
-                fatalError("unexpected pattern about result and error is nil")
-            }
-            let userID = UserID(rawValue: result.user.uid)!
-            self.store(userID: userID)
-            closure(.success(userID))
-        }
+        }.eraseToAnyPublisher()
     }
     
+    // MARK: - Private
     private enum StoreKey {
         static let firebaseUserID: String = "firebaseUserID"
     }
@@ -32,12 +35,6 @@ struct Auth: AuthProtocol {
             return
         }
         UserDefaults.standard.setValue(userID.rawValue, forKey: StoreKey.firebaseUserID)
-    }
-    func fetchUserID() -> UserID? {
-        guard let userID = UserDefaults.standard.string(forKey: StoreKey.firebaseUserID) else {
-            return nil
-        }
-        return UserID(rawValue: userID)
     }
 }
 
