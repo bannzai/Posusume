@@ -15,6 +15,7 @@
 		BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8782621F020006555AE /* CollectionReference+Combine.swift */; };
 		BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C87C2621F03A006555AE /* PathBuilder.swift */; };
 		BA26C8812621F05C006555AE /* CollectionMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8802621F05C006555AE /* CollectionMapper.swift */; };
+		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* ContentView.swift */; };
@@ -79,6 +80,7 @@
 		BA26C8782621F020006555AE /* CollectionReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionReference+Combine.swift"; sourceTree = "<group>"; };
 		BA26C87C2621F03A006555AE /* PathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBuilder.swift; sourceTree = "<group>"; };
 		BA26C8802621F05C006555AE /* CollectionMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionMapper.swift; sourceTree = "<group>"; };
+		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				BA26C8672621D015006555AE /* VoidEnvironment.swift */,
+				BA26C88426227C62006555AE /* EquatableError.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
 				BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */,
+				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 				BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */,
 			);
