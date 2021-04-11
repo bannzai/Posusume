@@ -1,4 +1,40 @@
 import SwiftUI
+import ComposableArchitecture
+
+struct SpotListState: Equatable {
+    var spots: [Spot] = []
+    var error: EquatableError?
+}
+
+enum SpotListAction: Equatable {
+    case onAppear
+    case fetch
+    case fetched(Result<[Spot], EquatableError>)
+}
+
+let spotListReducer = Reducer<SpotListState, SpotListAction, VoidEnvironment> { (state, action, _) in
+    struct Canceller: Hashable { }
+    switch action {
+    case .onAppear:
+        return Effect(value: .fetch).eraseToEffect()
+    case .fetch:
+        return auth.auth()
+            .map(DatabaseCollectionPathBuilder<Spot>.userSpots(userID:))
+            .flatMap(Database.shared.fetchList(path:))
+            .map(\.compacted)
+            .mapError(EquatableError.init(error:))
+            .catchToEffect()
+            .map(SpotListAction.fetched)
+            .receive(on: DispatchQueue.main)
+            .eraseToEffect()
+    case .fetched(.success(let spots)):
+        state.spots = spots
+        return .none
+    case .fetched(.failure(let error)):
+        state.error = error
+        return .none
+    }
+}
 
 struct SpotList: View {
     typealias Cell = SpotListCell
