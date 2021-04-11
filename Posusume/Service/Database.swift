@@ -3,9 +3,16 @@ import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+protocol Database {
+    func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
+    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<CollectionMapper<T>, Error>
+    func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error>
+    func update<T: Encodable>(value: T, path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
+}
+
 private let database = Firestore.firestore()
-struct Database {
-    static let shared = Database()
+struct FirestoreDatabase: Database {
+    static let shared = FirestoreDatabase()
     private init() { }
     
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
