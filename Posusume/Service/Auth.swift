@@ -2,12 +2,12 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-protocol AuthProtocol {
+protocol Auth {
     func auth() -> AnyPublisher<UserID, Error>
 }
 
-struct Auth: AuthProtocol {
-    fileprivate init() { }
+fileprivate struct _Auth: Auth {
+    init() { }
 
     func auth() -> AnyPublisher<UserID, Error> {
         Future { promise in
@@ -38,4 +38,4 @@ struct Auth: AuthProtocol {
     }
 }
 
-internal var auth: AuthProtocol = Auth()
+internal var auth: Auth = _Auth()
