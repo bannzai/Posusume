@@ -5,7 +5,7 @@ import FirebaseFirestoreSwift
 
 protocol Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
-    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<CollectionMapper<T>, Error>
+    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error>
     func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error>
     func update<T: Encodable>(value: T, path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
 }
@@ -18,16 +18,20 @@ struct FirestoreDatabase: Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.document(path.path).get()
     }
-    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<CollectionMapper<T>, Error> {
+    func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error> {
         Future { promise in
             database.collection(path.path).getDocuments { (snapshot, error) in
                 if let error = error {
                     return promise(.failure(error))
                 }
                 if let snapshot = snapshot {
-                    return promise(.success(.init(snapshots: snapshot.documents)))
+                    do {
+                        return promise(.success(try snapshot.documents.compactMap { try $0.data(as: T.self) }))
+                    } catch {
+                        promise(.failure(error))
+                    }
                 }
-                return promise(.success(.init(snapshots: [])))
+                return promise(.success([]))
             }
         }.eraseToAnyPublisher()
     }
