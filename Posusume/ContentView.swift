@@ -16,9 +16,19 @@ struct ContentView: View {
             Map(coordinateRegion: $region)
             ZStack {
                 BarnBottomSheet()
-                SpotList()
-                    .frame(alignment: .bottom)
-                    .padding()
+                SpotList(
+                    store: .init(
+                        initialState: .init(),
+                        reducer: spotListReducer,
+                        environment: SpotListEnvironment(
+                            auth: auth,
+                            fetchList: FirestoreDatabase.shared.fetchList,
+                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                        )
+                    )
+                )
+                .frame(alignment: .bottom)
+                .padding()
             }
             .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
         }

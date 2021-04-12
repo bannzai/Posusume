@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import ComposableArchitecture
 
 struct SpotListState: Equatable {
@@ -20,12 +21,11 @@ let spotListReducer = Reducer<SpotListState, SpotListAction, SpotListEnvironment
     case .fetch:
         return environment.auth.auth()
             .map(DatabaseCollectionPathBuilder<Spot>.userSpots(userID:))
-            .flatMap(environment.database.fetchList(path:))
-            .map(\.compacted)
+            .flatMap(environment.fetchList)
             .mapError(EquatableError.init(error:))
             .catchToEffect()
             .map(SpotListAction.fetched)
-            .receive(on: DispatchQueue.main)
+            .receive(on: environment.mainQueue)
             .eraseToEffect()
     case .fetched(.success(let spots)):
         state.spots = spots
@@ -37,56 +37,52 @@ let spotListReducer = Reducer<SpotListState, SpotListAction, SpotListEnvironment
 }
 
 struct SpotListEnvironment {
-    let database: Database
     let auth: Auth
+    let fetchList: (DatabaseCollectionPathBuilder<Spot>) -> AnyPublisher<[Spot], Error>
+    var mainQueue: AnySchedulerOf<DispatchQueue>
 }
 
 struct SpotList: View {
     typealias Cell = SpotListCell
-    var spots: [Spot] = [
-        .init(id: SpotID(rawValue: "identifier1")!, latitude: 100, longitude: 100, name: "spot 1", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier2")!, latitude: 100, longitude: 100, name: "spot 2", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier3")!, latitude: 100, longitude: 100, name: "spot 3", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier4")!, latitude: 100, longitude: 100, name: "spot 4", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier5")!, latitude: 100, longitude: 100, name: "spot 5", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier6")!, latitude: 100, longitude: 100, name: "spot 6", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier7")!, latitude: 100, longitude: 100, name: "spot 7", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier8")!, latitude: 100, longitude: 100, name: "spot 8", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier9")!, latitude: 100, longitude: 100, name: "spot 9", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier10")!, latitude: 100, longitude: 100, name: "spot 10", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier11")!, latitude: 100, longitude: 100, name: "spot 11", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier12")!, latitude: 100, longitude: 100, name: "spot 12", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier13")!, latitude: 100, longitude: 100, name: "spot 13", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier14")!, latitude: 100, longitude: 100, name: "spot 14", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier15")!, latitude: 100, longitude: 100, name: "spot 15", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier16")!, latitude: 100, longitude: 100, name: "spot 16", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier17")!, latitude: 100, longitude: 100, name: "spot 17", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier18")!, latitude: 100, longitude: 100, name: "spot 18", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier19")!, latitude: 100, longitude: 100, name: "spot 19", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier20")!, latitude: 100, longitude: 100, name: "spot 20", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier21")!, latitude: 100, longitude: 100, name: "spot 21", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier22")!, latitude: 100, longitude: 100, name: "spot 22", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier23")!, latitude: 100, longitude: 100, name: "spot 23", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier24")!, latitude: 100, longitude: 100, name: "spot 24", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier25")!, latitude: 100, longitude: 100, name: "spot 25", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier26")!, latitude: 100, longitude: 100, name: "spot 26", imagePath: nil),
-        .init(id: SpotID(rawValue: "identifier27")!, latitude: 100, longitude: 100, name: "spot 27", imagePath: nil),
-    ]
 
+    let store: Store<SpotListState, SpotListAction>
     var body: some View {
-        ScrollView(.horizontal) {
-            LazyHStack {
-                ForEach(spots) { spot in
-                    Cell(spot: spot)
+        WithViewStore(store) { viewStore in
+            ScrollView(.horizontal) {
+                LazyHStack {
+                    ForEach(viewStore.spots) { spot in
+                        Cell(spot: spot)
+                    }
                 }
             }
+            .onAppear { viewStore.send(.onAppear) }
         }
     }
 }
 
 
+struct MockAuth: Auth {
+    func auth() -> AnyPublisher<UserID, Error> {
+        Future(value: UserID(rawValue: "1"))
+            .eraseToAnyPublisher()
+    }
+}
+
 struct SpotList_Previews: PreviewProvider {
     static var previews: some View {
-        SpotList()
+        SpotList(
+            store: .init(
+                initialState: .init(),
+                reducer: spotListReducer,
+                environment: SpotListEnvironment(
+                    auth: MockAuth(),
+                    fetchList: { _ in Future(value: spots).eraseToAnyPublisher() },
+                    mainQueue: DispatchQueue.main.eraseToAnyScheduler()
+                )
+            )
+        )
+    }
+    static var spots: [Spot] = (0..<10).map {
+        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imagePath: nil)
     }
 }
