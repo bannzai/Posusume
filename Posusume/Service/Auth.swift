@@ -19,7 +19,7 @@ fileprivate struct _Auth: Auth {
                 guard let result = result else {
                     fatalError("unexpected pattern about result and error is nil")
                 }
-                let userID = UserID(rawValue: result.user.uid)!
+                let userID = UserID(rawValue: result.user.uid)
                 self.store(userID: userID)
                 promise(.success(userID))
             }

@@ -2,11 +2,11 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-enum SpotID: String, RawRepresentable, Equatable, Codable, DocumentIDWrappable {
-    case id
+struct SpotID: RawRepresentable, Equatable, Codable, DocumentIDWrappable, Hashable {
+    let rawValue: String
     
     static func wrap(_ documentReference: DocumentReference) throws -> SpotID {
-        SpotID(rawValue: documentReference.documentID)!
+        SpotID(rawValue: documentReference.documentID)
     }
 }
 

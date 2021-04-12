@@ -2,11 +2,11 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-enum UserID: String, RawRepresentable, Codable, DocumentIDWrappable {
-    case id
+struct UserID: RawRepresentable, Codable, DocumentIDWrappable, Hashable {
+    let rawValue: String
     
     static func wrap(_ documentReference: DocumentReference) throws -> UserID {
-        UserID(rawValue: documentReference.documentID)!
+        UserID(rawValue: documentReference.documentID)
     }
 }
 
