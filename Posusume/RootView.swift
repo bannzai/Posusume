@@ -1,10 +1,3 @@
-//
-//  RootView.swift
-//  posusume
-//
-//  Created by Yudai.Hirose on 2021/03/28.
-//
-
 import SwiftUI
 import MapKit
 
