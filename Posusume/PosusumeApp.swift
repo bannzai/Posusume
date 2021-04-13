@@ -13,7 +13,7 @@ struct posusumeApp: App {
 
     var body: some Scene {
         return WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RootView.swift
 //  posusume
 //
 //  Created by Yudai.Hirose on 2021/03/28.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct ContentView: View {
+struct RootView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 35.655164046, longitude: 139.740663704), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
 
     var body: some View {
@@ -38,8 +38,8 @@ struct ContentView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
+struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RootView()
     }
 }
