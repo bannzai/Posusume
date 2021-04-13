@@ -1,5 +1,5 @@
 import Foundation
 
 protocol DatabaseEntity: Codable {
-    associatedtype WhereKey: CodingKey & Hashable & RawRepresentable where WhereKey.RawValue == String
+    associatedtype WhereKey: CodingKey & RawRepresentable where WhereKey.RawValue == String
 }
