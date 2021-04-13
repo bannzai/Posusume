@@ -10,7 +10,7 @@ struct SpotID: RawRepresentable, Equatable, Codable, DocumentIDWrappable, Hashab
     }
 }
 
-struct Spot: Codable, Identifiable, Equatable {
+struct Spot: DatabaseEntity, Identifiable, Equatable {
     @DocumentID var id: SpotID?
     let latitude: Double
     let longitude: Double
@@ -19,6 +19,18 @@ struct Spot: Codable, Identifiable, Equatable {
     private(set) var createdDate: Date = .init()
     var deletedDate: Date? = nil
     var archivedDate: Date? = nil
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case latitude
+        case longitude
+        case name
+        case imagePath
+        case createdDate
+        case deletedDate
+        case archivedDate
+    }
+    typealias WhereKey = CodingKeys
 }
 
 extension Spot: ImagePath { }
