@@ -11,6 +11,8 @@
 		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
 		BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E792625EAB4000DA60F /* DatabaseEntity.swift */; };
+		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
+		BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E862625F1BB000DA60F /* LocationMeters.swift */; };
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
 		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
 		BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8672621D015006555AE /* VoidEnvironment.swift */; };
@@ -80,6 +82,8 @@
 		BA249E6E2625E15D000DA60F /* MockAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuth.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		BA249E792625EAB4000DA60F /* DatabaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEntity.swift; sourceTree = "<group>"; };
+		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
+		BA249E862625F1BB000DA60F /* LocationMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMeters.swift; sourceTree = "<group>"; };
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA26C8672621D015006555AE /* VoidEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidEnvironment.swift; sourceTree = "<group>"; };
@@ -161,6 +165,15 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		BA249E7F2625EFC7000DA60F /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */,
+				BA249E862625F1BB000DA60F /* LocationMeters.swift */,
+			);
+			path = CoreLocation;
+			sourceTree = "<group>";
+		};
 		BA26C8642621A03D006555AE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +197,7 @@
 		BA26C88A262293AB006555AE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BA249E7F2625EFC7000DA60F /* CoreLocation */,
 				BA26C892262293C2006555AE /* Combine */,
 			);
 			path = Extension;
@@ -550,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */,
 				BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */,
@@ -559,6 +574,7 @@
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
+				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
