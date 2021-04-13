@@ -3,15 +3,11 @@ import Firebase
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        setupFirebase()
-        auth.auth { (result) in
-            switch result {
-            case .success:
-                print("auth is success")
-            case .failure(let error):
-                print("auth is failure \(error.localizedDescription)")
-            }
+        if isPreview {
+            return true
         }
+        setupFirebase()
+        _ = auth.auth()
         return true
     }
 }
@@ -24,3 +20,4 @@ private func setupFirebase() {
     #endif
 }
 
+let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
