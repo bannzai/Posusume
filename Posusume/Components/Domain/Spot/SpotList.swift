@@ -59,14 +59,6 @@ struct SpotList: View {
     }
 }
 
-
-struct MockAuth: Auth {
-    func auth() -> AnyPublisher<UserID, Error> {
-        Future(value: UserID(rawValue: "1"))
-            .eraseToAnyPublisher()
-    }
-}
-
 struct SpotList_Previews: PreviewProvider {
     static var previews: some View {
         SpotList(
