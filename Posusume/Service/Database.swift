@@ -20,6 +20,21 @@ struct FirestoreDatabase: Database {
     }
     func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error> {
         Future { promise in
+            let collectionReference = database.collection(path.path)
+            path.args.forEach { key, relation in
+                switch relation {
+                case let .equal(value):
+                    collectionReference.whereField(key.rawValue, isEqualTo: value)
+                case let .less(value):
+                    collectionReference.whereField(key.rawValue, isLessThan: value)
+                case let .greater(value):
+                    collectionReference.whereField(key.rawValue, isGreaterThan: value)
+                case let .notEqual(value):
+                    collectionReference.whereField(key.rawValue, isNotEqualTo: value)
+                case let .contains(values):
+                    collectionReference.whereField(key.rawValue, in: values)
+                }
+            }
             database.collection(path.path).getDocuments { (snapshot, error) in
                 if let error = error {
                     return promise(.failure(error))
@@ -35,7 +50,7 @@ struct FirestoreDatabase: Database {
             }
         }.eraseToAnyPublisher()
     }
-    
+
     func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.collection(path.path).add(value: value)
     }
