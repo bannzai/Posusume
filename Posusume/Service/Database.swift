@@ -27,8 +27,12 @@ struct FirestoreDatabase: Database {
                     collectionReference.whereField(key.rawValue, isEqualTo: value)
                 case let .less(value):
                     collectionReference.whereField(key.rawValue, isLessThan: value)
+                case let .lessOrEqual(value):
+                    collectionReference.whereField(key.rawValue, isLessThanOrEqualTo: value)
                 case let .greater(value):
                     collectionReference.whereField(key.rawValue, isGreaterThan: value)
+                case let .greaterOrEqual(value):
+                    collectionReference.whereField(key.rawValue, isGreaterThanOrEqualTo: value)
                 case let .notEqual(value):
                     collectionReference.whereField(key.rawValue, isNotEqualTo: value)
                 case let .contains(values):

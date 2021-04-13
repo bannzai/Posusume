@@ -16,7 +16,9 @@ struct DatabaseCollectionPathBuilder<Entity: ExplicitKeyCodable> {
 enum CollectionRelation {
     case equal(Any)
     case less(Any)
+    case lessOrEqual(Any)
     case greater(Any)
+    case greaterOrEqual(Any)
     case notEqual(Any)
     case contains([Any])
 }
