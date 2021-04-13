@@ -5,7 +5,7 @@ struct DatabaseDocumentPathBuilder<Entity: Codable> {
     
     static func userSpot(userID: UserID, spotID: SpotID) -> DatabaseDocumentPathBuilder<Spot> { .init(path: "/users/\(userID.rawValue)/spots/\(spotID.rawValue)") }
 }
-struct DatabaseCollectionPathBuilder<Entity: ExplicitKeyCodable> {
+struct DatabaseCollectionPathBuilder<Entity: DatabaseEntity> {
     let path: String
     var args: [(Entity.WhereKey, CollectionRelation)] = []
 
