@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotsMapView.swift */; };
+		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
+		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
+		BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E792625EAB4000DA60F /* DatabaseEntity.swift */; };
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
 		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
 		BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8672621D015006555AE /* VoidEnvironment.swift */; };
@@ -72,6 +76,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BA249E672625E12D000DA60F /* SpotsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsMapView.swift; sourceTree = "<group>"; };
+		BA249E6E2625E15D000DA60F /* MockAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuth.swift; sourceTree = "<group>"; };
+		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		BA249E792625EAB4000DA60F /* DatabaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEntity.swift; sourceTree = "<group>"; };
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BA26C8672621D015006555AE /* VoidEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidEnvironment.swift; sourceTree = "<group>"; };
@@ -137,9 +145,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA249E6D2625E154000DA60F /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				BA249E6E2625E15D000DA60F /* MockAuth.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		BA249E782625EAAB000DA60F /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				BA249E792625EAB4000DA60F /* DatabaseEntity.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		BA26C8642621A03D006555AE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				BA249E782625EAAB000DA60F /* Firebase */,
 				BA26C88B262293B1006555AE /* TCA */,
 				BA26C88A262293AB006555AE /* Extension */,
 			);
@@ -223,6 +248,7 @@
 		BAD9A8B52610B73100676F22 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				BA249E6D2625E154000DA60F /* Mock */,
 				BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -270,6 +296,7 @@
 			children = (
 				BADF5300261D303C00431FEB /* SpotList.swift */,
 				BADF5304261D307700431FEB /* SpotListCell.swift */,
+				BA249E672625E12D000DA60F /* SpotsMapView.swift */,
 			);
 			path = Spot;
 			sourceTree = "<group>";
@@ -279,6 +306,7 @@
 			children = (
 				BADF530B261D309D00431FEB /* Spot.swift */,
 				BA26C859262196AD006555AE /* User.swift */,
+				BA249E742625E217000DA60F /* Me.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -523,9 +551,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
+				BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */,
+				BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */,
 				BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */,
 				BA26C86C2621D08D006555AE /* Database.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
+				BA249E752625E217000DA60F /* Me.swift in Sources */,
+				BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,

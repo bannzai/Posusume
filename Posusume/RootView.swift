@@ -1,31 +1,30 @@
 import SwiftUI
 import MapKit
+import ComposableArchitecture
+import Combine
+
+struct RootState: Equatable {
+    var spots: [Spot] = []
+    var error: EquatableError?
+}
+
+enum RootAction: Equatable {
+    case onAppear
+    case fetch
+    case fetched(Result<[Spot], EquatableError>)
+}
+
+struct RootEnvironment {
+    let auth: Auth
+    let fetchList: (DatabaseCollectionPathBuilder<Spot>) -> AnyPublisher<[Spot], Error>
+    var mainQueue: AnySchedulerOf<DispatchQueue>
+}
 
 struct RootView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 35.655164046, longitude: 139.740663704), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
 
     var body: some View {
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: $region)
-            ZStack {
-                BarnBottomSheet()
-                SpotList(
-                    store: .init(
-                        initialState: .init(),
-                        reducer: spotListReducer,
-                        environment: SpotListEnvironment(
-                            auth: auth,
-                            fetchList: FirestoreDatabase.shared.fetchList,
-                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                        )
-                    )
-                )
-                .frame(alignment: .bottom)
-                .padding()
-            }
-            .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
-        }
-        .edgesIgnoringSafeArea(.all)
+        EmptyView()
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
