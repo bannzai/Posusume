@@ -17,13 +17,19 @@ struct CloudStorage {
     struct Uploaded {
         let path: String
     }
-    func upload(jpegData: Data) -> AnyPublisher<Uploaded, Error> {
+    enum UploadError: Error {
+        case convertToJpeg
+    }
+    func upload(image: UIImage) -> AnyPublisher<Uploaded, Error> {
+        guard let jpegImage = image.jpegData(compressionQuality: 1) else {
+            return Combine.Fail(error: UploadError.convertToJpeg).eraseToAnyPublisher()
+        }
         var task: StorageUploadTask?
         return Future { promise in
             task = self
                 .reference
                 .child(generateFileName() + ".jpg")
-                .putData(jpegData, metadata: nil) { metadata, error in
+                .putData(jpegImage, metadata: nil) { metadata, error in
                     if let error = error {
                         return promise(.failure(error))
                     }
@@ -43,7 +49,7 @@ struct CloudStorage {
     enum FetchError: Error {
         case imagePathNotFound
     }
-    public func fetch(imagePath: ImagePath) -> AnyPublisher<Data, Error> {
+    public func fetch(imagePath: ImagePath) -> AnyPublisher<UIImage, Error> {
         guard let imagePath = imagePath.imagePath else {
             return Combine.Fail(error: FetchError.imagePathNotFound).eraseToAnyPublisher()
         }
@@ -53,10 +59,10 @@ struct CloudStorage {
                 if let error = error {
                     promise(.failure(error))
                 }
-                guard let data = data else {
+                guard let data = data, let image = UIImage(data: data) else {
                     fatalError("Uh-oh, an error occurred!")
                 }
-                promise(.success(data))
+                promise(.success(image))
             }
         }.handleEvents(receiveCancel: {
             task?.cancel()
