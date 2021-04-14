@@ -15,12 +15,19 @@ struct FirestoreDatabase: Database {
     static let shared = FirestoreDatabase()
     private init() { }
     
+    // MARK: - Fetch
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.document(path.path).get()
     }
+    
+    struct DecodeError {
+        let index: Int
+        let error: Error
+        let data: [String: Any]
+    }
     func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error> {
         Future { promise in
-            let collectionReference = database.collection(path.path)
+            let collectionReference = path.isGroup ? database.collectionGroup(path.path) : database.collection(path.path)
             path.args.forEach { key, relation in
                 switch relation {
                 case let .equal(value):
@@ -39,22 +46,36 @@ struct FirestoreDatabase: Database {
                     collectionReference.whereField(key.rawValue, in: values)
                 }
             }
-            database.collection(path.path).getDocuments { (snapshot, error) in
+            collectionReference.getDocuments { (snapshot, error) in
                 if let error = error {
                     return promise(.failure(error))
                 }
+                
+                var entities: [T] = []
+                var errors: [DecodeError] = []
                 if let snapshot = snapshot {
-                    do {
-                        return promise(.success(try snapshot.documents.compactMap { try $0.data(as: T.self) }))
-                    } catch {
-                        promise(.failure(error))
+                    snapshot.documents.enumerated().forEach { offset, document in
+                        do {
+                            try document.data(as: T.self).map {
+                                entities.append($0)
+                            }
+                        } catch {
+                            errors.append(.init(index: offset, error: error, data: document.data()))
+                        }
                     }
                 }
-                return promise(.success([]))
+                errors.forEach { print("cause error when fetch list for \(path). error description \($0)") }
+                return promise(.success(entities))
             }
         }.eraseToAnyPublisher()
     }
+    
+    // MARK: - Watch
+    func watchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error>{
+        fatalError("TODO:")
+    }
 
+    // MARK: - Modifier
     func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.collection(path.path).add(value: value)
     }
