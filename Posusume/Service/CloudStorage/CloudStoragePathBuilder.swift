@@ -1,7 +1,7 @@
 import Foundation
 
 struct CloudStoragePathBuilder<Entity: CloudStorageImageFileName> {
-    let paths: [String]
+    let initialFileName: String
     
-    static func userSpot(userID: UserID, spotID: SpotID) -> CloudStoragePathBuilder<Spot> { .init(paths: ["users", userID.rawValue, "spots", spotID.rawValue]) }
+    static func userSpot(userID: UserID, spotID: SpotID) -> CloudStoragePathBuilder<Spot> { .init(initialFileName: ["users", userID.rawValue, "spots", spotID.rawValue].joined(separator: "-")) }
 }

@@ -4,19 +4,8 @@ import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 struct CloudStorage {
-    let _reference: StorageReference = Storage.storage().reference()
-    func reference(paths: [String]) -> StorageReference {
-        var reference = _reference
-        paths.forEach {
-            reference = reference.child($0)
-        }
-        return reference
-    }
+    let reference: StorageReference = Storage.storage().reference()
 
-    private func generateJPEGFileName() -> String {
-        UUID().uuidString + ".jpg"
-    }
-    
     // MARK: - Upload
     struct Uploaded {
         let path: String
@@ -31,8 +20,8 @@ struct CloudStorage {
         var task: StorageUploadTask?
         return Future { promise in
             task = self
-                .reference(paths: path.paths)
-                .child(imageFileName?.imageFileName ?? generateJPEGFileName())
+                .reference
+                .child(imageFileName?.imageFileName ?? path.initialFileName)
                 .putData(jpegImage, metadata: nil) { metadata, error in
                     if let error = error {
                         return promise(.failure(error))
@@ -54,7 +43,7 @@ struct CloudStorage {
         var task: StorageDownloadTask?
         return Future { promise in
             task = self
-                .reference(paths: path.paths)
+                .reference
                 .child(imageFileName.imageFileName)
                 .getData(maxSize: maximumDataSize) { (data, error) in
                     if let error = error {
