@@ -33,8 +33,8 @@ struct CloudStorage {
                     if let error = error {
                         return promise(.failure(error))
                     }
-                    guard let metadata = metadata, let path = metadata.path else {
-                        fatalError("Uh-oh, an error occurred!")
+                    guard let _metadata = metadata, let path = _metadata.path else {
+                        fatalError("path not found in cloud storage response metadata \(String(describing: metadata))")
                     }
                     promise(.success(.init(path: path)))
                 }
@@ -59,8 +59,8 @@ struct CloudStorage {
                 if let error = error {
                     promise(.failure(error))
                 }
-                guard let data = data, let image = UIImage(data: data) else {
-                    fatalError("Uh-oh, an error occurred!")
+                guard let _data = data, let image = UIImage(data: _data) else {
+                    fatalError("data cann't convert to UIImage. data: \(String(describing: data))")
                 }
                 promise(.success(image))
             }
