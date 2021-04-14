@@ -34,7 +34,9 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
         ])
         return pathBuilder
     }
-    struct Canceller: Hashable { }
+
+    struct WatchCanceller: Hashable { }
+    struct FetchCanceller: Hashable { }
     switch action {
     case let .regionChange(center, meters):
         return .none
@@ -43,13 +45,14 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
             .mapError(EquatableError.init(error:))
             .receive(on: environment.mainQueue)
             .catchToEffect()
+            .cancellable(id: FetchCanceller())
             .map(SpotMapAction.reload)
     case .watch:
         return environment.watchList(path())
             .mapError(EquatableError.init(error:))
             .receive(on: environment.mainQueue)
             .catchToEffect()
-            .cancellable(id: Canceller())
+            .cancellable(id: WatchCanceller())
             .map(SpotMapAction.reload)
     case .reload(.success(let spots)):
         state.spots = spots
