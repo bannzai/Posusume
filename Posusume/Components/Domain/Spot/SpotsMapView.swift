@@ -102,7 +102,7 @@ struct SpotMapView_Previews: PreviewProvider {
             store: .init(
                 initialState: .init(
                     spots: [
-                        .init(id: SpotID(rawValue: "identifier"), latitude: 100, longitude: 100, name: "spot", imagePath: nil)
+                        .init(id: SpotID(rawValue: "identifier"), latitude: 100, longitude: 100, name: "spot", imageName: "")
                     ],
                     error: nil
                 ),
@@ -117,6 +117,6 @@ struct SpotMapView_Previews: PreviewProvider {
         )
     }
     static var spots: [Spot] = (0..<10).map {
-        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imagePath: nil)
+        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imageName: "")
     }
 }

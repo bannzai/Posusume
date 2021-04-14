@@ -15,7 +15,7 @@ struct Spot: DatabaseEntity, Identifiable, Equatable {
     let latitude: Double
     let longitude: Double
     let name: String
-    var imagePath: String?
+    var imageName: String
     private(set) var createdDate: Date = .init()
     var deletedDate: Date? = nil
     var archivedDate: Date? = nil
@@ -25,12 +25,10 @@ struct Spot: DatabaseEntity, Identifiable, Equatable {
         case latitude
         case longitude
         case name
-        case imagePath
+        case imageName
         case createdDate
         case deletedDate
         case archivedDate
     }
     typealias WhereKey = CodingKeys
 }
-
-extension Spot: ImagePath { }
