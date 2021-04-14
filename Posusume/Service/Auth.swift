@@ -3,13 +3,13 @@ import FirebaseAuth
 import Combine
 
 protocol Auth {
-    func auth() -> AnyPublisher<Me.ID, Error>
+    func auth() -> AnyPublisher<Me, Error>
 }
 
 fileprivate struct _Auth: Auth {
     init() { }
 
-    func auth() -> AnyPublisher<Me.ID, Error> {
+    func auth() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
                 if let error = error {
@@ -21,7 +21,7 @@ fileprivate struct _Auth: Auth {
                 }
                 let id = Me.ID(rawValue: result.user.uid)
                 self.store(meID: id)
-                promise(.success(id))
+                promise(.success(Me(id: id)))
             }
         }.eraseToAnyPublisher()
     }
