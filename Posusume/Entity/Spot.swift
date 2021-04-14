@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import CoreLocation
 
 struct SpotID: RawRepresentable, Equatable, Codable, DocumentIDWrappable, Hashable {
     let rawValue: String
@@ -31,4 +32,8 @@ struct Spot: DatabaseEntity, CloudStorageImageFileName, Identifiable, Equatable 
         case archivedDate
     }
     typealias WhereKey = CodingKeys
+    
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: latitude, longitude: longitude)
+    }
 }

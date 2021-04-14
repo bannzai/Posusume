@@ -75,11 +75,20 @@ struct SpotMapView: View {
     var body: some View {
         WithViewStore(store) { viewStore in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-                Map(coordinateRegion: viewStore.binding(
+                Map(
+                    coordinateRegion: viewStore.binding(
                         get: \.region,
                         send: { .regionChange(center: $0.center, span: .init(latitudeDelta: $0.span.longitudeDelta, longitudeDelta: $0.span.longitudeDelta))
                         }
-                ))
+                    ),
+                    showsUserLocation: true,
+                    annotationItems: viewStore.state.spots,
+                    annotationContent: { spot in
+                        MapAnnotation(coordinate: spot.coordinate) {
+                            Text(spot.name)
+                        }
+                    }
+                )
                 ZStack {
                     BarnBottomSheet()
                     SpotList(
@@ -116,7 +125,7 @@ struct SpotMapView_Previews: PreviewProvider {
             )
         )
     }
-    static var spots: [Spot] = (0..<10).map {
-        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imageFileName: "")
+    static var spots: [Spot] = (0..<10).map { offset in
+        .init(id: SpotID(rawValue: "identifier\(offset)"), latitude: 35.655164046, longitude: 139.740663704 + Double(offset) * 000000.1, name: "spot \(offset)", imageFileName: "")
     }
 }
