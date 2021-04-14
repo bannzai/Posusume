@@ -29,7 +29,7 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
         let offset: CLLocationDegrees = 3
         let latitude = state.center.latitude
         let longitude = state.center.longitude
-        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spots(args: [
+        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spotsGroup(args: [
             (.latitude, .lessOrEqual(latitude + offset)),
             (.longitude, .lessOrEqual(longitude + offset)),
             (.latitude, .greaterOrEqual(latitude - offset)),
