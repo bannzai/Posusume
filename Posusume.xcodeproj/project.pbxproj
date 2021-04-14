@@ -159,14 +159,6 @@
 			path = Mock;
 			sourceTree = "<group>";
 		};
-		BA249E782625EAAB000DA60F /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				BA249E792625EAB4000DA60F /* DatabaseEntity.swift */,
-			);
-			path = Firebase;
-			sourceTree = "<group>";
-		};
 		BA249E7F2625EFC7000DA60F /* CoreLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,7 +171,6 @@
 		BA26C8642621A03D006555AE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				BA249E782625EAAB000DA60F /* Firebase */,
 				BA26C88B262293B1006555AE /* TCA */,
 				BA26C88A262293AB006555AE /* Extension */,
 			);
@@ -189,6 +180,7 @@
 		BA26C8712621EFDA006555AE /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				BA249E792625EAB4000DA60F /* DatabaseEntity.swift */,
 				BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */,
 				BA26C8782621F020006555AE /* CollectionReference+Combine.swift */,
 				BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */,
