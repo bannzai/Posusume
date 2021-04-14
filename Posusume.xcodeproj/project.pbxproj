@@ -36,6 +36,7 @@
 		BADF5305261D307700431FEB /* SpotListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5304261D307700431FEB /* SpotListCell.swift */; };
 		BADF530C261D309D00431FEB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF530B261D309D00431FEB /* Spot.swift */; };
 		BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */; };
+		BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */; };
 		BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7000261C34A400584593 /* FirebaseFirestore */; };
 		BAFF7003261C34A400584593 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */; };
 		BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */; };
@@ -114,6 +115,7 @@
 		BADF5304261D307700431FEB /* SpotListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCell.swift; sourceTree = "<group>"; };
 		BADF530B261D309D00431FEB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStoragePathBuilder.swift; sourceTree = "<group>"; };
+		BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageImageFileName.swift; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */,
+				BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */,
 			);
 			path = CloudStorage;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
+				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,

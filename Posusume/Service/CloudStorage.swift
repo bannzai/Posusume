@@ -4,13 +4,13 @@ import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 struct CloudStorage {
-    let reference: StorageReference
-    init(path: CloudStoragePathBuilder) {
-        var reference = Storage.storage().reference()
-        path.paths.forEach {
+    let _reference: StorageReference = Storage.storage().reference()
+    func reference(paths: [String]) -> StorageReference {
+        var reference = _reference
+        paths.forEach {
             reference = reference.child($0)
         }
-        self.reference = reference
+        return reference
     }
 
     private func generateJPEGFileName() -> String {
@@ -24,15 +24,15 @@ struct CloudStorage {
     enum UploadError: Error {
         case convertToJPEG
     }
-    func upload(image: UIImage, imageName: String?) -> AnyPublisher<Uploaded, Error> {
+    func upload<T: CloudStorageImageFileName>(path: CloudStoragePathBuilder<T>, image: UIImage, imageFileName: T?) -> AnyPublisher<Uploaded, Error> {
         guard let jpegImage = image.jpegData(compressionQuality: 1) else {
             return Combine.Fail(error: UploadError.convertToJPEG).eraseToAnyPublisher()
         }
         var task: StorageUploadTask?
         return Future { promise in
             task = self
-                .reference
-                .child(imageName ?? generateJPEGFileName())
+                .reference(paths: path.paths)
+                .child(imageFileName?.imageFileName ?? generateJPEGFileName())
                 .putData(jpegImage, metadata: nil) { metadata, error in
                     if let error = error {
                         return promise(.failure(error))
@@ -50,18 +50,21 @@ struct CloudStorage {
     
     
     // MARK: - Fetch
-    public func fetch(imageName: String) -> AnyPublisher<UIImage, Error> {
+    public func fetch<T: CloudStorageImageFileName>(path: CloudStoragePathBuilder<T>, imageFileName: T) -> AnyPublisher<UIImage, Error> {
         var task: StorageDownloadTask?
         return Future { promise in
-            task = self.reference.child(imageName).getData(maxSize: maximumDataSize) { (data, error) in
-                if let error = error {
-                    promise(.failure(error))
+            task = self
+                .reference(paths: path.paths)
+                .child(imageFileName.imageFileName)
+                .getData(maxSize: maximumDataSize) { (data, error) in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    guard let _data = data, let image = UIImage(data: _data) else {
+                        fatalError("data cann't convert to UIImage. data: \(String(describing: data))")
+                    }
+                    promise(.success(image))
                 }
-                guard let _data = data, let image = UIImage(data: _data) else {
-                    fatalError("data cann't convert to UIImage. data: \(String(describing: data))")
-                }
-                promise(.success(image))
-            }
         }.handleEvents(receiveCancel: {
             task?.cancel()
         })

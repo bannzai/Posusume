@@ -29,6 +29,6 @@ struct SpotList_Previews: PreviewProvider {
         .previewLayout(.fixed(width: UIScreen.main.bounds.width, height: 300))
     }
     static var spots: [Spot] = (0..<10).map {
-        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imageName: "")
+        .init(id: SpotID(rawValue: "identifier\($0)"), latitude: 100, longitude: 100, name: "spot \($0)", imageFileName: "")
     }
 }
