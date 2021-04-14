@@ -16,7 +16,6 @@ enum RootAction: Equatable {
 
 struct RootEnvironment {
     let auth: Auth
-    let fetchList: (DatabaseCollectionPathBuilder<Spot>) -> AnyPublisher<[Spot], Error>
     var mainQueue: AnySchedulerOf<DispatchQueue>
 }
 

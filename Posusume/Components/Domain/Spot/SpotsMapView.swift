@@ -16,15 +16,12 @@ struct SpotMapState: Equatable {
 enum SpotMapAction: Equatable {
     case regionChange(center: CLLocationCoordinate2D, span: CoordinateSpan)
     case fetch
-    case fetched(Result<[Spot], EquatableError>)
+    case watch
+    case reload(Result<[Spot], EquatableError>)
 }
 
 let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { (state, action, environment) in
-    struct Canceller: Hashable { }
-    switch action {
-    case let .regionChange(center, meters):
-        return .none
-    case .fetch:
+    func path() -> DatabaseCollectionPathBuilder<Spot> {
         // TODO: adjustment offset from span
         let offset: CLLocationDegrees = 3
         let latitude = state.center.latitude
@@ -35,15 +32,29 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
             (.latitude, .greaterOrEqual(latitude - offset)),
             (.longitude, .greaterOrEqual(longitude - offset)),
         ])
-        return environment.fetchList(pathBuilder)
+        return pathBuilder
+    }
+    struct Canceller: Hashable { }
+    switch action {
+    case let .regionChange(center, meters):
+        return .none
+    case .fetch:
+        return environment.fetchList(path())
             .mapError(EquatableError.init(error:))
             .receive(on: environment.mainQueue)
             .catchToEffect()
-            .map(SpotMapAction.fetched)
-    case .fetched(.success(let spots)):
+            .map(SpotMapAction.reload)
+    case .watch:
+        return environment.watchList(path())
+            .mapError(EquatableError.init(error:))
+            .receive(on: environment.mainQueue)
+            .catchToEffect()
+            .cancellable(id: Canceller())
+            .map(SpotMapAction.reload)
+    case .reload(.success(let spots)):
         state.spots = spots
         return .none
-    case .fetched(.failure(let error)):
+    case .reload(.failure(let error)):
         state.error = error
         return .none
     }
@@ -52,6 +63,7 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
 struct SpotMapEnvironment {
     let me: Me
     let fetchList: (DatabaseCollectionPathBuilder<Spot>) -> AnyPublisher<[Spot], Error>
+    let watchList: (DatabaseCollectionPathBuilder<Spot>) -> AnyPublisher<[Spot], Error>
     var mainQueue: AnySchedulerOf<DispatchQueue>
 }
 
@@ -95,6 +107,7 @@ struct SpotMapView_Previews: PreviewProvider {
                 environment: SpotMapEnvironment(
                     me: .init(id: Me.ID(rawValue: "1")),
                     fetchList: { _ in Future(value: spots).eraseToAnyPublisher() },
+                    watchList: { _ in Future(value: spots).eraseToAnyPublisher() },
                     mainQueue: DispatchQueue.main.eraseToAnyScheduler()
                 )
             )
