@@ -19,7 +19,7 @@
 		BA26C86C2621D08D006555AE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C86B2621D08D006555AE /* Database.swift */; };
 		BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */; };
 		BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8782621F020006555AE /* CollectionReference+Combine.swift */; };
-		BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C87C2621F03A006555AE /* PathBuilder.swift */; };
+		BA26C87D2621F03A006555AE /* DatabasePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */; };
 		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
@@ -35,6 +35,7 @@
 		BADF5301261D303C00431FEB /* SpotList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5300261D303C00431FEB /* SpotList.swift */; };
 		BADF5305261D307700431FEB /* SpotListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5304261D307700431FEB /* SpotListCell.swift */; };
 		BADF530C261D309D00431FEB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF530B261D309D00431FEB /* Spot.swift */; };
+		BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */; };
 		BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7000261C34A400584593 /* FirebaseFirestore */; };
 		BAFF7003261C34A400584593 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */; };
 		BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */; };
@@ -90,7 +91,7 @@
 		BA26C86B2621D08D006555AE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentReference+Combine.swift"; sourceTree = "<group>"; };
 		BA26C8782621F020006555AE /* CollectionReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionReference+Combine.swift"; sourceTree = "<group>"; };
-		BA26C87C2621F03A006555AE /* PathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathBuilder.swift; sourceTree = "<group>"; };
+		BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePathBuilder.swift; sourceTree = "<group>"; };
 		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		BADF5300261D303C00431FEB /* SpotList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotList.swift; sourceTree = "<group>"; };
 		BADF5304261D307700431FEB /* SpotListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCell.swift; sourceTree = "<group>"; };
 		BADF530B261D309D00431FEB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStoragePathBuilder.swift; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -189,7 +191,7 @@
 			children = (
 				BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */,
 				BA26C8782621F020006555AE /* CollectionReference+Combine.swift */,
-				BA26C87C2621F03A006555AE /* PathBuilder.swift */,
+				BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA26C8512621939A006555AE /* CloudStorage.swift */,
 				BA26C86B2621D08D006555AE /* Database.swift */,
@@ -323,6 +326,14 @@
 				BA249E742625E217000DA60F /* Me.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
+			isa = PBXGroup;
+			children = (
+				BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */,
+			);
+			path = CloudStorage;
 			sourceTree = "<group>";
 		};
 		BAFF701F261C3FB300584593 /* Components */ = {
@@ -568,7 +579,7 @@
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */,
 				BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */,
-				BA26C87D2621F03A006555AE /* PathBuilder.swift in Sources */,
+				BA26C87D2621F03A006555AE /* DatabasePathBuilder.swift in Sources */,
 				BA26C86C2621D08D006555AE /* Database.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
@@ -580,6 +591,7 @@
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
+				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
 				BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
