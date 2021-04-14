@@ -5,12 +5,16 @@ import Combine
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 struct CloudStorage {
     let reference: StorageReference
-    init(userID: UserID) {
-        reference = Storage.storage().reference().child("users").child(userID.rawValue)
+    init(path: CloudStoragePathBuilder) {
+        var reference = Storage.storage().reference()
+        path.paths.forEach {
+            reference = reference.child($0)
+        }
+        self.reference = reference
     }
 
-    private func generateFileName() -> String {
-        UUID().uuidString
+    private func generateJPEGFileName() -> String {
+        UUID().uuidString + ".jpg"
     }
     
     // MARK: - Upload
@@ -18,17 +22,17 @@ struct CloudStorage {
         let path: String
     }
     enum UploadError: Error {
-        case convertToJpeg
+        case convertToJPEG
     }
-    func upload(image: UIImage) -> AnyPublisher<Uploaded, Error> {
+    func upload(image: UIImage, imageName: String?) -> AnyPublisher<Uploaded, Error> {
         guard let jpegImage = image.jpegData(compressionQuality: 1) else {
-            return Combine.Fail(error: UploadError.convertToJpeg).eraseToAnyPublisher()
+            return Combine.Fail(error: UploadError.convertToJPEG).eraseToAnyPublisher()
         }
         var task: StorageUploadTask?
         return Future { promise in
             task = self
                 .reference
-                .child(generateFileName() + ".jpg")
+                .child(imageName ?? generateJPEGFileName())
                 .putData(jpegImage, metadata: nil) { metadata, error in
                     if let error = error {
                         return promise(.failure(error))
@@ -46,16 +50,10 @@ struct CloudStorage {
     
     
     // MARK: - Fetch
-    enum FetchError: Error {
-        case imagePathNotFound
-    }
-    public func fetch(imagePath: ImagePath) -> AnyPublisher<UIImage, Error> {
-        guard let imagePath = imagePath.imagePath else {
-            return Combine.Fail(error: FetchError.imagePathNotFound).eraseToAnyPublisher()
-        }
+    public func fetch(imageName: String) -> AnyPublisher<UIImage, Error> {
         var task: StorageDownloadTask?
         return Future { promise in
-            task = self.reference.child(imagePath).getData(maxSize: maximumDataSize) { (data, error) in
+            task = self.reference.child(imageName).getData(maxSize: maximumDataSize) { (data, error) in
                 if let error = error {
                     promise(.failure(error))
                 }
@@ -70,8 +68,4 @@ struct CloudStorage {
         .eraseToAnyPublisher()
         
     }
-}
-
-protocol ImagePath {
-    var imagePath: String? { get }
 }
