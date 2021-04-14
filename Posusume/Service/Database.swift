@@ -27,26 +27,7 @@ struct FirestoreDatabase: Database {
     }
     func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error> {
         Future { promise in
-            let collectionReference = path.isGroup ? database.collectionGroup(path.path) : database.collection(path.path)
-            path.args.forEach { key, relation in
-                switch relation {
-                case let .equal(value):
-                    collectionReference.whereField(key.rawValue, isEqualTo: value)
-                case let .less(value):
-                    collectionReference.whereField(key.rawValue, isLessThan: value)
-                case let .lessOrEqual(value):
-                    collectionReference.whereField(key.rawValue, isLessThanOrEqualTo: value)
-                case let .greater(value):
-                    collectionReference.whereField(key.rawValue, isGreaterThan: value)
-                case let .greaterOrEqual(value):
-                    collectionReference.whereField(key.rawValue, isGreaterThanOrEqualTo: value)
-                case let .notEqual(value):
-                    collectionReference.whereField(key.rawValue, isNotEqualTo: value)
-                case let .contains(values):
-                    collectionReference.whereField(key.rawValue, in: values)
-                }
-            }
-            collectionReference.getDocuments { (snapshot, error) in
+            buildCollectionQuery(for: path).getDocuments { (snapshot, error) in
                 if let error = error {
                     return promise(.failure(error))
                 }
@@ -64,7 +45,7 @@ struct FirestoreDatabase: Database {
                         }
                     }
                 }
-                errors.forEach { print("cause error when fetch list for \(path). error description \($0)") }
+                errors.forEach { print("cause decode error when fetch list for \(path). error description \($0)") }
                 return promise(.success(entities))
             }
         }.eraseToAnyPublisher()
@@ -72,7 +53,29 @@ struct FirestoreDatabase: Database {
     
     // MARK: - Watch
     func watchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error>{
-        fatalError("TODO:")
+        let subject = PassthroughSubject<[T], Error>()
+        buildCollectionQuery(for: path).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                return subject.send(completion: .failure(error))
+            }
+            
+            var entities: [T] = []
+            var errors: [DecodeError] = []
+            if let snapshot = snapshot {
+                snapshot.documents.enumerated().forEach { offset, document in
+                    do {
+                        try document.data(as: T.self).map {
+                            entities.append($0)
+                        }
+                    } catch {
+                        errors.append(.init(index: offset, error: error, data: document.data()))
+                    }
+                }
+            }
+            errors.forEach { print("cause decode error when watch list for \(path). error description \($0)") }
+            return subject.send(entities)
+        }
+        return subject.eraseToAnyPublisher()
     }
 
     // MARK: - Modifier
@@ -82,5 +85,31 @@ struct FirestoreDatabase: Database {
 
     func update<T: Encodable>(value: T, path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
         database.document(path.path).set(from: value)
+    }
+}
+
+// MARK: - Private
+private extension FirestoreDatabase {
+    func buildCollectionQuery<T: Decodable>(for path: DatabaseCollectionPathBuilder<T>) -> FirebaseFirestore.Query {
+        var query = path.isGroup ? database.collectionGroup(path.path) : database.collection(path.path)
+        path.args.forEach { key, relation in
+            switch relation {
+            case let .equal(value):
+                query = query.whereField(key.rawValue, isEqualTo: value)
+            case let .less(value):
+                query = query.whereField(key.rawValue, isLessThan: value)
+            case let .lessOrEqual(value):
+                query = query.whereField(key.rawValue, isLessThanOrEqualTo: value)
+            case let .greater(value):
+                query = query.whereField(key.rawValue, isGreaterThan: value)
+            case let .greaterOrEqual(value):
+                query = query.whereField(key.rawValue, isGreaterThanOrEqualTo: value)
+            case let .notEqual(value):
+                query = query.whereField(key.rawValue, isNotEqualTo: value)
+            case let .contains(values):
+                query = query.whereField(key.rawValue, in: values)
+            }
+        }
+        return query
     }
 }
