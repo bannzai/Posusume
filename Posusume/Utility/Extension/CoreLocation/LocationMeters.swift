@@ -5,3 +5,4 @@ struct CoordinateSpan: Equatable {
     let latitudeDelta: CLLocationDegrees
     let longitudeDelta: CLLocationDegrees
 }
+

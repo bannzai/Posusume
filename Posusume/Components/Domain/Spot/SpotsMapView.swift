@@ -10,7 +10,7 @@ struct SpotMapState: Equatable {
     var spots: [Spot] = []
     var error: EquatableError?
 
-    var spotListState = SpotListState()
+    var spotListState: SpotListState { SpotListState(spots: spots) }
 }
 
 enum SpotMapAction: Equatable {
@@ -19,42 +19,35 @@ enum SpotMapAction: Equatable {
     case fetched(Result<[Spot], EquatableError>)
 }
 
-let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment>.combine(
-    .init { (state, action, environment) in
-        struct Canceller: Hashable { }
-        switch action {
-        case let .regionChange(center, meters):
-            return .none
-        case .fetch:
-            // TODO: adjustment offset from span
-            let offset: CLLocationDegrees = 3
-            let latitude = state.center.latitude
-            let longitude = state.center.longitude
-            let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spots(args: [
-                (.latitude, .lessOrEqual(latitude + offset)),
-                (.longitude, .lessOrEqual(longitude + offset)),
-                (.latitude, .greaterOrEqual(latitude - offset)),
-                (.longitude, .greaterOrEqual(longitude - offset)),
-            ])
-            return environment.fetchList(pathBuilder)
-                .mapError(EquatableError.init(error:))
-                .receive(on: environment.mainQueue)
-                .catchToEffect()
-                .map(SpotMapAction.fetched)
-        case .fetched(.success(let spots)):
-            state.spots = spots
-            return .none
-        case .fetched(.failure(let error)):
-            state.error = error
-            return .none
-        }
-    },
-    spotListReducer.pullback(
-        state: \.spotListState,
-        action: <#T##CasePath<GlobalAction, SpotListAction>#>,
-        environment: <#T##(GlobalEnvironment) -> SpotListEnvironment#>
-    )
-)
+let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { (state, action, environment) in
+    struct Canceller: Hashable { }
+    switch action {
+    case let .regionChange(center, meters):
+        return .none
+    case .fetch:
+        // TODO: adjustment offset from span
+        let offset: CLLocationDegrees = 3
+        let latitude = state.center.latitude
+        let longitude = state.center.longitude
+        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spots(args: [
+            (.latitude, .lessOrEqual(latitude + offset)),
+            (.longitude, .lessOrEqual(longitude + offset)),
+            (.latitude, .greaterOrEqual(latitude - offset)),
+            (.longitude, .greaterOrEqual(longitude - offset)),
+        ])
+        return environment.fetchList(pathBuilder)
+            .mapError(EquatableError.init(error:))
+            .receive(on: environment.mainQueue)
+            .catchToEffect()
+            .map(SpotMapAction.fetched)
+    case .fetched(.success(let spots)):
+        state.spots = spots
+        return .none
+    case .fetched(.failure(let error)):
+        state.error = error
+        return .none
+    }
+}
 
 struct SpotMapEnvironment {
     let me: Me
@@ -75,15 +68,7 @@ struct SpotMapView: View {
                 ZStack {
                     BarnBottomSheet()
                     SpotList(
-                        store: .init(
-                            initialState: .init(),
-                            reducer: spotListReducer,
-                            environment: SpotListEnvironment(
-                                auth: auth,
-                                fetchList: FirestoreDatabase.shared.fetchList,
-                                mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                            )
-                        )
+                        state: viewStore.state.spotListState
                     )
                     .frame(alignment: .bottom)
                     .padding()
