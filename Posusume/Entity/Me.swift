@@ -1,6 +1,6 @@
 import Foundation
 
-struct Me: Identifiable {
+struct Me: Identifiable, Equatable {
     let id: ID
     var userID: UserID { UserID(rawValue: id.rawValue) }
 
