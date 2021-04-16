@@ -13,8 +13,7 @@ struct SpotID: RawRepresentable, Equatable, Codable, DocumentIDWrappable, Hashab
 
 struct Spot: DatabaseEntity, CloudStorageImageFileName, Identifiable, Equatable {
     @DocumentID var id: SpotID?
-    let latitude: Double
-    let longitude: Double
+    var location: GeoPoint
     let name: String
     var imageFileName: String
     private(set) var createdDate: Date = .init()
@@ -23,17 +22,17 @@ struct Spot: DatabaseEntity, CloudStorageImageFileName, Identifiable, Equatable 
 
     enum CodingKeys: String, CodingKey {
         case id
-        case latitude
-        case longitude
+        case location
         case name
         case imageFileName
         case createdDate
         case deletedDate
         case archivedDate
+        
     }
     typealias WhereKey = CodingKeys
     
     var coordinate: CLLocationCoordinate2D {
-        .init(latitude: latitude, longitude: longitude)
+        .init(latitude: location.latitude, longitude: location.longitude)
     }
 }

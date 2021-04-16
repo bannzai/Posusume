@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 import ComposableArchitecture
 import MapKit
+import FirebaseFirestore
 
 let defaultRegion = MKCoordinateRegion(
     center: .init(latitude: 35.655164046, longitude: 139.740663704),
@@ -11,6 +12,7 @@ struct SpotMapState: Equatable {
     var center: CLLocationCoordinate2D = defaultRegion.center
     var span: CoordinateSpan = .init(latitudeDelta: defaultRegion.span.latitudeDelta, longitudeDelta: defaultRegion.span.longitudeDelta)
     var region: MKCoordinateRegion { .init(center: center, span: .init(latitudeDelta: span.latitudeDelta, longitudeDelta: span.longitudeDelta)) }
+    var geoPoint: GeoPoint { .init(coordinate: center) }
     var spots: [Spot] = []
     var error: EquatableError?
 
@@ -115,7 +117,7 @@ struct SpotMapView_Previews: PreviewProvider {
             store: .init(
                 initialState: .init(
                     spots: [
-                        .init(id: SpotID(rawValue: "identifier"), latitude: 100, longitude: 100, name: "spot", imageFileName: "")
+                        .init(id: SpotID(rawValue: "identifier"), location: .init(latitude: 100, longitude: 100), name: "spot", imageFileName: "")
                     ],
                     error: nil
                 ),
@@ -130,6 +132,6 @@ struct SpotMapView_Previews: PreviewProvider {
         )
     }
     static var spots: [Spot] = (0..<10).map { offset in
-        .init(id: SpotID(rawValue: "identifier\(offset)"), latitude: 35.655164046, longitude: 139.740663704 + Double(offset) * 000000.1, name: "spot \(offset)", imageFileName: "")
+        .init(id: SpotID(rawValue: "identifier\(offset)"), location: .init(latitude: 35.655164046, longitude: 139.740663704 + Double(offset) * 000000.1), name: "spot \(offset)", imageFileName: "")
     }
 }

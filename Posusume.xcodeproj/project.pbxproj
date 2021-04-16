@@ -24,6 +24,7 @@
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
+		BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* RootView.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
@@ -98,6 +99,7 @@
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeoPoint+Extension.swift"; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B12610B72F00676F22 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		BA26C88A262293AB006555AE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BAADA7AF26296100001CCED9 /* Firestore */,
 				BA249E7F2625EFC7000DA60F /* CoreLocation */,
 				BA26C892262293C2006555AE /* Combine */,
 			);
@@ -224,6 +227,14 @@
 				BAAB0D4826287AFD00EA3091 /* LoginView.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		BAADA7AF26296100001CCED9 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */,
+			);
+			path = Firestore;
 			sourceTree = "<group>";
 		};
 		BAD9A8A32610B72F00676F22 = {
@@ -601,6 +612,7 @@
 				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
 				BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
+				BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,

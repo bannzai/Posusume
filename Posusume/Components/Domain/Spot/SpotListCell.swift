@@ -11,6 +11,6 @@ struct SpotListCell: View {
 
 struct SpotListCell_Previews: PreviewProvider {
     static var previews: some View {
-        SpotListCell(spot: .init(id: nil, latitude: 100, longitude: 100, name: "This is awesome spot", imageFileName: ""))
+        SpotListCell(spot: .init(id: nil, location: .init(latitude: 100, longitude: 100), name: "This is awesome spot", imageFileName: ""))
     }
 }
