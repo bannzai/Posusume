@@ -6,9 +6,14 @@ protocol Auth {
     func auth() -> AnyPublisher<Me, Error>
 }
 
-fileprivate struct _Auth: Auth {
-    init() { }
+protocol Authorized {
+    func authorized() -> Me
+}
 
+fileprivate class _Auth: Auth, Authorized {
+    var me: Me?
+    init() { }
+    
     func auth() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
@@ -21,11 +26,18 @@ fileprivate struct _Auth: Auth {
                 }
                 let id = Me.ID(rawValue: result.user.uid)
                 self.store(meID: id)
-                promise(.success(Me(id: id)))
+
+                let me = Me(id: id)
+                self.me = me
+                promise(.success(me))
             }
         }.eraseToAnyPublisher()
     }
     
+    func authorized() -> Me {
+        me!
+    }
+
     // MARK: - Private
     private enum StoreKey {
         static let firebaseUserID: String = "firebaseUserID"
@@ -38,4 +50,6 @@ fileprivate struct _Auth: Auth {
     }
 }
 
-internal var auth: Auth = _Auth()
+private var _auth = _Auth()
+internal var auth: Auth { _auth }
+internal var authorized: Authorized { _auth }
