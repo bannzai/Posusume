@@ -6,8 +6,8 @@ import FirebaseFirestoreSwift
 protocol Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
     func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error>
-    func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error>
-    func update<T: Encodable>(value: T, path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
+    func createOrUpdate<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String?) -> AnyPublisher<T, Error>
+    func update<T: Encodable>(path: DatabaseDocumentPathBuilder<T>, value: T) -> AnyPublisher<T, Error>
 }
 
 private let database = Firestore.firestore()
@@ -79,11 +79,16 @@ struct FirestoreDatabase: Database {
     }
 
     // MARK: - Modifier
-    func create<T: Encodable>(value: T, path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<T, Error> {
-        database.collection(path.path).add(value: value)
+    func createOrUpdate<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String?) -> AnyPublisher<T, Error> {
+        switch identifier {
+        case nil:
+            return database.collection(path.path).document().set(from: value)
+        case let identifier?:
+            return database.collection(path.path).document(identifier).set(from: value)
+        }
     }
 
-    func update<T: Encodable>(value: T, path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error> {
+    func update<T: Encodable>(path: DatabaseDocumentPathBuilder<T>, value: T) -> AnyPublisher<T, Error> {
         database.document(path.path).set(from: value)
     }
 }
