@@ -30,14 +30,12 @@ let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { 
     func path() -> DatabaseCollectionPathBuilder<Spot> {
         // TODO: adjustment offset from span
         let offset: CLLocationDegrees = 3
-        let latitude = state.center.latitude
-        let longitude = state.center.longitude
-        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spotsGroup(args: [
-            (.latitude, .lessOrEqual(latitude + offset)),
-            (.longitude, .lessOrEqual(longitude + offset)),
-            (.latitude, .greaterOrEqual(latitude - offset)),
-            (.longitude, .greaterOrEqual(longitude - offset)),
-        ])
+        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spotsGroup(
+            args: (
+                key: .location,
+                relations: [.geoRange(geoPoint: state.geoPoint, distance: 1)]
+            )
+        )
         return pathBuilder
     }
 

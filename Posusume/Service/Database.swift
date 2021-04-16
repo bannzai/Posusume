@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import CoreLocation
 
 protocol Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
@@ -97,24 +98,58 @@ struct FirestoreDatabase: Database {
 private extension FirestoreDatabase {
     func buildCollectionQuery<T: Decodable>(for path: DatabaseCollectionPathBuilder<T>) -> FirebaseFirestore.Query {
         var query = path.isGroup ? database.collectionGroup(path.path) : database.collection(path.path)
-        path.args.forEach { key, relation in
-            switch relation {
-            case let .equal(value):
-                query = query.whereField(key.rawValue, isEqualTo: value)
-            case let .less(value):
-                query = query.whereField(key.rawValue, isLessThan: value)
-            case let .lessOrEqual(value):
-                query = query.whereField(key.rawValue, isLessThanOrEqualTo: value)
-            case let .greater(value):
-                query = query.whereField(key.rawValue, isGreaterThan: value)
-            case let .greaterOrEqual(value):
-                query = query.whereField(key.rawValue, isGreaterThanOrEqualTo: value)
-            case let .notEqual(value):
-                query = query.whereField(key.rawValue, isNotEqualTo: value)
-            case let .contains(values):
-                query = query.whereField(key.rawValue, in: values)
+        if let args = path.args {
+            args.relations.forEach { relation in
+                switch relation {
+                case let .equal(value):
+                    query = query.whereField(args.key.rawValue, isEqualTo: value)
+                case let .less(value):
+                    query = query.whereField(args.key.rawValue, isLessThan: value)
+                case let .lessOrEqual(value):
+                    query = query.whereField(args.key.rawValue, isLessThanOrEqualTo: value)
+                case let .greater(value):
+                    query = query.whereField(args.key.rawValue, isGreaterThan: value)
+                case let .greaterOrEqual(value):
+                    query = query.whereField(args.key.rawValue, isGreaterThanOrEqualTo: value)
+                case let .notEqual(value):
+                    query = query.whereField(args.key.rawValue, isNotEqualTo: value)
+                case let .contains(values):
+                    query = query.whereField(args.key.rawValue, in: values)
+                case let .geoRange(geoPoint, distance):
+                    query = buildGeoQuery(
+                        query: query,
+                        key: args.key.rawValue,
+                        baseGeoPoint: geoPoint,
+                        distance: distance
+                    )
+                }
             }
         }
         return query
+    }
+
+    // NOTE: Reference https://stackoverflow.com/questions/46630507/how-to-run-a-geo-nearby-query-with-firestore
+    private var mileDigress: CLLocationCoordinate2D {
+        .init(
+            latitude: 0.0144927536231884,
+            longitude: 0.0181818181818182
+        )
+    }
+    private func buildGeoQuery(
+        query: FirebaseFirestore.Query,
+        key: String,
+        baseGeoPoint geoPoint: GeoPoint,
+        distance: Double
+    ) -> FirebaseFirestore.Query {
+        let lowerLat = geoPoint.latitude - (mileDigress.latitude * distance)
+        let lowerLon = geoPoint.longitude - (mileDigress.longitude * distance)
+        
+        let greaterLat = geoPoint.latitude + (mileDigress.latitude * distance)
+        let greaterLon = geoPoint.longitude + (mileDigress.longitude * distance)
+        
+        let lesserGeopoint = GeoPoint(latitude: lowerLat, longitude: lowerLon)
+        let greaterGeopoint = GeoPoint(latitude: greaterLat, longitude: greaterLon)
+        
+        return query.whereField(key, isGreaterThan: lesserGeopoint).whereField(key, isLessThan: greaterGeopoint)
     }
 }

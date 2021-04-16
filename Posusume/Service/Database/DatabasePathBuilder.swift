@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseFirestore
 
 struct DatabaseDocumentPathBuilder<Entity: Codable> {
     let path: String
@@ -7,12 +8,12 @@ struct DatabaseDocumentPathBuilder<Entity: Codable> {
 }
 struct DatabaseCollectionPathBuilder<Entity: DatabaseEntity> {
     let path: String
-    var args: [(Entity.WhereKey, CollectionRelation)] = []
+    var args: (key: Entity.WhereKey, relations: [CollectionRelation])? = nil
     var isGroup: Bool = false
 
     static func users() -> DatabaseCollectionPathBuilder<User> { .init(path: "/users") }
     static func userSpots(userID: UserID) -> DatabaseCollectionPathBuilder<Spot> { .init(path: "/users/\(userID.rawValue)/spots") }
-    static func spotsGroup(args: [(Spot.WhereKey, CollectionRelation)]) -> DatabaseCollectionPathBuilder<Spot> { .init(path: "spots", args: args, isGroup: true) }
+    static func spotsGroup(args: (key: Spot.WhereKey, relations: [CollectionRelation])) -> DatabaseCollectionPathBuilder<Spot> { .init(path: "spots", args: args, isGroup: true) }
 }
 
 enum CollectionRelation {
@@ -23,4 +24,5 @@ enum CollectionRelation {
     case greaterOrEqual(Any)
     case notEqual(Any)
     case contains([Any])
+    case geoRange(geoPoint: GeoPoint, distance: Double)
 }
