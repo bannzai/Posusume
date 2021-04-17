@@ -24,7 +24,6 @@ struct SpotPostState: Equatable {
     }
     
     var error: EquatableError? = nil
-    var title: String? = nil
     var shouldDismiss: Bool = false
 }
 
@@ -34,6 +33,7 @@ enum SpotPostAction: Equatable {
     case update
     case posted(Result<Spot, EquatableError>)
     case dismiss
+    case edited(title: String)
 }
 
 struct SpotPostEnvironment {
@@ -70,56 +70,61 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
     case .dismiss:
         state.shouldDismiss = true
         return .none
+    case let .edited(title):
+        state.viewState.title = title
+        return .none
     }
 }
 
 
 struct SpotPostView: View {
-    @State var text: String = ""
+    let store: Store<SpotPostState, SpotPostAction>
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .top) {
-                Color.screenBackground.edgesIgnoringSafeArea(.all)
-                VStack(spacing: 18) {
-                    VStack {
-                        Image("anyPicture")
-                            .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                        Text("画像を選択")
-                            .font(.footnote)
+        WithViewStore(store) { viewStore in
+            NavigationView {
+                ZStack(alignment: .top) {
+                    Color.screenBackground.edgesIgnoringSafeArea(.all)
+                    VStack(spacing: 18) {
+                        VStack {
+                            Image("anyPicture")
+                                .resizable()
+                                .renderingMode(.template)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                            Text("画像を選択")
+                                .font(.footnote)
+                        }
+                        .foregroundColor(.placeholder)
+                        .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
+                        .background(Color.white)
+                        .padding(.horizontal, 20)
+                        
+                        VStack(alignment: .leading) {
+                            Text("タイトル")
+                                .font(.subheadline)
+                            TextField("ポスターのタイトル", text: viewStore.binding(get: \.viewState.title, send: SpotPostAction.edited(title:)))
+                                .font(.caption)
+                                .textFieldStyle(PlainTextFieldStyle())
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 16)
+                                .background(Color.white)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.leading, 20)
                     }
-                    .foregroundColor(.placeholder)
-                    .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
-                    .background(Color.white)
-                    .padding(.horizontal, 20)
-                    
-                    VStack(alignment: .leading) {
-                        Text("タイトル")
-                            .font(.subheadline)
-                        TextField("ポスターのタイトル", text: $text)
-                            .font(.caption)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .padding(.horizontal, 16)
-                            .background(Color.white)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.leading, 20)
                 }
-            }
-            .navigationBarItems(
-                leading:
-                    Button(action: {
+                .navigationBarItems(
+                    leading:
+                        Button(action: {
 
-                    }) {
-                        Image(systemName: "xmark")
-                            .renderingMode(.template)
-                            .foregroundColor(.appPrimary)
-                    }
-            )
+                        }) {
+                            Image(systemName: "xmark")
+                                .renderingMode(.template)
+                                .foregroundColor(.appPrimary)
+                        }
+                )
+            }
         }
     }
     
@@ -127,6 +132,18 @@ struct SpotPostView: View {
 
 struct SpotListView_Preview: PreviewProvider {
     static var previews: some View {
-        SpotPostView()
+        SpotPostView(
+            store: .init(
+                initialState: .init(context: .create(spot.location)),
+                reducer: spotPostReducer,
+                environment: SpotPostEnvironment(
+                    me: .init(id: .init(rawValue: "1")),
+                    mainQueue: .main,
+                    create: { (_) in Future(value: spot).eraseToAnyPublisher() },
+                    update: { (_, _, _) in Future(value: spot).eraseToAnyPublisher() }
+                )
+            )
+        )
     }
+    static let spot = Spot(location: .init(latitude: 10, longitude: 10), title: "", imageFileName: "")
 }
