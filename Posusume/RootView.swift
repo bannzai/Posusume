@@ -30,7 +30,7 @@ let rootReducer = Reducer<RootState, RootAction, RootEnvironment>.combine(
         state: \.login,
         action: /RootAction.login,
         environment: { root in
-            LoginEnvironment(auth: root.auth, mainQueue: root.mainQueue, createOrUpdateUser: FirestoreDatabase.shared.createOrUpdate)
+            LoginEnvironment(auth: root.auth, mainQueue: root.mainQueue, createOrUpdateUser: FirestoreDatabase.shared.createWithID)
         }
     ),
     spotMapReducer.optional().pullback(

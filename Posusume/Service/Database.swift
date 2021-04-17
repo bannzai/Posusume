@@ -7,7 +7,8 @@ import CoreLocation
 protocol Database {
     func fetch<T: Decodable>(path: DatabaseDocumentPathBuilder<T>) -> AnyPublisher<T, Error>
     func fetchList<T: Decodable>(path: DatabaseCollectionPathBuilder<T>) -> AnyPublisher<[T], Error>
-    func createOrUpdate<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String?) -> AnyPublisher<T, Error>
+    func create<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T) -> AnyPublisher<T, Error>
+    func createWithID<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String) -> AnyPublisher<T, Error>
     func update<T: Encodable>(path: DatabaseDocumentPathBuilder<T>, value: T) -> AnyPublisher<T, Error>
 }
 
@@ -80,13 +81,12 @@ struct FirestoreDatabase: Database {
     }
 
     // MARK: - Modifier
-    func createOrUpdate<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String?) -> AnyPublisher<T, Error> {
-        switch identifier {
-        case nil:
-            return database.collection(path.path).document().set(from: value)
-        case let identifier?:
-            return database.collection(path.path).document(identifier).set(from: value)
-        }
+    func create<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T) -> AnyPublisher<T, Error> {
+        database.collection(path.path).document().set(from: value)
+    }
+
+    func createWithID<T: Encodable>(path: DatabaseCollectionPathBuilder<T>, value: T, identifier: String) -> AnyPublisher<T, Error> {
+        database.collection(path.path).document(identifier).set(from: value)
     }
 
     func update<T: Encodable>(path: DatabaseDocumentPathBuilder<T>, value: T) -> AnyPublisher<T, Error> {
