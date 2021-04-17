@@ -13,8 +13,10 @@ struct SpotMapState: Equatable {
     var span: CoordinateSpan = .init(span: defaultRegion.span)
     var region: MKCoordinateRegion { .init(center: center, span: .init(latitudeDelta: span.latitudeDelta, longitudeDelta: span.longitudeDelta)) }
     var geoPoint: GeoPoint { .init(coordinate: center) }
+
     var spots: [Spot] = []
     var error: EquatableError?
+    var isPresentedPostPage: Bool = false
 
     var spotListState: SpotListState { SpotListState(spots: spots) }
 }
@@ -104,9 +106,8 @@ struct SpotMapView: View {
                                 .background(GradientColor.lower)
                                 .clipShape(Circle())
                         }
-                        Spacer()
-                            .frame(width: 20)
                     }
+                    .padding(.trailing, 20)
 
                     ZStack {
                         BarnBottomSheet()
