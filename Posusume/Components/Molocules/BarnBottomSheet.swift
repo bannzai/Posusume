@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BarnBottomSheet: View {
-    static let height: CGFloat = 300
+    static let height: CGFloat = 270
     var body: some View {
         VStack(spacing: 0) {
             GradientColor
