@@ -82,7 +82,8 @@ struct SpotMapView: View {
                 Map(
                     coordinateRegion: viewStore.binding(
                         get: \.region,
-                        send: { .regionChange(center: $0.center, span: .init(latitudeDelta: $0.span.longitudeDelta, longitudeDelta: $0.span.longitudeDelta))
+                        send: {
+                            .regionChange(center: $0.center, span: .init(latitudeDelta: $0.span.longitudeDelta, longitudeDelta: $0.span.longitudeDelta))
                         }
                     ),
                     showsUserLocation: true,
