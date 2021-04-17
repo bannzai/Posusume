@@ -14,7 +14,7 @@ struct SpotID: RawRepresentable, Equatable, Codable, DocumentIDWrappable, Hashab
 struct Spot: DatabaseEntity, CloudStorageImageFileName, Identifiable, Equatable {
     @DocumentID var id: SpotID?
     var location: GeoPoint
-    let name: String
+    var name: String
     var imageFileName: String
     private(set) var createdDate: Date = .init()
     var deletedDate: Date? = nil
