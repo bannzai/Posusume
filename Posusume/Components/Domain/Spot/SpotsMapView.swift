@@ -115,7 +115,7 @@ struct SpotMapView_Previews: PreviewProvider {
             store: .init(
                 initialState: .init(
                     spots: [
-                        .init(id: SpotID(rawValue: "identifier"), location: .init(latitude: 100, longitude: 100), name: "spot", imageFileName: "")
+                        .init(id: SpotID(rawValue: "identifier"), location: .init(latitude: 10, longitude: 100), name: "spot", imageFileName: "")
                     ],
                     error: nil
                 ),
