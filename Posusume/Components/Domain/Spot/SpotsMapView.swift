@@ -10,7 +10,7 @@ let defaultRegion = MKCoordinateRegion(
 )
 struct SpotMapState: Equatable {
     var center: CLLocationCoordinate2D = defaultRegion.center
-    var span: CoordinateSpan = .init(latitudeDelta: defaultRegion.span.latitudeDelta, longitudeDelta: defaultRegion.span.longitudeDelta)
+    var span: CoordinateSpan = .init(span: defaultRegion.span)
     var region: MKCoordinateRegion { .init(center: center, span: .init(latitudeDelta: span.latitudeDelta, longitudeDelta: span.longitudeDelta)) }
     var geoPoint: GeoPoint { .init(coordinate: center) }
     var spots: [Spot] = []
@@ -82,9 +82,7 @@ struct SpotMapView: View {
                 Map(
                     coordinateRegion: viewStore.binding(
                         get: \.region,
-                        send: {
-                            .regionChange(center: $0.center, span: .init(latitudeDelta: $0.span.longitudeDelta, longitudeDelta: $0.span.longitudeDelta))
-                        }
+                        send: { .regionChange(center: $0.center, span: .init(span: $0.span)) }
                     ),
                     showsUserLocation: true,
                     annotationItems: viewStore.state.spots,
