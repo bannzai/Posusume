@@ -90,7 +90,7 @@ struct SpotMapView: View {
                     annotationItems: viewStore.state.spots,
                     annotationContent: { spot in
                         MapAnnotation(coordinate: spot.coordinate) {
-                            Text(spot.name)
+                            Text(spot.title)
                         }
                     }
                 )
@@ -132,7 +132,7 @@ struct SpotMapView_Previews: PreviewProvider {
             store: .init(
                 initialState: .init(
                     spots: [
-                        .init(id: SpotID(rawValue: "identifier"), location: .init(latitude: 10, longitude: 100), name: "spot", imageFileName: "")
+                        .init(id: SpotID(rawValue: "identifier"), location: .init(latitude: 10, longitude: 100), title: "spot", imageFileName: "")
                     ],
                     error: nil
                 ),
@@ -147,6 +147,6 @@ struct SpotMapView_Previews: PreviewProvider {
         )
     }
     static var spots: [Spot] = (0..<10).map { offset in
-        .init(id: SpotID(rawValue: "identifier\(offset)"), location: .init(latitude: 35.655164046, longitude: 139.740663704 + Double(offset) * 000000.1), name: "spot \(offset)", imageFileName: "")
+        .init(id: SpotID(rawValue: "identifier\(offset)"), location: .init(latitude: 35.655164046, longitude: 139.740663704 + Double(offset) * 000000.1), title: "spot \(offset)", imageFileName: "")
     }
 }

@@ -15,7 +15,7 @@ struct SpotPostState: Equatable {
     init(context: Context) {
         switch context {
         case let .create(point):
-            self.viewState = .init(location: point, name: "", imageFileName: "")
+            self.viewState = .init(location: point, title: "", imageFileName: "")
             self.isNew = true
         case let .update(spot):
             self.viewState = spot
@@ -24,6 +24,7 @@ struct SpotPostState: Equatable {
     }
     
     var error: EquatableError? = nil
+    var title: String? = nil
     var shouldDismiss: Bool = false
 }
 
