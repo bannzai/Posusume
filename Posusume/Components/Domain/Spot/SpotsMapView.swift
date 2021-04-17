@@ -93,17 +93,34 @@ struct SpotMapView: View {
                         }
                     }
                 )
-                ZStack {
-                    BarnBottomSheet()
-                    SpotList(
-                        state: viewStore.state.spotListState
-                    )
-                    .frame(alignment: .bottom)
-                    .padding()
+
+                VStack(spacing: -32) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            print("")
+                        } label: {
+                            Image("addSpot")
+                                .frame(width: 64, height: 64, alignment: .center)
+                                .background(GradientColor.lower)
+                                .clipShape(Circle())
+                        }
+                        Spacer()
+                            .frame(width: 20)
+                    }
+
+                    ZStack {
+                        BarnBottomSheet()
+                        SpotList(
+                            state: viewStore.state.spotListState
+                        )
+                        .frame(alignment: .bottom)
+                        .padding()
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
                 }
-                .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
-                .onAppear { viewStore.send(.fetch) }
             }
+            .onAppear { viewStore.send(.fetch) }
         }
     }
 }
