@@ -24,7 +24,6 @@ struct SpotPostState: Equatable {
     }
     
     var error: EquatableError? = nil
-    var shouldDismiss: Bool = false
 }
 
 enum SpotPostAction: Equatable {
@@ -63,12 +62,12 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             .catchToEffect()
             .map(SpotPostAction.posted)
     case .posted(.success(let spot)):
+        state.error = nil
         return Effect(value: .dismiss)
     case .posted(.failure(let error)):
         state.error = error
         return .none
     case .dismiss:
-        state.shouldDismiss = true
         return .none
     case let .edited(title):
         state.viewState.title = title
@@ -85,20 +84,25 @@ struct SpotPostView: View {
                 ZStack(alignment: .top) {
                     Color.screenBackground.edgesIgnoringSafeArea(.all)
                     VStack(spacing: 18) {
-                        VStack {
-                            Image("anyPicture")
-                                .resizable()
-                                .renderingMode(.template)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                            Text("画像を選択")
-                                .font(.footnote)
-                        }
-                        .foregroundColor(.placeholder)
-                        .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
-                        .background(Color.white)
-                        .padding(.horizontal, 20)
-                        
+                        Button (action: {
+                            
+                        },
+                        label: {
+                            VStack {
+                                Image("anyPicture")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                Text("画像を選択")
+                                    .font(.footnote)
+                            }
+                            .foregroundColor(.placeholder)
+                            .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
+                            .background(Color.white)
+                            .padding(.horizontal, 20)
+                        })
+
                         VStack(alignment: .leading) {
                             Text("タイトル")
                                 .font(.subheadline)
@@ -117,7 +121,7 @@ struct SpotPostView: View {
                 .navigationBarItems(
                     leading:
                         Button(action: {
-
+                            viewStore.send(.dismiss)
                         }) {
                             Image(systemName: "xmark")
                                 .renderingMode(.template)
