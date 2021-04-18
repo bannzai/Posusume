@@ -12,8 +12,8 @@ struct PhotoLibraryState: Equatable {
 }
 
 enum PhotoLibraryAction: Equatable {
-    case selected([PHPickerResult])
-    case converted(Result<PhotoLibraryResult, EquatableError>)
+    case selected(PhotoLibraryResult)
+    case selectError(EquatableError)
     case end(PhotoLibraryResult)
 }
 
@@ -21,24 +21,14 @@ struct PhotoLibraryEnvironment {
     let me: Me
     let photoLibrary: PhotoLibrary
     let mainQueue: AnySchedulerOf<DispatchQueue>
+    let pickerConfiguration: PHPickerConfiguration
 }
 
 let reducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLibraryEnvironment> = .init { state, action, environment in
     switch action {
-    case let .selected(selectedResults):
-        guard let selected = selectedResults.first else {
-            fatalError("unexpected selectedResult is empty")
-        }
-        return environment
-            .photoLibrary
-            .convert(pickerResult: selected)
-            .mapError(EquatableError.init(error:))
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .map(PhotoLibraryAction.converted)
-    case let .converted(.success(result)):
-        return Effect(value: .end(result))
-    case let .converted(.failure(error)):
+    case let .selected(selectedResult):
+        return Effect(value: .end(selectedResult))
+    case let .selectError(error):
         state.error = error
         return .none
     case .end:
@@ -46,17 +36,14 @@ let reducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLibraryEnvironm
     }
 }
 
-private let sharedPhotoLibraryConfiguration: PHPickerConfiguration = .init(photoLibrary: PHPhotoLibrary.shared())
-
 struct PhotoLibraryView: UIViewControllerRepresentable {
-    let configuration: PHPickerConfiguration = sharedPhotoLibraryConfiguration
+    let pickerConfiguration: PHPickerConfiguration
     let photoLibrary: PhotoLibrary
-    @Binding var result: PhotoLibraryResult
-    @Binding var error: Error
-    @Binding var isPresented: Bool
-    
+    let success: (PhotoLibraryResult) -> Void
+    let failure: (Error) -> Void
+
     func makeUIViewController(context: Context) -> PHPickerViewController {
-        let controller = PHPickerViewController(configuration: configuration)
+        let controller = PHPickerViewController(configuration: pickerConfiguration)
         controller.delegate = context.coordinator
         return controller
     }
@@ -86,16 +73,34 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
             canceller?.cancel()
             canceller = parent.photoLibrary.convert(pickerResult: result)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { [weak self] (completion) in
+                .sink(receiveCompletion: { [weak self] completion in
                     switch completion {
                     case .failure(let error):
-                        self?.parent.error = error
+                        self?.parent.failure(error)
                     case .finished:
                         return
                     }
-                }, receiveValue: { [weak self] result in
-                    self?.parent.result = result
+                }, receiveValue: { [weak self] (result) in
+                    self?.parent.success(result)
                 })
+        }
+    }
+}
+
+struct PhotoLibraryViewConnector: View {
+    let store: Store<PhotoLibraryState, PhotoLibraryAction>
+    var body: some View {
+        WithViewStore(store) { viewStore in
+            PhotoLibraryView(
+                pickerConfiguration: sharedPhotoLibraryConfiguration,
+                photoLibrary: photoLibrary,
+                success: { value in
+                    viewStore.send(.selected(value))
+                },
+                failure: { error in
+                    viewStore.send(.selectError(.init(error: error)))
+                }
+            )
         }
     }
 }
@@ -103,10 +108,14 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
 struct PhotoLibraryView_Previews: PreviewProvider {
     static var previews: some View {
         PhotoLibraryView(
+            pickerConfiguration: sharedPhotoLibraryConfiguration,
             photoLibrary: MockPhotoLibrary(),
-            result: .init(get: { .init(image: .init(), location: nil, takeDate: nil) }, set: { _ in }),
-            error: .init(get: { NSError(domain: "error.bannzai.posusume", code: 999, userInfo: nil) }, set: { _ in }),
-            isPresented: .init(get: { false }, set: { _ in })
+            success: { value in
+                
+            },
+            failure: { error in
+                
+            }
         )
     }
 }

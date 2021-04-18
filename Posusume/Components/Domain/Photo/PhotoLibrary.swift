@@ -84,3 +84,4 @@ fileprivate struct _PhotoLibrary: PhotoLibrary {
 }
 
 let photoLibrary: PhotoLibrary = _PhotoLibrary()
+let sharedPhotoLibraryConfiguration: PHPickerConfiguration = .init(photoLibrary: PHPhotoLibrary.shared())
