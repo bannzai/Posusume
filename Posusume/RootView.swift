@@ -1,29 +1,79 @@
 import SwiftUI
 import MapKit
+import ComposableArchitecture
+import Combine
+
+struct RootState {
+    var login: LoginState? = .init()
+    var spots: SpotMapState?
+    var error: EquatableError?
+
+    mutating func authorized(me: Me) {
+        login = nil
+        error = nil
+        spots = .init()
+    }
+}
+
+enum RootAction: Equatable {
+    case login(LoginAction)
+    case spots(SpotMapAction)
+}
+
+struct RootEnvironment {
+    let auth: Auth
+    let mainQueue: AnySchedulerOf<DispatchQueue>
+}
+
+let rootReducer = Reducer<RootState, RootAction, RootEnvironment>.combine(
+    loginReducer.optional().pullback(
+        state: \.login,
+        action: /RootAction.login,
+        environment: { root in
+            LoginEnvironment(auth: root.auth, mainQueue: root.mainQueue, createOrUpdateUser: FirestoreDatabase.shared.createWithID)
+        }
+    ),
+    spotMapReducer.optional().pullback(
+        state: \.spots,
+        action: /RootAction.spots,
+        environment: { (environment: RootEnvironment) in
+            return SpotMapEnvironment(
+                me: authorized.authorized(),
+                fetchList: FirestoreDatabase.shared.fetchList,
+                watchList: FirestoreDatabase.shared.watchList,
+                mainQueue: environment.mainQueue
+            )
+        }
+    ),
+    .init { (state, action, environment) in
+        switch action {
+        case .spots:
+            return .none
+        case let .login(.endLogin(me)):
+            state.authorized(me: me)
+            return .none
+        case .login:
+            return .none
+        }
+    }
+)
+    
+
 
 struct RootView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 35.655164046, longitude: 139.740663704), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+    let store: Store<RootState, RootAction> = .init(
+        initialState: .init(),
+        reducer: rootReducer,
+        environment: RootEnvironment(auth: auth, mainQueue: .main)
+    )
+    @ViewBuilder public var body: some View {
+        IfLetStore(self.store.scope(state: { $0.login }, action: RootAction.login)) { store in
+            LoginView(store: store)
+        }
+        .edgesIgnoringSafeArea(.all)
 
-    var body: some View {
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: $region)
-            ZStack {
-                BarnBottomSheet()
-                SpotList(
-                    store: .init(
-                        initialState: .init(),
-                        reducer: spotListReducer,
-                        environment: SpotListEnvironment(
-                            auth: auth,
-                            fetchList: FirestoreDatabase.shared.fetchList,
-                            mainQueue: DispatchQueue.main.eraseToAnyScheduler()
-                        )
-                    )
-                )
-                .frame(alignment: .bottom)
-                .padding()
-            }
-            .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
+        IfLetStore(self.store.scope(state: { $0.spots }, action: RootAction.spots)) { store in
+            SpotMapView(store: store)
         }
         .edgesIgnoringSafeArea(.all)
     }

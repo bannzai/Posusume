@@ -10,7 +10,12 @@ struct UserID: RawRepresentable, Codable, DocumentIDWrappable, Hashable {
     }
 }
 
-struct User: Codable, Identifiable {
+struct User: DatabaseEntity, Equatable, Identifiable {
     @DocumentID var id: UserID?
-    let anonymouseUserID: UserID
+    let anonymousUserID: UserID
+
+    enum CodingKeys: String, CodingKey {
+        case anonymousUserID
+    }
+    typealias WhereKey = CodingKeys
 }

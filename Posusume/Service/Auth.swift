@@ -3,13 +3,18 @@ import FirebaseAuth
 import Combine
 
 protocol Auth {
-    func auth() -> AnyPublisher<UserID, Error>
+    func auth() -> AnyPublisher<Me, Error>
 }
 
-fileprivate struct _Auth: Auth {
-    init() { }
+protocol Authorized {
+    func authorized() -> Me
+}
 
-    func auth() -> AnyPublisher<UserID, Error> {
+fileprivate class _Auth: Auth, Authorized {
+    var me: Me?
+    init() { }
+    
+    func auth() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
                 if let error = error {
@@ -19,23 +24,32 @@ fileprivate struct _Auth: Auth {
                 guard let result = result else {
                     fatalError("unexpected pattern about result and error is nil")
                 }
-                let userID = UserID(rawValue: result.user.uid)
-                self.store(userID: userID)
-                promise(.success(userID))
+                let id = Me.ID(rawValue: result.user.uid)
+                self.store(meID: id)
+
+                let me = Me(id: id)
+                self.me = me
+                promise(.success(me))
             }
         }.eraseToAnyPublisher()
     }
     
+    func authorized() -> Me {
+        me!
+    }
+
     // MARK: - Private
     private enum StoreKey {
         static let firebaseUserID: String = "firebaseUserID"
     }
-    private func store(userID: UserID) {
+    private func store(meID: Me.ID) {
         guard UserDefaults.standard.string(forKey: StoreKey.firebaseUserID) == nil else {
             return
         }
-        UserDefaults.standard.setValue(userID.rawValue, forKey: StoreKey.firebaseUserID)
+        UserDefaults.standard.setValue(meID.rawValue, forKey: StoreKey.firebaseUserID)
     }
 }
 
-internal var auth: Auth = _Auth()
+private var _auth = _Auth()
+internal var auth: Auth { _auth }
+internal var authorized: Authorized { _auth }
