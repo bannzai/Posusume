@@ -23,9 +23,8 @@
 		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317302262A6DDE00E1212C /* SpotPostView.swift */; };
-		BA317333262BC20200E1212C /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317332262BC20200E1212C /* PhotoSelectView.swift */; };
 		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
-		BA317342262C354A00E1212C /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317341262C354A00E1212C /* PhotoLibraryView.swift */; };
+		BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31734B262CF25100E1212C /* PhotoLibraryView.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
 		BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */; };
@@ -102,9 +101,8 @@
 		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA317302262A6DDE00E1212C /* SpotPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostView.swift; sourceTree = "<group>"; };
-		BA317332262BC20200E1212C /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
 		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
-		BA317341262C354A00E1212C /* PhotoLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
+		BA31734B262CF25100E1212C /* PhotoLibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeoPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -234,8 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				BA317339262BC87900E1212C /* PhotoLibrary.swift */,
-				BA317332262BC20200E1212C /* PhotoSelectView.swift */,
-				BA317341262C354A00E1212C /* PhotoLibraryView.swift */,
+				BA31734B262CF25100E1212C /* PhotoLibraryView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -623,10 +620,9 @@
 				BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
+				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
-				BA317342262C354A00E1212C /* PhotoLibraryView.swift in Sources */,
 				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
-				BA317333262BC20200E1212C /* PhotoSelectView.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
