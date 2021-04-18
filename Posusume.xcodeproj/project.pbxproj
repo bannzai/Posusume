@@ -23,6 +23,8 @@
 		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317302262A6DDE00E1212C /* SpotPostView.swift */; };
+		BA317333262BC20200E1212C /* PhotoSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317332262BC20200E1212C /* PhotoSelectView.swift */; };
+		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
 		BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */; };
@@ -99,6 +101,8 @@
 		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA317302262A6DDE00E1212C /* SpotPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostView.swift; sourceTree = "<group>"; };
+		BA317332262BC20200E1212C /* PhotoSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectView.swift; sourceTree = "<group>"; };
+		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeoPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 		BA26C8712621EFDA006555AE /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				BA26C86B2621D08D006555AE /* Database.swift */,
 				BA249E792625EAB4000DA60F /* DatabaseEntity.swift */,
 				BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */,
 				BA26C8782621F020006555AE /* CollectionReference+Combine.swift */,
@@ -221,6 +226,22 @@
 				BA26C895262293C9006555AE /* Future+Extension.swift */,
 			);
 			path = Combine;
+			sourceTree = "<group>";
+		};
+		BA317331262BC1D500E1212C /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BA317332262BC20200E1212C /* PhotoSelectView.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
+		BA317338262BC85F00E1212C /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BA317339262BC87900E1212C /* PhotoLibrary.swift */,
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		BAAB0D3F26287ADA00EA3091 /* Login */ = {
@@ -308,10 +329,9 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				BA317338262BC85F00E1212C /* Photo */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 				BA979CAF26140A4600997206 /* Auth.swift */,
-				BA26C8512621939A006555AE /* CloudStorage.swift */,
-				BA26C86B2621D08D006555AE /* Database.swift */,
 				BA26C8712621EFDA006555AE /* Database */,
 			);
 			path = Service;
@@ -320,6 +340,7 @@
 		BADF52FE261D301E00431FEB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				BA317331262BC1D500E1212C /* Photo */,
 				BAAB0D3F26287ADA00EA3091 /* Login */,
 				BADF52FF261D303400431FEB /* Spot */,
 			);
@@ -350,6 +371,7 @@
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
 			isa = PBXGroup;
 			children = (
+				BA26C8512621939A006555AE /* CloudStorage.swift */,
 				BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */,
 				BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */,
 			);
@@ -608,6 +630,7 @@
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
+				BA317333262BC20200E1212C /* PhotoSelectView.swift in Sources */,
 				BA26C85A262196AD006555AE /* User.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
@@ -621,6 +644,7 @@
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
 				BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */,
+				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 				BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */,
