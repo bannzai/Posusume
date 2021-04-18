@@ -16,8 +16,8 @@ enum PhotoSelectAction: Equatable {
     case prepare
     case authorized(Result<PHAuthorizationStatus, Never>)
     case selected([PHPickerResult])
-    case converted(Result<PhotoLibraryConvertResult, EquatableError>)
-    case end(PhotoLibraryConvertResult)
+    case converted(Result<PhotoLibraryResult, EquatableError>)
+    case end(PhotoLibraryResult)
     case presentOpenSettingAlert
     case openSetting
     case presentedOpenSetting
