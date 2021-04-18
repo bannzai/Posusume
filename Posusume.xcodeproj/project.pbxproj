@@ -231,15 +231,8 @@
 		BA317331262BC1D500E1212C /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				BA317332262BC20200E1212C /* PhotoSelectView.swift */,
-			);
-			path = Photo;
-			sourceTree = "<group>";
-		};
-		BA317338262BC85F00E1212C /* Photo */ = {
-			isa = PBXGroup;
-			children = (
 				BA317339262BC87900E1212C /* PhotoLibrary.swift */,
+				BA317332262BC20200E1212C /* PhotoSelectView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -329,7 +322,6 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				BA317338262BC85F00E1212C /* Photo */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA26C8712621EFDA006555AE /* Database */,
