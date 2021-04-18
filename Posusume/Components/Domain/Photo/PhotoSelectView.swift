@@ -16,7 +16,8 @@ enum PhotoSelectAction: Equatable {
     case prepare
     case authorized(Result<PHAuthorizationStatus, Never>)
     case selected([PHPickerResult])
-    case converted(Result<UIImage, EquatableError>)
+    case converted(Result<PhotoLibraryConvertResult, EquatableError>)
+    case end(PhotoLibraryConvertResult)
     case presentOpenSettingAlert
     case openSetting
     case presentedOpenSetting
@@ -74,10 +75,12 @@ let reducer: Reducer<PhotoSelectState, PhotoSelectAction, PhotoSelectEnvironment
             .receive(on: environment.mainQueue)
             .catchToEffect()
             .map(PhotoSelectAction.converted)
-    case .converted(.success):
-        return .none
+    case let .converted(.success(result)):
+        return Effect(value: .end(result))
     case let .converted(.failure(error)):
         state.error = error
+        return .none
+    case .end:
         return .none
     case .presentOpenSettingAlert:
         state.isPresentOpenSettingAppAlert = true

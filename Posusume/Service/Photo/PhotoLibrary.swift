@@ -2,6 +2,7 @@ import Foundation
 import Combine
 import PhotosUI
 import Photos
+import CoreLocation
 
 enum PhotoLibraryPrepareAction {
     case openSettingApp
@@ -19,10 +20,16 @@ enum PhotoLibraryPickedError: LocalizedError {
     }
 }
 
+struct PhotoLibraryConvertResult: Equatable {
+    let image: UIImage
+    let location: CLLocationCoordinate2D?
+    let takeDate: Date?
+}
+
 protocol PhotoLibrary {
     func prepareActionType() -> PhotoLibraryPrepareAction?
     func requestAuthorization() -> AnyPublisher<PHAuthorizationStatus, Never>
-    func convert(pickerResult: PHPickerResult) -> AnyPublisher<UIImage, Error>
+    func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryConvertResult, Error>
 }
 
 fileprivate struct _PhotoLibrary: PhotoLibrary {
@@ -50,14 +57,24 @@ fileprivate struct _PhotoLibrary: PhotoLibrary {
         .eraseToAnyPublisher()
     }
     
-    func convert(pickerResult: PHPickerResult) -> AnyPublisher<UIImage, Error> {
-        Future { promise in
+    func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryConvertResult, Error> {
+        let info: (location: CLLocationCoordinate2D, takeDate: Date)? = {
+            if let identifier = pickerResult.assetIdentifier {
+                if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil).firstObject {
+                    if let location = asset.location, let takeDate = asset.creationDate {
+                        return (location: location.coordinate, takeDate: takeDate)
+                    }
+                }
+            }
+            return nil
+        }()
+        return Future { promise in
             pickerResult.itemProvider.loadObject(ofClass: UIImage.self) { (itemProviderReading, error) in
                 switch (itemProviderReading, error) {
                 case (nil, let error?):
                     promise(.failure(error))
-                case (let itemProviderReading as UIImage, _):
-                    promise(.success(itemProviderReading))
+                case (let image as UIImage, _):
+                    promise(.success(.init(image: image, location: info?.location, takeDate: info?.takeDate)))
                 case _:
                     promise(.failure(PhotoLibraryPickedError.convertError))
                 }
