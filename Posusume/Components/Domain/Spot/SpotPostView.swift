@@ -37,8 +37,8 @@ enum SpotPostAction: Equatable {
     case posted(Result<Spot, EquatableError>)
     case dismiss
     case edited(title: String)
-    case prepare
-    case authorized(Result<PHAuthorizationStatus, Never>)
+    case photoLibraryPrepare
+    case photoLibraryAuthorized(Result<PHAuthorizationStatus, Never>)
     case presentOpenSettingAlert
     case presentedOpenSetting
     case presentNotPermissionAlert
@@ -85,7 +85,7 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
     case let .edited(title):
         state.viewState.title = title
         return .none
-    case .prepare:
+    case .photoLibraryPrepare:
         switch environment.photoLibrary.prepareActionType() {
         case nil:
             return .none
@@ -97,9 +97,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 .requestAuthorization()
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SpotPostAction.authorized)
+                .map(SpotPostAction.photoLibraryAuthorized)
         }
-    case let .authorized(.success(status)):
+    case let .photoLibraryAuthorized(.success(status)):
         switch status {
         case .authorized:
             return .none
