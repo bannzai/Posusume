@@ -3,6 +3,8 @@ import ComposableArchitecture
 import Combine
 import CoreLocation
 import FirebaseFirestore
+import PhotosUI
+import Photos
 
 struct SpotPostState: Equatable {
     enum Context {
@@ -24,6 +26,8 @@ struct SpotPostState: Equatable {
     }
     
     var error: EquatableError? = nil
+    var isPresentOpenSettingAppAlert: Bool = false
+    var isPresentNotPermissionAlert: Bool = false
 }
 
 enum SpotPostAction: Equatable {
@@ -33,6 +37,14 @@ enum SpotPostAction: Equatable {
     case posted(Result<Spot, EquatableError>)
     case dismiss
     case edited(title: String)
+    case prepare
+    case authorized(Result<PHAuthorizationStatus, Never>)
+    case presentOpenSettingAlert
+    case presentedOpenSetting
+    case presentNotPermissionAlert
+    case openSetting
+    case confirmedNotPermission
+    case cancelAlertAction
 }
 
 struct SpotPostEnvironment {
@@ -40,6 +52,7 @@ struct SpotPostEnvironment {
     let mainQueue: AnySchedulerOf<DispatchQueue>
     let create: (DatabaseCollectionPathBuilder<Spot>) -> (AnyPublisher<Spot, Error>)
     let update: (DatabaseCollectionPathBuilder<Spot>, Spot, String) -> (AnyPublisher<Spot, Error>)
+    let photoLibrary: PhotoLibrary
 }
 
 let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment> = .init { state, action, environment in
@@ -71,6 +84,59 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         return .none
     case let .edited(title):
         state.viewState.title = title
+        return .none
+    case .prepare:
+        switch environment.photoLibrary.prepareActionType() {
+        case nil:
+            return .none
+        case .openSettingApp:
+            return Effect(value: .presentOpenSettingAlert)
+        case .requestAuthorization:
+            return environment
+                .photoLibrary
+                .requestAuthorization()
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(SpotPostAction.authorized)
+        }
+    case let .authorized(.success(status)):
+        switch status {
+        case .authorized:
+            return .none
+        case .limited:
+            return .none
+        case .notDetermined:
+            return Effect(value: .presentNotPermissionAlert)
+        case .denied:
+            return Effect(value: .presentNotPermissionAlert)
+        case .restricted:
+            return Effect(value: .presentNotPermissionAlert)
+        @unknown default:
+            assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
+            return .none
+        }
+    case .presentOpenSettingAlert:
+        state.isPresentOpenSettingAppAlert = true
+        return .none
+    case .openSetting:
+        guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {
+            assertionFailure("unexpected cannot open setting apps")
+            return .none
+        }
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+        return Effect(value: .presentedOpenSetting)
+    case .presentedOpenSetting:
+        state.isPresentOpenSettingAppAlert = false
+        return .none
+    case .presentNotPermissionAlert:
+        state.isPresentNotPermissionAlert = true
+        return .none
+    case .confirmedNotPermission:
+        state.isPresentNotPermissionAlert = false
+        return .none
+    case .cancelAlertAction:
+        state.isPresentOpenSettingAppAlert = false
+        state.isPresentNotPermissionAlert = false
         return .none
     }
 }
@@ -144,7 +210,8 @@ struct SpotListView_Preview: PreviewProvider {
                     me: .init(id: .init(rawValue: "1")),
                     mainQueue: .main,
                     create: { (_) in Future(value: spot).eraseToAnyPublisher() },
-                    update: { (_, _, _) in Future(value: spot).eraseToAnyPublisher() }
+                    update: { (_, _, _) in Future(value: spot).eraseToAnyPublisher() },
+                    photoLibrary: MockPhotoLibrary()
                 )
             )
         )
