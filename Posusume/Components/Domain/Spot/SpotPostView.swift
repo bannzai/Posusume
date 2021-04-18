@@ -28,6 +28,7 @@ struct SpotPostState: Equatable {
     var error: EquatableError? = nil
     var isPresentOpenSettingAppAlert: Bool = false
     var isPresentNotPermissionAlert: Bool = false
+    var photoLibraryResult: PhotoLibraryResult?
 }
 
 enum SpotPostAction: Equatable {
@@ -45,6 +46,7 @@ enum SpotPostAction: Equatable {
     case openSetting
     case confirmedNotPermission
     case cancelAlertAction
+    case photoLibraryAction(PhotoLibraryAction)
 }
 
 struct SpotPostEnvironment {
@@ -138,6 +140,14 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         state.isPresentOpenSettingAppAlert = false
         state.isPresentNotPermissionAlert = false
         return .none
+    case let .photoLibraryAction(action):
+        switch action {
+        case .selected, .selectError:
+            return .none
+        case let .end(photoLibraryResult):
+            state.photoLibraryResult = photoLibraryResult
+            return .none
+        }
     }
 }
 
