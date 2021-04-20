@@ -34,7 +34,7 @@ struct SpotPostState: Equatable {
         var id: Int { hashValue }
     }
     var presentationType: Presentation? = nil
-    var photoLibraryResult: PhotoLibraryResult? = nil
+    var photoLibrary: PhotoLibraryState = .init()
 }
 
 enum SpotPostAction: Equatable {
@@ -65,103 +65,117 @@ struct SpotPostEnvironment {
     let photoLibrary: PhotoLibrary
 }
 
-let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment> = .init { state, action, environment in
-    switch action {
-    case .post:
-        return state.isNew ? Effect(value: .create) : Effect(value: .update)
-    case .create:
-        return environment.create(.userSpots(userID: environment.me.userID))
-            .mapError(EquatableError.init(error:))
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .map(SpotPostAction.posted)
-    case .update:
-        guard let identifier = state.viewState.id?.rawValue else {
-            fatalError("unexpected state.viewState.id is nil when post -> update. \(state)")
+let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment> = .combine(
+    photoLibraryReducer.pullback(
+        state: \.photoLibrary,
+        action: /SpotPostAction.photoLibraryAction,
+        environment: { globalEnvironment in
+            PhotoLibraryEnvironment(
+                me: globalEnvironment.me,
+                photoLibrary: photoLibrary,
+                mainQueue: .main,
+                pickerConfiguration: sharedPhotoLibraryConfiguration
+            )
         }
-        return environment.update(.userSpots(userID: environment.me.userID), state.viewState, identifier)
-            .mapError(EquatableError.init(error:))
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .map(SpotPostAction.posted)
-    case .posted(.success(let spot)):
-        state.error = nil
-        return Effect(value: .dismiss)
-    case .posted(.failure(let error)):
-        state.error = error
-        return .none
-    case .dismiss:
-        return .none
-    case let .edited(title):
-        state.viewState.title = title
-        return .none
-    case .photoLibraryPrepare:
-        switch environment.photoLibrary.prepareActionType() {
-        case nil:
-            return .none
-        case .openSettingApp:
-            return Effect(value: .presentOpenSettingAlert)
-        case .requestAuthorization:
-            return environment
-                .photoLibrary
-                .requestAuthorization()
+    ),
+    .init { state, action, environment in
+        switch action {
+        case .post:
+            return state.isNew ? Effect(value: .create) : Effect(value: .update)
+        case .create:
+            return environment.create(.userSpots(userID: environment.me.userID))
+                .mapError(EquatableError.init(error:))
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
-                .map(SpotPostAction.photoLibraryAuthorized)
-        }
-    case let .photoLibraryAuthorized(.success(status)):
-        switch status {
-        case .authorized:
+                .map(SpotPostAction.posted)
+        case .update:
+            guard let identifier = state.viewState.id?.rawValue else {
+                fatalError("unexpected state.viewState.id is nil when post -> update. \(state)")
+            }
+            return environment.update(.userSpots(userID: environment.me.userID), state.viewState, identifier)
+                .mapError(EquatableError.init(error:))
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(SpotPostAction.posted)
+        case .posted(.success(let spot)):
+            state.error = nil
+            return Effect(value: .dismiss)
+        case .posted(.failure(let error)):
+            state.error = error
             return .none
-        case .limited:
+        case .dismiss:
             return .none
-        case .notDetermined:
-            return Effect(value: .presentNotPermissionAlert)
-        case .denied:
-            return Effect(value: .presentNotPermissionAlert)
-        case .restricted:
-            return Effect(value: .presentNotPermissionAlert)
-        @unknown default:
-            assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
+        case let .edited(title):
+            state.viewState.title = title
             return .none
-        }
-    case .presentPhotoLibrary:
-        return .none
-    case .presentOpenSettingAlert:
-        state.presentationType = .openSettingAlert
-        return .none
-    case .openSetting:
-        guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {
-            assertionFailure("unexpected cannot open setting apps")
+        case .photoLibraryPrepare:
+            switch environment.photoLibrary.prepareActionType() {
+            case nil:
+                return .none
+            case .openSettingApp:
+                return Effect(value: .presentOpenSettingAlert)
+            case .requestAuthorization:
+                return environment
+                    .photoLibrary
+                    .requestAuthorization()
+                    .receive(on: environment.mainQueue)
+                    .catchToEffect()
+                    .map(SpotPostAction.photoLibraryAuthorized)
+            }
+        case let .photoLibraryAuthorized(.success(status)):
+            switch status {
+            case .authorized:
+                return .none
+            case .limited:
+                return .none
+            case .notDetermined:
+                return Effect(value: .presentNotPermissionAlert)
+            case .denied:
+                return Effect(value: .presentNotPermissionAlert)
+            case .restricted:
+                return Effect(value: .presentNotPermissionAlert)
+            @unknown default:
+                assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
+                return .none
+            }
+        case .presentPhotoLibrary:
             return .none
-        }
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-        return Effect(value: .presentedOpenSetting)
-    case .presentedOpenSetting:
-        state.presentationType = nil
-        return .none
-    case .presentNotPermissionAlert:
-        state.presentationType = .notPermissionAlert
-        return .none
-    case .confirmedNotPermission:
-        state.presentationType = nil
-        return .none
-    case .cancelAlertAction:
-        state.presentationType = nil
-        return .none
-    case let .presentationTypeDidChanged(presentationType):
-        state.presentationType = presentationType
-        return .none
-    case let .photoLibraryAction(action):
-        switch action {
-        case .selected, .selectError:
+        case .presentOpenSettingAlert:
+            state.presentationType = .openSettingAlert
             return .none
-        case let .end(photoLibraryResult):
-            state.photoLibraryResult = photoLibraryResult
+        case .openSetting:
+            guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {
+                assertionFailure("unexpected cannot open setting apps")
+                return .none
+            }
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+            return Effect(value: .presentedOpenSetting)
+        case .presentedOpenSetting:
+            state.presentationType = nil
             return .none
+        case .presentNotPermissionAlert:
+            state.presentationType = .notPermissionAlert
+            return .none
+        case .confirmedNotPermission:
+            state.presentationType = nil
+            return .none
+        case .cancelAlertAction:
+            state.presentationType = nil
+            return .none
+        case let .presentationTypeDidChanged(presentationType):
+            state.presentationType = presentationType
+            return .none
+        case let .photoLibraryAction(action):
+            switch action {
+            case .selected, .selectError:
+                return .none
+            case let .end(photoLibraryResult):
+                state.presentationType = nil
+                return .none
+            }
         }
     }
-}
+)
 
 
 struct SpotPostView: View {

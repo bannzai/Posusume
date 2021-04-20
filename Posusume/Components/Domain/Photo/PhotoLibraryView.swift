@@ -8,6 +8,7 @@ import Combine
 
 struct PhotoLibraryState: Equatable {
     var selectedImage: UIImage?
+    var result: PhotoLibraryResult?
     var error: EquatableError?
 }
 
@@ -24,9 +25,10 @@ struct PhotoLibraryEnvironment {
     let pickerConfiguration: PHPickerConfiguration
 }
 
-let reducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLibraryEnvironment> = .init { state, action, environment in
+let photoLibraryReducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLibraryEnvironment> = .init { state, action, environment in
     switch action {
     case let .selected(selectedResult):
+        state.result = selectedResult
         return Effect(value: .end(selectedResult))
     case let .selectError(error):
         state.error = error
