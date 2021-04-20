@@ -26,9 +26,15 @@ struct SpotPostState: Equatable {
     }
     
     var error: EquatableError? = nil
-    var isPresentOpenSettingAppAlert: Bool = false
-    var isPresentNotPermissionAlert: Bool = false
-    var photoLibraryResult: PhotoLibraryResult?
+    
+    enum Presentation: Int, Identifiable {
+        case photoLibrary
+        case openSettingAlert
+        case notPermissionAlert
+        var id: Int { hashValue }
+    }
+    var presentationType: Presentation? = nil
+    var photoLibraryResult: PhotoLibraryResult? = nil
 }
 
 enum SpotPostAction: Equatable {
@@ -40,12 +46,14 @@ enum SpotPostAction: Equatable {
     case edited(title: String)
     case photoLibraryPrepare
     case photoLibraryAuthorized(Result<PHAuthorizationStatus, Never>)
+    case presentPhotoLibrary
     case presentOpenSettingAlert
     case presentedOpenSetting
     case presentNotPermissionAlert
     case openSetting
     case confirmedNotPermission
     case cancelAlertAction
+    case presentationTypeDidChanged(SpotPostState.Presentation?)
     case photoLibraryAction(PhotoLibraryAction)
 }
 
@@ -117,8 +125,10 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
             return .none
         }
+    case .presentPhotoLibrary:
+        return .none
     case .presentOpenSettingAlert:
-        state.isPresentOpenSettingAppAlert = true
+        state.presentationType = .openSettingAlert
         return .none
     case .openSetting:
         guard UIApplication.shared.canOpenURL(URL(string: UIApplication.openSettingsURLString)!) else {
@@ -128,17 +138,19 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
         return Effect(value: .presentedOpenSetting)
     case .presentedOpenSetting:
-        state.isPresentOpenSettingAppAlert = false
+        state.presentationType = nil
         return .none
     case .presentNotPermissionAlert:
-        state.isPresentNotPermissionAlert = true
+        state.presentationType = .notPermissionAlert
         return .none
     case .confirmedNotPermission:
-        state.isPresentNotPermissionAlert = false
+        state.presentationType = nil
         return .none
     case .cancelAlertAction:
-        state.isPresentOpenSettingAppAlert = false
-        state.isPresentNotPermissionAlert = false
+        state.presentationType = nil
+        return .none
+    case let .presentationTypeDidChanged(presentationType):
+        state.presentationType = presentationType
         return .none
     case let .photoLibraryAction(action):
         switch action {
@@ -161,7 +173,7 @@ struct SpotPostView: View {
                     Color.screenBackground.edgesIgnoringSafeArea(.all)
                     VStack(spacing: 18) {
                         Button (action: {
-                            
+                            viewStore.send(.photoLibraryPrepare)
                         },
                         label: {
                             VStack {
@@ -205,6 +217,25 @@ struct SpotPostView: View {
                         }
                 )
             }
+            .sheet(
+                item: viewStore.binding(
+                    get: \.presentationType,
+                    send: { .presentationTypeDidChanged($0) }
+                ),
+                content: { type -> AnyView in
+                    func body() -> some View {
+                        switch type {
+                        case .photoLibrary:
+                            return EmptyView()
+                        case .openSettingAlert:
+                            return EmptyView()
+                        case .notPermissionAlert:
+                            return EmptyView()
+                        }
+                    }
+                    return AnyView(body())
+                }
+            )
         }
     }
     
