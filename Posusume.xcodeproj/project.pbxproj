@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotsMapView.swift */; };
+		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
 		BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E792625EAB4000DA60F /* DatabaseEntity.swift */; };
@@ -86,7 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BA249E672625E12D000DA60F /* SpotsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsMapView.swift; sourceTree = "<group>"; };
+		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E6E2625E15D000DA60F /* MockAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuth.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		BA249E792625EAB4000DA60F /* DatabaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEntity.swift; sourceTree = "<group>"; };
@@ -347,7 +347,7 @@
 			children = (
 				BADF5300261D303C00431FEB /* SpotList.swift */,
 				BADF5304261D307700431FEB /* SpotListCell.swift */,
-				BA249E672625E12D000DA60F /* SpotsMapView.swift */,
+				BA249E672625E12D000DA60F /* SpotMapView.swift */,
 				BA317302262A6DDE00E1212C /* SpotPostView.swift */,
 			);
 			path = Spot;
@@ -620,7 +620,7 @@
 				BA26C86C2621D08D006555AE /* Database.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
-				BA249E682625E12D000DA60F /* SpotsMapView.swift in Sources */,
+				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
