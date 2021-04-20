@@ -61,9 +61,19 @@ let spotMapReducer: Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> = .
         
         struct WatchCanceller: Hashable { }
         struct FetchCanceller: Hashable { }
+        struct RegionDidChangedCanceller: Hashable { }
         switch action {
         case let .regionChange(center, meters):
-            return .none
+            return .merge(
+                Effect(value: SpotMapAction.fetch)
+                    .cancellable(id: RegionDidChangedCanceller())
+                    .delay(for: 0.5, scheduler: environment.mainQueue)
+                    .eraseToEffect(),
+                Effect(value: SpotMapAction.watch)
+                    .cancellable(id: RegionDidChangedCanceller())
+                    .delay(for: 0.5, scheduler: environment.mainQueue)
+                    .eraseToEffect()
+            )
         case .fetch:
             return environment.fetchList(path())
                 .mapError(EquatableError.init(error:))
