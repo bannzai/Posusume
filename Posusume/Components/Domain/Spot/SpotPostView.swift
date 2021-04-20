@@ -60,8 +60,8 @@ enum SpotPostAction: Equatable {
 struct SpotPostEnvironment {
     let me: Me
     let mainQueue: AnySchedulerOf<DispatchQueue>
-    let create: (DatabaseCollectionPathBuilder<Spot>) -> (AnyPublisher<Spot, Error>)
-    let update: (DatabaseCollectionPathBuilder<Spot>, Spot, String) -> (AnyPublisher<Spot, Error>)
+    let create: (DatabaseCollectionPathBuilder<Spot>, Spot) -> (AnyPublisher<Spot, Error>)
+    let update: (DatabaseDocumentPathBuilder<Spot>, Spot) -> (AnyPublisher<Spot, Error>)
     let photoLibrary: PhotoLibrary
 }
 
@@ -83,16 +83,16 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .post:
             return state.isNew ? Effect(value: .create) : Effect(value: .update)
         case .create:
-            return environment.create(.userSpots(userID: environment.me.userID))
+            return environment.create(.userSpots(userID: environment.me.userID), state.viewState)
                 .mapError(EquatableError.init(error:))
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SpotPostAction.posted)
         case .update:
-            guard let identifier = state.viewState.id?.rawValue else {
+            guard let identifier = state.viewState.id else {
                 fatalError("unexpected state.viewState.id is nil when post -> update. \(state)")
             }
-            return environment.update(.userSpots(userID: environment.me.userID), state.viewState, identifier)
+            return environment.update(.userSpot(userID: environment.me.userID, spotID: identifier), state.viewState)
                 .mapError(EquatableError.init(error:))
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
@@ -264,8 +264,8 @@ struct SpotListView_Preview: PreviewProvider {
                 environment: SpotPostEnvironment(
                     me: .init(id: .init(rawValue: "1")),
                     mainQueue: .main,
-                    create: { (_) in Future(value: spot).eraseToAnyPublisher() },
-                    update: { (_, _, _) in Future(value: spot).eraseToAnyPublisher() },
+                    create: { (_,_) in Future(value: spot).eraseToAnyPublisher() },
+                    update: { (_, _) in Future(value: spot).eraseToAnyPublisher() },
                     photoLibrary: MockPhotoLibrary()
                 )
             )

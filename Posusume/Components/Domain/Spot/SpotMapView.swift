@@ -16,8 +16,9 @@ struct SpotMapState: Equatable {
 
     var spots: [Spot] = []
     var error: EquatableError?
-    var isPresentedPostPage: Bool = false
 
+    var spotPost: SpotPostState? = nil
+    var isPresentedSpotPostPage: Bool { spotPost != nil }
     var spotListState: SpotListState { SpotListState(spots: spots) }
 }
 
@@ -26,48 +27,86 @@ enum SpotMapAction: Equatable {
     case fetch
     case watch
     case reload(Result<[Spot], EquatableError>)
+    case presentSpotPost(Spot?)
+    case spotPostAction(SpotPostAction)
+    case spotPostPresentationDidChanged(Bool)
 }
 
-let spotMapReducer = Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> { (state, action, environment) in
-    func path() -> DatabaseCollectionPathBuilder<Spot> {
-        // TODO: adjustment offset from span
-        let offset: CLLocationDegrees = 3
-        let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spotsGroup(
-            args: (
-                key: .location,
-                relations: [.geoRange(geoPoint: state.geoPoint, distance: 1)]
+let spotMapReducer: Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> = .combine (
+    spotPostReducer.optional().pullback(
+        state: \.spotPost,
+        action: /SpotMapAction.spotPostAction,
+        environment: {
+            SpotPostEnvironment(
+                me: $0.me,
+                mainQueue: .main,
+                create: FirestoreDatabase.shared.create,
+                update: FirestoreDatabase.shared.update,
+                photoLibrary: photoLibrary
             )
-        )
-        return pathBuilder
-    }
-
-    struct WatchCanceller: Hashable { }
-    struct FetchCanceller: Hashable { }
-    switch action {
-    case let .regionChange(center, meters):
-        return .none
-    case .fetch:
-        return environment.fetchList(path())
-            .mapError(EquatableError.init(error:))
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .cancellable(id: FetchCanceller())
-            .map(SpotMapAction.reload)
-    case .watch:
-        return environment.watchList(path())
-            .mapError(EquatableError.init(error:))
-            .receive(on: environment.mainQueue)
-            .catchToEffect()
-            .cancellable(id: WatchCanceller())
-            .map(SpotMapAction.reload)
-    case .reload(.success(let spots)):
-        state.spots = spots
-        return .none
-    case .reload(.failure(let error)):
-        state.error = error
-        return .none
-    }
-}
+        }
+    ),
+    .init { (state, action, environment) in
+        func path() -> DatabaseCollectionPathBuilder<Spot> {
+            // TODO: adjustment offset from span
+            let offset: CLLocationDegrees = 3
+            let pathBuilder = DatabaseCollectionPathBuilder<Spot>.spotsGroup(
+                args: (
+                    key: .location,
+                    relations: [.geoRange(geoPoint: state.geoPoint, distance: 1)]
+                )
+            )
+            return pathBuilder
+        }
+        
+        struct WatchCanceller: Hashable { }
+        struct FetchCanceller: Hashable { }
+        switch action {
+        case let .regionChange(center, meters):
+            return .none
+        case .fetch:
+            return environment.fetchList(path())
+                .mapError(EquatableError.init(error:))
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .cancellable(id: FetchCanceller())
+                .map(SpotMapAction.reload)
+        case .watch:
+            return environment.watchList(path())
+                .mapError(EquatableError.init(error:))
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .cancellable(id: WatchCanceller())
+                .map(SpotMapAction.reload)
+        case .reload(.success(let spots)):
+            state.spots = spots
+            return .none
+        case .reload(.failure(let error)):
+            state.error = error
+            return .none
+        case let .presentSpotPost(spot):
+            switch spot {
+            case nil:
+                state.spotPost = SpotPostState(context: .create(state.geoPoint))
+            case let spot?:
+                state.spotPost = SpotPostState(context: .update(spot))
+            }
+            return .none
+        case let .spotPostPresentationDidChanged(isPresent):
+            if !isPresent {
+                state.spotPost = nil
+            }
+            return .none
+        case let .spotPostAction(action):
+            switch action {
+            case .dismiss:
+                state.spotPost = nil
+                return .none
+            case _:
+                return .none
+            }
+        }
+    })
 
 struct SpotMapEnvironment {
     let me: Me
@@ -99,7 +138,7 @@ struct SpotMapView: View {
                     HStack {
                         Spacer()
                         Button {
-                            print("")
+                            viewStore.send(.presentSpotPost(nil))
                         } label: {
                             Image("addSpot")
                                 .frame(width: 64, height: 64, alignment: .center)
@@ -121,6 +160,22 @@ struct SpotMapView: View {
                 }
             }
             .onAppear { viewStore.send(.fetch) }
+            .sheet(
+                isPresented: viewStore.binding(
+                    get: \.isPresentedSpotPostPage,
+                    send: { .spotPostPresentationDidChanged($0) }
+                ),
+                content: {
+                    IfLetStore(
+                        store.scope(
+                            state: \.spotPost,
+                            action: {
+                                .spotPostAction($0)
+                            }
+                        ),
+                        then: SpotPostView.init(store:))
+                }
+            )
         }
     }
 }
