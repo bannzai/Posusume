@@ -16,6 +16,7 @@ enum PhotoLibraryAction: Equatable {
     case selected(PhotoLibraryResult)
     case selectError(EquatableError)
     case end(PhotoLibraryResult)
+    case dismiss
 }
 
 struct PhotoLibraryEnvironment {
@@ -35,6 +36,8 @@ let photoLibraryReducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLib
         return .none
     case .end:
         return .none
+    case .dismiss:
+        return .none
     }
 }
 
@@ -43,6 +46,7 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
     let photoLibrary: PhotoLibrary
     let success: (PhotoLibraryResult) -> Void
     let failure: (Error) -> Void
+    let dismiss: () -> Void
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let controller = PHPickerViewController(configuration: pickerConfiguration)
@@ -69,10 +73,13 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
             canceller = nil
         }
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            defer {
+                canceller?.cancel()
+            }
             guard let result = results.first else {
+                parent.dismiss()
                 return
             }
-            canceller?.cancel()
             canceller = parent.photoLibrary.convert(pickerResult: result)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] completion in
@@ -101,6 +108,9 @@ struct PhotoLibraryViewConnector: View {
                 },
                 failure: { error in
                     viewStore.send(.selectError(.init(error: error)))
+                },
+                dismiss: {
+                    viewStore.send(.dismiss)
                 }
             )
         }
@@ -117,7 +127,8 @@ struct PhotoLibraryView_Previews: PreviewProvider {
             },
             failure: { error in
                 
-            }
+            },
+            dismiss: {  }
         )
     }
 }
