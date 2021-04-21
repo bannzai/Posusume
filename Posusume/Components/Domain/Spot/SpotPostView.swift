@@ -111,7 +111,7 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .photoLibraryPrepare:
             switch environment.photoLibrary.prepareActionType() {
             case nil:
-                return .none
+                return Effect(value: .presentPhotoLibrary)
             case .openSettingApp:
                 return Effect(value: .presentOpenSettingAlert)
             case .requestAuthorization:
@@ -125,9 +125,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case let .photoLibraryAuthorized(.success(status)):
             switch status {
             case .authorized:
-                return .none
+                return Effect(value: .presentPhotoLibrary)
             case .limited:
-                return .none
+                return Effect(value: .presentPhotoLibrary)
             case .notDetermined:
                 return Effect(value: .presentNotPermissionAlert)
             case .denied:
@@ -139,6 +139,7 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 return .none
             }
         case .presentPhotoLibrary:
+            state.presentationType = .photoLibrary
             return .none
         case .presentOpenSettingAlert:
             state.presentationType = .openSettingAlert
