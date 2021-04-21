@@ -194,19 +194,25 @@ struct SpotPostView: View {
                             viewStore.send(.photoLibraryPrepare)
                         },
                         label: {
-                            VStack {
-                                Image("anyPicture")
+                            if let value = viewStore.state.photoLibrary.result {
+                                Image(uiImage: value.image)
                                     .resizable()
-                                    .renderingMode(.template)
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("画像を選択")
-                                    .font(.footnote)
+                            } else {
+                                VStack {
+                                    Image("anyPicture")
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 40, height: 40)
+                                    Text("画像を選択")
+                                        .font(.footnote)
+                                }
+                                .foregroundColor(.placeholder)
+                                .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
+                                .background(Color.white)
+                                .padding(.horizontal, 20)
                             }
-                            .foregroundColor(.placeholder)
-                            .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
-                            .background(Color.white)
-                            .padding(.horizontal, 20)
                         })
 
                         VStack(alignment: .leading) {
