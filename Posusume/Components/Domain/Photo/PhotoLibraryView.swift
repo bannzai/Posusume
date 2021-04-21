@@ -73,13 +73,11 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
             canceller = nil
         }
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            defer {
-                canceller?.cancel()
-            }
             guard let result = results.first else {
                 parent.dismiss()
                 return
             }
+            canceller?.cancel()
             canceller = parent.photoLibrary.convert(pickerResult: result)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] completion in
