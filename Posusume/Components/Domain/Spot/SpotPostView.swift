@@ -173,6 +173,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             case let .end(photoLibraryResult):
                 state.presentationType = nil
                 return .none
+            case .dismiss:
+                state.presentationType = nil
+                return .none
             }
         }
     }
