@@ -237,17 +237,21 @@ struct SpotPostView: View {
                     send: { .presentationTypeDidChanged($0) }
                 ),
                 content: { type -> AnyView in
-                    func body() -> some View {
-                        switch type {
-                        case .photoLibrary:
-                            return EmptyView()
-                        case .openSettingAlert:
-                            return EmptyView()
-                        case .notPermissionAlert:
-                            return EmptyView()
-                        }
+                    switch type {
+                    case .photoLibrary:
+                        return AnyView(
+                            PhotoLibraryViewConnector(
+                                store: store.scope(
+                                    state: \.photoLibrary,
+                                    action: { .photoLibraryAction($0) }
+                                )
+                            )
+                        )
+                    case .openSettingAlert:
+                        return AnyView(EmptyView())
+                    case .notPermissionAlert:
+                        return AnyView(EmptyView())
                     }
-                    return AnyView(body())
                 }
             )
         }
