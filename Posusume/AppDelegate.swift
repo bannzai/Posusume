@@ -15,8 +15,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 func setupAppearance() {
     let appearance = UINavigationBarAppearance()
     appearance.backgroundColor = .clear
+    appearance.shadowColor = nil
+    appearance.shadowImage = nil
+    appearance.backgroundImage = nil
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
 }
 
 private func setupFirebase() {
