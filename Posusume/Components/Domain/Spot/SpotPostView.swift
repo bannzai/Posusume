@@ -190,6 +190,7 @@ struct SpotPostView: View {
                 ZStack(alignment: .top) {
                     Color.screenBackground.edgesIgnoringSafeArea(.all)
                     VStack(spacing: 18) {
+                        Spacer().frame(height: 16)
                         Button (action: {
                             viewStore.send(.photoLibraryPrepare)
                         },
