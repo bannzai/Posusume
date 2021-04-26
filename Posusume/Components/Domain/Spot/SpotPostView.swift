@@ -197,7 +197,10 @@ struct SpotPostView: View {
                             if let value = viewStore.state.photoLibrary.result {
                                 Image(uiImage: value.image)
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: UIScreen.main.bounds.width - 40)
+                                    .aspectRatio(3 / 4, contentMode: .fit)
+                                    .clipped()
+                                    .padding(.horizontal, 20)
                             } else {
                                 VStack {
                                     Image("anyPicture")
@@ -271,19 +274,43 @@ struct SpotPostView: View {
 
 struct SpotListView_Preview: PreviewProvider {
     static var previews: some View {
-        SpotPostView(
-            store: .init(
-                initialState: .init(context: .create(spot.location)),
-                reducer: spotPostReducer,
-                environment: SpotPostEnvironment(
-                    me: .init(id: .init(rawValue: "1")),
-                    mainQueue: .main,
-                    create: { (_,_) in Future(value: spot).eraseToAnyPublisher() },
-                    update: { (_, _) in Future(value: spot).eraseToAnyPublisher() },
-                    photoLibrary: MockPhotoLibrary()
+        Group {
+            SpotPostView(
+                store: .init(
+                    initialState: .init(context: .create(spot.location)),
+                    reducer: spotPostReducer,
+                    environment: SpotPostEnvironment(
+                        me: .init(id: .init(rawValue: "1")),
+                        mainQueue: .main,
+                        create: { (_,_) in Future(value: spot).eraseToAnyPublisher() },
+                        update: { (_, _) in Future(value: spot).eraseToAnyPublisher() },
+                        photoLibrary: MockPhotoLibrary()
+                    )
                 )
             )
-        )
+            SpotPostView(
+                store: .init(
+                    initialState: {
+                        var state = SpotPostState(context: .create(spot.location))
+                        state.photoLibrary = .init()
+                        state.photoLibrary.result = .init(
+                            image: UIImage(named: "hanahana")!,
+                            location: nil,
+                            takeDate: .init()
+                        )
+                        return state
+                    }(),
+                    reducer: spotPostReducer,
+                    environment: SpotPostEnvironment(
+                        me: .init(id: .init(rawValue: "1")),
+                        mainQueue: .main,
+                        create: { (_,_) in Future(value: spot).eraseToAnyPublisher() },
+                        update: { (_, _) in Future(value: spot).eraseToAnyPublisher() },
+                        photoLibrary: MockPhotoLibrary()
+                    )
+                )
+            )
+        }
     }
     static let spot = Spot(location: .init(latitude: 10, longitude: 10), title: "", imageFileName: "")
 }
