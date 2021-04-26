@@ -218,6 +218,7 @@ struct SpotPostView: View {
                                 .padding(.horizontal, 20)
                             }
                         })
+                        .buttonStyle(PlainButtonStyle())
 
                         VStack(alignment: .leading) {
                             Text("タイトル")
