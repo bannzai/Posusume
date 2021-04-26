@@ -243,6 +243,7 @@ struct SpotPostView: View {
                                 .foregroundColor(.appPrimary)
                         }
                 )
+                .navigationBarTitle("", displayMode: .inline)
             }
             .sheet(
                 item: viewStore.binding(
