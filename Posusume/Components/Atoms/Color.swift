@@ -8,6 +8,7 @@ extension Color {
     // #CBCBCB
     static let placeholder: Color = Color(white: 203 / 255)
     
+    static let disabled: Color = .gray
 }
 
 fileprivate extension Color {
@@ -15,6 +16,16 @@ fileprivate extension Color {
     static let barnEnd: Color = Color(red: 255 / 255, green: 171 / 255, blue: 139 / 255)
     // #E95468
     static let barnStart: Color = Color(red: 233 / 255, green: 84 / 255, blue: 104 / 255)
+}
+
+extension Color {
+    var gradient: LinearGradient {
+        .init(
+            gradient: Gradient(colors: [self]),
+            startPoint: .bottom,
+            endPoint: .top
+        )
+    }
 }
 
 struct GradientColor {

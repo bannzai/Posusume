@@ -299,7 +299,7 @@ struct SpotPostView: View {
                         })
                         .disabled(viewStore.viewState.submitButtonIsDisabled)
                         .frame(width: 200, height: 44, alignment: .center)
-                        .background(GradientColor.barn)
+                        .background(viewStore.viewState.submitButtonIsDisabled ? Color.gray.gradient : GradientColor.barn)
 
                         Spacer().frame(height: 32)
                     }
@@ -363,21 +363,23 @@ struct SpotListView_Preview: PreviewProvider {
             SpotPostView(
                 store: .init(
                     initialState: {
-                        var state = SpotPostState(context: .create(spot.location))
+                        var state = SpotPostState(context: .update(spot2))
                         state.photoLibrary = .init()
                         state.photoLibrary.result = .init(
                             image: UIImage(named: "hanahana")!,
                             location: nil,
                             takeDate: .init()
                         )
+                        
+                        state.viewState.image = state.photoLibrary.result?.image
                         return state
                     }(),
                     reducer: spotPostReducer,
                     environment: SpotPostEnvironment(
                         me: .init(id: .init(rawValue: "1")),
                         mainQueue: .main,
-                        create: { (_,_) in Future(value: spot).eraseToAnyPublisher() },
-                        update: { (_, _) in Future(value: spot).eraseToAnyPublisher() },
+                        create: { (_,_) in Future(value: spot2).eraseToAnyPublisher() },
+                        update: { (_, _) in Future(value: spot2).eraseToAnyPublisher() },
                         photoLibrary: MockPhotoLibrary()
                     )
                 )
@@ -385,4 +387,5 @@ struct SpotListView_Preview: PreviewProvider {
         }
     }
     static let spot = Spot(location: .init(latitude: 10, longitude: 10), title: "", imageFileName: "")
+    static let spot2 = Spot(location: .init(latitude: 10, longitude: 10), title: "title", imageFileName: "")
 }
