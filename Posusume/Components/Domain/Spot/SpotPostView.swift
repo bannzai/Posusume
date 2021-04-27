@@ -7,25 +7,32 @@ import PhotosUI
 import Photos
 
 struct SpotPostState: Equatable {
+    struct ViewState: Equatable {
+        let id: SpotID?
+        var image: UIImage? = nil
+        var imageName: String? = nil
+        var title: String = ""
+        var geoPoint: GeoPoint
+        var isNew: Bool
+        var error: EquatableError? = nil
+
+        var submitButtonIsEnabled: Bool { image != nil && !title.isEmpty }
+    }
+
+    var viewState: ViewState
     enum Context {
         case create(GeoPoint)
         case update(Spot)
     }
-
-    var viewState: Spot
-    let isNew: Bool
     init(context: Context) {
         switch context {
         case let .create(point):
-            self.viewState = .init(location: point, title: "", imageFileName: "")
-            self.isNew = true
+            self.viewState = .init(id: nil, image: nil, title: "", geoPoint: point, isNew: true)
         case let .update(spot):
-            self.viewState = spot
-            self.isNew = false
+            // TODO: load image
+            self.viewState = .init(id: spot.id, imageName: spot.imageFileName, title: spot.title, geoPoint: spot.location, isNew: false)
         }
     }
-    
-    var error: EquatableError? = nil
     
     enum Presentation: Int, Identifiable {
         case photoLibrary
@@ -35,6 +42,17 @@ struct SpotPostState: Equatable {
     }
     var presentationType: Presentation? = nil
     var photoLibrary: PhotoLibraryState = .init()
+    
+    func buildSpot() -> Spot? {
+        guard let imageName = viewState.imageName else {
+            return nil
+        }
+        return .init(
+            location: viewState.geoPoint,
+            title: viewState.title,
+            imageFileName: imageName
+        )
+    }
 }
 
 enum SpotPostAction: Equatable {
@@ -81,7 +99,7 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
     .init { state, action, environment in
         switch action {
         case .post:
-            return state.isNew ? Effect(value: .create) : Effect(value: .update)
+            return state.viewState.isNew ? Effect(value: .create) : Effect(value: .update)
         case .create:
             return environment.create(.userSpots(userID: environment.me.userID), state.viewState)
                 .mapError(EquatableError.init(error:))
@@ -168,7 +186,10 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             return .none
         case let .photoLibraryAction(action):
             switch action {
-            case .selected, .selectError:
+            case let .selected(photoLibraryResult):
+                state.viewState.image = photoLibraryResult.image
+                return .none
+            case .selectError:
                 return .none
             case let .end(photoLibraryResult):
                 state.presentationType = nil
@@ -233,11 +254,11 @@ struct SpotPostView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.leading, 20)
-
+                        
                         Spacer()
 
                         Button(action: {
-
+                                
                             },
                             label: {
                             Text("保存")
