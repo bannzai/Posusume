@@ -8,7 +8,7 @@ extension Color {
     // #CBCBCB
     static let placeholder: Color = Color(white: 203 / 255)
     
-    static let disabled: Color = .gray
+    static let disabled: Color = Color(white: 192 / 255)
 }
 
 fileprivate extension Color {

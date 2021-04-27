@@ -299,7 +299,7 @@ struct SpotPostView: View {
                         })
                         .disabled(viewStore.viewState.submitButtonIsDisabled)
                         .frame(width: 200, height: 44, alignment: .center)
-                        .background(viewStore.viewState.submitButtonIsDisabled ? Color.gray.gradient : GradientColor.barn)
+                        .background(viewStore.viewState.submitButtonIsDisabled ? Color.disabled.gradient : GradientColor.barn)
 
                         Spacer().frame(height: 32)
                     }
