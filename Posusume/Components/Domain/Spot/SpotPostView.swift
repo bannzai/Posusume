@@ -32,7 +32,7 @@ struct SpotPostState: Equatable {
         }
         
         var error: EquatableError? = nil
-        var submitButtonIsEnabled: Bool { image != nil && !title.isEmpty }
+        var submitButtonIsDisabled: Bool { image == nil || title.isEmpty }
     }
 
     var viewState: ViewState
@@ -297,7 +297,7 @@ struct SpotPostView: View {
                                 .font(.body)
                                 .fontWeight(.medium)
                         })
-                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .disabled(viewStore.viewState.submitButtonIsDisabled)
                         .frame(width: 200, height: 44, alignment: .center)
                         .background(GradientColor.barn)
 
