@@ -233,6 +233,23 @@ struct SpotPostView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.leading, 20)
+
+                        Spacer()
+
+                        Button(action: {
+
+                            },
+                            label: {
+                            Text("保存")
+                                .foregroundColor(.white)
+                                .font(.body)
+                                .fontWeight(.medium)
+                        })
+                        .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                        .frame(width: 200, height: 44, alignment: .center)
+                        .background(GradientColor.barn)
+
+                        Spacer().frame(height: 32)
                     }
                 }
                 .navigationBarItems(
