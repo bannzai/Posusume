@@ -8,29 +8,44 @@ import Photos
 
 struct SpotPostState: Equatable {
     struct ViewState: Equatable {
-        let id: SpotID?
+        let context: Context
         var image: UIImage? = nil
-        var imageName: String? = nil
         var title: String = ""
-        var geoPoint: GeoPoint
-        var isNew: Bool
-        var error: EquatableError? = nil
+        var imageName: String? = nil
 
+        var geoPoint: GeoPoint {
+            switch context {
+            case .create(let point):
+                return point
+            case .update(let spot):
+                return spot.location
+            }
+        }
+
+        var isNew: Bool {
+            switch context {
+            case .create:
+                return true
+            case .update:
+                return false
+            }
+        }
+        
+        var error: EquatableError? = nil
         var submitButtonIsEnabled: Bool { image != nil && !title.isEmpty }
     }
 
     var viewState: ViewState
-    enum Context {
+    enum Context: Equatable {
         case create(GeoPoint)
         case update(Spot)
     }
     init(context: Context) {
         switch context {
-        case let .create(point):
-            self.viewState = .init(id: nil, image: nil, title: "", geoPoint: point, isNew: true)
+        case .create:
+            viewState = .init(context: context)
         case let .update(spot):
-            // TODO: load image
-            self.viewState = .init(id: spot.id, imageName: spot.imageFileName, title: spot.title, geoPoint: spot.location, isNew: false)
+            viewState = .init(context: context, title: spot.title, imageName: spot.imageFileName)
         }
     }
     
@@ -43,15 +58,25 @@ struct SpotPostState: Equatable {
     var presentationType: Presentation? = nil
     var photoLibrary: PhotoLibraryState = .init()
     
-    func buildSpot() -> Spot? {
+    func buildSpot() -> Spot {
         guard let imageName = viewState.imageName else {
-            return nil
+            fatalError("unexpected not register image to remote storage")
         }
-        return .init(
-            location: viewState.geoPoint,
-            title: viewState.title,
-            imageFileName: imageName
-        )
+        switch viewState.context {
+        case .create:
+            return .init(
+                location: viewState.geoPoint,
+                title: viewState.title,
+                imageFileName: imageName
+            )
+        case let .update(spot):
+            return .init(
+                location: viewState.geoPoint,
+                title: viewState.title,
+                imageFileName: imageName,
+                createdDate: spot.createdDate
+            )
+        }
     }
 }
 
@@ -101,25 +126,31 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .post:
             return state.viewState.isNew ? Effect(value: .create) : Effect(value: .update)
         case .create:
-            return environment.create(.userSpots(userID: environment.me.userID), state.viewState)
+            guard case .create = state.viewState.context else {
+                fatalError("unexpected pattern for context is not create. \(state.viewState.context)")
+            }
+            return environment.create(.userSpots(userID: environment.me.userID), state.buildSpot())
                 .mapError(EquatableError.init(error:))
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SpotPostAction.posted)
         case .update:
-            guard let identifier = state.viewState.id else {
-                fatalError("unexpected state.viewState.id is nil when post -> update. \(state)")
+            guard case .update = state.viewState.context else {
+                fatalError("unexpected pattern for context is not update. \(state.viewState.context)")
             }
-            return environment.update(.userSpot(userID: environment.me.userID, spotID: identifier), state.viewState)
+            guard let identifier = state.buildSpot().id else {
+                fatalError("unexpected state.buildSpot().id is nil when post for update. \(state)")
+            }
+            return environment.update(.userSpot(userID: environment.me.userID, spotID: identifier), state.buildSpot())
                 .mapError(EquatableError.init(error:))
                 .receive(on: environment.mainQueue)
                 .catchToEffect()
                 .map(SpotPostAction.posted)
         case .posted(.success(let spot)):
-            state.error = nil
+            state.viewState.error = nil
             return Effect(value: .dismiss)
         case .posted(.failure(let error)):
-            state.error = error
+            state.viewState.error = error
             return .none
         case .dismiss:
             return .none
