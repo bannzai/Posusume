@@ -26,6 +26,7 @@
 		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
 		BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31734B262CF25100E1212C /* PhotoLibraryView.swift */; };
 		BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317351262CF28000E1212C /* MockPhotoLibrary.swift */; };
+		BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
 		BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */; };
@@ -105,6 +106,7 @@
 		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		BA31734B262CF25100E1212C /* PhotoLibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
 		BA317351262CF28000E1212C /* MockPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrary.swift; sourceTree = "<group>"; };
+		BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCameraView.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeoPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			children = (
 				BA317339262BC87900E1212C /* PhotoLibrary.swift */,
 				BA31734B262CF25100E1212C /* PhotoLibraryView.swift */,
+				BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 			files = (
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
+				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */,
 				BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */,
 				BA26C87D2621F03A006555AE /* DatabasePathBuilder.swift in Sources */,
