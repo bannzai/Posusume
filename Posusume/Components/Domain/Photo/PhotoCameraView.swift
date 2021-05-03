@@ -5,19 +5,13 @@ import ComposableArchitecture
 import Combine
 import CoreLocation
 
-struct PhotoCameraCaptureResult: Equatable {
-    let image: UIImage
-    let location: CLLocationCoordinate2D
-}
-
 struct PhotoCameraState: Equatable {
-    var result: PhotoCameraCaptureResult?
+    var capturedImage: UIImage?
     var error: EquatableError?
 }
 
 enum PhotoCameraAction: Equatable {
     case captured(UIImage)
-    case dismiss
 }
 
 struct PhotoCameraEnvironment {
@@ -28,8 +22,7 @@ struct PhotoCameraEnvironment {
 let PhotoCameraReducer: Reducer<PhotoCameraState, PhotoCameraAction, PhotoCameraEnvironment> = .init { state, action, environment in
     switch action {
     case let .captured(image):
-        return Effect(value: .dismiss)
-    case .dismiss:
+        state.capturedImage = image
         return .none
     }
 }

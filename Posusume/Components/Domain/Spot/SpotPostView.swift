@@ -50,13 +50,16 @@ struct SpotPostState: Equatable {
     }
     
     enum Presentation: Int, Identifiable {
+        case camera
         case photoLibrary
         case openSettingAlert
         case notPermissionAlert
         var id: Int { hashValue }
     }
     var presentationType: Presentation? = nil
+    var isPresentedImageSelectionActionSheet: Bool = false
     var photoLibrary: PhotoLibraryState = .init()
+    var photoCamera: PhotoCameraState = .init()
     
     func buildSpot() -> Spot {
         guard let imageName = viewState.imageName else {
@@ -89,6 +92,9 @@ enum SpotPostAction: Equatable {
     case edited(title: String)
     case photoLibraryPrepare
     case photoLibraryAuthorized(Result<PHAuthorizationStatus, Never>)
+    case presentImageSelectActionSheet
+    case dismissedImageSelectActionSheet
+    case presentPhotoCamera
     case presentPhotoLibrary
     case presentOpenSettingAlert
     case presentedOpenSetting
@@ -98,6 +104,7 @@ enum SpotPostAction: Equatable {
     case cancelAlertAction
     case presentationTypeDidChanged(SpotPostState.Presentation?)
     case photoLibraryAction(PhotoLibraryAction)
+    case photoCameraAction(PhotoCameraAction)
 }
 
 struct SpotPostEnvironment {
@@ -187,6 +194,13 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
                 return .none
             }
+        case .presentImageSelectActionSheet:
+            return .none
+        case .dismissedImageSelectActionSheet:
+            return .none
+        case .presentPhotoCamera:
+            state.presentationType = .camera
+            return .none
         case .presentPhotoLibrary:
             state.presentationType = .photoLibrary
             return .none
@@ -227,6 +241,12 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 return .none
             case .dismiss:
                 state.presentationType = nil
+                return .none
+            }
+        case let .photoCameraAction(action):
+            switch action {
+            case let .captured(image):
+                state.viewState.image = image
                 return .none
             }
         }
@@ -316,6 +336,29 @@ struct SpotPostView: View {
                 )
                 .navigationBarTitle("", displayMode: .inline)
             }
+            .actionSheet(
+                isPresented: viewStore.binding(
+                    get: \.isPresentedImageSelectionActionSheet,
+                    send: { _ in .dismissedImageSelectActionSheet }
+                ),
+                content: {
+                    ActionSheet(
+                        title: Text("Action"),
+                        message: Text("Description"),
+                        buttons: [
+                            .default(Text("撮影する"), action: {
+                                viewStore.send(.presentPhotoCamera)
+                            }),
+                            .default(Text("写真から選択"), action: {
+                                viewStore.send(.photoLibraryPrepare)
+                            }),
+                            .cancel(Text("キャンセル"), action: {
+                                
+                            })
+                        ]
+                    )
+                }
+            )
             .sheet(
                 item: viewStore.binding(
                     get: \.presentationType,
@@ -323,6 +366,15 @@ struct SpotPostView: View {
                 ),
                 content: { type -> AnyView in
                     switch type {
+                    case .camera:
+                        return AnyView(
+                            PhotoCameraViewConnector(
+                                store: store.scope(
+                                    state: \.photoCamera,
+                                    action: { .photoCameraAction($0)}
+                                )
+                            )
+                        )
                     case .photoLibrary:
                         return AnyView(
                             PhotoLibraryViewConnector(
