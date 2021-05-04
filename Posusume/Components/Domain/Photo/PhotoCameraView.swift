@@ -19,7 +19,7 @@ struct PhotoCameraEnvironment {
     let mainQueue: AnySchedulerOf<DispatchQueue>
 }
 
-let PhotoCameraReducer: Reducer<PhotoCameraState, PhotoCameraAction, PhotoCameraEnvironment> = .init { state, action, environment in
+let photoCameraReducer: Reducer<PhotoCameraState, PhotoCameraAction, PhotoCameraEnvironment> = .init { state, action, environment in
     switch action {
     case let .captured(image):
         state.capturedImage = image
