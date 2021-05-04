@@ -114,7 +114,6 @@ struct LocationSelectView: View {
                     HStack {
                         Image(systemName: "location.circle")
                         Text("現在地を選択")
-                            .foregroundColor(.accentColor)
                             .font(.headline)
                             .onTapGesture {
                                 viewStore.send(.selectedCurrentLocationRow)
