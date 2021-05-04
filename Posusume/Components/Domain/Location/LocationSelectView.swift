@@ -100,40 +100,37 @@ struct LocationSelectView: View {
 
     var body: some View {
         WithViewStore(store) { viewStore in
-            ScrollView {
-                LazyVStack {
-                    Section(header: Text("Header")) {
-                        SearchBar(
-                            isEditing: true,
-                            text: viewStore.binding(
-                                get: \.searchText,
-                                send: {
-                                    .search($0)
-                                }
-                            )
-                        )
-                    }
-                    row("現在地を選択")
+            VStack(alignment: .leading) {
+                SearchBar(
+                    isEditing: true,
+                    text: viewStore.binding(
+                        get: \.searchText,
+                        send: {
+                            .search($0)
+                        }
+                    )
+                )
+                List {
+                    Text("現在地を選択")
+                        .foregroundColor(.accentColor)
+                        .font(.headline)
                         .onTapGesture {
                             viewStore.send(.selectedCurrentLocationRow)
                         }
                     ForEach(0..<viewStore.marks.count) { i in
                         HStack {
-                            row(formatForLocation(mark: viewStore.marks[i]))
+                            Text(formatForLocation(mark: viewStore.marks[i]))
+                                .font(.footnote)
                                 .onTapGesture {
                                     viewStore.send(.selected(viewStore.marks[i]))
                                     presentationMode.wrappedValue.dismiss()
                                 }
                         }
-                        .padding(.horizontal, 20)
                     }
                 }
+                
             }
         }
-    }
-    
-    func row(_ name: String) -> Text {
-        Text(name).font(.footnote)
     }
 }
 
@@ -146,15 +143,36 @@ func formatForLocation(mark: PlaceMark) -> String {
 
 struct LocationSelectView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSelectView(
-            store: .init(
-                initialState: .init(),
-                reducer: locationSelectReducer,
-                environment: LocationSelectEnvironment(
-                    geocoder: geocoder,
-                    locationManager: locationManager
+        Group {
+            LocationSelectView(
+                store: .init(
+                    initialState: .init(),
+                    reducer: locationSelectReducer,
+                    environment: LocationSelectEnvironment(
+                        geocoder: geocoder,
+                        locationManager: locationManager
+                    )
                 )
             )
-        )
+            .previewDisplayName("empty search text")
+            LocationSelectView(
+                store: .init(
+                    initialState: {
+                        var state = LocationSelectState()
+                        state.searchText = "東京"
+                        state.marks = [
+                            .init(name: "東京駅", country: "日本", postalCode: "100-0005", address: .init(administrativeArea: "東京都", locality: "千代田区", thoroughfare: "丸の内1丁目", subThoroughfare: "1号1番"), location: defaultRegion.center)
+                        ]
+                        return state
+                    }(),
+                    reducer: locationSelectReducer,
+                    environment: LocationSelectEnvironment(
+                        geocoder: geocoder,
+                        locationManager: locationManager
+                    )
+                )
+            )
+            .previewDisplayName("inputed 東京")
+        }
     }
 }
