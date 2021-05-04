@@ -77,7 +77,7 @@ let locationSelectReducer: Reducer<LocationSelectState, LocationSelectAction, Lo
             state.alert = .notPermission
             return .none
         case .notDetermined:
-            fatalError("unexpected notDetermined permission. requestedAuthentification should call after request permission")
+            fatalError("unexpected status of notDetermined. requestedAuthentification should call after request permission")
         case .restricted:
             state.alert = .openSettingApp
             return .none
