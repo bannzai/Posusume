@@ -13,15 +13,7 @@ struct SpotPostState: Equatable {
         var image: UIImage? = nil
         var title: String = ""
         var imageName: String? = nil
-
-        var geoPoint: GeoPoint {
-            switch context {
-            case .create(let point):
-                return point
-            case .update(let spot):
-                return spot.location
-            }
-        }
+        var geoPoint: GeoPoint? = nil
 
         var isNew: Bool {
             switch context {
@@ -34,11 +26,12 @@ struct SpotPostState: Equatable {
         
         var error: EquatableError? = nil
         var submitButtonIsDisabled: Bool { image == nil || title.isEmpty }
+        var canEditGeoPoint: Bool { isNew }
     }
 
     var viewState: ViewState
     enum Context: Equatable {
-        case create(GeoPoint)
+        case create
         case update(Spot)
     }
     init(context: Context) {
@@ -68,14 +61,17 @@ struct SpotPostState: Equatable {
         }
         switch viewState.context {
         case .create:
+            guard let geoPoint = viewState.geoPoint else {
+                fatalError("unexpected getopoint is not setting. geopoint should necessary before post")
+            }
             return .init(
-                location: viewState.geoPoint,
+                location: geoPoint,
                 title: viewState.title,
                 imageFileName: imageName
             )
         case let .update(spot):
             return .init(
-                location: viewState.geoPoint,
+                location: spot.location,
                 title: viewState.title,
                 imageFileName: imageName,
                 createdDate: spot.createdDate
@@ -427,7 +423,7 @@ struct SpotListView_Preview: PreviewProvider {
         Group {
             SpotPostView(
                 store: .init(
-                    initialState: .init(context: .create(spot.location)),
+                    initialState: .init(context: .create),
                     reducer: spotPostReducer,
                     environment: SpotPostEnvironment(
                         me: .init(id: .init(rawValue: "1")),
