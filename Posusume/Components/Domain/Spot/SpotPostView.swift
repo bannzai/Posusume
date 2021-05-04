@@ -129,6 +129,13 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             )
         }
     ),
+    photoCameraReducer.pullback(
+        state: \.photoCamera,
+        action: /SpotPostAction.photoCameraAction,
+        environment: { globalEnvironment in
+            PhotoCameraEnvironment(me: globalEnvironment.me, mainQueue: globalEnvironment.mainQueue)
+        }
+    ),
     locationSelectReducer.pullback(
         state: \.locationSelect,
         action: /SpotPostAction.locationSelectAction,
