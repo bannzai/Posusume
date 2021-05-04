@@ -3,19 +3,24 @@ import SwiftUI
 struct SearchBar: View {
     @State var isEditing = false
     @Binding var text: String
+    var isDisableAutocorrection: Bool = false
 
     var body: some View {
         HStack {
             TextField("検索", text: $text)
+                .disableAutocorrection(isDisableAutocorrection)
                 .padding(7)
                 .padding(.horizontal, 25)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .padding(.horizontal, 10)
                 .onTapGesture {
+                    if self.isDisableAutocorrection {
+                        return
+                    }
                     self.isEditing = true
                 }
- 
+
             if isEditing {
                 Button(action: {
                     self.isEditing = false
