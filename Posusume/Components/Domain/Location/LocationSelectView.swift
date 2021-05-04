@@ -44,7 +44,7 @@ let locationSelectReducer: Reducer<LocationSelectState, LocationSelectAction, Lo
             .map(LocationSelectAction.searched)
             .eraseToEffect()
     case let .searched(.success(marks)):
-        state.marks = []
+        state.marks = marks
         return .none
     case .searched(.failure):
         state.marks = []
@@ -117,12 +117,12 @@ struct LocationSelectView: View {
                         .onTapGesture {
                             viewStore.send(.selectedCurrentLocationRow)
                         }
-                    ForEach(0..<viewStore.marks.count) { i in
+                    ForEach(viewStore.marks) { mark in
                         HStack {
-                            Text(formatForLocation(mark: viewStore.marks[i]))
+                            Text(formatForLocation(mark: mark))
                                 .font(.footnote)
                                 .onTapGesture {
-                                    viewStore.send(.selected(viewStore.marks[i]))
+                                    viewStore.send(.selected(mark))
                                 }
                         }
                     }

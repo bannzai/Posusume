@@ -40,7 +40,8 @@ private struct _Geocoder: Geocoder {
 
 internal let geocoder: Geocoder = _Geocoder()
 
-struct PlaceMark: Equatable {
+struct PlaceMark: Equatable, Identifiable {
+    let id: UUID = .init()
     let name: String
     let country: String
     let postalCode: String
