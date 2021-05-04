@@ -93,7 +93,7 @@ let spotMapReducer: Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> = .
         case let .presentSpotPost(spot):
             switch spot {
             case nil:
-                state.spotPost = SpotPostState(context: .create(state.geoPoint))
+                state.spotPost = SpotPostState(context: .create)
             case let spot?:
                 state.spotPost = SpotPostState(context: .update(spot))
             }
