@@ -164,19 +164,15 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case let .edited(title):
             state.viewState.title = title
             return .none
-        case .photoLibraryPrepare:
+        case .presentPhotoLibrary:
             switch environment.photoLibrary.prepareActionType() {
             case nil:
-                return Effect(value: .presentPhotoLibrary)
+                state.presentationType = .photoLibrary
+                return .none
             case .openSettingApp:
                 return Effect(value: .presentOpenSettingAlert)
             case .requestAuthorization:
-                return environment
-                    .photoLibrary
-                    .requestAuthorization()
-                    .receive(on: environment.mainQueue)
-                    .catchToEffect()
-                    .map(SpotPostAction.photoLibraryAuthorized)
+                return Effect(value: .photoLibraryPrepare)
             }
         case let .photoLibraryAuthorized(.success(status)):
             switch status {
@@ -202,9 +198,13 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .presentPhotoCamera:
             state.presentationType = .camera
             return .none
-        case .presentPhotoLibrary:
-            state.presentationType = .photoLibrary
-            return .none
+        case .photoLibraryPrepare:
+            return environment
+                .photoLibrary
+                .requestAuthorization()
+                .receive(on: environment.mainQueue)
+                .catchToEffect()
+                .map(SpotPostAction.photoLibraryAuthorized)
         case .presentOpenSettingAlert:
             state.presentationType = .openSettingAlert
             return .none
@@ -350,7 +350,7 @@ struct SpotPostView: View {
                                 viewStore.send(.presentPhotoCamera)
                             }),
                             .default(Text("写真から選択"), action: {
-                                viewStore.send(.photoLibraryPrepare)
+                                viewStore.send(.presentPhotoLibrary)
                             }),
                             .cancel(Text("キャンセル"), action: {
                                 
