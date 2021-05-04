@@ -48,12 +48,14 @@ struct SpotPostState: Equatable {
         case photoLibrary
         case openSettingAlert
         case notPermissionAlert
+        case locationSelection
         var id: Int { hashValue }
     }
     var presentationType: Presentation? = nil
     var isPresentedImageSelectionActionSheet: Bool = false
     var photoLibrary: PhotoLibraryState = .init()
     var photoCamera: PhotoCameraState = .init()
+    var locationSelect: LocationSelectState = .init()
 
     func buildSpot() -> Spot {
         guard let imageName = viewState.imageName else {
@@ -103,6 +105,7 @@ enum SpotPostAction: Equatable {
     case presentationTypeDidChanged(SpotPostState.Presentation?)
     case photoLibraryAction(PhotoLibraryAction)
     case photoCameraAction(PhotoCameraAction)
+    case locationSelectAction(LocationSelectAction)
 }
 
 struct SpotPostEnvironment {
@@ -251,6 +254,27 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 state.viewState.image = image
                 return .none
             }
+        case let .locationSelectAction(action):
+            switch action {
+            case .search:
+                return .none
+            case .searched:
+                return .none
+            case let .selected(mark):
+                state.viewState.geoPoint = GeoPoint(coordinate: mark.location)
+                return .none
+            case .selectedCurrentLocationRow:
+                return .none
+            case let .setUserLocation(.success(location)):
+                state.viewState.geoPoint = .init(coordinate: location.coordinate)
+                return .none
+            case .setUserLocation(.failure):
+                return .none
+            case .startTrackingLocation:
+                return .none
+            case .requestedAuthentification:
+                return .none
+            }
         }
     }
 )
@@ -310,17 +334,21 @@ struct SpotPostView: View {
                             .padding(.leading, 20)
                             
                             VStack(alignment: .leading) {
-                                Text("タイトル")
-                                    .font(.subheadline)
                                 Button(
                                     action: {
-                                        
+                                        if !viewStore.viewState.canEditGeoPoint {
+                                            return
+                                        }
+                                        viewStore.send(.presentLocationSelect)
                                     },
                                     label: {
-                                        Map(
-                                            coordinateRegion: Binding(get: { defaultRegion }, set: { _ in }),
-                                            showsUserLocation: true
-                                        )
+                                        if let geoPoint = viewStore.viewState.geoPoint {
+                                            Text("画像を撮った場所を選んでください")
+                                                .font(.subheadline)
+                                        } else {
+                                            Text("画像を撮った場所を選んでください")
+                                                .font(.subheadline)
+                                        }
                                     }
                                 )
                                 .frame(height: 80)
@@ -403,6 +431,15 @@ struct SpotPostView: View {
                                 store: store.scope(
                                     state: \.photoLibrary,
                                     action: { .photoLibraryAction($0) }
+                                )
+                            )
+                        )
+                    case .locationSelection:
+                        return AnyView(
+                            LocationSelectView(
+                                store: store.scope(
+                                    state: \.locationSelect,
+                                    action: { .locationSelectAction($0) }
                                 )
                             )
                         )
