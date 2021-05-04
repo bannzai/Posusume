@@ -29,7 +29,7 @@
 		BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */; };
 		BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3526410A6B00ACE02F /* DefaultLocation.swift */; };
 		BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3726410C3A00ACE02F /* SearchBar.swift */; };
-		BA906C3C26410E4D00ACE02F /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3B26410E4D00ACE02F /* LocationSearchView.swift */; };
+		BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */; };
 		BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3E26410F0400ACE02F /* Geocoder.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
 		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
@@ -113,7 +113,7 @@
 		BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCameraView.swift; sourceTree = "<group>"; };
 		BA906C3526410A6B00ACE02F /* DefaultLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocation.swift; sourceTree = "<group>"; };
 		BA906C3726410C3A00ACE02F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		BA906C3B26410E4D00ACE02F /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectView.swift; sourceTree = "<group>"; };
 		BA906C3E26410F0400ACE02F /* Geocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 		BA906C32264109E400ACE02F /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				BA906C3B26410E4D00ACE02F /* LocationSearchView.swift */,
+				BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */,
 				BA906C3526410A6B00ACE02F /* DefaultLocation.swift */,
 			);
 			path = Location;
@@ -673,7 +673,7 @@
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
-				BA906C3C26410E4D00ACE02F /* LocationSearchView.swift in Sources */,
+				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
