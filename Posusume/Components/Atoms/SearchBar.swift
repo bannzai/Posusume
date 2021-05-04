@@ -29,10 +29,10 @@ struct SearchBar: View {
                     Text("キャンセル")
                 }
                 .padding(.trailing, 10)
-                .transition(.move(edge: .trailing))
-                .animation(.default)
             }
         }
+        .padding(.vertical, 4)
+        .frame(maxHeight: 50)
     }
 }
 
