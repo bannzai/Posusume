@@ -262,67 +262,69 @@ struct SpotPostView: View {
             NavigationView {
                 ZStack(alignment: .top) {
                     Color.screenBackground.edgesIgnoringSafeArea(.all)
-                    VStack(spacing: 18) {
-                        Spacer().frame(height: 16)
-                        Button (action: {
-                            viewStore.send(.presentImageSelectActionSheet)
-                        },
-                        label: {
-                            if let image = viewStore.state.viewState.image {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .frame(width: UIScreen.main.bounds.width - 40)
-                                    .aspectRatio(3 / 4, contentMode: .fit)
-                                    .clipped()
-                                    .padding(.horizontal, 20)
-                            } else {
-                                VStack {
-                                    Image("anyPicture")
-                                        .resizable()
-                                        .renderingMode(.template)
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 40, height: 40)
-                                    Text("画像を選択")
-                                        .font(.footnote)
-                                }
-                                .foregroundColor(.placeholder)
-                                .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
-                                .background(Color.white)
-                                .padding(.horizontal, 20)
-                            }
-                        })
-                        .buttonStyle(PlainButtonStyle())
-
-                        VStack(alignment: .leading) {
-                            Text("タイトル")
-                                .font(.subheadline)
-                            TextField("ポスターのタイトル", text: viewStore.binding(get: \.viewState.title, send: SpotPostAction.edited(title:)))
-                                .font(.caption)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .padding(.horizontal, 16)
-                                .background(Color.white)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.leading, 20)
-                        
-                        Spacer()
-
-                        Button(action: {
-                                
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 18) {
+                            Spacer().frame(height: 16)
+                            Button (action: {
+                                viewStore.send(.presentImageSelectActionSheet)
                             },
                             label: {
-                            Text("保存")
-                                .foregroundColor(.white)
-                                .font(.body)
-                                .fontWeight(.medium)
-                        })
-                        .disabled(viewStore.viewState.submitButtonIsDisabled)
-                        .frame(width: 200, height: 44, alignment: .center)
-                        .background(viewStore.viewState.submitButtonIsDisabled ? Color.disabled.gradient : GradientColor.barn)
+                                if let image = viewStore.state.viewState.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width: UIScreen.main.bounds.width - 40)
+                                        .aspectRatio(3 / 4, contentMode: .fit)
+                                        .clipped()
+                                        .padding(.horizontal, 20)
+                                } else {
+                                    VStack {
+                                        Image("anyPicture")
+                                            .resizable()
+                                            .renderingMode(.template)
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                        Text("画像を選択")
+                                            .font(.footnote)
+                                    }
+                                    .foregroundColor(.placeholder)
+                                    .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
+                                    .background(Color.white)
+                                    .padding(.horizontal, 20)
+                                }
+                            })
+                            .buttonStyle(PlainButtonStyle())
 
-                        Spacer().frame(height: 32)
+                            VStack(alignment: .leading) {
+                                Text("タイトル")
+                                    .font(.subheadline)
+                                TextField("ポスターのタイトル", text: viewStore.binding(get: \.viewState.title, send: SpotPostAction.edited(title:)))
+                                    .font(.caption)
+                                    .textFieldStyle(PlainTextFieldStyle())
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 14)
+                                    .padding(.horizontal, 16)
+                                    .background(Color.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.leading, 20)
+                            
+                            Spacer()
+
+                            Button(action: {
+                                    
+                                },
+                                label: {
+                                Text("保存")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .fontWeight(.medium)
+                            })
+                            .disabled(viewStore.viewState.submitButtonIsDisabled)
+                            .frame(width: 200, height: 44, alignment: .center)
+                            .background(viewStore.viewState.submitButtonIsDisabled ? Color.disabled.gradient : GradientColor.barn)
+
+                            Spacer().frame(height: 32)
+                        }
                     }
                 }
                 .navigationBarItems(
