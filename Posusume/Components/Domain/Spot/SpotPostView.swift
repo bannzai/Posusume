@@ -5,6 +5,7 @@ import CoreLocation
 import FirebaseFirestore
 import PhotosUI
 import Photos
+import MapKit
 
 struct SpotPostState: Equatable {
     struct ViewState: Equatable {
@@ -12,15 +13,7 @@ struct SpotPostState: Equatable {
         var image: UIImage? = nil
         var title: String = ""
         var imageName: String? = nil
-
-        var geoPoint: GeoPoint {
-            switch context {
-            case .create(let point):
-                return point
-            case .update(let spot):
-                return spot.location
-            }
-        }
+        var geoPoint: GeoPoint? = nil
 
         var isNew: Bool {
             switch context {
@@ -33,11 +26,12 @@ struct SpotPostState: Equatable {
         
         var error: EquatableError? = nil
         var submitButtonIsDisabled: Bool { image == nil || title.isEmpty }
+        var canEditGeoPoint: Bool { isNew }
     }
 
     var viewState: ViewState
     enum Context: Equatable {
-        case create(GeoPoint)
+        case create
         case update(Spot)
     }
     init(context: Context) {
@@ -54,27 +48,32 @@ struct SpotPostState: Equatable {
         case photoLibrary
         case openSettingAlert
         case notPermissionAlert
+        case locationSelection
         var id: Int { hashValue }
     }
     var presentationType: Presentation? = nil
     var isPresentedImageSelectionActionSheet: Bool = false
     var photoLibrary: PhotoLibraryState = .init()
     var photoCamera: PhotoCameraState = .init()
-    
+    var locationSelect: LocationSelectState = .init()
+
     func buildSpot() -> Spot {
         guard let imageName = viewState.imageName else {
             fatalError("unexpected not register image to remote storage")
         }
         switch viewState.context {
         case .create:
+            guard let geoPoint = viewState.geoPoint else {
+                fatalError("unexpected getopoint is not setting. geopoint should necessary before post")
+            }
             return .init(
-                location: viewState.geoPoint,
+                location: geoPoint,
                 title: viewState.title,
                 imageFileName: imageName
             )
         case let .update(spot):
             return .init(
-                location: viewState.geoPoint,
+                location: spot.location,
                 title: viewState.title,
                 imageFileName: imageName,
                 createdDate: spot.createdDate
@@ -99,12 +98,14 @@ enum SpotPostAction: Equatable {
     case presentOpenSettingAlert
     case presentedOpenSetting
     case presentNotPermissionAlert
+    case presentLocationSelect
     case openSetting
     case confirmedNotPermission
     case cancelAlertAction
     case presentationTypeDidChanged(SpotPostState.Presentation?)
     case photoLibraryAction(PhotoLibraryAction)
     case photoCameraAction(PhotoCameraAction)
+    case locationSelectAction(LocationSelectAction)
 }
 
 struct SpotPostEnvironment {
@@ -126,6 +127,20 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 mainQueue: .main,
                 pickerConfiguration: sharedPhotoLibraryConfiguration
             )
+        }
+    ),
+    photoCameraReducer.pullback(
+        state: \.photoCamera,
+        action: /SpotPostAction.photoCameraAction,
+        environment: { globalEnvironment in
+            PhotoCameraEnvironment(me: globalEnvironment.me, mainQueue: globalEnvironment.mainQueue)
+        }
+    ),
+    locationSelectReducer.pullback(
+        state: \.locationSelect,
+        action: /SpotPostAction.locationSelectAction,
+        environment: { _ in
+            LocationSelectEnvironment(geocoder: geocoder, locationManager: locationManager)
         }
     ),
     .init { state, action, environment in
@@ -221,6 +236,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .presentNotPermissionAlert:
             state.presentationType = .notPermissionAlert
             return .none
+        case .presentLocationSelect:
+            state.presentationType = .locationSelection
+            return .none
         case .confirmedNotPermission:
             state.presentationType = nil
             return .none
@@ -248,6 +266,29 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             switch action {
             case let .captured(image):
                 state.viewState.image = image
+                return .none
+            }
+        case let .locationSelectAction(action):
+            switch action {
+            case .search:
+                return .none
+            case .searched:
+                return .none
+            case let .selected(mark):
+                state.viewState.geoPoint = GeoPoint(coordinate: mark.location)
+                state.presentationType = nil
+                return .none
+            case .selectedCurrentLocationRow:
+                return .none
+            case let .setUserLocation(.success(location)):
+                state.viewState.geoPoint = .init(coordinate: location.coordinate)
+                state.presentationType = nil
+                return .none
+            case .setUserLocation(.failure):
+                return .none
+            case .startTrackingLocation:
+                return .none
+            case .requestedAuthentification:
                 return .none
             }
         }
@@ -308,6 +349,29 @@ struct SpotPostView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.leading, 20)
                             
+                            VStack(alignment: .leading) {
+                                Button(
+                                    action: {
+                                        if !viewStore.viewState.canEditGeoPoint {
+                                            return
+                                        }
+                                        viewStore.send(.presentLocationSelect)
+                                    },
+                                    label: {
+                                        if let geoPoint = viewStore.viewState.geoPoint {
+                                            Text("画像を撮った場所を選んでください")
+                                                .font(.subheadline)
+                                        } else {
+                                            Text("画像を撮った場所を選んでください")
+                                                .font(.subheadline)
+                                        }
+                                    }
+                                )
+                                .frame(height: 80)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.leading, 20)
+
                             Spacer()
 
                             Button(action: {
@@ -386,6 +450,15 @@ struct SpotPostView: View {
                                 )
                             )
                         )
+                    case .locationSelection:
+                        return AnyView(
+                            LocationSelectView(
+                                store: store.scope(
+                                    state: \.locationSelect,
+                                    action: { .locationSelectAction($0) }
+                                )
+                            )
+                        )
                     case .openSettingAlert:
                         return AnyView(EmptyView())
                     case .notPermissionAlert:
@@ -403,7 +476,7 @@ struct SpotListView_Preview: PreviewProvider {
         Group {
             SpotPostView(
                 store: .init(
-                    initialState: .init(context: .create(spot.location)),
+                    initialState: .init(context: .create),
                     reducer: spotPostReducer,
                     environment: SpotPostEnvironment(
                         me: .init(id: .init(rawValue: "1")),

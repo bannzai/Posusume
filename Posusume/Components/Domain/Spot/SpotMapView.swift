@@ -4,10 +4,6 @@ import ComposableArchitecture
 import MapKit
 import FirebaseFirestore
 
-let defaultRegion = MKCoordinateRegion(
-    center: .init(latitude: 35.655164046, longitude: 139.740663704),
-    span: .init(latitudeDelta: 0.1, longitudeDelta: 0.1)
-)
 struct SpotMapState: Equatable {
     var center: CLLocationCoordinate2D = defaultRegion.center
     var span: CoordinateSpan = .init(span: defaultRegion.span)
@@ -97,7 +93,7 @@ let spotMapReducer: Reducer<SpotMapState, SpotMapAction, SpotMapEnvironment> = .
         case let .presentSpotPost(spot):
             switch spot {
             case nil:
-                state.spotPost = SpotPostState(context: .create(state.geoPoint))
+                state.spotPost = SpotPostState(context: .create)
             case let spot?:
                 state.spotPost = SpotPostState(context: .update(spot))
             }
