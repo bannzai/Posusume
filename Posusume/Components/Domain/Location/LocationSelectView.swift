@@ -57,6 +57,7 @@ let locationSelectReducer: Reducer<LocationSelectState, LocationSelectAction, Lo
         case nil:
             return Effect(value: .startTrackingLocation)
         case .openSettingApp:
+            state.alert = .openSettingApp
             return .none
         case .requiredAutentification:
             return environment.locationManager.requestAuthorization().map(LocationSelectAction.requestedAuthentification).eraseToEffect()
@@ -77,7 +78,7 @@ let locationSelectReducer: Reducer<LocationSelectState, LocationSelectAction, Lo
             state.alert = .notPermission
             return .none
         case .notDetermined:
-            fatalError("unexpected status of notDetermined. requestedAuthentification should call after request permission")
+            return .none
         case .restricted:
             state.alert = .openSettingApp
             return .none
@@ -96,7 +97,6 @@ let locationSelectReducer: Reducer<LocationSelectState, LocationSelectAction, Lo
 
 struct LocationSelectView: View {
     let store: Store<LocationSelectState, LocationSelectAction>
-    @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
         WithViewStore(store) { viewStore in
@@ -123,7 +123,6 @@ struct LocationSelectView: View {
                                 .font(.footnote)
                                 .onTapGesture {
                                     viewStore.send(.selected(viewStore.marks[i]))
-                                    presentationMode.wrappedValue.dismiss()
                                 }
                         }
                     }

@@ -129,6 +129,13 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
             )
         }
     ),
+    locationSelectReducer.pullback(
+        state: \.locationSelect,
+        action: /SpotPostAction.locationSelectAction,
+        environment: { _ in
+            LocationSelectEnvironment(geocoder: geocoder, locationManager: locationManager)
+        }
+    ),
     .init { state, action, environment in
         switch action {
         case .post:
@@ -262,11 +269,13 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 return .none
             case let .selected(mark):
                 state.viewState.geoPoint = GeoPoint(coordinate: mark.location)
+                state.presentationType = nil
                 return .none
             case .selectedCurrentLocationRow:
                 return .none
             case let .setUserLocation(.success(location)):
                 state.viewState.geoPoint = .init(coordinate: location.coordinate)
+                state.presentationType = nil
                 return .none
             case .setUserLocation(.failure):
                 return .none
