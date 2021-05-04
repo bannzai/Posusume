@@ -5,6 +5,7 @@ import CoreLocation
 import FirebaseFirestore
 import PhotosUI
 import Photos
+import MapKit
 
 struct SpotPostState: Equatable {
     struct ViewState: Equatable {
@@ -60,7 +61,7 @@ struct SpotPostState: Equatable {
     var isPresentedImageSelectionActionSheet: Bool = false
     var photoLibrary: PhotoLibraryState = .init()
     var photoCamera: PhotoCameraState = .init()
-    
+
     func buildSpot() -> Spot {
         guard let imageName = viewState.imageName else {
             fatalError("unexpected not register image to remote storage")
@@ -99,6 +100,7 @@ enum SpotPostAction: Equatable {
     case presentOpenSettingAlert
     case presentedOpenSetting
     case presentNotPermissionAlert
+    case presentLocationSelect
     case openSetting
     case confirmedNotPermission
     case cancelAlertAction
@@ -221,6 +223,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case .presentNotPermissionAlert:
             state.presentationType = .notPermissionAlert
             return .none
+        case .presentLocationSelect:
+            state.presentationType = .locationSelection
+            return .none
         case .confirmedNotPermission:
             state.presentationType = nil
             return .none
@@ -308,6 +313,25 @@ struct SpotPostView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.leading, 20)
                             
+                            VStack(alignment: .leading) {
+                                Text("タイトル")
+                                    .font(.subheadline)
+                                Button(
+                                    action: {
+                                        
+                                    },
+                                    label: {
+                                        Map(
+                                            coordinateRegion: Binding(get: { defaultRegion }, set: { _ in }),
+                                            showsUserLocation: true
+                                        )
+                                    }
+                                )
+                                .frame(height: 80)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.leading, 20)
+
                             Spacer()
 
                             Button(action: {
