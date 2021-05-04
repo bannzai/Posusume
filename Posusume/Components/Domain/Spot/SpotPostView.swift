@@ -195,6 +195,7 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
                 return .none
             }
         case .presentImageSelectActionSheet:
+            state.isPresentedImageSelectionActionSheet = true
             return .none
         case .dismissedImageSelectActionSheet:
             return .none
@@ -264,11 +265,11 @@ struct SpotPostView: View {
                     VStack(spacing: 18) {
                         Spacer().frame(height: 16)
                         Button (action: {
-                            viewStore.send(.photoLibraryPrepare)
+                            viewStore.send(.presentImageSelectActionSheet)
                         },
                         label: {
-                            if let value = viewStore.state.photoLibrary.result {
-                                Image(uiImage: value.image)
+                            if let image = viewStore.state.viewState.image {
+                                Image(uiImage: image)
                                     .resizable()
                                     .frame(width: UIScreen.main.bounds.width - 40)
                                     .aspectRatio(3 / 4, contentMode: .fit)
@@ -343,8 +344,7 @@ struct SpotPostView: View {
                 ),
                 content: {
                     ActionSheet(
-                        title: Text("Action"),
-                        message: Text("Description"),
+                        title: Text("写真を1枚選んでください"),
                         buttons: [
                             .default(Text("撮影する"), action: {
                                 viewStore.send(.presentPhotoCamera)
