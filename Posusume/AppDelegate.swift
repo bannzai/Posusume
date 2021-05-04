@@ -3,13 +3,24 @@ import Firebase
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if isPreview {
-            return true
+        setupAppearance()
+        if !isPreview {
+            setupFirebase()
+            _ = auth.auth()
         }
-        setupFirebase()
-        _ = auth.auth()
         return true
     }
+}
+
+func setupAppearance() {
+    let appearance = UINavigationBarAppearance()
+    appearance.backgroundColor = .clear
+    appearance.shadowColor = nil
+    appearance.shadowImage = nil
+    appearance.backgroundImage = nil
+    UINavigationBar.appearance().standardAppearance = appearance
+    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+
 }
 
 private func setupFirebase() {
