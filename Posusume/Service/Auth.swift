@@ -6,11 +6,11 @@ protocol Auth {
     func auth() -> AnyPublisher<Me, Error>
 }
 
-protocol Authorized {
-    func authorized() -> Me
+protocol Authentificated {
+    func authentificated() -> Me
 }
 
-fileprivate class _Auth: Auth, Authorized {
+fileprivate class _Auth: Auth, Authentificated {
     var me: Me?
     init() { }
     
@@ -34,7 +34,7 @@ fileprivate class _Auth: Auth, Authorized {
         }.eraseToAnyPublisher()
     }
     
-    func authorized() -> Me {
+    func authentificated() -> Me {
         me!
     }
 
@@ -52,4 +52,4 @@ fileprivate class _Auth: Auth, Authorized {
 
 private var _auth = _Auth()
 internal var auth: Auth { _auth }
-internal var authorized: Authorized { _auth }
+internal var authentificated: Authentificated { _auth }

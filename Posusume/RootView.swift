@@ -38,7 +38,7 @@ let rootReducer = Reducer<RootState, RootAction, RootEnvironment>.combine(
         action: /RootAction.spots,
         environment: { (environment: RootEnvironment) in
             return SpotMapEnvironment(
-                me: authorized.authorized(),
+                me: authentificated.authentificated()(),
                 fetchList: FirestoreDatabase.shared.fetchList,
                 watchList: FirestoreDatabase.shared.watchList,
                 mainQueue: environment.mainQueue
