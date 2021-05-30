@@ -251,6 +251,9 @@ let spotPostReducer: Reducer<SpotPostState, SpotPostAction, SpotPostEnvironment>
         case let .photoLibraryAction(action):
             switch action {
             case let .selected(photoLibraryResult):
+                if let location = photoLibraryResult.location {
+                    state.viewState.geoPoint = .init(coordinate: location)
+                }
                 state.viewState.image = photoLibraryResult.image
                 return .none
             case .selectError:
