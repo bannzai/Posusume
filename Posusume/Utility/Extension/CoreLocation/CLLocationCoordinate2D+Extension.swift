@@ -6,3 +6,9 @@ extension CLLocationCoordinate2D: Equatable {
         lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }
+
+extension CLLocationCoordinate2D {
+    func clLocation() -> CLLocation {
+        .init(latitude: latitude, longitude: longitude)
+    }
+}
