@@ -490,6 +490,7 @@ struct SpotListView_Preview: PreviewProvider {
                     )
                 )
             )
+            .previewDisplayName("Initial State")
             SpotPostView(
                 store: .init(
                     initialState: {
@@ -514,6 +515,7 @@ struct SpotListView_Preview: PreviewProvider {
                     )
                 )
             )
+            .previewDisplayName("Fill spot information")
         }
     }
     static let spot = Spot(location: .init(latitude: 10, longitude: 10), title: "", imageFileName: "")
