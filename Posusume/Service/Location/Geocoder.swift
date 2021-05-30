@@ -3,6 +3,7 @@ import Combine
 
 protocol Geocoder {
     func geocoder(address: String) -> AnyPublisher<[PlaceMark], Swift.Error>
+    func reverseGeocoder(location: CLLocation) -> AnyPublisher<[PlaceMark], Error>
 }
 
 private struct _Geocoder: Geocoder {
@@ -12,29 +13,40 @@ private struct _Geocoder: Geocoder {
                 if let error = error {
                     return promise(.failure(error))
                 }
-                promise(
-                    .success(
-                        (marks ?? []).compactMap { mark in
-                            guard let location = mark.location else {
-                                return nil
-                            }
-                            return PlaceMark(
-                                name: mark.name ?? "",
-                                country: mark.country ?? "",
-                                postalCode: mark.postalCode ?? "",
-                                address: .init(
-                                    administrativeArea: mark.administrativeArea ?? "",
-                                    locality: mark.locality ?? "",
-                                    thoroughfare: mark.thoroughfare ?? "",
-                                    subThoroughfare: mark.subThoroughfare ?? ""
-                                ),
-                                location: location.coordinate
-                            )
-                        }
-                    )
-                )
+                promise(.success(map(marks)))
             }
         }.eraseToAnyPublisher()
+    }
+
+    func reverseGeocoder(location: CLLocation) -> AnyPublisher<[PlaceMark], Error> {
+        Future { promise in
+            CLGeocoder().reverseGeocodeLocation(location) { marks, error in
+                if let error = error {
+                    return promise(.failure(error))
+                }
+                promise(.success(map(marks)))
+            }
+        }.eraseToAnyPublisher()
+    }
+}
+
+private func map(_ marks: [CLPlacemark]?) -> [PlaceMark] {
+    (marks ?? []).compactMap { mark in
+        guard let location = mark.location else {
+            return nil
+        }
+        return PlaceMark(
+            name: mark.name ?? "",
+            country: mark.country ?? "",
+            postalCode: mark.postalCode ?? "",
+            address: .init(
+                administrativeArea: mark.administrativeArea ?? "",
+                locality: mark.locality ?? "",
+                thoroughfare: mark.thoroughfare ?? "",
+                subThoroughfare: mark.subThoroughfare ?? ""
+            ),
+            location: location.coordinate
+        )
     }
 }
 
