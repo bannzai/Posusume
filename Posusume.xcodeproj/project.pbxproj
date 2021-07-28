@@ -12,6 +12,8 @@
 		2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3626B18DA0007D3E82 /* FirebaseAuth */; };
 		2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */; };
 		2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */; };
+		204D305B26B191870005C964 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305A26B191870005C964 /* Apollo */; };
+		204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305C26B191870005C964 /* ApolloWebSocket */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
@@ -147,8 +149,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */,
+				204D305B26B191870005C964 /* Apollo in Frameworks */,
 				2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */,
 				2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */,
+				204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */,
 				2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				2004BA3326B18DA0007D3E82 /* FirebaseCrashlytics in Frameworks */,
 			);
@@ -450,6 +454,8 @@
 				2004BA3626B18DA0007D3E82 /* FirebaseAuth */,
 				2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */,
 				2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */,
+				204D305A26B191870005C964 /* Apollo */,
+				204D305C26B191870005C964 /* ApolloWebSocket */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
@@ -527,6 +533,7 @@
 			mainGroup = BAD9A8A32610B72F00676F22;
 			packageReferences = (
 				2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = BAD9A8AD2610B72F00676F22 /* Products */;
 			projectDirPath = "";
@@ -1010,6 +1017,14 @@
 				minimumVersion = 8.4.0;
 			};
 		};
+		204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios/";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.45.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1037,6 +1052,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		204D305A26B191870005C964 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		204D305C26B191870005C964 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
