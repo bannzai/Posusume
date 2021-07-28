@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 import ComposableArchitecture
 import MapKit
-import FirebaseFirestore
 
 struct SpotMapState: Equatable {
     var center: CLLocationCoordinate2D = defaultRegion.center
