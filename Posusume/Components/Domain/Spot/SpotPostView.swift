@@ -2,7 +2,6 @@ import SwiftUI
 import ComposableArchitecture
 import Combine
 import CoreLocation
-import FirebaseFirestore
 import PhotosUI
 import Photos
 import MapKit

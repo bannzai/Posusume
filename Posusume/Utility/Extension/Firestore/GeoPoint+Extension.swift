@@ -1,5 +1,4 @@
 import Foundation
-import FirebaseFirestore
 import CoreLocation
 
 private let latitudeOffset: CLLocationDegrees = 90
