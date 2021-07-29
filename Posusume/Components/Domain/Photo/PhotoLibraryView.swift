@@ -3,43 +3,7 @@ import UIKit
 import SwiftUI
 import PhotosUI
 import Photos
-import ComposableArchitecture
 import Combine
-
-struct PhotoLibraryState: Equatable {
-    var selectedImage: UIImage?
-    var result: PhotoLibraryResult?
-    var error: EquatableError?
-}
-
-enum PhotoLibraryAction: Equatable {
-    case selected(PhotoLibraryResult)
-    case selectError(EquatableError)
-    case end(PhotoLibraryResult)
-    case dismiss
-}
-
-struct PhotoLibraryEnvironment {
-    let me: Me
-    let photoLibrary: PhotoLibrary
-    let mainQueue: AnySchedulerOf<DispatchQueue>
-    let pickerConfiguration: PHPickerConfiguration
-}
-
-let photoLibraryReducer: Reducer<PhotoLibraryState, PhotoLibraryAction, PhotoLibraryEnvironment> = .init { state, action, environment in
-    switch action {
-    case let .selected(selectedResult):
-        state.result = selectedResult
-        return Effect(value: .end(selectedResult))
-    case let .selectError(error):
-        state.error = error
-        return .none
-    case .end:
-        return .none
-    case .dismiss:
-        return .none
-    }
-}
 
 struct PhotoLibraryView: UIViewControllerRepresentable {
     let pickerConfiguration: PHPickerConfiguration
@@ -90,27 +54,6 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
                 }, receiveValue: { [weak self] (result) in
                     self?.parent.success(result)
                 })
-        }
-    }
-}
-
-struct PhotoLibraryViewConnector: View {
-    let store: Store<PhotoLibraryState, PhotoLibraryAction>
-    var body: some View {
-        WithViewStore(store) { viewStore in
-            PhotoLibraryView(
-                pickerConfiguration: sharedPhotoLibraryConfiguration,
-                photoLibrary: photoLibrary,
-                success: { value in
-                    viewStore.send(.selected(value))
-                },
-                failure: { error in
-                    viewStore.send(.selectError(.init(error: error)))
-                },
-                dismiss: {
-                    viewStore.send(.dismiss)
-                }
-            )
         }
     }
 }

@@ -1,31 +1,8 @@
 import Foundation
 import UIKit
 import SwiftUI
-import ComposableArchitecture
 import Combine
 import CoreLocation
-
-struct PhotoCameraState: Equatable {
-    var capturedImage: UIImage?
-    var error: EquatableError?
-}
-
-enum PhotoCameraAction: Equatable {
-    case captured(UIImage)
-}
-
-struct PhotoCameraEnvironment {
-    let me: Me
-    let mainQueue: AnySchedulerOf<DispatchQueue>
-}
-
-let photoCameraReducer: Reducer<PhotoCameraState, PhotoCameraAction, PhotoCameraEnvironment> = .init { state, action, environment in
-    switch action {
-    case let .captured(image):
-        state.capturedImage = image
-        return .none
-    }
-}
 
 struct PhotoCameraView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
@@ -68,19 +45,6 @@ struct PhotoCameraView: UIViewControllerRepresentable {
             }
             parent.captured(image)
             parent.presentationMode.wrappedValue.dismiss()
-        }
-    }
-}
-
-struct PhotoCameraViewConnector: View {
-    let store: Store<PhotoCameraState, PhotoCameraAction>
-    var body: some View {
-        WithViewStore(store) { viewStore in
-            PhotoCameraView(
-                captured: { value in
-                    viewStore.send(.captured(value))
-                }
-            )
         }
     }
 }
