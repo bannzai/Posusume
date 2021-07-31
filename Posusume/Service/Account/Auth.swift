@@ -3,6 +3,7 @@ import FirebaseAuth
 import Combine
 
 protocol Auth {
+    func fetch() -> Me?
     func signInAnonymously() -> AnyPublisher<Me, Error>
 }
 
@@ -30,6 +31,10 @@ fileprivate class _Auth: Auth {
         }.eraseToAnyPublisher()
     }
     
+    func fetch() -> Me? {
+        me
+    }
+
     // MARK: - Private
     private enum StoreKey {
         static let firebaseUserID: String = "firebaseUserID"
