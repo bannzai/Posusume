@@ -14,6 +14,7 @@
 		2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */; };
 		204D305B26B191870005C964 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305A26B191870005C964 /* Apollo */; };
 		204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305C26B191870005C964 /* ApolloWebSocket */; };
+		20CEA51626B4CC1F0032BBD1 /* LoginEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CEA51526B4CC1F0032BBD1 /* LoginEnvironment.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20CEA51526B4CC1F0032BBD1 /* LoginEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEnvironment.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E6E2625E15D000DA60F /* MockAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuth.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			children = (
 				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA249E742625E217000DA60F /* Me.swift */,
+				20CEA51526B4CC1F0032BBD1 /* LoginEnvironment.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
+				20CEA51626B4CC1F0032BBD1 /* LoginEnvironment.swift in Sources */,
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,

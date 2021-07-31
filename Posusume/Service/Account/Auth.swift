@@ -3,18 +3,14 @@ import FirebaseAuth
 import Combine
 
 protocol Auth {
-    func auth() -> AnyPublisher<Me, Error>
+    func signInAnonymously() -> AnyPublisher<Me, Error>
 }
 
-protocol Authorized {
-    func authorized() -> Me
-}
-
-fileprivate class _Auth: Auth, Authorized {
+fileprivate class _Auth: Auth {
     var me: Me?
     init() { }
     
-    func auth() -> AnyPublisher<Me, Error> {
+    func signInAnonymously() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
                 if let error = error {
@@ -34,10 +30,6 @@ fileprivate class _Auth: Auth, Authorized {
         }.eraseToAnyPublisher()
     }
     
-    func authorized() -> Me {
-        me!
-    }
-
     // MARK: - Private
     private enum StoreKey {
         static let firebaseUserID: String = "firebaseUserID"
@@ -52,4 +44,3 @@ fileprivate class _Auth: Auth, Authorized {
 
 private var _auth = _Auth()
 internal var auth: Auth { _auth }
-internal var authorized: Authorized { _auth }
