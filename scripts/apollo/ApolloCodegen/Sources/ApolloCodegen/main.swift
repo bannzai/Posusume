@@ -1,6 +1,6 @@
 import Foundation
 
-print("Launched ApolloCodegen process... 🥚")
+print("Launched ApolloCodegen process...")
 
 let cwd = URL(string: "file://\(FileManager.default.currentDirectoryPath)")!
 print("cwd: ", cwd)
@@ -8,6 +8,12 @@ let cliPath = cwd.appendingPathComponent("ApolloCLI")
 print("ApolloCodegen CLI binary path of \(cliPath.absoluteString)")
 let schemaPath = cwd.appendingPathComponent("schema.json")
 print("ApolloCodegen will download and use schema path of \(schemaPath.absoluteString)")
+let appPath = cwd // ApolloCodegen
+    .deletingLastPathComponent() // apollo
+    .deletingLastPathComponent() // scripts
+    .deletingLastPathComponent() // Posusume
+
+print("Defined application path: \(appPath)")
 
 do {
     print("Begin downloadSchema...")
@@ -25,4 +31,4 @@ do {
 }
 
 print("End codegen")
-print("End ApolloCodegen 🐣")
+print("End ApolloCodegen")
