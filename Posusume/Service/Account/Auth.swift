@@ -2,15 +2,9 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-protocol Auth {
-    var me: Me? { get }
-    func signInAnonymously() -> AnyPublisher<Me, Error>
-}
+class AuthViewModel: ObservableObject {
+    @Published var me: Me?
 
-fileprivate class _Auth: Auth {
-    var me: Me?
-    init() { }
-    
     func signInAnonymously() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
@@ -43,5 +37,4 @@ fileprivate class _Auth: Auth {
     }
 }
 
-private var _auth = _Auth()
-internal var auth: Auth { _auth }
+

@@ -3,23 +3,16 @@ import MapKit
 import Combine
 
 struct RootView: View {
-    @ViewBuilder public var body: some View {
-        EmptyView()
+    @StateObject private var auth = AuthViewModel()
+
+    var body: some View {
         if let me = auth.me {
             SpotMapView()
                 .environment(\.me, me)
         } else {
             LoginView()
+                .environmentObject(auth)
         }
-//        IfLetStore(self.store.scope(state: { $0.login }, action: RootAction.login)) { store in
-//            LoginView(store: store)
-//        }
-//        .edgesIgnoringSafeArea(.all)
-//
-//        IfLetStore(self.store.scope(state: { $0.spots }, action: RootAction.spots)) { store in
-//            SpotMapView(store: store)
-//        }
-//        .edgesIgnoringSafeArea(.all)
     }
 }
 

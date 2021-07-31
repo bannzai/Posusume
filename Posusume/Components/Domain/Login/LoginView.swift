@@ -3,12 +3,16 @@ import MapKit
 import Combine
 
 struct LoginView: View {
+    @EnvironmentObject private var auth: AuthViewModel
     @State var region: MKCoordinateRegion = defaultRegion
+
     var body: some View {
         // NOTE: Currently Posusume provided only anonymous login. It means about LoginView only keep empty map view until authorized
         Map(coordinateRegion: $region)
-            .onAppear(perform: { /* TODO: */ })
-        
+            .onAppear(perform: {
+                _ = auth.signInAnonymously()
+            })
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

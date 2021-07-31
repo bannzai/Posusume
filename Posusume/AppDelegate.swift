@@ -6,7 +6,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         setupAppearance()
         if !isPreview {
             setupFirebase()
-            _ = auth.signInAnonymously()
         }
         return true
     }
