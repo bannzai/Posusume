@@ -10,11 +10,11 @@ struct Me: Identifiable, Equatable {
 }
 
 struct MeEnvironmentKey: EnvironmentKey {
-    static var defaultValue: Me { auth.me! }
+    static var defaultValue: Me?
 }
 
 extension EnvironmentValues {
-    var me: Me {
+    var me: Me! {
         get {
             self[MeEnvironmentKey.self]
         }
