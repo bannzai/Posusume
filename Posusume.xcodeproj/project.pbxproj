@@ -269,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				BA26C8642621A03D006555AE /* Utility */,
-				BADF530A261D308C00431FEB /* State */,
 				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
@@ -314,9 +313,9 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				BADF530A261D308C00431FEB /* Account */,
 				BA906C3D26410EFD00ACE02F /* Location */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
-				BA979CAF26140A4600997206 /* Auth.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -343,12 +342,13 @@
 			path = Spot;
 			sourceTree = "<group>";
 		};
-		BADF530A261D308C00431FEB /* State */ = {
+		BADF530A261D308C00431FEB /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA249E742625E217000DA60F /* Me.swift */,
 			);
-			path = State;
+			path = Account;
 			sourceTree = "<group>";
 		};
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
