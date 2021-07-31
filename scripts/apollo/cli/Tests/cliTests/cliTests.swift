@@ -1,7 +1,7 @@
 import XCTest
 import class Foundation.Bundle
 
-final class apolloTests: XCTestCase {
+final class cliTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
@@ -15,7 +15,7 @@ final class apolloTests: XCTestCase {
         // Mac Catalyst won't have `Process`, but it is supported for executables.
         #if !targetEnvironment(macCatalyst)
 
-        let fooBinary = productsDirectory.appendingPathComponent("apollo")
+        let fooBinary = productsDirectory.appendingPathComponent("cli")
 
         let process = Process()
         process.executableURL = fooBinary
