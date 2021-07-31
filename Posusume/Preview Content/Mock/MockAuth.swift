@@ -2,7 +2,7 @@ import Combine
 
 #if DEBUG
 struct MockAuth: Auth {
-    func fetch() -> Me? {
+    var me: Me? {
         .init(id: .init(rawValue: "1"))
     }
     func signInAnonymously() -> AnyPublisher<Me, Error> {

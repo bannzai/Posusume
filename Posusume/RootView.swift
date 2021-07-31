@@ -5,6 +5,12 @@ import Combine
 struct RootView: View {
     @ViewBuilder public var body: some View {
         EmptyView()
+        if let me = auth.me {
+            SpotMapView()
+                .environment(\.me, me)
+        } else {
+            LoginView()
+        }
 //        IfLetStore(self.store.scope(state: { $0.login }, action: RootAction.login)) { store in
 //            LoginView(store: store)
 //        }

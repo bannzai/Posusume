@@ -1,3 +1,4 @@
+import SwiftUI
 import Foundation
 
 struct Me: Identifiable, Equatable {
@@ -7,3 +8,19 @@ struct Me: Identifiable, Equatable {
         let rawValue: String
     }
 }
+
+struct MeEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Me { auth.me! }
+}
+
+extension EnvironmentValues {
+    var me: Me {
+        get {
+            self[MeEnvironmentKey.self]
+        }
+        set {
+            self[MeEnvironmentKey.self] = newValue
+        }
+    }
+}
+
