@@ -1,4 +1,4 @@
-query Spots($location: point) {
+query Spots($location: geometry!) {
   Spot_connection(first: 20, where: {location: {_eq: $location}}) {
     edges {
       node {
