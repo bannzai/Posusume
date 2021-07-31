@@ -8,7 +8,7 @@ public final class SpotsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query Spots($location: point) {
+    query Spots($location: geometry!) {
       Spot_connection(first: 20, where: {location: {_eq: $location}}) {
         __typename
         edges {
@@ -24,9 +24,9 @@ public final class SpotsQuery: GraphQLQuery {
 
   public let operationName: String = "Spots"
 
-  public var location: point?
+  public var location: geometry
 
-  public init(location: point? = nil) {
+  public init(location: geometry) {
     self.location = location
   }
 
