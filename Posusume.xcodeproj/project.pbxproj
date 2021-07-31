@@ -14,6 +14,10 @@
 		2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */; };
 		204D305B26B191870005C964 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305A26B191870005C964 /* Apollo */; };
 		204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305C26B191870005C964 /* ApolloWebSocket */; };
+		2067175526B5852200C85A25 /* spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* spots.graphql.swift */; };
+		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
+		2067175926B59C0200C85A25 /* geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175826B59C0200C85A25 /* geometry.swift */; };
+		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		20CEA51926B4D18E0032BBD1 /* QueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CEA51826B4D18E0032BBD1 /* QueryViewModel.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
@@ -82,6 +86,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2067175326B5852100C85A25 /* spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spots.graphql.swift; sourceTree = "<group>"; };
+		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		2067175826B59C0200C85A25 /* geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geometry.swift; sourceTree = "<group>"; };
+		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		20CEA51826B4D18E0032BBD1 /* QueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryViewModel.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
@@ -157,6 +165,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2067175226B5852100C85A25 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				2067175726B59BFB00C85A25 /* Scalar */,
+				2067175326B5852100C85A25 /* spots.graphql.swift */,
+				2067175426B5852100C85A25 /* Types.graphql.swift */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		2067175726B59BFB00C85A25 /* Scalar */ = {
+			isa = PBXGroup;
+			children = (
+				2067175826B59C0200C85A25 /* geometry.swift */,
+				2067175C26B5A32F00C85A25 /* Scalar.swift */,
+			);
+			path = Scalar;
+			sourceTree = "<group>";
+		};
 		20CEA51326B4CB800032BBD1 /* StdLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +302,7 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
+				2067175226B5852100C85A25 /* GraphQL */,
 				20CEA51726B4D18A0032BBD1 /* API */,
 				BA26C8642621A03D006555AE /* Utility */,
 				BADF52FC261D2FE300431FEB /* Service */,
@@ -608,12 +636,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2067175526B5852200C85A25 /* spots.graphql.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
+				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
@@ -625,8 +655,10 @@
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
+				2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
+				2067175926B59C0200C85A25 /* geometry.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
