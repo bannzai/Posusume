@@ -10,12 +10,12 @@ let schemaPath = cwd.appendingPathComponent("schema.json")
 print("ApolloCodegen will download and use schema path of \(schemaPath.absoluteString)")
 
 do {
-    print("Begin introspection...")
-    try introspection()
+    print("Begin downloadSchema...")
+    try downloadSchema()
 } catch {
-    fatalError("introspection failed. details: \(error))")
+    fatalError("downloadSchema failed. details: \(error))")
 }
-print("End introspection")
+print("End downloadSchema")
 
 do {
     print("Begin codegen...")
