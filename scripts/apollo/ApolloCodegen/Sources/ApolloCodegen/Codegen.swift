@@ -8,7 +8,7 @@ func codegen() throws {
         options: ApolloCodegenOptions(
             includes: "schemas/graphql/*.graphql",
             namespace: nil,
-            outputFormat: .multipleFiles(inFolderAtURL: appPath.appendingPathComponent("GraphQL")),
+            outputFormat: .multipleFiles(inFolderAtURL: appPath.appendingPathComponent("Posusume/GraphQL")),
             customScalarFormat: .passthrough,
             urlToSchemaFile: schemaPath
         )
