@@ -1,0 +1,10 @@
+query Spots($location: point) {
+  Spot_connection(first: 20, where: {location: {_eq: $location}}) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+
