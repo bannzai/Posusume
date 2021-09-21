@@ -4,8 +4,9 @@ import ApolloSQLite
 
 public final class AppApolloClient {
     public static let shared = AppApolloClient()
-    private lazy var interceptorProvider = AppApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
     private init() { }
+    
+    private lazy var interceptorProvider = AppApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
 
     private let store: ApolloStore = {
         let documentsURL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
