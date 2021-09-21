@@ -8,7 +8,16 @@ public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
         request: HTTPRequest<Operation>,
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-        Auth.auth().currentUser?.getIDToken(completion: { idToken, error in
+        guard let currentUser = Auth.auth().currentUser else {
+            chain.proceedAsync(
+                request: request,
+                response: response,
+                completion: completion
+            )
+            return
+        }
+
+        currentUser.getIDToken(completion: { idToken, error in
             if let error = error {
                 if let errorCode = AuthErrorCode(rawValue: error._code), let appError = mapped(for: errorCode, error: error) {
                     if case .unstableNetwork = appError {
