@@ -19,7 +19,7 @@
 		2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4826FA10FC009001C7 /* ApolloSQLite */; };
 		2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4A26FA10FC009001C7 /* ApolloWebSocket */; };
 		2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4C26FA11CB009001C7 /* Plist.swift */; };
-		2005EE4F26FA7D59009001C7 /* FirebaseAuthCommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4E26FA7D59009001C7 /* FirebaseAuthCommonError.swift */; };
+		2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */; };
 		2067175526B5852200C85A25 /* spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175926B59C0200C85A25 /* geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175826B59C0200C85A25 /* geometry.swift */; };
@@ -96,7 +96,7 @@
 		2005EE4026FA0A37009001C7 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
 		2005EE4C26FA11CB009001C7 /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
-		2005EE4E26FA7D59009001C7 /* FirebaseAuthCommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthCommonError.swift; sourceTree = "<group>"; };
+		2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorMappers.swift; sourceTree = "<group>"; };
 		2067175326B5852100C85A25 /* spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175826B59C0200C85A25 /* geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geometry.swift; sourceTree = "<group>"; };
@@ -189,11 +189,21 @@
 		2005EE4226FA0A41009001C7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2005EE5026FA825A009001C7 /* Error */,
+				BA979CAF26140A4600997206 /* Auth.swift */,
 				BA249E742625E217000DA60F /* Me.swift */,
-				2005EE4026FA0A37009001C7 /* AppError.swift */,
 				2005EE4C26FA11CB009001C7 /* Plist.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		2005EE5026FA825A009001C7 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2005EE4026FA0A37009001C7 /* AppError.swift */,
+				2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		2067175226B5852100C85A25 /* GraphQL */ = {
@@ -334,7 +344,6 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
-				BADF530A261D308C00431FEB /* Auth */,
 				2005EE4226FA0A41009001C7 /* Core */,
 				2067175226B5852100C85A25 /* GraphQL */,
 				20CEA51726B4D18A0032BBD1 /* API */,
@@ -409,15 +418,6 @@
 				BA317302262A6DDE00E1212C /* SpotPostView.swift */,
 			);
 			path = Spot;
-			sourceTree = "<group>";
-		};
-		BADF530A261D308C00431FEB /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				BA979CAF26140A4600997206 /* Auth.swift */,
-				2005EE4E26FA7D59009001C7 /* FirebaseAuthCommonError.swift */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
@@ -672,7 +672,7 @@
 			files = (
 				2067175526B5852200C85A25 /* spots.graphql.swift in Sources */,
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
-				2005EE4F26FA7D59009001C7 /* FirebaseAuthCommonError.swift in Sources */,
+				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
