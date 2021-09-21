@@ -4,7 +4,7 @@ import MapKit
 
 struct SpotMapView: View {
     var body: some View {
-        EmptyView()
+        Text("Hello, world")
 //        WithViewStore(store) { viewStore in
 //            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
 //                Map(
