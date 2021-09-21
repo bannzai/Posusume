@@ -6,6 +6,7 @@ public enum AppError: Error, LocalizedError {
     case unstableNetwork
     case fatal
     case support(error: Error, code: Int, domain: String, userInfo: [String: Any])
+    case unexpected(error: Error)
 
     public var errorDescription: String? {
         switch self {
@@ -25,6 +26,8 @@ public enum AppError: Error, LocalizedError {
                     domain: \(domain)
                     userInfo: \(userInfo)
                     """
+        case let .unexpected(error):
+            return error.localizedDescription
         }
     }
 }

@@ -2,14 +2,14 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-class AuthViewModel: ObservableObject {
-    @Published var me: Me?
+public final class AuthViewModel: ObservableObject {
+    @Published public private(set) var me: Me?
 
-    func signInAnonymously() -> AnyPublisher<Me, Error> {
+    public func signInAnonymously() -> AnyPublisher<Me, Error> {
         Future { promise in
             FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
                 if let error = error {
-                    promise(.failure(error))
+                    promise(.failure(mappedAppError(from: error)))
                     return
                 }
                 guard let result = result else {

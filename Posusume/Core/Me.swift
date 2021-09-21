@@ -1,19 +1,22 @@
 import SwiftUI
 import Foundation
 
-struct Me: Identifiable, Equatable {
-    let id: ID
+public struct Me: Identifiable, Equatable {
+    public let id: ID
 
-    struct ID: RawRepresentable, Equatable, Hashable {
-        let rawValue: String
+    public struct ID: RawRepresentable, Equatable, Hashable {
+        public let rawValue: String
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
     }
 }
 
-struct MeEnvironmentKey: EnvironmentKey {
-    static var defaultValue: Me?
+public struct MeEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: Me?
 }
 
-extension EnvironmentValues {
+public extension EnvironmentValues {
     var me: Me! {
         get {
             self[MeEnvironmentKey.self]
