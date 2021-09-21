@@ -12,13 +12,18 @@
 		2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3626B18DA0007D3E82 /* FirebaseAuth */; };
 		2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */; };
 		2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */; };
-		204D305B26B191870005C964 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305A26B191870005C964 /* Apollo */; };
-		204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 204D305C26B191870005C964 /* ApolloWebSocket */; };
+		2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */; };
+		2005EE4126FA0A37009001C7 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4026FA0A37009001C7 /* AppError.swift */; };
+		2005EE4426FA0C43009001C7 /* RequestLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */; };
+		2005EE4726FA10FC009001C7 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4626FA10FC009001C7 /* Apollo */; };
+		2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4826FA10FC009001C7 /* ApolloSQLite */; };
+		2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4A26FA10FC009001C7 /* ApolloWebSocket */; };
+		2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4C26FA11CB009001C7 /* Plist.swift */; };
 		2067175526B5852200C85A25 /* spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175926B59C0200C85A25 /* geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175826B59C0200C85A25 /* geometry.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
-		20CEA51926B4D18E0032BBD1 /* QueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CEA51826B4D18E0032BBD1 /* QueryViewModel.swift */; };
+		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
 		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
@@ -86,11 +91,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationHeaderAddingInterceptor.swift; sourceTree = "<group>"; };
+		2005EE4026FA0A37009001C7 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
+		2005EE4C26FA11CB009001C7 /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		2067175326B5852100C85A25 /* spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175826B59C0200C85A25 /* geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geometry.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
-		20CEA51826B4D18E0032BBD1 /* QueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryViewModel.swift; sourceTree = "<group>"; };
+		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
@@ -139,10 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */,
-				204D305B26B191870005C964 /* Apollo in Frameworks */,
+				2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */,
+				2005EE4726FA10FC009001C7 /* Apollo in Frameworks */,
 				2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */,
 				2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */,
-				204D305D26B191870005C964 /* ApolloWebSocket in Frameworks */,
+				2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */,
 				2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				2004BA3326B18DA0007D3E82 /* FirebaseCrashlytics in Frameworks */,
 			);
@@ -165,6 +175,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2005EE3C26F9D416009001C7 /* Interceptors */ = {
+			isa = PBXGroup;
+			children = (
+				2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */,
+				2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */,
+			);
+			path = Interceptors;
+			sourceTree = "<group>";
+		};
+		2005EE4226FA0A41009001C7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2005EE4026FA0A37009001C7 /* AppError.swift */,
+				2005EE4C26FA11CB009001C7 /* Plist.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		2067175226B5852100C85A25 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,7 +223,8 @@
 		20CEA51726B4D18A0032BBD1 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				20CEA51826B4D18E0032BBD1 /* QueryViewModel.swift */,
+				2005EE3C26F9D416009001C7 /* Interceptors */,
+				2067175E26B641F100C85A25 /* APIClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -302,6 +331,7 @@
 		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
 			isa = PBXGroup;
 			children = (
+				2005EE4226FA0A41009001C7 /* Core */,
 				2067175226B5852100C85A25 /* GraphQL */,
 				20CEA51726B4D18A0032BBD1 /* API */,
 				BA26C8642621A03D006555AE /* Utility */,
@@ -447,8 +477,9 @@
 				2004BA3626B18DA0007D3E82 /* FirebaseAuth */,
 				2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */,
 				2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */,
-				204D305A26B191870005C964 /* Apollo */,
-				204D305C26B191870005C964 /* ApolloWebSocket */,
+				2005EE4626FA10FC009001C7 /* Apollo */,
+				2005EE4826FA10FC009001C7 /* ApolloSQLite */,
+				2005EE4A26FA10FC009001C7 /* ApolloWebSocket */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
@@ -526,7 +557,7 @@
 			mainGroup = BAD9A8A32610B72F00676F22;
 			packageReferences = (
 				2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = BAD9A8AD2610B72F00676F22 /* Products */;
 			projectDirPath = "";
@@ -637,12 +668,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2067175526B5852200C85A25 /* spots.graphql.swift in Sources */,
+				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
+				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
+				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
 				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
@@ -654,6 +688,7 @@
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
+				2005EE4426FA0C43009001C7 /* RequestLoggingInterceptor.swift in Sources */,
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
 				2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
@@ -664,10 +699,10 @@
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
-				20CEA51926B4D18E0032BBD1 /* QueryViewModel.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
+				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
 				BA619FB326414493003713A4 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1005,12 +1040,12 @@
 				minimumVersion = 8.4.0;
 			};
 		};
-		204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+		2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apollographql/apollo-ios/";
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.45.0;
+				minimumVersion = 0.48.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1041,14 +1076,19 @@
 			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
 		};
-		204D305A26B191870005C964 /* Apollo */ = {
+		2005EE4626FA10FC009001C7 /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
 		};
-		204D305C26B191870005C964 /* ApolloWebSocket */ = {
+		2005EE4826FA10FC009001C7 /* ApolloSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 204D305926B191870005C964 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloSQLite;
+		};
+		2005EE4A26FA10FC009001C7 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = ApolloWebSocket;
 		};
 /* End XCSwiftPackageProductDependency section */
