@@ -5,7 +5,7 @@ import ApolloSQLite
 public final class AppApolloClient {
     public static let shared = AppApolloClient()
     private init() { }
-    
+
     private lazy var interceptorProvider = AppApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
 
     private let store: ApolloStore = {
@@ -16,7 +16,6 @@ public final class AppApolloClient {
 
     private lazy var apollo: ApolloClient = {
         let endpointURL = URL(string: Plist.shared[.apiEndPoint])!
-            .appendingPathComponent("graphql")
 
         let networkTransport = RequestChainNetworkTransport(
             interceptorProvider: interceptorProvider,
