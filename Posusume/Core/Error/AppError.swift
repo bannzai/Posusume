@@ -27,7 +27,7 @@ public enum AppError: Error, LocalizedError {
                     userInfo: \(userInfo)
                     """
         case let .unexpected(error):
-            return error.localizedDescription
+            return "予期せぬエラーが発生しました。\(error.localizedDescription)"
         }
     }
 }
