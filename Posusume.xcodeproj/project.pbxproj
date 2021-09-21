@@ -187,6 +187,7 @@
 		2005EE4226FA0A41009001C7 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BA249E742625E217000DA60F /* Me.swift */,
 				2005EE4026FA0A37009001C7 /* AppError.swift */,
 				2005EE4C26FA11CB009001C7 /* Plist.swift */,
 			);
@@ -412,7 +413,6 @@
 			isa = PBXGroup;
 			children = (
 				BA979CAF26140A4600997206 /* Auth.swift */,
-				BA249E742625E217000DA60F /* Me.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
