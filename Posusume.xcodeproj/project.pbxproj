@@ -236,6 +236,7 @@
 		20CEA51726B4D18A0032BBD1 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				2067175226B5852100C85A25 /* GraphQL */,
 				2005EE3C26F9D416009001C7 /* Interceptors */,
 				2067175E26B641F100C85A25 /* APIClient.swift */,
 			);
@@ -345,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				2005EE4226FA0A41009001C7 /* Core */,
-				2067175226B5852100C85A25 /* GraphQL */,
 				20CEA51726B4D18A0032BBD1 /* API */,
 				BA26C8642621A03D006555AE /* Utility */,
 				BADF52FC261D2FE300431FEB /* Service */,
