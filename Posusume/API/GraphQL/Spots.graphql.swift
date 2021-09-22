@@ -15,6 +15,7 @@ public final class SpotsQuery: GraphQLQuery {
         spots {
           __typename
           id
+          title
         }
       }
     }
@@ -108,6 +109,7 @@ public final class SpotsQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+            GraphQLField("title", type: .nonNull(.scalar(String.self))),
           ]
         }
 
@@ -117,8 +119,8 @@ public final class SpotsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: GraphQLID) {
-          self.init(unsafeResultMap: ["__typename": "Spot", "id": id])
+        public init(id: GraphQLID, title: String) {
+          self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "title": title])
         }
 
         public var __typename: String {
@@ -136,6 +138,15 @@ public final class SpotsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        public var title: String {
+          get {
+            return resultMap["title"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "title")
           }
         }
       }

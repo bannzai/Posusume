@@ -3,6 +3,7 @@ query Spots {
     id
     spots {
       id
+      title
     }
   }
 }

@@ -2,68 +2,60 @@ import SwiftUI
 import Combine
 import MapKit
 
+extension SpotsQuery.Data.Me.Spot: Identifiable {
+    var coordinate: CLLocationCoordinate2D {
+        .init()
+    }
+}
+
 struct SpotMapView: View {
+    @State var region: MKCoordinateRegion = defaultRegion
+    @State var spots: [SpotsQuery.Data.Me.Spot] = []
+    @State var isAddSpotPresented = false;
+
     var body: some View {
-        Text("Hello, world")
-//        WithViewStore(store) { viewStore in
-//            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-//                Map(
-//                    coordinateRegion: viewStore.binding(
-//                        get: \.region,
-//                        send: { .regionChange(center: $0.center, span: .init(span: $0.span)) }
-//                    ),
-//                    showsUserLocation: true,
-//                    annotationItems: viewStore.state.spots,
-//                    annotationContent: { spot in
-//                        MapAnnotation(coordinate: spot.coordinate) {
-//                            Text(spot.title)
-//                        }
-//                    }
-//                )
-//
-//                VStack(spacing: -32) {
-//                    HStack {
-//                        Spacer()
-//                        Button {
-//                            viewStore.send(.presentSpotPost(nil))
-//                        } label: {
-//                            Image("addSpot")
-//                                .frame(width: 64, height: 64, alignment: .center)
-//                                .background(GradientColor.lower)
-//                                .clipShape(Circle())
-//                        }
-//                    }
-//                    .padding(.trailing, 20)
-//
-//                    ZStack {
-//                        BarnBottomSheet()
-//                        SpotList(
-//                            state: viewStore.state.spotListState
-//                        )
-//                        .frame(alignment: .bottom)
-//                        .padding()
-//                    }
-//                    .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
-//                }
-//            }
-//            .onAppear { viewStore.send(.fetch) }
-//            .sheet(
-//                isPresented: viewStore.binding(
-//                    get: \.isPresentedSpotPostPage,
-//                    send: { .spotPostPresentationDidChanged($0) }
-//                ),
-//                content: {
-//                    IfLetStore(
-//                        store.scope(
-//                            state: \.spotPost,
-//                            action: {
-//                                .spotPostAction($0)
-//                            }
-//                        ),
-//                        then: SpotPostView.init(store:))
-//                }
-//            )
-//        }
+        ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
+            Map(
+                coordinateRegion: $region,
+                showsUserLocation: true,
+                annotationItems: spots,
+                annotationContent: { spot in
+                    MapAnnotation(coordinate: spot.coordinate) {
+                        Text(spot.title)
+                    }
+                }
+            )
+
+            VStack(spacing: -32) {
+                HStack(alignment: .bottom) {
+                    Spacer()
+                    Button {
+                        isAddSpotPresented = true
+                    } label: {
+                        Image("addSpot")
+                            .frame(width: 64, height: 64, alignment: .center)
+                            .background(GradientColor.lower)
+                            .clipShape(Circle())
+                    }
+                }
+                .padding(.trailing, 20)
+
+                ZStack {
+                    BarnBottomSheet()
+                    SpotList()
+                    .frame(alignment: .bottom)
+                    .padding()
+                }
+                .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
+            }
+        }
+        .sheet(
+            isPresented: $isAddSpotPresented,
+            content: {
+                SpotPostView()
+            }
+        )
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
