@@ -2,12 +2,7 @@
 
 echo 'Start `Apollo`'
 
-echo "Print current working directory"
-cd `dirname $0`
-cd ApolloCodegen
-pwd
+SCRIPT_DIR="$(cd `dirname $0` && pwd -P)"
 
-xcrun -sdk macosx swift run ApolloCodegen 
-
-cd -
+xcrun -sdk macosx swift run $SCRIPT_DIR/ApolloCodegen 
 
