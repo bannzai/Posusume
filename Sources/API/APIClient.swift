@@ -15,7 +15,7 @@ public final class AppApolloClient {
     }()
 
     private lazy var apollo: ApolloClient = {
-        let endpointURL = URL(string: Plist.shared[.apiEndPoint])!
+        let endpointURL = URL(string: Secret.apiEndpoint)!
 
         let networkTransport = RequestChainNetworkTransport(
             interceptorProvider: interceptorProvider,
