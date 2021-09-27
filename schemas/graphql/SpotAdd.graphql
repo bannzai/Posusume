@@ -1,0 +1,7 @@
+mutation SpotAdd($spotAddInput: SpotAddInput!, $spotAddFile: Upload!) {
+  spotAdd(input: $spotAddInput, file: $spotAddFile) {
+    spot {
+       id
+    }
+  }
+}

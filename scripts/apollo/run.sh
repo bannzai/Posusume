@@ -4,5 +4,7 @@ echo 'Start `Apollo`'
 
 SCRIPT_DIR="$(cd `dirname $0` && pwd -P)"
 
-xcrun -sdk macosx swift run $SCRIPT_DIR/ApolloCodegen 
-
+# ApolloCodegen uses relative paths. So, move the path
+cd $SCRIPT_DIR
+xcrun -sdk macosx swift run ApolloCodegen 
+cd -
