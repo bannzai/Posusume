@@ -1,4 +1,7 @@
 import Foundation
+import Apollo
+import CoreLocation
 
-/// Scalar is a provided name space for GraphQL custome scalar types
-public enum Scalar { }
+// MARK: - Latitude, Longitude
+public typealias Latitude = CLLocationDegrees
+public typealias Longitude = CLLocationDegrees
