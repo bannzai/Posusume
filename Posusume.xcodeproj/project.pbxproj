@@ -227,12 +227,12 @@
 			path = Scalar;
 			sourceTree = "<group>";
 		};
-		20A09D192701F25B0090E22F /* PropertyWrapper */ = {
+		20A09D192701F25B0090E22F /* ObservableObject */ = {
 			isa = PBXGroup;
 			children = (
 				20A09D1A2701F2640090E22F /* Query.swift */,
 			);
-			path = PropertyWrapper;
+			path = ObservableObject;
 			sourceTree = "<group>";
 		};
 		20CEA51326B4CB800032BBD1 /* StdLib */ = {
@@ -246,7 +246,7 @@
 		20CEA51726B4D18A0032BBD1 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				20A09D192701F25B0090E22F /* PropertyWrapper */,
+				20A09D192701F25B0090E22F /* ObservableObject */,
 				2067175226B5852100C85A25 /* GraphQL */,
 				2005EE3C26F9D416009001C7 /* Interceptors */,
 				2067175E26B641F100C85A25 /* APIClient.swift */,

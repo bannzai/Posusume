@@ -14,21 +14,6 @@ public final class AppApolloClient {
         return .init(cache: cache)
     }()
 
-    private lazy var apollo: ApolloClient = {
-        let endpointURL = URL(string: Secret.apiEndpoint)!
-
-        let networkTransport = RequestChainNetworkTransport(
-            interceptorProvider: interceptorProvider,
-            endpointURL: endpointURL,
-            additionalHeaders: headers
-        )
-
-        let client = Apollo.ApolloClient(networkTransport: networkTransport, store: store)
-        client.cacheKeyForObject = { $0["id"] }
-
-        return client
-    }()
-
     private var headers: [String: String] {
         var headers: [String: String] = [:]
         if let semanticVersion = Plist.shared[.semanticVersion] {
@@ -42,6 +27,21 @@ public final class AppApolloClient {
         }
         return headers
     }
+
+    public lazy var apollo: ApolloClient = {
+        let endpointURL = URL(string: Secret.apiEndpoint)!
+
+        let networkTransport = RequestChainNetworkTransport(
+            interceptorProvider: interceptorProvider,
+            endpointURL: endpointURL,
+            additionalHeaders: headers
+        )
+
+        let client = Apollo.ApolloClient(networkTransport: networkTransport, store: store)
+        client.cacheKeyForObject = { $0["id"] }
+
+        return client
+    }()
 }
 
 /// See also apollo-ios DefaultInterceptorProvider
