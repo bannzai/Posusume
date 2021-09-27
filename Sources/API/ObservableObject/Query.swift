@@ -4,8 +4,8 @@ import Combine
 import SwiftUI
 
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
-    @Published internal var data: Query.Data?
-    @Published internal var error: Error?
+    @Published public private(set) var data: Query.Data?
+    @Published public private(set) var error: Error?
     public func fetch(query: Query, cachePolicy: CachePolicy) {
         AppApolloClient.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { [weak self] result in
             do {
