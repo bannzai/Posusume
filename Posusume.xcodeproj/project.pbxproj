@@ -26,6 +26,7 @@
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
 		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
+		20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1C2702186F0090E22F /* InterceptorProvider.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
 		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
@@ -104,6 +105,7 @@
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		20A09D1A2701F2640090E22F /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		20A09D1C2702186F0090E22F /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */,
 				2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */,
+				20A09D1C2702186F0090E22F /* InterceptorProvider.swift */,
 			);
 			path = Interceptors;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
+				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
