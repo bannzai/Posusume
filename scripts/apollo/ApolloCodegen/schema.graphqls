@@ -1,0 +1,71 @@
+scalar Upload
+
+scalar Date
+
+scalar URL
+
+"""
+A field whose value is a valid decimal degrees latitude number (53.471): https://en.wikipedia.org/wiki/Latitude
+"""
+scalar Latitude
+
+"""
+A field whose value is a valid decimal degrees longitude number (53.471): https://en.wikipedia.org/wiki/Longitude
+"""
+scalar Longitude
+
+type Query {
+  me: Me
+}
+
+type Mutation {
+  spotAdd(input: SpotAddInput!, file: Upload!): SpotAddPayload!
+}
+
+interface Node {
+  id: ID!
+}
+
+type Spot implements Node {
+  id: ID!
+  title: String!
+  imageURL: URL!
+  createdDate: Date!
+  deletedDate: Date
+  archivedDate: Date
+  authorID: ID!
+  author: User!
+  geoPoint: GeoPoint!
+}
+
+type GeoPoint {
+  latitude: Latitude!
+  longitude: Longitude!
+}
+
+type User implements Node {
+  id: ID!
+}
+
+type Me implements Node {
+  id: ID!
+  spots: [Spot!]!
+}
+
+type UploadedFile {
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: URL!
+}
+
+input SpotAddInput {
+  title: String!
+  latitude: Latitude!
+  longitude: Longitude!
+}
+
+type SpotAddPayload {
+  uploadedFile: UploadedFile!
+  spot: Spot!
+}
