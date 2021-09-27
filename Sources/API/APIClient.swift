@@ -47,10 +47,17 @@ public final class AppApolloClient {
 // MARK: - async/await
 extension AppApolloClient {
     func fetch<Query: GraphQLQuery>(query: Query, cachePolicy: CachePolicy) async throws -> GraphQLResult<Query.Data> {
-        try await withCheckedThrowingContinuation { continuation in
-            apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                continuation.resume(with: result)
+        var canceller: Apollo.Cancellable?
+        return try await withTaskCancellationHandler(operation: {
+            try await withCheckedThrowingContinuation { continuation in
+                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
+                    continuation.resume(with: result)
+                }
             }
-        }
+        }, onCancel: {
+            // TODO:
+            // Got `Reference to captured var 'canceller' in concurrently-executing code`
+//            canceller?.cancel()
+        })
     }
 }
