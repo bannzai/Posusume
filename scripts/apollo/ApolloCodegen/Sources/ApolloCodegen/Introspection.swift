@@ -7,13 +7,11 @@ func downloadSchema() throws {
         fatalError("Unexpected POSUSUME_GRAPHQL_API_INTROSPECTION_URL is empty or invalid URL")
     }
     print("Put schema file from \(introspectionURLString) to \(schemaPath.absoluteString)")
-    
-    try ApolloSchemaDownloader.run(
-        with: cliPath,
-        options: ApolloSchemaOptions(
-            downloadMethod: .introspection(endpointURL: introspectionURL),
-            outputFolderURL: schemaPath.deletingLastPathComponent(),
-            downloadTimeout: 30
+
+    try ApolloSchemaDownloader.fetch(
+        with: .init(
+            using: .introspection(endpointURL: introspectionURL),
+            outputFolderURL: schemaPath.deletingLastPathComponent()
         )
     )
 }
