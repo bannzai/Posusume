@@ -43,3 +43,14 @@ public final class AppApolloClient {
         return client
     }()
 }
+
+// MARK: - async/await
+extension AppApolloClient {
+    func fetch<Query: GraphQLQuery>(query: Query, cachePolicy: CachePolicy) async throws -> GraphQLResult<Query.Data> {
+        try await withCheckedThrowingContinuation { continuation in
+            apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
