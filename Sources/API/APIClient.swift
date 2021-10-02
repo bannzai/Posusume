@@ -44,21 +44,73 @@ public final class AppApolloClient {
     }()
 }
 
+// MARK: - Error
+extension AppApolloClient {
+    // Named error for Posusume app
+    public struct AppGraphQLError: Error {
+        // Application error caused by server side application
+        public let applicationErrors: [Apollo.GraphQLError]
+
+        internal init(_ errors: [Apollo.GraphQLError]) {
+            self.applicationErrors = errors
+        }
+    }
+}
+
 // MARK: - async/await
 extension AppApolloClient {
-    func fetch<Query: GraphQLQuery>(query: Query, cachePolicy: CachePolicy) async throws -> GraphQLResult<Query.Data> {
-//        var canceller: Apollo.Cancellable?
-        return try await withTaskCancellationHandler(operation: {
+    func fetchFromCache<Query: GraphQLQuery>(query: Query) async throws -> Query.Data? {
+        //        var canceller: Apollo.Cancellable?
+        try await withTaskCancellationHandler(operation: {
             try await withCheckedThrowingContinuation { continuation in
-//                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                    continuation.resume(with: result)
+                //                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
+                apollo.fetch(query: query, cachePolicy: .returnCacheDataDontFetch) { result in
+                    do {
+                        let response = try result.get()
+                        if let data = response.data {
+                            continuation.resume(returning: data)
+                        } else if let errors = response.errors, !errors.isEmpty {
+                            continuation.resume(with: .failure(AppGraphQLError(errors)))
+                        } else {
+                            // NOTE: Occurs when the Local Cache does not hit
+                            continuation.resume(returning: nil)
+                        }
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
         }, onCancel: {
             // TODO:
             // Got `Reference to captured var 'canceller' in concurrently-executing code`
-//            canceller?.cancel()
+            //            canceller?.cancel()
+        })
+    }
+
+    func fetchFromServer<Query: GraphQLQuery>(query: Query) async throws -> Query.Data {
+        //        var canceller: Apollo.Cancellable?
+        try await withTaskCancellationHandler(operation: {
+            try await withCheckedThrowingContinuation { continuation in
+                //                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
+                apollo.fetch(query: query, cachePolicy: fetchIgnoringCacheData) { result in
+                    do {
+                        let response = try result.get()
+                        if let data = response.data {
+                            continuation.resume(returning: data)
+                        } else if let errors = response.errors, !errors.isEmpty {
+                            continuation.resume(with: .failure(AppGraphQLError(errors)))
+                        } else {
+                            fatalError("Unexpected result.data and result.errors not found. Maybe apollo-ios or server side application bug")
+                        }
+                    } catch {
+                        continuation.resume(throwing: error)
+                    }
+                }
+            }
+        }, onCancel: {
+            // TODO:
+            // Got `Reference to captured var 'canceller' in concurrently-executing code`
+            //            canceller?.cancel()
         })
     }
 }
