@@ -30,7 +30,7 @@ public final class Cache<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
     }
 
-    public func callAsFunction(query: Query) async {
+    public func callAsFunction(_ query: Query) async {
         await retrieve(query: query)
     }
 }
