@@ -1,11 +1,24 @@
 import Foundation
 import Apollo
 
+/// Query fetch data from server with `GraphQL Query` and published data
+///
+/// Declare
+/// ```swift
+///  @StateObject var query = Query<PosusumeQuery>()
+/// ```
+///
+/// Call query in task
+/// ```swift
+///  .task {
+///    await query(.init())
+///  }
+/// ```
 @MainActor
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
-    @Published public var isFetching: Bool = false
-    @Published public var data: Query.Data?
-    @Published public var error: Error?
+    @Published public private(set) var isFetching: Bool = false
+    @Published public private(set) var data: Query.Data?
+    @Published public private(set) var error: Error?
 
     public func fetch(query: Query) async {
         isFetching = true
@@ -20,7 +33,7 @@ public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
     }
 
-    public func callAsFunction(query: Query) async {
+    public func callAsFunction(_ query: Query) async {
         await fetch(query: query)
     }
 }
