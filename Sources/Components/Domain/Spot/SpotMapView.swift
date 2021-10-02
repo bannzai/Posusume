@@ -12,6 +12,10 @@ struct SpotMapView: View {
     @State var region: MKCoordinateRegion = defaultRegion
     @State var spots: [SpotsQuery.Data.Me.Spot] = []
     @State var isAddSpotPresented = false;
+    @State var isLoading: Bool = false
+    @State var error: Error?
+    @StateObject var cache = Cache<SpotsQuery>()
+    @StateObject var query = Query<SpotsQuery>()
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -56,6 +60,17 @@ struct SpotMapView: View {
             }
         )
         .edgesIgnoringSafeArea(.all)
+        .task {
+            do {
+                spots = try await cache(query: .init())?.me?.spots ?? []
+
+                isLoading = spots.isEmpty
+                spots = try await query(query: .init()).me?.spots ?? []
+            } catch {
+                self.error = error
+            }
+            isLoading = false
+        }
     }
 }
 
