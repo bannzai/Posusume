@@ -1,34 +1,27 @@
 import Foundation
+import Combine
+import UIKit
 
 @MainActor
-public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
+public final class Upload: ObservableObject {
     @Published public private(set) var isProcessing = false
-    @Published public private(set) var data: Mutation.Data?
+    @Published public private(set) var uploadedPath: CloudStorage.Uploaded?
     @Published public private(set) var error: Error?
 
-    internal func perform(mutation: Mutation) async {
+    internal func upload(path: CloudStorage.PathKind, image: UIImage) async {
         isProcessing = true
         defer {
             isProcessing = false
         }
 
         do {
-            data = try await AppApolloClient.shared.perform(mutation: mutation)
+            uploadedPath = try await CloudStorage.shared.upload(path: path, image: image)
         } catch {
             self.error = error
         }
     }
 
-    internal func perform<Query: GraphQLQuery>(mutation: Mutation, queryAfterPerform query: Query) async {
-        await perform(mutation: mutation)
-        _ = try? await AppApolloClient.shared.fetchFromServer(query: query)
-    }
-
-    public func callAsFunction(for mutation: Mutation) async {
-        await perform(mutation: mutation)
-    }
-
-    public func callAsFunction<Query: GraphQLQuery>(for mutation: Mutation, queryAfterPerform query: Query) async {
-        await perform(mutation: mutation, queryAfterPerform: query)
+    public func callAsFunction(path: CloudStorage.PathKind, image: UIImage) async {
+        await upload(path: path, image: image)
     }
 }

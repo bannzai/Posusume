@@ -4,6 +4,9 @@ import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 public struct CloudStorage {
+    public static let shared = CloudStorage()
+    private init() {}
+
     public let reference: StorageReference = Storage.storage().reference()
 }
 
