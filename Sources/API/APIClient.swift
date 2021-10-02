@@ -92,7 +92,7 @@ extension AppApolloClient {
         try await withTaskCancellationHandler(operation: {
             try await withCheckedThrowingContinuation { continuation in
                 //                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                apollo.fetch(query: query, cachePolicy: fetchIgnoringCacheData) { result in
+                apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
                     do {
                         let response = try result.get()
                         if let data = response.data {
