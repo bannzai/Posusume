@@ -21,7 +21,9 @@
 		2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4C26FA11CB009001C7 /* Plist.swift */; };
 		2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */; };
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
-		2067175526B5852200C85A25 /* spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* spots.graphql.swift */; };
+		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
+		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
+		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
@@ -102,7 +104,9 @@
 		2005EE4C26FA11CB009001C7 /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorMappers.swift; sourceTree = "<group>"; };
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
-		2067175326B5852100C85A25 /* spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spots.graphql.swift; sourceTree = "<group>"; };
+		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
+		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
@@ -220,7 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				2067175726B59BFB00C85A25 /* Scalar */,
-				2067175326B5852100C85A25 /* spots.graphql.swift */,
+				2067175326B5852100C85A25 /* Spots.graphql.swift */,
+				2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */,
 				2067175426B5852100C85A25 /* Types.graphql.swift */,
 			);
 			path = GraphQL;
@@ -240,6 +245,7 @@
 				20A09D1A2701F2640090E22F /* Query.swift */,
 				20A088722708FA1B00D94272 /* Cache.swift */,
 				20A088742708FDED00D94272 /* Mutation.swift */,
+				2035A9C22709229F007D580F /* Upload.swift */,
 			);
 			path = ObservableObject;
 			sourceTree = "<group>";
@@ -255,7 +261,6 @@
 		20CEA51726B4D18A0032BBD1 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				20A09D192701F25B0090E22F /* ObservableObject */,
 				2067175226B5852100C85A25 /* GraphQL */,
 				2005EE3C26F9D416009001C7 /* Interceptors */,
 				2067175E26B641F100C85A25 /* APIClient.swift */,
@@ -365,6 +370,7 @@
 		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				20A09D192701F25B0090E22F /* ObservableObject */,
 				2005EE4226FA0A41009001C7 /* Core */,
 				20CEA51726B4D18A0032BBD1 /* API */,
 				BA26C8642621A03D006555AE /* Utility */,
@@ -690,7 +696,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2067175526B5852200C85A25 /* spots.graphql.swift in Sources */,
+				2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */,
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
@@ -706,6 +712,7 @@
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
+				2035A9C32709229F007D580F /* Upload.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
@@ -728,6 +735,7 @@
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
+				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
 				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,

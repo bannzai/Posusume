@@ -1,5 +1,5 @@
 import Foundation
 
-struct CloudStoragePathBuilder<Entity: CloudStorageImageFileName> {
+public struct CloudStoragePathBuilder<Entity: CloudStorageImageFileName> {
     let initialFileName: String
 }

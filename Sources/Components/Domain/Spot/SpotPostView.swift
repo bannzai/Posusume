@@ -4,34 +4,14 @@ import CoreLocation
 import PhotosUI
 import Photos
 import MapKit
-
-struct ViewState: Equatable {
-    enum Context: Int, Equatable {
-        case create
-        case update
-    }
-    
-    let context: Context
-    var image: UIImage? = nil
-    var title: String = ""
-    var imageName: String? = nil
-//    var geoPoint: GeoPoint? = nil
-
-    var isNew: Bool {
-        switch context {
-        case .create:
-            return true
-        case .update:
-            return false
-        }
-    }
-    
-    var error: EquatableError? = nil
-    var submitButtonIsDisabled: Bool { image == nil || title.isEmpty }
-    var canEditGeoPoint: Bool { isNew }
-}
+import FirebaseStorageSwift
 
 struct SpotPostView: View {
+    @State var title: String?
+    @State var imageName: String?
+    @State var image: UIImage?
+    @StateObject var mutation = Mutation<SpotAddMutation>()
+
     var body: some View {
         EmptyView()
     }

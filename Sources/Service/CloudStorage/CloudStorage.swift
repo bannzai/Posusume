@@ -3,61 +3,73 @@ import FirebaseStorage
 import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
-struct CloudStorage {
-    let reference: StorageReference = Storage.storage().reference()
+public struct CloudStorage {
+    public let reference: StorageReference = Storage.storage().reference()
+}
+
+// MARK: - asinc/await
+extension CloudStorage {
+    public enum PathKind {
+        case spot(userID: String, spotID: String)
+
+        var path: String {
+            switch self {
+            case let .spot(userID, spotID):
+                return "users/\(userID)/spots/\(spotID)"
+            }
+        }
+    }
 
     // MARK: - Upload
-    struct Uploaded {
+    public struct Uploaded {
         let path: String
     }
-    enum UploadError: Error {
+    public enum UploadError: Error {
         case convertToJPEG
+        case cloudStoragePathNotFound
     }
-    func upload<T: CloudStorageImageFileName>(path: CloudStoragePathBuilder<T>, image: UIImage, imageFileName: T?) -> AnyPublisher<Uploaded, Error> {
+
+    public func upload(path: PathKind, image: UIImage) async throws -> Uploaded {
         guard let jpegImage = image.jpegData(compressionQuality: 1) else {
-            return Combine.Fail(error: UploadError.convertToJPEG).eraseToAnyPublisher()
+            throw UploadError.convertToJPEG
         }
-        var task: StorageUploadTask?
-        return Future { promise in
-            task = self
-                .reference
-                .child(imageFileName?.imageFileName ?? path.initialFileName)
+
+        return try await withCheckedThrowingContinuation { continuation in
+            reference
+                .child(path.path)
                 .putData(jpegImage, metadata: nil) { metadata, error in
                     if let error = error {
-                        return promise(.failure(error))
+                        continuation.resume(throwing: error)
+                    } else {
+                        guard let _metadata = metadata, let path = _metadata.path else {
+                            continuation.resume(throwing: UploadError.cloudStoragePathNotFound)
+                            return
+                        }
+                        continuation.resume(returning: .init(path: path))
                     }
-                    guard let _metadata = metadata, let path = _metadata.path else {
-                        fatalError("path not found in cloud storage response metadata \(String(describing: metadata))")
-                    }
-                    promise(.success(.init(path: path)))
                 }
-        }.handleEvents(receiveCancel: {
-            task?.cancel()
-        })
-        .eraseToAnyPublisher()
+        }
     }
-    
-    
-    // MARK: - Fetch
-    public func fetch<T: CloudStorageImageFileName>(path: CloudStoragePathBuilder<T>, imageFileName: T) -> AnyPublisher<UIImage, Error> {
-        var task: StorageDownloadTask?
-        return Future { promise in
-            task = self
-                .reference
-                .child(imageFileName.imageFileName)
+
+    public enum DownloadError: Error {
+        case convertToUIImage
+    }
+    // MARK: - Download
+    public func download(path: PathKind) async throws -> UIImage {
+        try await withCheckedThrowingContinuation { continuation in
+            reference
+                .child(path.path)
                 .getData(maxSize: maximumDataSize) { (data, error) in
                     if let error = error {
-                        promise(.failure(error))
+                        continuation.resume(throwing: error)
+                    } else {
+                        guard let _data = data, let image = UIImage(data: _data) else {
+                            continuation.resume(throwing: DownloadError.convertToUIImage)
+                            return
+                        }
+                        continuation.resume(returning: image)
                     }
-                    guard let _data = data, let image = UIImage(data: _data) else {
-                        fatalError("data cann't convert to UIImage. data: \(String(describing: data))")
-                    }
-                    promise(.success(image))
                 }
-        }.handleEvents(receiveCancel: {
-            task?.cancel()
-        })
-        .eraseToAnyPublisher()
-        
+        }
     }
 }

@@ -1,5 +1,5 @@
 import Foundation
 
-protocol CloudStorageImageFileName {
+public protocol CloudStorageImageFileName {
     var imageFileName: String { get }
 }
