@@ -25,11 +25,11 @@ public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
         _ = try? await AppApolloClient.shared.fetchFromServer(query: query)
     }
 
-    public func callAsFunction(_ mutation: Mutation) async {
+    public func callAsFunction(for mutation: Mutation) async {
         await perform(mutation: mutation)
     }
 
-    public func callAsFunction<Query: GraphQLQuery>(_ mutation: Mutation, queryAfterPerform query: Query) async {
+    public func callAsFunction<Query: GraphQLQuery>(for mutation: Mutation, queryAfterPerform query: Query) async {
         await perform(mutation: mutation, queryAfterPerform: query)
     }
 }

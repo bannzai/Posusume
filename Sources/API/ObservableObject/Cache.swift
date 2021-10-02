@@ -15,7 +15,7 @@ import Apollo
 /// Call query in task
 /// ```swift
 ///  .task {
-///    await cache(.init())
+///    await cache(for: PosusumeQuery())
 ///  }
 /// ```
 @MainActor
@@ -30,7 +30,7 @@ public final class Cache<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
     }
 
-    public func callAsFunction(_ query: Query) async {
+    public func callAsFunction(for query: Query) async {
         await retrieve(query: query)
     }
 }

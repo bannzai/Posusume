@@ -59,8 +59,8 @@ struct SpotMapView: View {
         )
         .edgesIgnoringSafeArea(.all)
         .task {
-            await cache(query: .init())
-            await query(query: .init())
+            await cache(for: .init())
+            await query(for: .init())
         }
     }
 }

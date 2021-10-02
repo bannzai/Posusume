@@ -11,7 +11,7 @@ import Apollo
 /// Call query in task
 /// ```swift
 ///  .task {
-///    await query(.init())
+///    await query(for: PosusumeQuery())
 ///  }
 /// ```
 @MainActor
@@ -33,7 +33,7 @@ public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
     }
 
-    public func callAsFunction(_ query: Query) async {
+    public func callAsFunction(for query: Query) async {
         await fetch(query: query)
     }
 }
