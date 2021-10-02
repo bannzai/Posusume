@@ -61,8 +61,6 @@
 		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
 		BADF5301261D303C00431FEB /* SpotList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5300261D303C00431FEB /* SpotList.swift */; };
 		BADF5305261D307700431FEB /* SpotListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5304261D307700431FEB /* SpotListCell.swift */; };
-		BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */; };
-		BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */; };
 		BAFF7024261C3FB300584593 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7021261C3FB300584593 /* Color.swift */; };
 		BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */; };
 /* End PBXBuildFile section */
@@ -150,8 +148,6 @@
 		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		BADF5300261D303C00431FEB /* SpotList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotList.swift; sourceTree = "<group>"; };
 		BADF5304261D307700431FEB /* SpotListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCell.swift; sourceTree = "<group>"; };
-		BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStoragePathBuilder.swift; sourceTree = "<group>"; };
-		BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageImageFileName.swift; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -450,8 +446,6 @@
 			isa = PBXGroup;
 			children = (
 				BA26C8512621939A006555AE /* CloudStorage.swift */,
-				BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */,
-				BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */,
 			);
 			path = CloudStorage;
 			sourceTree = "<group>";
@@ -715,13 +709,11 @@
 				2035A9C32709229F007D580F /* Upload.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
-				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
 				20A088732708FA1B00D94272 /* Cache.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
 				20A09D1B2701F2640090E22F /* Query.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
-				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
 				201F268C27009C7B00A5DD1E /* Secret.swift in Sources */,
 				2005EE4426FA0C43009001C7 /* RequestLoggingInterceptor.swift in Sources */,
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
