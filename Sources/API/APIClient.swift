@@ -97,4 +97,23 @@ extension AppApolloClient {
             }
         }
     }
+
+    func perform<Mutation: GraphQLMutation>(mutation: Mutation) async throws -> Mutation.Data {
+        try await withCheckedThrowingContinuation { continuation in
+            apollo.perform(mutation: mutation) { result in
+                do {
+                    let response = try result.get()
+                    if let data = response.data {
+                        continuation.resume(returning: data)
+                    } else if let errors = response.errors, !errors.isEmpty {
+                        continuation.resume(with: .failure(AppGraphQLError(errors)))
+                    } else {
+                        fatalError("Unexpected result.data and result.errors not found. Maybe apollo-ios or server side application bug")
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }
