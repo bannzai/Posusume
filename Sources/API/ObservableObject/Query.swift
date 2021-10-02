@@ -16,11 +16,11 @@ import Apollo
 /// ```
 @MainActor
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
-    @Published public private(set) var isFetching: Bool = false
+    @Published public private(set) var isFetching = false
     @Published public private(set) var data: Query.Data?
     @Published public private(set) var error: Error?
 
-    public func fetch(query: Query) async {
+    internal func fetch(query: Query) async {
         isFetching = true
         defer {
             isFetching = false
