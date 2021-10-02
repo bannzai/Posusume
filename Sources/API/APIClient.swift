@@ -60,57 +60,41 @@ extension AppApolloClient {
 // MARK: - async/await
 extension AppApolloClient {
     func fetchFromCache<Query: GraphQLQuery>(query: Query) async throws -> Query.Data? {
-        //        var canceller: Apollo.Cancellable?
-        try await withTaskCancellationHandler(operation: {
-            try await withCheckedThrowingContinuation { continuation in
-                //                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                apollo.fetch(query: query, cachePolicy: .returnCacheDataDontFetch) { result in
-                    do {
-                        let response = try result.get()
-                        if let data = response.data {
-                            continuation.resume(returning: data)
-                        } else if let errors = response.errors, !errors.isEmpty {
-                            continuation.resume(with: .failure(AppGraphQLError(errors)))
-                        } else {
-                            // NOTE: Occurs when the Local Cache does not hit
-                            continuation.resume(returning: nil)
-                        }
-                    } catch {
-                        continuation.resume(throwing: error)
+        try await withCheckedThrowingContinuation { continuation in
+            apollo.fetch(query: query, cachePolicy: .returnCacheDataDontFetch) { result in
+                do {
+                    let response = try result.get()
+                    if let data = response.data {
+                        continuation.resume(returning: data)
+                    } else if let errors = response.errors, !errors.isEmpty {
+                        continuation.resume(with: .failure(AppGraphQLError(errors)))
+                    } else {
+                        // NOTE: Occurs when the Local Cache does not hit
+                        continuation.resume(returning: nil)
                     }
+                } catch {
+                    continuation.resume(throwing: error)
                 }
             }
-        }, onCancel: {
-            // TODO:
-            // Got `Reference to captured var 'canceller' in concurrently-executing code`
-            //            canceller?.cancel()
-        })
+        }
     }
 
     func fetchFromServer<Query: GraphQLQuery>(query: Query) async throws -> Query.Data {
-        //        var canceller: Apollo.Cancellable?
-        try await withTaskCancellationHandler(operation: {
-            try await withCheckedThrowingContinuation { continuation in
-                //                canceller = apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-                apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
-                    do {
-                        let response = try result.get()
-                        if let data = response.data {
-                            continuation.resume(returning: data)
-                        } else if let errors = response.errors, !errors.isEmpty {
-                            continuation.resume(with: .failure(AppGraphQLError(errors)))
-                        } else {
-                            fatalError("Unexpected result.data and result.errors not found. Maybe apollo-ios or server side application bug")
-                        }
-                    } catch {
-                        continuation.resume(throwing: error)
+        try await withCheckedThrowingContinuation { continuation in
+            apollo.fetch(query: query, cachePolicy: .fetchIgnoringCacheData) { result in
+                do {
+                    let response = try result.get()
+                    if let data = response.data {
+                        continuation.resume(returning: data)
+                    } else if let errors = response.errors, !errors.isEmpty {
+                        continuation.resume(with: .failure(AppGraphQLError(errors)))
+                    } else {
+                        fatalError("Unexpected result.data and result.errors not found. Maybe apollo-ios or server side application bug")
                     }
+                } catch {
+                    continuation.resume(throwing: error)
                 }
             }
-        }, onCancel: {
-            // TODO:
-            // Got `Reference to captured var 'canceller' in concurrently-executing code`
-            //            canceller?.cancel()
-        })
+        }
     }
 }
