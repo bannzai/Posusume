@@ -27,9 +27,10 @@ struct SpotPostView: View {
                         title: $title,
                         geoPoint: $geoPoint
                     )
+                    Spacer()
                 }
+                .frame(minHeight: UIScreen.main.bounds.height)
             }
-            .frame(maxWidth: .infinity)
             .padding(.top, 16)
             .padding(.horizontal, 20)
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
