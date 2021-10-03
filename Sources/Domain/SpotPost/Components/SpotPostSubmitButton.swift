@@ -8,7 +8,7 @@ public struct SpotPostSubmitButton: View {
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
 
-    @State var error: IdentifiableError?
+    @State var error: Error?
 
     @Binding var image: UIImage?
     @Binding var title: String
@@ -29,9 +29,7 @@ public struct SpotPostSubmitButton: View {
             })
             .disabled(submitButtonIsDisabled)
             .buttonStyle(PrimaryButtonStyle(isLoading: mutation.isProcessing))
-            .alert(item: $error) { error in
-                Alert(title: Text("エラーが発生しました"), message: Text(error.localizedDescription), dismissButton: .default(Text("OK")))
-            }
+            .handle(error: $error)
     }
 
     private func save() {
@@ -54,7 +52,7 @@ public struct SpotPostSubmitButton: View {
                 )
                 dismiss()
             } catch {
-                self.error = .init(error)
+                self.error = error
             }
         }
     }
