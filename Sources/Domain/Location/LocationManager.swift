@@ -12,7 +12,6 @@ protocol LocationManager: CLLocationManagerDelegate {
     func userLocation() -> AnyPublisher<CLLocation, Swift.Error>
 }
 
-
 private class _LocationManager: NSObject, LocationManager {
     var canceller: Set<AnyCancellable> = []
     let didChangeAuthorization: PassthroughSubject<CLAuthorizationStatus, Never> = .init()
