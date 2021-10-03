@@ -28,8 +28,10 @@ struct PhotoLibraryResult: Equatable {
 
 protocol PhotoLibrary {
     func prepareActionType() -> PhotoLibraryPrepareAction?
-    func requestAuthorization() -> AnyPublisher<PHAuthorizationStatus, Never>
+    func requestAuthorization() async -> PHAuthorizationStatus
     func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryResult, Error>
+    // TODO: Replace to async method after handling canceller event is stable
+//    func convert(pickerResult: PHPickerResult) async throws -> PhotoLibraryResult
 }
 
 fileprivate struct _PhotoLibrary: PhotoLibrary {
@@ -47,16 +49,32 @@ fileprivate struct _PhotoLibrary: PhotoLibrary {
             return nil
         }
     }
-    
-    func requestAuthorization() -> AnyPublisher<PHAuthorizationStatus, Never> {
-        Future { promise in
+
+    func requestAuthorization() async -> PHAuthorizationStatus {
+        await withCheckedContinuation { continuation in
             PHPhotoLibrary.requestAuthorization { (status) in
-                promise(.success(status))
+                continuation.resume(returning: status)
             }
         }
-        .eraseToAnyPublisher()
     }
-    
+
+
+//    func convert(pickerResult: PHPickerResult) async throws -> PhotoLibraryResult {
+//        try await withCheckedThrowingContinuation { continuation in
+//            convert(pickerResult: pickerResult).sink(receiveCompletion: { completion in
+//                switch completion {
+//                case .finished:
+//                    break
+//                case let .failure(error):
+//                    continuation.resume(throwing: error)
+//                }
+//
+//            }, receiveValue: { result in
+//                continuation.resume(returning: result)
+//            })
+//        }
+//    }
+
     func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryResult, Error> {
         let info: (location: CLLocationCoordinate2D, takeDate: Date)? = {
             if let identifier = pickerResult.assetIdentifier {

@@ -6,14 +6,13 @@ import Photos
 import Combine
 
 struct PhotoLibraryView: UIViewControllerRepresentable {
-    let pickerConfiguration: PHPickerConfiguration
     let photoLibrary: PhotoLibrary
     let success: (PhotoLibraryResult) -> Void
     let failure: (Error) -> Void
     let dismiss: () -> Void
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
-        let controller = PHPickerViewController(configuration: pickerConfiguration)
+        let controller = PHPickerViewController(configuration: sharedPhotoLibraryConfiguration)
         controller.delegate = context.coordinator
         return controller
     }
@@ -61,7 +60,6 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
 struct PhotoLibraryView_Previews: PreviewProvider {
     static var previews: some View {
         PhotoLibraryView(
-            pickerConfiguration: sharedPhotoLibraryConfiguration,
             photoLibrary: MockPhotoLibrary(),
             success: { value in
                 
