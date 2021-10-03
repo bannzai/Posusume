@@ -27,21 +27,18 @@ struct SpotPostView: View {
                         title: $title,
                         geoPoint: $geoPoint
                     )
-                    Spacer().frame(height: 32)
                 }
             }
-            .padding(.vertical, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 32)
             .padding(.horizontal, 20)
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .navigationBarItems(
-                leading:
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark")
-                            .renderingMode(.template)
-                            .foregroundColor(.appPrimary)
-                    }
+                leading: Button(action: dismiss.callAsFunction, label: {
+                    Image(systemName: "xmark")
+                        .renderingMode(.template)
+                        .foregroundColor(.appPrimary)
+                })
             )
             .navigationBarTitle("", displayMode: .inline)
         }
