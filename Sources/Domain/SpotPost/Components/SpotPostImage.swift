@@ -1,11 +1,11 @@
 import Foundation
 import SwiftUI
 
-public struct SpotPostImage: View {
+struct SpotPostImage: View {
     @Binding var image: UIImage?
     @State var showsActionSheet: Bool = false
 
-    public var body: some View {
+    var body: some View {
         Button (
             action: {
                 showsActionSheet = true
@@ -14,11 +14,12 @@ public struct SpotPostImage: View {
                 if let image = image {
                     Image(uiImage: image)
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width - 40)
-                        .aspectRatio(3 / 4, contentMode: .fit)
+                        .frame(width: .infinity)
+                        .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
                         .clipped()
                 } else {
                     VStack {
+                        Spacer()
                         Image("anyPicture")
                             .resizable()
                             .renderingMode(.template)
@@ -26,9 +27,11 @@ public struct SpotPostImage: View {
                             .frame(width: 40, height: 40)
                         Text("画像を選択")
                             .font(.footnote)
+                        Spacer()
                     }
+                    .frame(maxWidth: .infinity)
+                    .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
                     .foregroundColor(.placeholder)
-                    .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
                     .background(Color.white)
                 }
             })
@@ -37,3 +40,9 @@ public struct SpotPostImage: View {
     }
 }
 
+
+struct Preview: PreviewProvider {
+    static var previews: some View {
+        SpotPostImage(image: .init(get: { nil }, set: { _ in }))
+    }
+}
