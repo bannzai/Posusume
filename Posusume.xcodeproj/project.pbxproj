@@ -404,6 +404,7 @@
 		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				BADF52FE261D301E00431FEB /* Domain */,
 				20A09D192701F25B0090E22F /* ObservableObject */,
 				2005EE4226FA0A41009001C7 /* Core */,
 				20CEA51726B4D18A0032BBD1 /* API */,
@@ -494,7 +495,6 @@
 				2035A9C82709589A007D580F /* ViewModifier */,
 				BAFF7020261C3FB300584593 /* Atoms */,
 				BAFF7022261C3FB300584593 /* Molocules */,
-				BADF52FE261D301E00431FEB /* Domain */,
 			);
 			path = Components;
 			sourceTree = "<group>";
