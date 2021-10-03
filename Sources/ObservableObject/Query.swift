@@ -17,7 +17,7 @@ import Apollo
 @MainActor
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
     @Published public private(set) var isFetching = false
-    @Published public private(set) var data: Query.Data?
+    @Published public private(set) var response: Query.Data?
     @Published public private(set) var error: Error?
 
     internal func fetch(query: Query) async {
@@ -27,7 +27,7 @@ public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
 
         do {
-            data = try await AppApolloClient.shared.fetchFromServer(query: query)
+            response = try await AppApolloClient.shared.fetchFromServer(query: query)
         } catch {
             self.error = error
         }

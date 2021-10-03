@@ -5,7 +5,7 @@ import UIKit
 @MainActor
 public final class Upload: ObservableObject {
     @Published public private(set) var isProcessing = false
-    @Published public private(set) var uploadedPath: CloudStorage.Uploaded?
+    @Published public private(set) var response: CloudStorage.Uploaded?
     @Published public private(set) var error: Error?
 
     internal func upload(path: CloudStorage.PathKind, image: UIImage) async {
@@ -15,7 +15,7 @@ public final class Upload: ObservableObject {
         }
 
         do {
-            uploadedPath = try await CloudStorage.shared.upload(path: path, image: image)
+            response = try await CloudStorage.shared.upload(path: path, image: image)
         } catch {
             self.error = error
         }
