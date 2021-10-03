@@ -42,7 +42,7 @@
 		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
 		BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E862625F1BB000DA60F /* LocationMeters.swift */; };
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
-		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
+		BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* IdentifiableError.swift */; };
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317302262A6DDE00E1212C /* SpotPostView.swift */; };
 		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
@@ -129,7 +129,7 @@
 		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		BA249E862625F1BB000DA60F /* LocationMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMeters.swift; sourceTree = "<group>"; };
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
-		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
+		BA26C88426227C62006555AE /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA317302262A6DDE00E1212C /* SpotPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostView.swift; sourceTree = "<group>"; };
 		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 		20CEA51326B4CB800032BBD1 /* StdLib */ = {
 			isa = PBXGroup;
 			children = (
-				BA26C88426227C62006555AE /* EquatableError.swift */,
+				BA26C88426227C62006555AE /* IdentifiableError.swift */,
 			);
 			path = StdLib;
 			sourceTree = "<group>";
@@ -776,7 +776,7 @@
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
-				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
+				BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
 				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
 				BA619FB326414493003713A4 /* LocationManager.swift in Sources */,
