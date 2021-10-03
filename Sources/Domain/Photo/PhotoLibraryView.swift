@@ -46,6 +46,10 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
             canceller = parent.photoLibrary.convert(pickerResult: result)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] completion in
+                    defer {
+                        self?.parent.dismiss()
+                    }
+
                     switch completion {
                     case .failure(let error):
                         self?.parent.error = error

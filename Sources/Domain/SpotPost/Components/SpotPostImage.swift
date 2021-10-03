@@ -44,6 +44,7 @@ struct SpotPostImage: View {
                 photoLibraryResult: $photoLibraryResult,
                 error: $error
             )
+            .handle(error: $error)
     }
 }
 
