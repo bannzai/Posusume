@@ -16,24 +16,23 @@ struct SpotPostView: View {
 
     var body: some View {
         NavigationView {
-            ZStack(alignment: .top) {
-                Color.screenBackground.edgesIgnoringSafeArea(.all)
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 18) {
-                        SpotPostImage(image: $image)
-                        SpotPostTitle(title: $title)
-                        SpotPostGeoPoint(geoPoint: $geoPoint)
-                        Spacer()
-                        SpotPostSubmitButton(
-                            image: $image,
-                            title: $title,
-                            geoPoint: $geoPoint
-                        )
-                        Spacer().frame(height: 32)
-                    }
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 20) {
+                    SpotPostImage(image: $image)
+                    SpotPostTitle(title: $title)
+                    SpotPostGeoPoint(geoPoint: $geoPoint)
+                    Spacer()
+                    SpotPostSubmitButton(
+                        image: $image,
+                        title: $title,
+                        geoPoint: $geoPoint
+                    )
+                    Spacer().frame(height: 32)
                 }
             }
             .padding(.vertical, 16)
+            .padding(.horizontal, 20)
+            .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .navigationBarItems(
                 leading:
                     Button(action: {

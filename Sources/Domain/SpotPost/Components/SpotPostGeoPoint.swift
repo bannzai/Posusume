@@ -23,7 +23,6 @@ public struct SpotPostGeoPoint: View {
             ).frame(height: 80)
         }
         .frame(maxWidth: .infinity)
-        .padding(.horizontal, 20)
     }
 }
 

@@ -17,7 +17,6 @@ public struct SpotPostImage: View {
                         .frame(width: UIScreen.main.bounds.width - 40)
                         .aspectRatio(3 / 4, contentMode: .fit)
                         .clipped()
-                        .padding(.horizontal, 20)
                 } else {
                     VStack {
                         Image("anyPicture")
@@ -31,7 +30,6 @@ public struct SpotPostImage: View {
                     .foregroundColor(.placeholder)
                     .frame(maxWidth: .infinity, minHeight: 160, maxHeight: 160)
                     .background(Color.white)
-                    .padding(.horizontal, 20)
                 }
             })
             .buttonStyle(PlainButtonStyle())

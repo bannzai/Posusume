@@ -17,7 +17,6 @@ public struct SpotPostTitle: View {
                 .background(Color.white)
         }
         .frame(maxWidth: .infinity)
-        .padding(.horizontal, 20)
     }
 }
 
