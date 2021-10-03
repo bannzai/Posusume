@@ -7,7 +7,8 @@ import CoreLocation
 struct PhotoCameraView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIImagePickerController
     
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.dismiss) private var dismiss
+
     let captured: (UIImage) -> Void
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
@@ -26,10 +27,6 @@ struct PhotoCameraView: UIViewControllerRepresentable {
         Coordinator(parent: self)
     }
     
-    private func dismiss() {
-        presentationMode.wrappedValue.dismiss()
-    }
-    
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         var parent: PhotoCameraView
         
@@ -40,11 +37,11 @@ struct PhotoCameraView: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             
             guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
-                parent.presentationMode.wrappedValue.dismiss()
+                parent.dismiss()
                 return
             }
             parent.captured(image)
-            parent.presentationMode.wrappedValue.dismiss()
+            parent.dismiss()
         }
     }
 }

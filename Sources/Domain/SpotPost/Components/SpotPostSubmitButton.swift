@@ -3,7 +3,7 @@ import SwiftUI
 import CoreLocation
 
 public struct SpotPostSubmitButton: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
@@ -52,7 +52,7 @@ public struct SpotPostSubmitButton: View {
                         )
                     )
                 )
-                presentationMode.wrappedValue.dismiss()
+                dismiss()
             } catch {
                 self.error = .init(error)
             }

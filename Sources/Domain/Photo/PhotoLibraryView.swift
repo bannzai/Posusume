@@ -6,10 +6,11 @@ import Photos
 import Combine
 
 struct PhotoLibraryView: UIViewControllerRepresentable {
+    @Environment(\.dismiss) private var dismiss
+
     let photoLibrary: PhotoLibrary
     let success: (PhotoLibraryResult) -> Void
     let failure: (Error) -> Void
-    let dismiss: () -> Void
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let controller = PHPickerViewController(configuration: sharedPhotoLibraryConfiguration)
@@ -66,8 +67,7 @@ struct PhotoLibraryView_Previews: PreviewProvider {
             },
             failure: { error in
                 
-            },
-            dismiss: {  }
+            }
         )
     }
 }

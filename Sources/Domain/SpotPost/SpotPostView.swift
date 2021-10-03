@@ -7,7 +7,7 @@ import MapKit
 import FirebaseStorageSwift
 
 struct SpotPostView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
     @State var image: UIImage?
@@ -36,7 +36,7 @@ struct SpotPostView: View {
             .navigationBarItems(
                 leading:
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()
+                        dismiss()
                     }) {
                         Image(systemName: "xmark")
                             .renderingMode(.template)

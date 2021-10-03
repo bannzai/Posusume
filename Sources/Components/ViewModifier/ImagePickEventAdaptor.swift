@@ -9,7 +9,8 @@ private func openSetting() {
 }
 
 public struct ImagePickEventAdaptor: ViewModifier {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
+
     @State private var selectedImageSourceType: ImageSourceType?
     @State private var presentingAlertType: AlertType?
 
@@ -84,8 +85,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
                                 },
                                 failure: { error in
 
-                                },
-                                dismiss: { presentationMode.wrappedValue.dismiss() }
+                                }
                             )
                         )
                     }
