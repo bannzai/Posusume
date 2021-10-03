@@ -2,8 +2,11 @@ import Foundation
 import SwiftUI
 
 struct SpotPostImage: View {
-    @Binding var image: UIImage?
     @State var showsActionSheet: Bool = false
+    @State var photoLibraryResult: PhotoLibraryResult?
+    @State var error: Error?
+
+    @Binding var image: UIImage?
 
     var body: some View {
         Button (
@@ -36,7 +39,11 @@ struct SpotPostImage: View {
                 }
             })
             .buttonStyle(PlainButtonStyle())
-            .adaptImagePickEvent(showsActionSheet: $showsActionSheet)
+            .adaptImagePickEvent(
+                showsActionSheet: $showsActionSheet,
+                photoLibraryResult: $photoLibraryResult,
+                error: $error
+            )
     }
 }
 

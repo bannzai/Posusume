@@ -9,8 +9,9 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
 
     let photoLibrary: PhotoLibrary
-    let success: (PhotoLibraryResult) -> Void
-    let failure: (Error) -> Void
+
+    @Binding var photoLibraryResult: PhotoLibraryResult?
+    @Binding var error: Error?
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let controller = PHPickerViewController(configuration: sharedPhotoLibraryConfiguration)
@@ -47,27 +48,26 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
                 .sink(receiveCompletion: { [weak self] completion in
                     switch completion {
                     case .failure(let error):
-                        self?.parent.failure(error)
+                        self?.parent.error = error
                     case .finished:
                         return
                     }
                 }, receiveValue: { [weak self] (result) in
-                    self?.parent.success(result)
+                    self?.parent.photoLibraryResult = result
                 })
         }
     }
 }
 
 struct PhotoLibraryView_Previews: PreviewProvider {
+    @State static var photoLibraryResult: PhotoLibraryResult? = nil
+    @State static var error: Error? = nil
+
     static var previews: some View {
         PhotoLibraryView(
             photoLibrary: MockPhotoLibrary(),
-            success: { value in
-                
-            },
-            failure: { error in
-                
-            }
+            photoLibraryResult: $photoLibraryResult,
+            error: $error
         )
     }
 }

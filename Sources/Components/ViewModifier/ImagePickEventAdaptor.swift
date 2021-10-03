@@ -15,6 +15,8 @@ public struct ImagePickEventAdaptor: ViewModifier {
     @State private var presentingAlertType: AlertType?
 
     @Binding var showsActionSheet: Bool
+    @Binding var photoLibraryResult: PhotoLibraryResult?
+    @Binding var error: Error?
 
     enum ImageSourceType: Int, Identifiable {
         case camera
@@ -80,12 +82,8 @@ public struct ImagePickEventAdaptor: ViewModifier {
                         return AnyView(
                             PhotoLibraryView(
                                 photoLibrary: photoLibrary,
-                                success: { result in
-
-                                },
-                                failure: { error in
-
-                                }
+                                photoLibraryResult: $photoLibraryResult,
+                                error: $error
                             )
                         )
                     }
@@ -113,7 +111,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
 }
 
 extension View {
-    func adaptImagePickEvent(showsActionSheet: Binding<Bool>) -> some View {
-        modifier(ImagePickEventAdaptor(showsActionSheet: showsActionSheet))
+    func adaptImagePickEvent(showsActionSheet: Binding<Bool>, photoLibraryResult: Binding<PhotoLibraryResult?>, error: Binding<Error?>) -> some View {
+        modifier(ImagePickEventAdaptor(showsActionSheet: showsActionSheet, photoLibraryResult: photoLibraryResult, error: error))
     }
 }
