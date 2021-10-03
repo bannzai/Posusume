@@ -9,10 +9,11 @@ public struct SpotAddInput: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - title
+  ///   - imageUrl
   ///   - latitude
   ///   - longitude
-  public init(title: String, latitude: Latitude, longitude: Longitude) {
-    graphQLMap = ["title": title, "latitude": latitude, "longitude": longitude]
+  public init(title: String, imageUrl: URL, latitude: Latitude, longitude: Longitude) {
+    graphQLMap = ["title": title, "imageURL": imageUrl, "latitude": latitude, "longitude": longitude]
   }
 
   public var title: String {
@@ -21,6 +22,15 @@ public struct SpotAddInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "title")
+    }
+  }
+
+  public var imageUrl: URL {
+    get {
+      return graphQLMap["imageURL"] as! URL
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "imageURL")
     }
   }
 

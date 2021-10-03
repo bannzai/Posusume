@@ -1,5 +1,5 @@
-mutation SpotAdd($spotAddInput: SpotAddInput!, $spotAddFile: Upload!) {
-  spotAdd(input: $spotAddInput, file: $spotAddFile) {
+mutation SpotAdd($spotAddInput: SpotAddInput!) {
+  spotAdd(input: $spotAddInput) {
     spot {
        id
     }

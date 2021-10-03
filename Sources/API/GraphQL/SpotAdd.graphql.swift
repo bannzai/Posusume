@@ -8,8 +8,8 @@ public final class SpotAddMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation SpotAdd($spotAddInput: SpotAddInput!, $spotAddFile: Upload!) {
-      spotAdd(input: $spotAddInput, file: $spotAddFile) {
+    mutation SpotAdd($spotAddInput: SpotAddInput!) {
+      spotAdd(input: $spotAddInput) {
         __typename
         spot {
           __typename
@@ -22,15 +22,13 @@ public final class SpotAddMutation: GraphQLMutation {
   public let operationName: String = "SpotAdd"
 
   public var spotAddInput: SpotAddInput
-  public var spotAddFile: Upload
 
-  public init(spotAddInput: SpotAddInput, spotAddFile: Upload) {
+  public init(spotAddInput: SpotAddInput) {
     self.spotAddInput = spotAddInput
-    self.spotAddFile = spotAddFile
   }
 
   public var variables: GraphQLMap? {
-    return ["spotAddInput": spotAddInput, "spotAddFile": spotAddFile]
+    return ["spotAddInput": spotAddInput]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -38,7 +36,7 @@ public final class SpotAddMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("spotAdd", arguments: ["input": GraphQLVariable("spotAddInput"), "file": GraphQLVariable("spotAddFile")], type: .nonNull(.object(SpotAdd.selections))),
+        GraphQLField("spotAdd", arguments: ["input": GraphQLVariable("spotAddInput")], type: .nonNull(.object(SpotAdd.selections))),
       ]
     }
 
