@@ -4,8 +4,6 @@ import Apollo
 @MainActor
 public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
     @Published public private(set) var isProcessing = false
-    @Published public private(set) var response: Mutation.Data?
-    @Published public private(set) var error: Error?
 
     internal func perform(mutation: Mutation) async throws -> Mutation.Data {
         isProcessing = true
