@@ -21,9 +21,7 @@ struct SpotPostView: View {
                     VStack(spacing: 20) {
                         SpotPostImage(image: $image)
                         SpotPostTitle(title: $title)
-                        if image != nil && geoPoint == nil {
-                            SpotPostGeoPoint(geoPoint: $geoPoint)
-                        }
+                        SpotPostGeoPoint(geoPoint: $geoPoint)
                         Spacer()
                         SpotPostSubmitButton(
                             image: $image,
