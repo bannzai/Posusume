@@ -10,7 +10,7 @@ struct SpotPostView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
-    @State var image: UIImage?
+    @State var photo: SpotPostPhoto = .init()
     @State var title: String = ""
     @State var geoPoint: CLLocationCoordinate2D?
 
@@ -19,12 +19,14 @@ struct SpotPostView: View {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
-                        SpotPostImage(image: $image)
+                        SpotPostImage(image: photo.$image)
                         SpotPostTitle(title: $title)
-                        SpotPostGeoPoint(geoPoint: $geoPoint)
+                        if image != nil && geoPoint == nil {
+                            SpotPostGeoPoint(geoPoint: $geoPoint)
+                        }
                         Spacer()
                         SpotPostSubmitButton(
-                            image: $image,
+                            image: photo.$image,
                             title: $title,
                             geoPoint: $geoPoint
                         )
