@@ -1,12 +1,13 @@
 import CoreLocation
 import Combine
+import SwiftUI
 
-enum LocationManagerPrepareAction {
+public enum LocationManagerPrepareAction {
     case openSettingApp
     case requiredAutentification
 }
 
-protocol LocationManager: CLLocationManagerDelegate {
+public protocol LocationManager: CLLocationManagerDelegate {
     func prepareActionType() -> LocationManagerPrepareAction?
     func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never>
     func userLocation() -> AnyPublisher<CLLocation, Swift.Error>
@@ -88,4 +89,18 @@ extension _LocationManager: CLLocationManagerDelegate {
     }
 }
 
-let locationManager: LocationManager = _LocationManager()
+struct LocationManagerEnvironmentKey: EnvironmentKey {
+    static var defaultValue: LocationManager = _LocationManager()
+}
+
+extension EnvironmentValues {
+    var locationManager: LocationManager {
+        get {
+            self[LocationManagerEnvironmentKey.self]
+        }
+        set {
+            self[LocationManagerEnvironmentKey.self] = newValue
+        }
+    }
+}
+
