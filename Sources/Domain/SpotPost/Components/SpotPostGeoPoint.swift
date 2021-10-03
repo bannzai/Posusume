@@ -20,7 +20,7 @@ public struct SpotPostGeoPoint: View {
                             .font(.subheadline)
                     }
                 }
-            ).frame(height: 80)
+            )
         }
         .frame(maxWidth: .infinity)
     }

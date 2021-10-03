@@ -29,8 +29,8 @@ struct SpotPostView: View {
                     )
                 }
             }
+            .frame(maxWidth: .infinity)
             .padding(.top, 16)
-            .padding(.bottom, 32)
             .padding(.horizontal, 20)
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .navigationBarItems(
