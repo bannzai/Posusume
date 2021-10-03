@@ -23,8 +23,11 @@
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
 		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
-		2035A9C727094E4B007D580F /* SpotPostImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C627094E4B007D580F /* SpotPostImageView.swift */; };
+		2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C627094E4B007D580F /* SpotPostImage.swift */; };
 		2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */; };
+		2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CB270966C8007D580F /* SpotPostTitle.swift */; };
+		2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */; };
+		2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */; };
 		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
@@ -106,8 +109,11 @@
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
-		2035A9C627094E4B007D580F /* SpotPostImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostImageView.swift; sourceTree = "<group>"; };
+		2035A9C627094E4B007D580F /* SpotPostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostImage.swift; sourceTree = "<group>"; };
 		2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickEventAdaptor.swift; sourceTree = "<group>"; };
+		2035A9CB270966C8007D580F /* SpotPostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostTitle.swift; sourceTree = "<group>"; };
+		2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostGeoPoint.swift; sourceTree = "<group>"; };
+		2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostSubmitButton.swift; sourceTree = "<group>"; };
 		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
@@ -232,7 +238,10 @@
 		2035A9C527094DEF007D580F /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2035A9C627094E4B007D580F /* SpotPostImageView.swift */,
+				2035A9C627094E4B007D580F /* SpotPostImage.swift */,
+				2035A9CB270966C8007D580F /* SpotPostTitle.swift */,
+				2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */,
+				2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -722,10 +731,11 @@
 			files = (
 				2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */,
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
+				2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */,
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
-				2035A9C727094E4B007D580F /* SpotPostImageView.swift in Sources */,
+				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
@@ -735,11 +745,13 @@
 				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
 				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
+				2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				2035A9C32709229F007D580F /* Upload.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
+				2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */,
 				20A088732708FA1B00D94272 /* Cache.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,

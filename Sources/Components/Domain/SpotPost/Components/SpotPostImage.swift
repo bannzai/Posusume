@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-public struct SpotPostImageView: View {
+public struct SpotPostImage: View {
     @Binding var image: UIImage?
     @State var showsActionSheet: Bool = false
 
