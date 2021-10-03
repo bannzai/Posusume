@@ -362,17 +362,10 @@
 		BA906C32264109E400ACE02F /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */,
-				BA906C3526410A6B00ACE02F /* DefaultLocation.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		BA906C3D26410EFD00ACE02F /* Location */ = {
-			isa = PBXGroup;
-			children = (
 				BA906C3E26410F0400ACE02F /* Geocoder.swift */,
 				BA619FB226414493003713A4 /* LocationManager.swift */,
+				BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */,
+				BA906C3526410A6B00ACE02F /* DefaultLocation.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -458,7 +451,6 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				BA906C3D26410EFD00ACE02F /* Location */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 			);
 			path = Service;
