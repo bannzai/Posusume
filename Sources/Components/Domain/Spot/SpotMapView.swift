@@ -9,12 +9,13 @@ extension SpotsQuery.Data.Me.Spot: Identifiable {
 }
 
 struct SpotMapView: View {
-    @State var region: MKCoordinateRegion = defaultRegion
-    @State var response: SpotsQuery.Data?
-    @State var error: Error?
-    @State var isAddSpotPresented = false;
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
+
+    @State var response: SpotsQuery.Data?
+    @State var error: Error?
+    @State var region: MKCoordinateRegion = defaultRegion
+    @State var isAddSpotPresented = false;
 
     var spots: [SpotsQuery.Data.Me.Spot] {
         response?.me?.spots ?? []
