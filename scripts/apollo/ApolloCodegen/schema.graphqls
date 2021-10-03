@@ -1,5 +1,3 @@
-scalar Upload
-
 scalar Date
 
 scalar URL
@@ -19,7 +17,7 @@ type Query {
 }
 
 type Mutation {
-  spotAdd(input: SpotAddInput!, file: Upload!): SpotAddPayload!
+  spotAdd(input: SpotAddInput!): SpotAddPayload!
 }
 
 interface Node {
@@ -52,20 +50,13 @@ type Me implements Node {
   spots: [Spot!]!
 }
 
-type UploadedFile {
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  url: URL!
-}
-
 input SpotAddInput {
   title: String!
+  imageURL: URL!
   latitude: Latitude!
   longitude: Longitude!
 }
 
 type SpotAddPayload {
-  uploadedFile: UploadedFile!
   spot: Spot!
 }
