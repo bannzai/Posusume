@@ -33,35 +33,14 @@ struct SpotPostView: View {
                         Spacer()
                         PrimaryButton(
                             isLoading: mutation.isProcessing,
-                            action: {
-                                guard let image = image, let geoPoint = geoPoint else {
-                                    return
-                                }
-                                Task {
-                                    // TODO:
-                                    do {
-                                        let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: image)
-                                        try await mutation(
-                                            for: .init(
-                                                spotAddInput: .init(
-                                                    title: title,
-                                                    imageUrl: uploaded.url,
-                                                    latitude: geoPoint.latitude,
-                                                    longitude: geoPoint.longitude
-                                                )
-                                            )
-                                        )
-                                        presentationMode.wrappedValue.dismiss()
-                                    } catch {
-                                        self.error = error
-                                    }
-                                }
-                            }, label: {
+                            action: save,
+                            label: {
                                 Text("保存")
                                     .foregroundColor(.white)
                                     .font(.body)
                                     .fontWeight(.medium)
-                            })
+                            }
+                        )
                         SpotPostSubmitButton(isDisabled: submitButtonIsDisabled)
                         Spacer().frame(height: 32)
                     }
@@ -81,7 +60,32 @@ struct SpotPostView: View {
             .navigationBarTitle("", displayMode: .inline)
         }
     }
-    
+
+    private func save() {
+        guard let image = image, let geoPoint = geoPoint else {
+            return
+        }
+        Task {
+            // TODO:
+            do {
+                let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: image)
+                try await mutation(
+                    for: .init(
+                        spotAddInput: .init(
+                            title: title,
+                            imageUrl: uploaded.url,
+                            latitude: geoPoint.latitude,
+                            longitude: geoPoint.longitude
+                        )
+                    )
+                )
+                presentationMode.wrappedValue.dismiss()
+            } catch {
+                self.error = error
+            }
+        }
+    }
+
 }
 
 struct SpotListView_Preview: PreviewProvider {
