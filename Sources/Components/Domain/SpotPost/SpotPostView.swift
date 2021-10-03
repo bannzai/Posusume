@@ -17,7 +17,7 @@ struct SpotPostView: View {
     @State var geoPoint: CLLocationCoordinate2D?
 
     var submitButtonIsDisabled: Bool {
-        image == nil || title.isEmpty
+        image == nil || title.isEmpty || geoPoint == nil
     }
 
     var body: some View {
