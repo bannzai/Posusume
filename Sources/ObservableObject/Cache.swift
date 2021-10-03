@@ -20,17 +20,22 @@ import Apollo
 /// ```
 @MainActor
 public final class Cache<Query: Apollo.GraphQLQuery>: ObservableObject {
-    @Published public var response: Query.Data?
+    @Published public private(set) var isFetching = false
 
-    internal func retrieve(query: Query) async {
+    internal func retrieve(query: Query) async -> Query.Data? {
+        isFetching = true
+        defer {
+            isFetching = false
+        }
+
         do {
-            response = try await AppApolloClient.shared.fetchFromCache(query: query)
+            return try await AppApolloClient.shared.fetchFromCache(query: query)
         } catch {
-            reponse = nil
+            return nil
         }
     }
 
-    public func callAsFunction(for query: Query) async {
-        await retrieve(query: query)
+    public func callAsFunction(for query: Query) async -> Query.Data? {
+        return await retrieve(query: query)
     }
 }

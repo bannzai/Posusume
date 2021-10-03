@@ -10,10 +10,15 @@ extension SpotsQuery.Data.Me.Spot: Identifiable {
 
 struct SpotMapView: View {
     @State var region: MKCoordinateRegion = defaultRegion
-    @State var spots: [SpotsQuery.Data.Me.Spot] = []
+    @State var response: SpotsQuery.Data?
+    @State var error: Error?
     @State var isAddSpotPresented = false;
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
+
+    var spots: [SpotsQuery.Data.Me.Spot] {
+        response?.me?.spots ?? []
+    }
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -59,8 +64,13 @@ struct SpotMapView: View {
         )
         .edgesIgnoringSafeArea(.all)
         .task {
-            await cache(for: .init())
-            await query(for: .init())
+            response = await cache(for: .init())
+
+            do {
+                response = try await query(for: .init())
+            } catch {
+                self.error = error
+            }
         }
     }
 }

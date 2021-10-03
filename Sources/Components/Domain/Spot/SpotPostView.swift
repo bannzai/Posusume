@@ -11,6 +11,7 @@ struct SpotPostView: View {
     @State var imageName: String?
     @State var image: UIImage?
     @StateObject var mutation = Mutation<SpotAddMutation>()
+    @StateObject var upload = Upload()
 
     var body: some View {
         EmptyView()
