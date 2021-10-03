@@ -20,10 +20,12 @@ public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
         return response
     }
 
+    @discardableResult
     public func callAsFunction(for mutation: Mutation) async throws -> Mutation.Data {
         try await perform(mutation: mutation)
     }
 
+    @discardableResult
     public func callAsFunction<Query: GraphQLQuery>(for mutation: Mutation, queryAfterPerform query: Query) async throws -> Mutation.Data {
         try await perform(mutation: mutation, queryAfterPerform: query)
     }

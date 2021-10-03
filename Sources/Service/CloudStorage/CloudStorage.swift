@@ -25,6 +25,7 @@ extension CloudStorage {
 
     // MARK: - Upload
     public struct Uploaded {
+        var url: URL { URL(string: path )! }
         let path: String
     }
     public enum UploadError: Error {

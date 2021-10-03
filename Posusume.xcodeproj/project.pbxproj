@@ -28,6 +28,7 @@
 		2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CB270966C8007D580F /* SpotPostTitle.swift */; };
 		2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */; };
 		2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */; };
+		2035A9D227096EB8007D580F /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D127096EB8007D580F /* Buttons.swift */; };
 		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
@@ -114,6 +115,7 @@
 		2035A9CB270966C8007D580F /* SpotPostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostTitle.swift; sourceTree = "<group>"; };
 		2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostGeoPoint.swift; sourceTree = "<group>"; };
 		2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostSubmitButton.swift; sourceTree = "<group>"; };
+		2035A9D127096EB8007D580F /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 			children = (
 				BAFF7021261C3FB300584593 /* Color.swift */,
 				BA906C3726410C3A00ACE02F /* SearchBar.swift */,
+				2035A9D127096EB8007D580F /* Buttons.swift */,
 			);
 			path = Atoms;
 			sourceTree = "<group>";
@@ -768,6 +771,7 @@
 				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
+				2035A9D227096EB8007D580F /* Buttons.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,

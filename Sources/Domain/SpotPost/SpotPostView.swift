@@ -12,6 +12,7 @@ struct SpotPostView: View {
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
 
+    @State var error: Error?
     @State var image: UIImage?
     @State var title: String = ""
     @State var geoPoint: CLLocationCoordinate2D?
@@ -30,6 +31,37 @@ struct SpotPostView: View {
                         SpotPostTitle(title: $title)
                         SpotPostGeoPoint(geoPoint: $geoPoint)
                         Spacer()
+                        PrimaryButton(
+                            isLoading: mutation.isProcessing,
+                            action: {
+                                guard let image = image, let geoPoint = geoPoint else {
+                                    return
+                                }
+                                Task {
+                                    // TODO:
+                                    do {
+                                        let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: image)
+                                        try await mutation(
+                                            for: .init(
+                                                spotAddInput: .init(
+                                                    title: title,
+                                                    imageUrl: uploaded.url,
+                                                    latitude: geoPoint.latitude,
+                                                    longitude: geoPoint.longitude
+                                                )
+                                            )
+                                        )
+                                        presentationMode.wrappedValue.dismiss()
+                                    } catch {
+                                        self.error = error
+                                    }
+                                }
+                            }, label: {
+                                Text("保存")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .fontWeight(.medium)
+                            })
                         SpotPostSubmitButton(isDisabled: submitButtonIsDisabled)
                         Spacer().frame(height: 32)
                     }
