@@ -25,17 +25,16 @@ struct LocationSelectView: View {
     var body: some View {
         VStack(alignment: .leading) {
             LocationSelectSearchBar(
-                isEditing: true,
-                text: .init(get: { searchText }, set: { text in
-                    searchText = text
+                text: $searchText,
+                onSearch: {
                     Task {
                         do {
-                            places = try await geocoder.geocode(address: text)
+                            places = try await geocoder.geocode(address: searchText)
                         } catch {
                             self.error = error
                         }
                     }
-                })
+                }
             )
             List {
                 HStack {
