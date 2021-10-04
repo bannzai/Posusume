@@ -10,7 +10,7 @@ struct SpotPostView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
-    @State var photo: UIImage?
+    @State var image: UIImage?
     @State var title: String = ""
     @State var geoPoint: CLLocationCoordinate2D?
 

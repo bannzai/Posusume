@@ -59,6 +59,13 @@ public struct PlaceMark: Equatable, Identifiable {
             "\(administrativeArea)\(locality)\(thoroughfare)\(subThoroughfare)"
         }
     }
+
+    func formattedLocationAddress() -> String {
+        if !name.isEmpty {
+            return "\(name): \(address.address)"
+        }
+        return address.address
+    }
 }
 
 public struct GeocoderEnvironmentKey: EnvironmentKey {

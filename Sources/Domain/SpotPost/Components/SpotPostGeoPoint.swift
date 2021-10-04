@@ -7,20 +7,15 @@ public struct SpotPostGeoPoint: View {
 
     public var body: some View {
         VStack(alignment: .leading) {
-            Button(
-                action: {
-                    // TODO:
-                },
-                label: {
-                    if let geoPoint = geoPoint {
-                        Text("画像を撮った場所を選んでください")
-                            .font(.subheadline)
-                    } else {
-                        Text("画像を撮った場所を選んでください")
-                            .font(.subheadline)
-                    }
+            NavigationLink(destination: LocationSelectView()) {
+                if let geoPoint = geoPoint {
+                    Text("")
+                        .font(.subheadline)
+                } else {
+                    Text("画像を撮った場所を選んでください")
+                        .font(.subheadline)
                 }
-            )
+            }
         }
         .frame(maxWidth: .infinity)
     }

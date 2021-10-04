@@ -12,6 +12,7 @@ struct LocationSelectView: View {
     @State var marks: [PlaceMark] = []
     @State var selectedMark: PlaceMark?
     @State var userLocation: CLLocation?
+    @State var presentingAlertType: AlertType?
 
     enum AlertType: Int, Identifiable {
         case openSetting
@@ -45,7 +46,7 @@ struct LocationSelectView: View {
                             case nil:
                                 updateUserLocation()
                             case .openSettingApp:
-                                openSetting()
+                                presentingAlertType = .openSetting
                             case .requiredAutentification:
                                 requestAuthentification()
                             }
@@ -53,7 +54,7 @@ struct LocationSelectView: View {
                 }
                 ForEach(marks) { mark in
                     HStack {
-                        Text(formatForLocation(mark: mark))
+                        Text(mark.formattedLocationAddress())
                             .font(.footnote)
                             .onTapGesture {
                                 selectedMark = mark
@@ -63,6 +64,24 @@ struct LocationSelectView: View {
             }
         }
         .handle(error: $error)
+        .alert(item: $presentingAlertType, content: { alertType in
+            switch alertType {
+            case .openSetting:
+                return Alert(
+                    title: Text("位置情報を取得できません"),
+                    message: Text("位置情報の取得が許可されていません。設定アプリから許可をしてください"),
+                    primaryButton: .default(Text("設定を開く"), action: openSetting),
+                    secondaryButton: .cancel()
+                )
+            case .choseNoPermission:
+                return Alert(
+                    title: Text("位置情報の取得を拒否しました"),
+                    message: Text("位置情報の取得が拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
+                    primaryButton: .default(Text("設定を開く"), action: openSetting),
+                    secondaryButton: .cancel()
+                )
+            }
+        })
     }
 
     private func updateUserLocation() {
@@ -84,9 +103,9 @@ struct LocationSelectView: View {
             case .notDetermined:
                 return
             case .denied:
-                state.alert = .notPermission
+                presentingAlertType = .choseNoPermission
             case .restricted:
-                openSetting()
+                presentingAlertType = .openSetting
             @unknown default:
                 assertionFailure("unexpected authorization status \(status):\(status.rawValue)")
             }
@@ -94,14 +113,7 @@ struct LocationSelectView: View {
     }
 }
 
-func formatForLocation(mark: PlaceMark) -> String {
-    if !mark.name.isEmpty {
-        return "\(mark.name): \(mark.address.address)"
-    }
-    return mark.address.address
-}
-
-struct LocationSelectView_Previews: PreviewProvider {
+private struct Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LocationSelectView()
