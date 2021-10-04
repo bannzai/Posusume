@@ -12,7 +12,7 @@ struct SpotPostView: View {
     @State var error: Error?
     @State var image: UIImage?
     @State var title: String = ""
-    @State var geoPoint: CLLocationCoordinate2D?
+    @State var place: Place?
 
     var body: some View {
         NavigationView {
@@ -21,12 +21,12 @@ struct SpotPostView: View {
                     VStack(spacing: 20) {
                         SpotPostImage(image: $image)
                         SpotPostTitle(title: $title)
-                        SpotPostGeoPoint(geoPoint: $geoPoint)
+                        SpotPostGeoPoint(place: $place)
                         Spacer()
                         SpotPostSubmitButton(
                             image: $image,
                             title: $title,
-                            geoPoint: $geoPoint
+                            place: $place
                         )
                     }
                     .frame(minHeight: geometry.size.height)

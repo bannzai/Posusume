@@ -12,10 +12,10 @@ public struct SpotPostSubmitButton: View {
 
     @Binding var image: UIImage?
     @Binding var title: String
-    @Binding var geoPoint: CLLocationCoordinate2D?
+    @Binding var place: Place?
 
     var submitButtonIsDisabled: Bool {
-        image == nil || title.isEmpty || geoPoint == nil
+        image == nil || title.isEmpty || place == nil
     }
 
     public var body: some View {
@@ -33,7 +33,7 @@ public struct SpotPostSubmitButton: View {
     }
 
     private func save() {
-        guard let image = image, let geoPoint = geoPoint else {
+        guard let image = image, let place = place else {
             return
         }
         Task {
@@ -45,8 +45,8 @@ public struct SpotPostSubmitButton: View {
                         spotAddInput: .init(
                             title: title,
                             imageUrl: uploaded.url,
-                            latitude: geoPoint.latitude,
-                            longitude: geoPoint.longitude
+                            latitude: place.location.latitude,
+                            longitude: place.location.longitude
                         )
                     )
                 )

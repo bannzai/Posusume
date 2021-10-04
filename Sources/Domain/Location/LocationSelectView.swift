@@ -115,9 +115,10 @@ struct LocationSelectView: View {
 }
 
 private struct Previews: PreviewProvider {
+    @State static var place: Place?
     static var previews: some View {
         Group {
-            LocationSelectView()
+            LocationSelectView(selectedPlace: $place)
                 .previewDisplayName("empty search text")
         }
     }
