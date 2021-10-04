@@ -4,6 +4,7 @@ import Combine
 
 struct LoginView: View {
     @EnvironmentObject private var auth: AuthViewModel
+
     @State var region: MKCoordinateRegion = defaultRegion
 
     var body: some View {
