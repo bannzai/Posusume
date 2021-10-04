@@ -3,11 +3,11 @@ import Combine
 import SwiftUI
 
 public protocol Geocoder {
-    func geocode(address: String) async throws -> [PlaceMark]
+    func geocode(address: String) async throws -> [Place]
 }
 
 private struct _Geocoder: Geocoder {
-    func geocode(address: String) async throws -> [PlaceMark] {
+    func geocode(address: String) async throws -> [Place] {
         try await withCheckedThrowingContinuation { continuation in
             CLGeocoder().geocodeAddressString(address) { marks, error in
                 if let error = error {
@@ -19,7 +19,7 @@ private struct _Geocoder: Geocoder {
                     guard let location = mark.location else {
                         return nil
                     }
-                    return PlaceMark(
+                    return Place(
                         name: mark.name ?? "",
                         country: mark.country ?? "",
                         postalCode: mark.postalCode ?? "",
@@ -37,7 +37,7 @@ private struct _Geocoder: Geocoder {
     }
 }
 
-public struct PlaceMark: Equatable, Identifiable {
+public struct Place: Equatable, Identifiable {
     public let id: UUID = .init()
     public let name: String
     public let country: String

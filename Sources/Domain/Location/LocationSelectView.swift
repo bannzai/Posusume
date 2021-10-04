@@ -9,11 +9,11 @@ struct LocationSelectView: View {
 
     @State var error: Error?
     @State var searchText: String = ""
-    @State var marks: [PlaceMark] = []
+    @State var marks: [Place] = []
     @State var userLocation: CLLocation?
     @State var presentingAlertType: AlertType?
 
-    @Binding var selectedMark: PlaceMark?
+    @Binding var selectedMark: Place?
 
     enum AlertType: Int, Identifiable {
         case openSetting
