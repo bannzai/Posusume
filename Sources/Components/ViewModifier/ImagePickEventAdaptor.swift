@@ -94,7 +94,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
                 case .choseNoPermission:
                     return Alert(
                         title: Text("アクセスを拒否しました"),
-                        message: Text("フォトライブラリのアクセスが拒否されました。捜査を行う場合は設定アプリから許可をしてください"),
+                        message: Text("フォトライブラリのアクセスが拒否されました。操作を続ける場合は設定アプリから許可をしてください"),
                         primaryButton: .default(Text("設定を開く"), action: openSetting),
                         secondaryButton: .cancel()
                     )
