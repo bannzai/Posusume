@@ -30,7 +30,7 @@ struct LocationSelectView: View {
                     searchText = text
                     Task {
                         do {
-                        places = try await geocoder.geocode(address: text)
+                            places = try await geocoder.geocode(address: text)
                         } catch {
                             self.error = error
                         }
