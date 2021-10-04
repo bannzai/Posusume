@@ -12,7 +12,7 @@ struct SpotPostView: View {
     @State var error: Error?
     @State var image: UIImage?
     @State var title: String = ""
-    @State var place: Place?
+    @State var place: Placemark?
 
     var body: some View {
         NavigationView {

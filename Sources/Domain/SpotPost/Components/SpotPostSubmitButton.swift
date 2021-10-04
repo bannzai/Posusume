@@ -12,7 +12,7 @@ public struct SpotPostSubmitButton: View {
 
     @Binding var image: UIImage?
     @Binding var title: String
-    @Binding var place: Place?
+    @Binding var place: Placemark?
 
     var submitButtonIsDisabled: Bool {
         image == nil || title.isEmpty || place == nil

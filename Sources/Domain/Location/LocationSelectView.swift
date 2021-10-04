@@ -9,11 +9,11 @@ struct LocationSelectView: View {
 
     @State var error: Error?
     @State var searchText: String = ""
-    @State var places: [Place] = []
+    @State var places: [Placemark] = []
     @State var userLocation: CLLocation?
     @State var presentingAlertType: AlertType?
 
-    @Binding var selectedPlace: Place?
+    @Binding var selectedPlacemark: Placemark?
 
     enum AlertType: Int, Identifiable {
         case openSetting
@@ -58,7 +58,7 @@ struct LocationSelectView: View {
                         Text(mark.formattedLocationAddress())
                             .font(.footnote)
                             .onTapGesture {
-                                selectedPlace = mark
+                                selectedPlacemark = mark
                             }
                     }
                 }
@@ -115,10 +115,10 @@ struct LocationSelectView: View {
 }
 
 private struct Previews: PreviewProvider {
-    @State static var place: Place?
+    @State static var place: Placemark?
     static var previews: some View {
         Group {
-            LocationSelectView(selectedPlace: $place)
+            LocationSelectView(selectedPlacemark: $place)
                 .previewDisplayName("empty search text")
         }
     }
