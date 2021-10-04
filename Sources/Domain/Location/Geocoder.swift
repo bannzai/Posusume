@@ -72,6 +72,7 @@ public struct Place: Equatable, Identifiable {
         // 1番1号
         public let subThoroughfare: String?
 
+        // 東京都渋谷区X町 4丁目1番1号
         public var address: String {
             [administrativeArea, locality, thoroughfare, subThoroughfare]
                 .compactMap{ $0 }
