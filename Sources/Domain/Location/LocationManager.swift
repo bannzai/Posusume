@@ -2,13 +2,13 @@ import CoreLocation
 import Combine
 import SwiftUI
 
-public enum LocationManagerPrepareAction {
-    case openSettingApp
+public enum LocationManagerInvalidationReason {
     case requiredAutentification
+    case denied
 }
 
 public protocol LocationManager: CLLocationManagerDelegate {
-    func prepareActionType() -> LocationManagerPrepareAction?
+    func invalidationReason() -> LocationManagerInvalidationReason?
     func requestAuthorization() async -> CLAuthorizationStatus
     func userLocation() async throws -> CLLocation
 }
@@ -18,6 +18,7 @@ private class _LocationManager: NSObject, LocationManager {
     let didChangeAuthorization: PassthroughSubject<CLAuthorizationStatus, Never> = .init()
     let userLocationSubject: PassthroughSubject<CLLocation, Swift.Error> = .init()
     let locationManager: CLLocationManager = .init()
+
     override init() {
         super.init()
         locationManager.delegate = self
@@ -26,15 +27,15 @@ private class _LocationManager: NSObject, LocationManager {
         locationManager.allowsBackgroundLocationUpdates = false
     }
     
-    func prepareActionType() -> LocationManagerPrepareAction? {
+    func invalidationReason() -> LocationManagerInvalidationReason? {
         let status = locationManager.authorizationStatus
         switch status {
         case .notDetermined:
             return .requiredAutentification
         case .denied:
-            return .openSettingApp
+            return .denied
         case .restricted:
-            return .openSettingApp
+            return .denied
         case .authorizedAlways:
             return nil
         case .authorizedWhenInUse:
