@@ -24,18 +24,6 @@ struct LocationSelectView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            LocationSelectSearchBar(
-                text: $searchText,
-                onSearch: {
-                    Task {
-                        do {
-                            places = try await geocoder.geocode(address: searchText)
-                        } catch {
-                            self.error = error
-                        }
-                    }
-                }
-            )
             List {
                 HStack {
                     Image(systemName: "location.circle")
@@ -63,6 +51,17 @@ struct LocationSelectView: View {
                 }
             }
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("住所を入力"))
+        .onSubmit(of: .search) {
+            Task {
+                do {
+                    places = try await geocoder.geocode(address: searchText)
+                } catch {
+                    self.error = error
+                }
+            }
+        }
+        .navigationTitle(Text("撮影場所を選択"))
         .handle(error: $error)
         .alert(item: $presentingAlertType, content: { alertType in
             switch alertType {
@@ -113,12 +112,11 @@ struct LocationSelectView: View {
     }
 }
 
-private struct Previews: PreviewProvider {
+private struct LocationSelectView_Previews: PreviewProvider {
     @State static var place: Placemark?
     static var previews: some View {
         Group {
             LocationSelectView(selectedPlacemark: $place)
-                .previewDisplayName("empty search text")
         }
     }
 }
