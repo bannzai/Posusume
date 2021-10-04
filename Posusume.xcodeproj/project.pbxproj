@@ -30,6 +30,8 @@
 		2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */; };
 		2035A9D227096EB8007D580F /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D127096EB8007D580F /* Buttons.swift */; };
 		2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */; };
+		2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */; };
+		2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DC270BAB68007D580F /* RootViewModel.swift */; };
 		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
@@ -55,7 +57,6 @@
 		BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */; };
 		BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3E26410F0400ACE02F /* Geocoder.swift */; };
 		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
-		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* RootView.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
@@ -117,6 +118,8 @@
 		2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostSubmitButton.swift; sourceTree = "<group>"; };
 		2035A9D127096EB8007D580F /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
+		2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireLocationAuthorizationView.swift; sourceTree = "<group>"; };
+		2035A9DC270BAB68007D580F /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
@@ -142,7 +145,6 @@
 		BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectView.swift; sourceTree = "<group>"; };
 		BA906C3E26410F0400ACE02F /* Geocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B12610B72F00676F22 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -362,18 +364,11 @@
 			children = (
 				BA906C3E26410F0400ACE02F /* Geocoder.swift */,
 				BA619FB226414493003713A4 /* LocationManager.swift */,
+				2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */,
 				BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */,
 				BA906C3526410A6B00ACE02F /* DefaultLocation.swift */,
 			);
 			path = Location;
-			sourceTree = "<group>";
-		};
-		BAAB0D3F26287ADA00EA3091 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				BAAB0D4826287AFD00EA3091 /* LoginView.swift */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		BAD9A8A32610B72F00676F22 = {
@@ -409,6 +404,7 @@
 				BAFF701F261C3FB300584593 /* Components */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B12610B72F00676F22 /* RootView.swift */,
+				2035A9DC270BAB68007D580F /* RootViewModel.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
 				BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */,
@@ -460,7 +456,6 @@
 				2035A9C427094DE6007D580F /* SpotPost */,
 				BA906C32264109E400ACE02F /* Location */,
 				BA317331262BC1D500E1212C /* Photo */,
-				BAAB0D3F26287ADA00EA3091 /* Login */,
 				BADF52FF261D303400431FEB /* Spot */,
 			);
 			path = Domain;
@@ -730,6 +725,7 @@
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
+				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
@@ -757,11 +753,11 @@
 				2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
 				2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */,
+				2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */,
 				BA979CB026140A4600997206 /* Auth.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
 				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
-				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
 				2035A9D227096EB8007D580F /* Buttons.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
