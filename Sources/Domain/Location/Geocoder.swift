@@ -8,37 +8,30 @@ public protocol Geocoder {
 
 private struct _Geocoder: Geocoder {
     func geocode(address: String) async throws -> [Place] {
-        try await withCheckedThrowingContinuation { continuation in
-            CLGeocoder().geocodeAddressString(address) { places, error in
-                if let error = error {
-                    return continuation.resume(throwing: error)
+        try await CLGeocoder()
+            .geocodeAddressString(address)
+            .compactMap { mark in
+                guard let location = mark.location else {
+                    return nil
                 }
-
-
-                continuation.resume(returning: (places ?? []).compactMap { mark in
-                    guard let location = mark.location else {
-                        return nil
-                    }
-                    return Place(
-                        name: mark.name,
-                        country: mark.country,
-                        isoCountryCode: mark.isoCountryCode,
-                        postalCode: mark.postalCode,
-                        inlandWater: mark.inlandWater,
-                        ocean: mark.ocean,
-                        areasOfInterest: mark.areasOfInterest,
-                        address: .init(
-                            administrativeArea: mark.administrativeArea,
-                            subAdministrativeArea: mark.subAdministrativeArea,
-                            locality: mark.locality,
-                            subLocality: mark.subLocality,
-                            thoroughfare: mark.thoroughfare,
-                            subThoroughfare: mark.subThoroughfare
-                        ),
-                        location: location.coordinate
-                    )
-                })
-            }
+                return Place(
+                    name: mark.name,
+                    country: mark.country,
+                    isoCountryCode: mark.isoCountryCode,
+                    postalCode: mark.postalCode,
+                    inlandWater: mark.inlandWater,
+                    ocean: mark.ocean,
+                    areasOfInterest: mark.areasOfInterest,
+                    address: .init(
+                        administrativeArea: mark.administrativeArea,
+                        subAdministrativeArea: mark.subAdministrativeArea,
+                        locality: mark.locality,
+                        subLocality: mark.subLocality,
+                        thoroughfare: mark.thoroughfare,
+                        subThoroughfare: mark.subThoroughfare
+                    ),
+                location: location.coordinate
+            )
         }
     }
 }
