@@ -9,11 +9,11 @@ struct LocationSelectView: View {
 
     @State var error: Error?
     @State var searchText: String = ""
-    @State var marks: [Place] = []
+    @State var places: [Place] = []
     @State var userLocation: CLLocation?
     @State var presentingAlertType: AlertType?
 
-    @Binding var selectedMark: Place?
+    @Binding var selectedPlace: Place?
 
     enum AlertType: Int, Identifiable {
         case openSetting
@@ -30,7 +30,7 @@ struct LocationSelectView: View {
                     searchText = text
                     Task {
                         do {
-                        marks = try await geocoder.geocode(address: text)
+                        places = try await geocoder.geocode(address: text)
                         } catch {
                             self.error = error
                         }
@@ -53,12 +53,12 @@ struct LocationSelectView: View {
                             }
                         }
                 }
-                ForEach(marks) { mark in
+                ForEach(places) { mark in
                     HStack {
                         Text(mark.formattedLocationAddress())
                             .font(.footnote)
                             .onTapGesture {
-                                selectedMark = mark
+                                selectedPlace = mark
                             }
                     }
                 }

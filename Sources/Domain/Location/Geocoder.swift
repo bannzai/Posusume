@@ -9,13 +9,13 @@ public protocol Geocoder {
 private struct _Geocoder: Geocoder {
     func geocode(address: String) async throws -> [Place] {
         try await withCheckedThrowingContinuation { continuation in
-            CLGeocoder().geocodeAddressString(address) { marks, error in
+            CLGeocoder().geocodeAddressString(address) { places, error in
                 if let error = error {
                     return continuation.resume(throwing: error)
                 }
 
 
-                continuation.resume(returning: (marks ?? []).compactMap { mark in
+                continuation.resume(returning: (places ?? []).compactMap { mark in
                     guard let location = mark.location else {
                         return nil
                     }
