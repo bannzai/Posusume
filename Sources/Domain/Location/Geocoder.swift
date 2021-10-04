@@ -74,7 +74,7 @@ public struct Placemark: Equatable, Identifiable {
     }
 
     func formattedLocationAddress() -> String {
-        if let name = name, !name.isEmpty {
+        if let name = name, !name.isEmpty, !address.address.contains(name) {
             return "\(name): \(address.address)"
         }
         return address.address
