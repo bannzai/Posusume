@@ -1,65 +1,78 @@
 import CoreLocation
 import Combine
+import SwiftUI
 
-protocol Geocoder {
-    func geocoder(address: String) -> AnyPublisher<[PlaceMark], Swift.Error>
+public protocol Geocoder {
+    func geocode(address: String) async throws -> [PlaceMark]
 }
 
 private struct _Geocoder: Geocoder {
-    func geocoder(address: String) -> AnyPublisher<[PlaceMark], Error> {
-        Future { promise in
+    func geocode(address: String) async throws -> [PlaceMark] {
+        try await withCheckedThrowingContinuation { continuation in
             CLGeocoder().geocodeAddressString(address) { marks, error in
                 if let error = error {
-                    return promise(.failure(error))
+                    return continuation.resume(throwing: error)
                 }
-                promise(
-                    .success(
-                        (marks ?? []).compactMap { mark in
-                            guard let location = mark.location else {
-                                return nil
-                            }
-                            return PlaceMark(
-                                name: mark.name ?? "",
-                                country: mark.country ?? "",
-                                postalCode: mark.postalCode ?? "",
-                                address: .init(
-                                    administrativeArea: mark.administrativeArea ?? "",
-                                    locality: mark.locality ?? "",
-                                    thoroughfare: mark.thoroughfare ?? "",
-                                    subThoroughfare: mark.subThoroughfare ?? ""
-                                ),
-                                location: location.coordinate
-                            )
-                        }
+
+
+                continuation.resume(returning: (marks ?? []).compactMap { mark in
+                    guard let location = mark.location else {
+                        return nil
+                    }
+                    return PlaceMark(
+                        name: mark.name ?? "",
+                        country: mark.country ?? "",
+                        postalCode: mark.postalCode ?? "",
+                        address: .init(
+                            administrativeArea: mark.administrativeArea ?? "",
+                            locality: mark.locality ?? "",
+                            thoroughfare: mark.thoroughfare ?? "",
+                            subThoroughfare: mark.subThoroughfare ?? ""
+                        ),
+                        location: location.coordinate
                     )
-                )
+                })
             }
-        }.eraseToAnyPublisher()
+        }
     }
 }
 
-internal let geocoder: Geocoder = _Geocoder()
+public struct PlaceMark: Equatable, Identifiable {
+    public let id: UUID = .init()
+    public let name: String
+    public let country: String
+    public let postalCode: String
+    public let address: Address
+    public let location: CLLocationCoordinate2D
 
-struct PlaceMark: Equatable, Identifiable {
-    let id: UUID = .init()
-    let name: String
-    let country: String
-    let postalCode: String
-    let address: Address
-    let location: CLLocationCoordinate2D
-
-    struct Address: Equatable  {
+    public struct Address: Equatable  {
         // 東京都
-        let administrativeArea: String
+        public let administrativeArea: String
         // 渋谷区
-        let locality: String
+        public let locality: String
         // X町 4丁目
-        let thoroughfare: String
+        public let thoroughfare: String
         // 1番1号
-        let subThoroughfare: String
+        public let subThoroughfare: String
 
-        var address: String {
+        public var address: String {
             "\(administrativeArea)\(locality)\(thoroughfare)\(subThoroughfare)"
         }
     }
 }
+
+public struct GeocoderEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: Geocoder = _Geocoder()
+}
+
+extension EnvironmentValues {
+    public var geocoder: Geocoder {
+        get {
+            self[GeocoderEnvironmentKey.self]
+        }
+        set {
+            self[GeocoderEnvironmentKey.self] = newValue
+        }
+    }
+}
+

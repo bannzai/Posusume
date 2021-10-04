@@ -1,13 +1,6 @@
 import Foundation
 import SwiftUI
 
-private func openSetting() {
-    let settingURL = URL(string: UIApplication.openSettingsURLString)!
-    if UIApplication.shared.canOpenURL(settingURL) {
-        UIApplication.shared.open(settingURL)
-    }
-}
-
 public struct ImagePickEventAdaptor: ViewModifier {
     @Environment(\.dismiss) private var dismiss
 
@@ -113,5 +106,12 @@ public struct ImagePickEventAdaptor: ViewModifier {
 extension View {
     func adaptImagePickEvent(showsActionSheet: Binding<Bool>, photoLibraryResult: Binding<PhotoLibraryResult?>, error: Binding<Error?>) -> some View {
         modifier(ImagePickEventAdaptor(showsActionSheet: showsActionSheet, photoLibraryResult: photoLibraryResult, error: error))
+    }
+}
+
+private func openSetting() {
+    let settingURL = URL(string: UIApplication.openSettingsURLString)!
+    if UIApplication.shared.canOpenURL(settingURL) {
+        UIApplication.shared.open(settingURL)
     }
 }

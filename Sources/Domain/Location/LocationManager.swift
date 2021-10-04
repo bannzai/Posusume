@@ -9,8 +9,8 @@ public enum LocationManagerPrepareAction {
 
 public protocol LocationManager: CLLocationManagerDelegate {
     func prepareActionType() -> LocationManagerPrepareAction?
-    func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never>
-    func userLocation() -> AnyPublisher<CLLocation, Swift.Error>
+    func requestAuthorization() async -> CLAuthorizationStatus
+    func userLocation() async throws -> CLLocation
 }
 
 private class _LocationManager: NSObject, LocationManager {
@@ -44,6 +44,14 @@ private class _LocationManager: NSObject, LocationManager {
             return nil
         }
     }
+    func requestAuthorization() async -> CLAuthorizationStatus {
+        await withCheckedContinuation { continuation in
+            requestAuthorization().sink { status in
+                continuation.resume(returning: status)
+            }
+            .store(in: &canceller)
+        }
+    }
     func requestAuthorization() -> AnyPublisher<CLAuthorizationStatus, Never> {
         Future { promise in
             self.didChangeAuthorization.sink { status in
@@ -53,6 +61,20 @@ private class _LocationManager: NSObject, LocationManager {
 
             self.locationManager.requestWhenInUseAuthorization()
         }.eraseToAnyPublisher()
+    }
+    func userLocation() async throws -> CLLocation {
+        try await withCheckedThrowingContinuation { continuation in
+            userLocation().sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    return
+                case let .failure(error):
+                    continuation.resume(throwing: error)
+                }
+            }, receiveValue: {
+                continuation.resume(returning: $0)
+            }).store(in: &canceller)
+        }
     }
     func userLocation() -> AnyPublisher<CLLocation, Swift.Error> {
         Future { promise in
@@ -89,12 +111,12 @@ extension _LocationManager: CLLocationManagerDelegate {
     }
 }
 
-struct LocationManagerEnvironmentKey: EnvironmentKey {
-    static var defaultValue: LocationManager = _LocationManager()
+public struct LocationManagerEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: LocationManager = _LocationManager()
 }
 
 extension EnvironmentValues {
-    var locationManager: LocationManager {
+    public var locationManager: LocationManager {
         get {
             self[LocationManagerEnvironmentKey.self]
         }
