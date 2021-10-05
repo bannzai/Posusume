@@ -7,6 +7,8 @@ import MapKit
 import FirebaseStorageSwift
 
 struct SpotPostView: View {
+    @Environment(\.locationManager) var locationManager
+    @Environment(\.geocoder) var geocoder
     @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
@@ -42,6 +44,11 @@ struct SpotPostView: View {
                 })
             )
             .navigationBarTitle("", displayMode: .inline)
+            .task {
+                if place == nil, let userLocation = try? await locationManager.userLocation() {
+                    place = try? await geocoder.reverseGeocode(location: userLocation).first
+                }
+            }
         }
     }
 

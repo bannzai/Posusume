@@ -10,13 +10,14 @@ public struct SpotPostGeoPoint: View {
             NavigationLink(destination: LocationSelectView(selectedPlacemark: _place)) {
                 if let place = place {
                     Text(place.formattedLocationAddress())
-                        .font(.subheadline)
                 } else {
-                    Text("画像を撮った場所を選んでください")
-                        .font(.subheadline)
+                    Text("撮影場所を選択してください")
+                        .foregroundColor(.accentColor)
                 }
             }
         }
+        .font(.subheadline)
+        .foregroundColor(.black)
         .frame(maxWidth: .infinity)
     }
 }
