@@ -4,8 +4,8 @@ import SwiftUI
 public struct ImagePickEventAdaptor: ViewModifier {
     @Environment(\.dismiss) private var dismiss
 
-    @State private var isCameraPresented = false
-    @State private var isPhotoLibraryPresented = false
+    @State private var isPresentingCamera = false
+    @State private var isPresentingPhotoLibrary = false
     @State private var presentingAlertType: AlertType?
 
     @Binding var showsActionSheet: Bool
@@ -28,12 +28,12 @@ public struct ImagePickEventAdaptor: ViewModifier {
                         title: Text("写真を1枚選んでください"),
                         buttons: [
                             .default(Text("撮影する"), action: {
-                                isCameraPresented = true
+                                isPresentingCamera = true
                             }),
                             .default(Text("写真から選択"), action: {
                                 switch photoLibrary.prepareActionType() {
                                 case nil:
-                                    isPhotoLibraryPresented = true
+                                    isPresentingPhotoLibrary = true
                                 case .openSettingApp:
                                     presentingAlertType = .openSetting
                                 case .requestAuthorization:
@@ -41,7 +41,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
                                         let status = await photoLibrary.requestAuthorization()
                                         switch status {
                                         case .authorized, .limited:
-                                            isPhotoLibraryPresented = true
+                                            isPresentingPhotoLibrary = true
                                         case .denied, .restricted, .notDetermined:
                                             presentingAlertType = .choseNoPermission
                                         @unknown default:
@@ -55,13 +55,13 @@ public struct ImagePickEventAdaptor: ViewModifier {
                     )
                 }
             )
-            .fullScreenCover(isPresented: $isCameraPresented, content: {
+            .fullScreenCover(isPresented: $isPresentingCamera, content: {
                 PhotoCameraView(captured: { image in
 
                 }).ignoresSafeArea()
             })
             .sheet(
-                isPresented: $isPhotoLibraryPresented,
+                isPresented: $isPresentingPhotoLibrary,
                 content: {
                     PhotoLibraryView(
                         photoLibrary: photoLibrary,
