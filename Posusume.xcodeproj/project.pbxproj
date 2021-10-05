@@ -51,7 +51,6 @@
 		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
 		BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA31734B262CF25100E1212C /* PhotoLibraryView.swift */; };
 		BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317351262CF28000E1212C /* MockPhotoLibrary.swift */; };
-		BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */; };
 		BA619FB326414493003713A4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA619FB226414493003713A4 /* LocationManager.swift */; };
 		BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3526410A6B00ACE02F /* DefaultLocation.swift */; };
 		BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */; };
@@ -138,7 +137,6 @@
 		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		BA31734B262CF25100E1212C /* PhotoLibraryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoLibraryView.swift; sourceTree = "<group>"; };
 		BA317351262CF28000E1212C /* MockPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrary.swift; sourceTree = "<group>"; };
-		BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCameraView.swift; sourceTree = "<group>"; };
 		BA619FB226414493003713A4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		BA906C3526410A6B00ACE02F /* DefaultLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocation.swift; sourceTree = "<group>"; };
 		BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectView.swift; sourceTree = "<group>"; };
@@ -351,7 +349,6 @@
 			children = (
 				BA317339262BC87900E1212C /* PhotoLibrary.swift */,
 				BA31734B262CF25100E1212C /* PhotoLibraryView.swift */,
-				BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -724,7 +721,6 @@
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
-				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
