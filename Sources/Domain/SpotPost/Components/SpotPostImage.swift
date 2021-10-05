@@ -21,8 +21,8 @@ struct SpotPostImage: View {
                     GeometryReader { reader in
                         Image(uiImage: image)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: reader.size.width, height: reader.size.width / 4 * 3)
+                            .scaledToFill()
+                            .frame(width: reader.size.width, height: reader.size.width / 3 * 4)
                             .clipped()
                     }
                 } else {
@@ -38,12 +38,13 @@ struct SpotPostImage: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
+                    .aspectRatio(.init(width: 3, height: 4), contentMode: .fill)
                     .foregroundColor(.placeholder)
                     .background(Color.white)
                 }
             })
             .buttonStyle(PlainButtonStyle())
+            .clipped() // WORKAROUND
             .adaptImagePickEvent(
                 showsActionSheet: $showsActionSheet,
                 error: $error,
