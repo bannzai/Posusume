@@ -17,34 +17,33 @@ struct SpotPostImage: View {
                 showsActionSheet = true
             },
             label: {
-                if let image = image {
-                    GeometryReader { reader in
-                        Image(uiImage: image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: reader.size.width, height: reader.size.width / 3 * 4)
-                            .clipped()
+                GeometryReader { reader in
+                    Group {
+                        if let image = image {
+                            Image(uiImage: image)
+                                .resizable()
+                        } else {
+                            VStack {
+                                Spacer()
+                                Image("anyPicture")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                Text("画像を選択")
+                                    .font(.footnote)
+                                Spacer()
+                            }
+                            .foregroundColor(.placeholder)
+                        }
                     }
-                } else {
-                    VStack {
-                        Spacer()
-                        Image("anyPicture")
-                            .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                        Text("画像を選択")
-                            .font(.footnote)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-                    .aspectRatio(.init(width: 3, height: 4), contentMode: .fill)
-                    .foregroundColor(.placeholder)
+                    .scaledToFill()
+                    .frame(width: reader.size.width, height: reader.size.width / 3 * 4)
                     .background(Color.white)
                 }
             })
             .buttonStyle(PlainButtonStyle())
-            .clipped() // WORKAROUND
+            .clipped()
             .adaptImagePickEvent(
                 showsActionSheet: $showsActionSheet,
                 error: $error,
