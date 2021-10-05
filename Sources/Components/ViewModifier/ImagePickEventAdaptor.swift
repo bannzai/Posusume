@@ -9,8 +9,10 @@ public struct ImagePickEventAdaptor: ViewModifier {
     @State private var presentingAlertType: AlertType?
 
     @Binding var showsActionSheet: Bool
-    @Binding var photoLibraryResult: PhotoLibraryResult?
     @Binding var error: Error?
+
+    let takenPhoto: (UIImage) -> Void
+    let selectedPhoto: (PhotoLibraryResult) -> Void
 
     enum AlertType: Int, Identifiable {
         case openSetting
@@ -56,17 +58,16 @@ public struct ImagePickEventAdaptor: ViewModifier {
                 }
             )
             .fullScreenCover(isPresented: $isPresentingCamera, content: {
-                PhotoCameraView(captured: { image in
-
-                }).ignoresSafeArea()
+                PhotoCameraView(taken: takenPhoto)
+                    .ignoresSafeArea()
             })
             .sheet(
                 isPresented: $isPresentingPhotoLibrary,
                 content: {
                     PhotoLibraryView(
+                        error: $error,
                         photoLibrary: photoLibrary,
-                        photoLibraryResult: $photoLibraryResult,
-                        error: $error
+                        selected: selectedPhoto
                     )
                 }
             )
@@ -92,8 +93,20 @@ public struct ImagePickEventAdaptor: ViewModifier {
 }
 
 extension View {
-    func adaptImagePickEvent(showsActionSheet: Binding<Bool>, photoLibraryResult: Binding<PhotoLibraryResult?>, error: Binding<Error?>) -> some View {
-        modifier(ImagePickEventAdaptor(showsActionSheet: showsActionSheet, photoLibraryResult: photoLibraryResult, error: error))
+    func adaptImagePickEvent(
+        showsActionSheet: Binding<Bool>,
+        error: Binding<Error?>,
+        takenPhoto: @escaping (UIImage) -> Void,
+        selectedPhoto: @escaping (PhotoLibraryResult) -> Void
+    ) -> some View {
+        modifier(
+            ImagePickEventAdaptor(
+                showsActionSheet: showsActionSheet,
+                error: error,
+                takenPhoto: takenPhoto,
+                selectedPhoto: selectedPhoto
+            )
+        )
     }
 }
 
