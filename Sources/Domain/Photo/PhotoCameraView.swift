@@ -9,7 +9,7 @@ struct PhotoCameraView: UIViewControllerRepresentable {
     
     @Environment(\.dismiss) private var dismiss
 
-    let captured: (UIImage) -> Void
+    let taken: (UIImage) -> Void
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
         let viewController = UIImagePickerController()
@@ -40,7 +40,7 @@ struct PhotoCameraView: UIViewControllerRepresentable {
                 parent.dismiss()
                 return
             }
-            parent.captured(image)
+            parent.taken(image)
             parent.dismiss()
         }
     }
@@ -48,10 +48,6 @@ struct PhotoCameraView: UIViewControllerRepresentable {
 
 struct PhotoCameraView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoCameraView(
-            captured: { _ in
-                
-            }
-        )
+        PhotoCameraView(taken: { _ in })
     }
 }
