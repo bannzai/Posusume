@@ -18,11 +18,13 @@ struct SpotPostImage: View {
             },
             label: {
                 if let image = image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: .infinity)
-                        .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
-                        .clipped()
+                    GeometryReader { reader in
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: reader.size.width, height: reader.size.width / 4 * 3)
+                            .clipped()
+                    }
                 } else {
                     VStack {
                         Spacer()

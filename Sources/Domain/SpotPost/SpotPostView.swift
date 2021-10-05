@@ -27,7 +27,9 @@ struct SpotPostView: View {
                             selectedPhoto: selectedPhoto
                         )
                         SpotPostTitle(title: $title)
-                        SpotPostGeoPoint(place: $placemark)
+                        if image != nil {
+                            SpotPostGeoPoint(place: $placemark)
+                        }
                         Spacer()
                         SpotPostSubmitButton(
                             image: image,
