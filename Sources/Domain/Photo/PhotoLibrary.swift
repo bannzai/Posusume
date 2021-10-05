@@ -20,9 +20,9 @@ enum PhotoLibraryPickedError: LocalizedError {
     }
 }
 
-struct PhotoLibraryResult: Equatable {
+struct PhotoLibraryResult {
     let image: UIImage
-    let location: CLLocationCoordinate2D?
+    let location: CLLocation?
     let takeDate: Date?
 }
 
@@ -76,11 +76,11 @@ fileprivate struct _PhotoLibrary: PhotoLibrary {
 //    }
 
     func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryResult, Error> {
-        let info: (location: CLLocationCoordinate2D, takeDate: Date)? = {
+        let info: (location: CLLocation, takeDate: Date)? = {
             if let identifier = pickerResult.assetIdentifier {
                 if let asset = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil).firstObject {
                     if let location = asset.location, let takeDate = asset.creationDate {
-                        return (location: location.coordinate, takeDate: takeDate)
+                        return (location: location, takeDate: takeDate)
                     }
                 }
             }

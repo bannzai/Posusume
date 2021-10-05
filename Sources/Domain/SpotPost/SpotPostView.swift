@@ -12,23 +12,26 @@ struct SpotPostView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
-    @State var image: UIImage?
+    @State var photoLibraryResult: PhotoLibraryResult?
+    @State var photoLibraryPlacemark: Placemark?
     @State var title: String = ""
-    @State var place: Placemark?
+    @State var userInputPlacemark: Placemark?
 
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
-                        SpotPostImage(image: $image)
+                        SpotPostImage(photoLibraryResult: $photoLibraryResult, photoLibraryPlacemark: $photoLibraryPlacemark)
                         SpotPostTitle(title: $title)
-                        SpotPostGeoPoint(place: $place)
+                        if isUnknownPhotoLibraryResultLocation {
+                            SpotPostGeoPoint(place: $userInputPlacemark)
+                        }
                         Spacer()
                         SpotPostSubmitButton(
-                            image: $image,
-                            title: $title,
-                            place: $place
+                            photoLibraryResult: photoLibraryResult,
+                            title: title,
+                            placemark: photoLibraryPlacemark ?? userInputPlacemark
                         )
                     }
                     .frame(minHeight: geometry.size.height)
@@ -45,14 +48,16 @@ struct SpotPostView: View {
             )
             .navigationBarTitle("", displayMode: .inline)
             .task {
-                if place == nil, let userLocation = try? await locationManager.userLocation() {
-                    place = try? await geocoder.reverseGeocode(location: userLocation).first
+                if userInputPlacemark == nil, let userLocation = try? await locationManager.userLocation() {
+                    userInputPlacemark = try? await geocoder.reverseGeocode(location: userLocation).first
                 }
             }
         }
     }
 
-
+    private var isUnknownPhotoLibraryResultLocation: Bool {
+        photoLibraryResult != nil && photoLibraryPlacemark == nil
+    }
 }
 
 struct SpotListView_Preview: PreviewProvider {

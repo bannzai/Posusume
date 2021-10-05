@@ -10,12 +10,12 @@ public struct SpotPostSubmitButton: View {
 
     @State var error: Error?
 
-    @Binding var image: UIImage?
-    @Binding var title: String
-    @Binding var place: Placemark?
+    let photoLibraryResult: PhotoLibraryResult?
+    let title: String
+    let placemark: Placemark?
 
     var submitButtonIsDisabled: Bool {
-        image == nil || title.isEmpty || place == nil
+        photoLibraryResult == nil || title.isEmpty || placemark == nil
     }
 
     public var body: some View {
@@ -33,20 +33,20 @@ public struct SpotPostSubmitButton: View {
     }
 
     private func save() {
-        guard let image = image, let place = place else {
+        guard let photoLibraryResult = photoLibraryResult, let placemark = placemark else {
             return
         }
         Task {
             do {
             // TODO: fill values
-                let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: image)
+                let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: photoLibraryResult.image)
                 try await mutation(
                     for: .init(
                         spotAddInput: .init(
                             title: title,
                             imageUrl: uploaded.url,
-                            latitude: place.location.latitude,
-                            longitude: place.location.longitude
+                            latitude: placemark.location.latitude,
+                            longitude: placemark.location.longitude
                         )
                     )
                 )

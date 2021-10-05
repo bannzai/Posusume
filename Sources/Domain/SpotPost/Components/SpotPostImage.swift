@@ -2,11 +2,13 @@ import Foundation
 import SwiftUI
 
 struct SpotPostImage: View {
+    @Environment(\.geocoder) var geocoder
+
     @State var showsActionSheet: Bool = false
-    @State var photoLibraryResult: PhotoLibraryResult?
     @State var error: Error?
 
-    @Binding var image: UIImage?
+    @Binding var photoLibraryResult: PhotoLibraryResult?
+    @Binding var photoLibraryPlacemark: Placemark?
 
     var body: some View {
         Button (
@@ -14,7 +16,7 @@ struct SpotPostImage: View {
                 showsActionSheet = true
             },
             label: {
-                if let image = image {
+                if let image = photoLibraryResult?.image {
                     Image(uiImage: image)
                         .resizable()
                         .frame(width: .infinity)
@@ -41,7 +43,16 @@ struct SpotPostImage: View {
             .buttonStyle(PlainButtonStyle())
             .adaptImagePickEvent(
                 showsActionSheet: $showsActionSheet,
-                photoLibraryResult: $photoLibraryResult,
+                photoLibraryResult: Binding(get: {
+                    photoLibraryResult
+                }, set: { photoLibraryResult in
+                    Task {
+                        if let photoLibraryResultLocation = photoLibraryResult?.location {
+                            photoLibraryPlacemark = try? await geocoder.reverseGeocode(location: photoLibraryResultLocation).first
+                        }
+                        self.photoLibraryResult = photoLibraryResult
+                    }
+                }),
                 error: $error
             )
             .handle(error: $error)
@@ -49,8 +60,10 @@ struct SpotPostImage: View {
 }
 
 
-struct Preview: PreviewProvider {
+private struct Preview: PreviewProvider {
+    @State static var photoLibraryResult: PhotoLibraryResult?
+    @State static var photoLibraryResultPlacemark: Placemark?
     static var previews: some View {
-        SpotPostImage(image: .init(get: { nil }, set: { _ in }))
+        SpotPostImage(photoLibraryResult: $photoLibraryResult, photoLibraryPlacemark: $photoLibraryResultPlacemark)
     }
 }
