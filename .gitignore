@@ -1,3 +1,4 @@
 
 GoogleService-Info-dev.plist
 GoogleService-Info-prod.plist
+*Secret.swift

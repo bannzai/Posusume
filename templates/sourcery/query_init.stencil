@@ -1,0 +1,98 @@
+// swiftlint:disable
+
+import Foundation
+import Apollo
+
+{% macro extractTypeName variable %}{%if variable.actualTypeName == "" %}GraphQL.{{ variable.typeName.unwrappedTypeName }}{% else %}{{ variable.actualTypeName }}{% endif %}{% endmacro %}
+
+// MARK: - GraphQLSelectionSet
+{% for type in types.based.GraphQLQuery|struct %}
+{% if type.allMethods|initializer|count != 1 %}
+extension QueryViewModel: where Query == {{ type.name }}{
+    public static func provide() -> {{ type.name }} {
+        return {{ type.name }}(
+            {% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" and not variable.typeName.unwrappedTypeName|hasPrefix:"As" %}
+            {{ variable.name }}: Factory<{% call extractTypeName variable %}>.provide(){% if not forloop.last %},{% endif %}
+            {% endfor %}
+        )
+    }
+{% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" %}
+   func stub({{ variable.name }}: {% if variable.type == nil %}{{variable.typeName.name}}{% else %}{{ variable.type.name }}{% if variable.typeName.isOptional %}?{% endif %}{% endif %}) -> {{ type.name }} {
+        {% if variable.name|hasPrefix:"as" %}return {{type.name}}(unsafeResultMap: {{variable.name}}.resultMap)
+        {% else %}return {{type.name}}({% for argument in type.computedVariables where not argument.name == "__typename" and not argument.name == "fragments" %}{{argument.name}}: {% if variable.name == argument.name %}{{variable.name}}{% else %}self.{{argument.name}}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})
+        {% endif %}
+   }
+{% endfor %}
+{% else %}
+extension {{ type.name }}: FactoryProvidable {
+    public static func provide() -> {{ type.name }} {
+        return {{ type.name }}(
+            unsafeResultMap: [:]
+        )
+    }
+{% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" %}
+   func stub({{ variable.name }}: {% if variable.type == nil %}{{variable.typeName.name}}{% else %}{{ variable.type.name }}{% endif %}) -> {{ type.name }} {
+        {% if variable.name|hasPrefix:"as" %}return {{type.name}}(unsafeResultMap: {{variable.name}}.resultMap)
+        {% else %}return {{type.name}}({% for argument in type.computedVariables where not argument.name == "__typename" and not argument.name == "fragments" %}{{argument.name}}: {% if variable.name == argument.name %}{{variable.name}}{% else %}self.{{argument.name}}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})
+        {% endif %}
+   }
+{% endfor %}
+{% endif %}
+
+}
+
+{% endfor %}
+
+// MARK: - GraphQLFragment
+{% for type in types.based.GraphQLFragment|struct %}
+{% if type.allMethods|initializer|count != 1 %}
+extension {{ type.name }}: FactoryProvidable {
+    public static func provide() -> {{ type.name }} {
+        return {{ type.name }}(
+            {% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" and not variable.typeName.unwrappedTypeName|hasPrefix:"As" %}
+            {{ variable.name }}: Factory<{% call extractTypeName variable %}>.provide(){% if not forloop.last %},{% endif %}
+            {% endfor %}
+      )
+  }
+{% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" %}
+   func stub({{ variable.name }}: {% if variable.type == nil %}{{variable.typeName.name}}{% else %}{{ variable.type.name }}{% if variable.typeName.isOptional %}?{% endif %}{% endif %}) -> {{ type.name }} {
+        {% if variable.name|hasPrefix:"as" %}return {{type.name}}(unsafeResultMap: {{variable.name}}.resultMap)
+        {% else %}return {{type.name}}({% for argument in type.computedVariables where not argument.name == "__typename" and not argument.name == "fragments" %}{{argument.name}}: {% if variable.name == argument.name %}{{variable.name}}{% else %}self.{{argument.name}}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})
+        {% endif %}
+   }
+{% endfor %}
+{% else %}
+extension {{ type.name }}: FactoryProvidable {
+    public static func provide() -> {{ type.name }} {
+        return {{ type.name }}(
+            unsafeResultMap: [:]
+      )
+  }
+{% for variable in type.computedVariables where not variable.name == "__typename" and not variable.name == "fragments" %}
+   func stub({{ variable.name }}: {% if variable.type == nil %}{{variable.typeName.name}}{% else %}{{ variable.type.name }}{% endif %}) -> {{ type.name }} {
+        {% if variable.name|hasPrefix:"as" %}return {{type.name}}(unsafeResultMap: {{variable.name}}.resultMap)
+        {% else %}return {{type.name}}({% for argument in type.computedVariables where not argument.name == "__typename" and not argument.name == "fragments" %}{{argument.name}}: {% if variable.name == argument.name %}{{variable.name}}{% else %}self.{{argument.name}}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})
+        {% endif %}
+   }
+{% endfor %}
+{% endif %}
+
+}
+
+{% endfor %}
+
+// MARK: - Enum
+{% for type in types.enums %}
+{% if not type.cases.count == 0 %}
+extension {{ type.name }}: FactoryProvidable {
+    public static func provide() -> {{ type.name }} {
+        return .{{ type.cases.first.name }}{% if type.cases.first.hasAssociatedValue %}(
+            {% for associatedValue in type.cases.first.associatedValues %}
+            {% if not associatedValue.localName == nil %}{{ associatedValue.localName }}: {% endif %}Factory<{{ associatedValue.typeName.unwrappedTypeName }}>.provide(){% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ){% endif %}
+    }
+}
+
+{% endif %}
+{% endfor %}

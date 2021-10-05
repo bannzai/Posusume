@@ -7,20 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2004BA3326B18DA0007D3E82 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3226B18DA0007D3E82 /* FirebaseCrashlytics */; };
+		2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3426B18DA0007D3E82 /* FirebaseMessaging */; };
+		2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3626B18DA0007D3E82 /* FirebaseAuth */; };
+		2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */; };
+		2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */; };
+		2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */; };
+		2005EE4126FA0A37009001C7 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4026FA0A37009001C7 /* AppError.swift */; };
+		2005EE4426FA0C43009001C7 /* RequestLoggingInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */; };
+		2005EE4726FA10FC009001C7 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4626FA10FC009001C7 /* Apollo */; };
+		2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4826FA10FC009001C7 /* ApolloSQLite */; };
+		2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4A26FA10FC009001C7 /* ApolloWebSocket */; };
+		2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4C26FA11CB009001C7 /* Plist.swift */; };
+		2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */; };
+		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
+		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
+		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
+		2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C627094E4B007D580F /* SpotPostImage.swift */; };
+		2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */; };
+		2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CB270966C8007D580F /* SpotPostTitle.swift */; };
+		2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */; };
+		2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */; };
+		2035A9D227096EB8007D580F /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D127096EB8007D580F /* Buttons.swift */; };
+		2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */; };
+		2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */; };
+		2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DC270BAB68007D580F /* RootViewModel.swift */; };
+		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
+		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
+		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
+		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
+		20A088732708FA1B00D94272 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088722708FA1B00D94272 /* Cache.swift */; };
+		20A088752708FDED00D94272 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088742708FDED00D94272 /* Mutation.swift */; };
+		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
+		20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1C2702186F0090E22F /* InterceptorProvider.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
-		BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E6E2625E15D000DA60F /* MockAuth.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
-		BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E792625EAB4000DA60F /* DatabaseEntity.swift */; };
 		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
 		BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E862625F1BB000DA60F /* LocationMeters.swift */; };
 		BA26C8522621939A006555AE /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8512621939A006555AE /* CloudStorage.swift */; };
-		BA26C85A262196AD006555AE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C859262196AD006555AE /* User.swift */; };
-		BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8672621D015006555AE /* VoidEnvironment.swift */; };
-		BA26C86C2621D08D006555AE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C86B2621D08D006555AE /* Database.swift */; };
-		BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */; };
-		BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C8782621F020006555AE /* CollectionReference+Combine.swift */; };
-		BA26C87D2621F03A006555AE /* DatabasePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */; };
-		BA26C88526227C62006555AE /* EquatableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* EquatableError.swift */; };
+		BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C88426227C62006555AE /* IdentifiableError.swift */; };
 		BA26C896262293C9006555AE /* Future+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA26C895262293C9006555AE /* Future+Extension.swift */; };
 		BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317302262A6DDE00E1212C /* SpotPostView.swift */; };
 		BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317339262BC87900E1212C /* PhotoLibrary.swift */; };
@@ -29,12 +54,8 @@
 		BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */; };
 		BA619FB326414493003713A4 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA619FB226414493003713A4 /* LocationManager.swift */; };
 		BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3526410A6B00ACE02F /* DefaultLocation.swift */; };
-		BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3726410C3A00ACE02F /* SearchBar.swift */; };
 		BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */; };
 		BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA906C3E26410F0400ACE02F /* Geocoder.swift */; };
-		BA979CB026140A4600997206 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA979CAF26140A4600997206 /* Auth.swift */; };
-		BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAB0D4826287AFD00EA3091 /* LoginView.swift */; };
-		BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8B12610B72F00676F22 /* RootView.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
@@ -46,17 +67,6 @@
 		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
 		BADF5301261D303C00431FEB /* SpotList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5300261D303C00431FEB /* SpotList.swift */; };
 		BADF5305261D307700431FEB /* SpotListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF5304261D307700431FEB /* SpotListCell.swift */; };
-		BADF530C261D309D00431FEB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADF530B261D309D00431FEB /* Spot.swift */; };
-		BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */; };
-		BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */; };
-		BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7000261C34A400584593 /* FirebaseFirestore */; };
-		BAFF7003261C34A400584593 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */; };
-		BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */; };
-		BAFF7009261C34A400584593 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7008261C34A400584593 /* FirebaseStorageSwift-Beta */; };
-		BAFF700D261C34A400584593 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF700C261C34A400584593 /* FirebaseCrashlytics */; };
-		BAFF700F261C34A400584593 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF700E261C34A400584593 /* FirebaseAuth */; };
-		BAFF7011261C34A400584593 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7010261C34A400584593 /* FirebaseFunctions */; };
-		BAFF7016261C374700584593 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = BAFF7015261C374700584593 /* ComposableArchitecture */; };
 		BAFF7024261C3FB300584593 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7021261C3FB300584593 /* Color.swift */; };
 		BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */; };
 /* End PBXBuildFile section */
@@ -92,20 +102,37 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationHeaderAddingInterceptor.swift; sourceTree = "<group>"; };
+		2005EE4026FA0A37009001C7 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
+		2005EE4C26FA11CB009001C7 /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
+		2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorMappers.swift; sourceTree = "<group>"; };
+		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
+		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
+		2035A9C627094E4B007D580F /* SpotPostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostImage.swift; sourceTree = "<group>"; };
+		2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickEventAdaptor.swift; sourceTree = "<group>"; };
+		2035A9CB270966C8007D580F /* SpotPostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostTitle.swift; sourceTree = "<group>"; };
+		2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostGeoPoint.swift; sourceTree = "<group>"; };
+		2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostSubmitButton.swift; sourceTree = "<group>"; };
+		2035A9D127096EB8007D580F /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
+		2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireLocationAuthorizationView.swift; sourceTree = "<group>"; };
+		2035A9DC270BAB68007D580F /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
+		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
+		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		20A088722708FA1B00D94272 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		20A088742708FDED00D94272 /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
+		20A09D1A2701F2640090E22F /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		20A09D1C2702186F0090E22F /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
-		BA249E6E2625E15D000DA60F /* MockAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAuth.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
-		BA249E792625EAB4000DA60F /* DatabaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseEntity.swift; sourceTree = "<group>"; };
 		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		BA249E862625F1BB000DA60F /* LocationMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMeters.swift; sourceTree = "<group>"; };
 		BA26C8512621939A006555AE /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
-		BA26C859262196AD006555AE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BA26C8672621D015006555AE /* VoidEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidEnvironment.swift; sourceTree = "<group>"; };
-		BA26C86B2621D08D006555AE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentReference+Combine.swift"; sourceTree = "<group>"; };
-		BA26C8782621F020006555AE /* CollectionReference+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionReference+Combine.swift"; sourceTree = "<group>"; };
-		BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabasePathBuilder.swift; sourceTree = "<group>"; };
-		BA26C88426227C62006555AE /* EquatableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableError.swift; sourceTree = "<group>"; };
+		BA26C88426227C62006555AE /* IdentifiableError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableError.swift; sourceTree = "<group>"; };
 		BA26C895262293C9006555AE /* Future+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+Extension.swift"; sourceTree = "<group>"; };
 		BA317302262A6DDE00E1212C /* SpotPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostView.swift; sourceTree = "<group>"; };
 		BA317339262BC87900E1212C /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
@@ -114,12 +141,8 @@
 		BA39F854263AAF0E00A17E0A /* PhotoCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCameraView.swift; sourceTree = "<group>"; };
 		BA619FB226414493003713A4 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		BA906C3526410A6B00ACE02F /* DefaultLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocation.swift; sourceTree = "<group>"; };
-		BA906C3726410C3A00ACE02F /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectView.swift; sourceTree = "<group>"; };
 		BA906C3E26410F0400ACE02F /* Geocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
-		BA979CAF26140A4600997206 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
-		BAAB0D4826287AFD00EA3091 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeoPoint+Extension.swift"; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B12610B72F00676F22 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -137,9 +160,6 @@
 		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		BADF5300261D303C00431FEB /* SpotList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotList.swift; sourceTree = "<group>"; };
 		BADF5304261D307700431FEB /* SpotListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotListCell.swift; sourceTree = "<group>"; };
-		BADF530B261D309D00431FEB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
-		BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStoragePathBuilder.swift; sourceTree = "<group>"; };
-		BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorageImageFileName.swift; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,14 +169,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAFF7016261C374700584593 /* ComposableArchitecture in Frameworks */,
-				BAFF7009261C34A400584593 /* FirebaseStorageSwift-Beta in Frameworks */,
-				BAFF7005261C34A400584593 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
-				BAFF7001261C34A400584593 /* FirebaseFirestore in Frameworks */,
-				BAFF7011261C34A400584593 /* FirebaseFunctions in Frameworks */,
-				BAFF700D261C34A400584593 /* FirebaseCrashlytics in Frameworks */,
-				BAFF7003261C34A400584593 /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				BAFF700F261C34A400584593 /* FirebaseAuth in Frameworks */,
+				2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */,
+				2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */,
+				2005EE4726FA10FC009001C7 /* Apollo in Frameworks */,
+				2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */,
+				2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */,
+				2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */,
+				2004BA3926B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				2004BA3326B18DA0007D3E82 /* FirebaseCrashlytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,10 +197,116 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2005EE3C26F9D416009001C7 /* Interceptors */ = {
+			isa = PBXGroup;
+			children = (
+				2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */,
+				2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */,
+				20A09D1C2702186F0090E22F /* InterceptorProvider.swift */,
+			);
+			path = Interceptors;
+			sourceTree = "<group>";
+		};
+		2005EE4226FA0A41009001C7 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				201F268B27009C7B00A5DD1E /* Secret.swift */,
+				2005EE5026FA825A009001C7 /* Error */,
+				BA249E742625E217000DA60F /* Me.swift */,
+				2005EE4C26FA11CB009001C7 /* Plist.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2005EE5026FA825A009001C7 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				2005EE4026FA0A37009001C7 /* AppError.swift */,
+				2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		2035A9C427094DE6007D580F /* SpotPost */ = {
+			isa = PBXGroup;
+			children = (
+				2035A9C527094DEF007D580F /* Components */,
+				BA317302262A6DDE00E1212C /* SpotPostView.swift */,
+			);
+			path = SpotPost;
+			sourceTree = "<group>";
+		};
+		2035A9C527094DEF007D580F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2035A9C627094E4B007D580F /* SpotPostImage.swift */,
+				2035A9CB270966C8007D580F /* SpotPostTitle.swift */,
+				2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */,
+				2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2035A9C82709589A007D580F /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		2067175226B5852100C85A25 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				2067175726B59BFB00C85A25 /* Scalar */,
+				2067175326B5852100C85A25 /* Spots.graphql.swift */,
+				2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */,
+				2067175426B5852100C85A25 /* Types.graphql.swift */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		2067175726B59BFB00C85A25 /* Scalar */ = {
+			isa = PBXGroup;
+			children = (
+				2067175C26B5A32F00C85A25 /* Scalar.swift */,
+			);
+			path = Scalar;
+			sourceTree = "<group>";
+		};
+		20A09D192701F25B0090E22F /* ObservableObject */ = {
+			isa = PBXGroup;
+			children = (
+				20A09D1A2701F2640090E22F /* Query.swift */,
+				20A088722708FA1B00D94272 /* Cache.swift */,
+				20A088742708FDED00D94272 /* Mutation.swift */,
+				2035A9C22709229F007D580F /* Upload.swift */,
+			);
+			path = ObservableObject;
+			sourceTree = "<group>";
+		};
+		20CEA51326B4CB800032BBD1 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				BA26C88426227C62006555AE /* IdentifiableError.swift */,
+				2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		20CEA51726B4D18A0032BBD1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2067175226B5852100C85A25 /* GraphQL */,
+				2005EE3C26F9D416009001C7 /* Interceptors */,
+				2067175E26B641F100C85A25 /* APIClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		BA249E6D2625E154000DA60F /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				BA249E6E2625E15D000DA60F /* MockAuth.swift */,
 				BA317351262CF28000E1212C /* MockPhotoLibrary.swift */,
 			);
 			path = Mock;
@@ -198,41 +324,18 @@
 		BA26C8642621A03D006555AE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				BA26C88B262293B1006555AE /* TCA */,
 				BA26C88A262293AB006555AE /* Extension */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		BA26C8712621EFDA006555AE /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				BA26C86B2621D08D006555AE /* Database.swift */,
-				BA249E792625EAB4000DA60F /* DatabaseEntity.swift */,
-				BA26C8722621EFFA006555AE /* DocumentReference+Combine.swift */,
-				BA26C8782621F020006555AE /* CollectionReference+Combine.swift */,
-				BA26C87C2621F03A006555AE /* DatabasePathBuilder.swift */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
 		BA26C88A262293AB006555AE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				BAADA7AF26296100001CCED9 /* Firestore */,
 				BA249E7F2625EFC7000DA60F /* CoreLocation */,
 				BA26C892262293C2006555AE /* Combine */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		BA26C88B262293B1006555AE /* TCA */ = {
-			isa = PBXGroup;
-			children = (
-				BA26C8672621D015006555AE /* VoidEnvironment.swift */,
-				BA26C88426227C62006555AE /* EquatableError.swift */,
-			);
-			path = TCA;
 			sourceTree = "<group>";
 		};
 		BA26C892262293C2006555AE /* Combine */ = {
@@ -256,41 +359,19 @@
 		BA906C32264109E400ACE02F /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				BA906C3E26410F0400ACE02F /* Geocoder.swift */,
+				BA619FB226414493003713A4 /* LocationManager.swift */,
+				2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */,
 				BA906C3B26410E4D00ACE02F /* LocationSelectView.swift */,
 				BA906C3526410A6B00ACE02F /* DefaultLocation.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
 		};
-		BA906C3D26410EFD00ACE02F /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				BA906C3E26410F0400ACE02F /* Geocoder.swift */,
-				BA619FB226414493003713A4 /* LocationManager.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		BAAB0D3F26287ADA00EA3091 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				BAAB0D4826287AFD00EA3091 /* LoginView.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		BAADA7AF26296100001CCED9 /* Firestore */ = {
-			isa = PBXGroup;
-			children = (
-				BAADA7B02629610C001CCED9 /* GeoPoint+Extension.swift */,
-			);
-			path = Firestore;
-			sourceTree = "<group>";
-		};
 		BAD9A8A32610B72F00676F22 = {
 			isa = PBXGroup;
 			children = (
-				BAD9A8AE2610B72F00676F22 /* Posusume */,
+				BAD9A8AE2610B72F00676F22 /* Sources */,
 				BAD9A8C02610B73100676F22 /* PosusumeTests */,
 				BAD9A8CB2610B73200676F22 /* PosusumeUITests */,
 				BAD9A8AD2610B72F00676F22 /* Products */,
@@ -307,15 +388,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BAD9A8AE2610B72F00676F22 /* Posusume */ = {
+		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				20CEA51326B4CB800032BBD1 /* Error */,
+				BADF52FE261D301E00431FEB /* Domain */,
+				20A09D192701F25B0090E22F /* ObservableObject */,
+				2005EE4226FA0A41009001C7 /* Core */,
+				20CEA51726B4D18A0032BBD1 /* API */,
 				BA26C8642621A03D006555AE /* Utility */,
-				BADF530A261D308C00431FEB /* Entity */,
 				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B12610B72F00676F22 /* RootView.swift */,
+				2035A9DC270BAB68007D580F /* RootViewModel.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
 				BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */,
@@ -323,7 +409,7 @@
 				BAD9A8B52610B73100676F22 /* Preview Content */,
 				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
 			);
-			path = Posusume;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		BAD9A8B52610B73100676F22 /* Preview Content */ = {
@@ -356,10 +442,7 @@
 		BADF52FC261D2FE300431FEB /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				BA906C3D26410EFD00ACE02F /* Location */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
-				BA979CAF26140A4600997206 /* Auth.swift */,
-				BA26C8712621EFDA006555AE /* Database */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -367,9 +450,9 @@
 		BADF52FE261D301E00431FEB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				2035A9C427094DE6007D580F /* SpotPost */,
 				BA906C32264109E400ACE02F /* Location */,
 				BA317331262BC1D500E1212C /* Photo */,
-				BAAB0D3F26287ADA00EA3091 /* Login */,
 				BADF52FF261D303400431FEB /* Spot */,
 			);
 			path = Domain;
@@ -381,27 +464,14 @@
 				BADF5300261D303C00431FEB /* SpotList.swift */,
 				BADF5304261D307700431FEB /* SpotListCell.swift */,
 				BA249E672625E12D000DA60F /* SpotMapView.swift */,
-				BA317302262A6DDE00E1212C /* SpotPostView.swift */,
 			);
 			path = Spot;
-			sourceTree = "<group>";
-		};
-		BADF530A261D308C00431FEB /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				BADF530B261D309D00431FEB /* Spot.swift */,
-				BA26C859262196AD006555AE /* User.swift */,
-				BA249E742625E217000DA60F /* Me.swift */,
-			);
-			path = Entity;
 			sourceTree = "<group>";
 		};
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
 			isa = PBXGroup;
 			children = (
 				BA26C8512621939A006555AE /* CloudStorage.swift */,
-				BAF1E46F26268B1A0055EBEB /* CloudStoragePathBuilder.swift */,
-				BAF1E47526268DEE0055EBEB /* CloudStorageImageFileName.swift */,
 			);
 			path = CloudStorage;
 			sourceTree = "<group>";
@@ -409,9 +479,9 @@
 		BAFF701F261C3FB300584593 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2035A9C82709589A007D580F /* ViewModifier */,
 				BAFF7020261C3FB300584593 /* Atoms */,
 				BAFF7022261C3FB300584593 /* Molocules */,
-				BADF52FE261D301E00431FEB /* Domain */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -420,7 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFF7021261C3FB300584593 /* Color.swift */,
-				BA906C3726410C3A00ACE02F /* SearchBar.swift */,
+				2035A9D127096EB8007D580F /* Buttons.swift */,
 			);
 			path = Atoms;
 			sourceTree = "<group>";
@@ -451,14 +521,14 @@
 			);
 			name = Posusume;
 			packageProductDependencies = (
-				BAFF7000261C34A400584593 /* FirebaseFirestore */,
-				BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */,
-				BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */,
-				BAFF7008261C34A400584593 /* FirebaseStorageSwift-Beta */,
-				BAFF700C261C34A400584593 /* FirebaseCrashlytics */,
-				BAFF700E261C34A400584593 /* FirebaseAuth */,
-				BAFF7010261C34A400584593 /* FirebaseFunctions */,
-				BAFF7015261C374700584593 /* ComposableArchitecture */,
+				2004BA3226B18DA0007D3E82 /* FirebaseCrashlytics */,
+				2004BA3426B18DA0007D3E82 /* FirebaseMessaging */,
+				2004BA3626B18DA0007D3E82 /* FirebaseAuth */,
+				2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */,
+				2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */,
+				2005EE4626FA10FC009001C7 /* Apollo */,
+				2005EE4826FA10FC009001C7 /* ApolloSQLite */,
+				2005EE4A26FA10FC009001C7 /* ApolloWebSocket */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
@@ -535,8 +605,8 @@
 			);
 			mainGroup = BAD9A8A32610B72F00676F22;
 			packageReferences = (
-				BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = BAD9A8AD2610B72F00676F22 /* Products */;
 			projectDirPath = "";
@@ -646,44 +716,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */,
+				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
+				2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */,
+				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
+				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
+				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
-				BA249E6F2625E15D000DA60F /* MockAuth.swift in Sources */,
-				BA249E7A2625EAB4000DA60F /* DatabaseEntity.swift in Sources */,
-				BA906C3826410C3A00ACE02F /* SearchBar.swift in Sources */,
-				BA26C87D2621F03A006555AE /* DatabasePathBuilder.swift in Sources */,
-				BA26C86C2621D08D006555AE /* Database.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
+				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
+				20A088752708FDED00D94272 /* Mutation.swift in Sources */,
+				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
+				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
+				2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
+				2035A9C32709229F007D580F /* Upload.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
-				BAF1E47626268DEE0055EBEB /* CloudStorageImageFileName.swift in Sources */,
-				BA26C85A262196AD006555AE /* User.swift in Sources */,
+				2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */,
+				20A088732708FA1B00D94272 /* Cache.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				BADF5301261D303C00431FEB /* SpotList.swift in Sources */,
+				20A09D1B2701F2640090E22F /* Query.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
-				BAF1E47026268B1A0055EBEB /* CloudStoragePathBuilder.swift in Sources */,
+				201F268C27009C7B00A5DD1E /* Secret.swift in Sources */,
+				2005EE4426FA0C43009001C7 /* RequestLoggingInterceptor.swift in Sources */,
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
+				2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
-				BA26C8732621EFFA006555AE /* DocumentReference+Combine.swift in Sources */,
-				BA979CB026140A4600997206 /* Auth.swift in Sources */,
+				2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */,
+				2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
-				BAADA7B12629610C001CCED9 /* GeoPoint+Extension.swift in Sources */,
+				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
-				BAAB0D4926287AFD00EA3091 /* LoginView.swift in Sources */,
-				BADF530C261D309D00431FEB /* Spot.swift in Sources */,
+				2035A9D227096EB8007D580F /* Buttons.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
-				BA26C8792621F020006555AE /* CollectionReference+Combine.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
-				BA26C88526227C62006555AE /* EquatableError.swift in Sources */,
+				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
+				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
+				BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */,
 				BADF5305261D307700431FEB /* SpotListCell.swift in Sources */,
+				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
 				BA619FB326414493003713A4 /* LocationManager.swift in Sources */,
-				BA26C8682621D015006555AE /* VoidEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,7 +850,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -826,7 +906,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "";
@@ -843,12 +923,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"posusume/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sources/Preview Content\"";
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
-				INFOPLIST_FILE = posusume/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = Sources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -868,12 +948,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"posusume/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Sources/Preview Content\"";
 				DEVELOPMENT_TEAM = TQPN82UBBY;
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
-				INFOPLIST_FILE = posusume/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				INFOPLIST_FILE = Sources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1012,64 +1092,64 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.10.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 8.4.0;
 			};
 		};
-		BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.17.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.48.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BAFF7000261C34A400584593 /* FirebaseFirestore */ = {
+		2004BA3226B18DA0007D3E82 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		BAFF7002261C34A400584593 /* FirebaseFirestoreSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreSwift-Beta";
-		};
-		BAFF7004261C34A400584593 /* FirebaseAnalyticsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAnalyticsSwift-Beta";
-		};
-		BAFF7008261C34A400584593 /* FirebaseStorageSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageSwift-Beta";
-		};
-		BAFF700C261C34A400584593 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
 		};
-		BAFF700E261C34A400584593 /* FirebaseAuth */ = {
+		2004BA3426B18DA0007D3E82 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		2004BA3626B18DA0007D3E82 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		BAFF7010261C34A400584593 /* FirebaseFunctions */ = {
+		2004BA3826B18DA0007D3E82 /* FirebaseAnalyticsSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BAFF6FFF261C34A400584593 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFunctions;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
 		};
-		BAFF7015261C374700584593 /* ComposableArchitecture */ = {
+		2004BA3A26B18DA0007D3E82 /* FirebaseStorageSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BAFF7014261C374600584593 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
+		};
+		2005EE4626FA10FC009001C7 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		2005EE4826FA10FC009001C7 /* ApolloSQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloSQLite;
+		};
+		2005EE4A26FA10FC009001C7 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,0 +1,9 @@
+query Spots {
+  me {
+    id
+    spots {
+      id
+      title
+    }
+  }
+}
