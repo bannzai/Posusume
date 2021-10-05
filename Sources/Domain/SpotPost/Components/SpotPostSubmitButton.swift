@@ -59,11 +59,5 @@ public struct SpotPostSubmitButton: View {
             }
         }
     }
-
-    struct Spacer: View {
-        var body: some View {
-            SpotPostSubmitButton(image: nil, title: "", placemark: nil).hidden()
-        }
-    }
 }
 
