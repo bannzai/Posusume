@@ -4,6 +4,7 @@ import SwiftUI
 
 public protocol Geocoder {
     func geocode(address: String) async throws -> [Placemark]
+    func reverseGeocode(location: CLLocation) async throws -> [Placemark]
 }
 
 private struct _Geocoder: Geocoder {
@@ -34,6 +35,35 @@ private struct _Geocoder: Geocoder {
             )
         }
     }
+
+    func reverseGeocode(location: CLLocation) async throws -> [Placemark] {
+        try await CLGeocoder()
+            .reverseGeocodeLocation(location)
+            .compactMap { mark in
+                guard let location = mark.location else {
+                    return nil
+                }
+                return Placemark(
+                    name: mark.name,
+                    country: mark.country,
+                    isoCountryCode: mark.isoCountryCode,
+                    postalCode: mark.postalCode,
+                    inlandWater: mark.inlandWater,
+                    ocean: mark.ocean,
+                    areasOfInterest: mark.areasOfInterest,
+                    address: .init(
+                        administrativeArea: mark.administrativeArea,
+                        subAdministrativeArea: mark.subAdministrativeArea,
+                        locality: mark.locality,
+                        subLocality: mark.subLocality,
+                        thoroughfare: mark.thoroughfare,
+                        subThoroughfare: mark.subThoroughfare
+                    ),
+                    location: location.coordinate
+                )
+            }
+    }
+
 }
 
 public struct Placemark: Equatable, Identifiable {
@@ -75,7 +105,7 @@ public struct Placemark: Equatable, Identifiable {
 
     func formattedLocationAddress() -> String {
         if let name = name, !name.isEmpty, !address.address.contains(name) {
-            return "\(name): \(address.address)"
+            return "\(name) \(address.address)"
         }
         return address.address
     }

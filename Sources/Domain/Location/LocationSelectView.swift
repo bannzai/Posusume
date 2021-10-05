@@ -6,31 +6,36 @@ import CoreLocation
 struct LocationSelectView: View {
     @Environment(\.locationManager) var locationManager
     @Environment(\.geocoder) var geocoder
+    @Environment(\.dismiss) var dismiss
 
     @State var error: Error?
     @State var searchText: String = ""
-    @State var places: [Placemark] = []
-    @State var userLocation: CLLocation?
+    @State var searchedPlacemarks: [Placemark] = []
+    @State var userPlacemarks: [Placemark] = []
 
     @Binding var selectedPlacemark: Placemark?
 
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                HStack {
-                    Image(systemName: "location.circle")
-                    Text("現在地を選択")
-                        .font(.headline)
-                        .onTapGesture {
-                            updateUserLocation()
-                        }
+                ForEach(userPlacemarks) { mark in
+                    HStack {
+                        Image(systemName: "location.circle")
+                        Text("現在地: \(mark.formattedLocationAddress())")
+                            .font(.footnote)
+                            .onTapGesture {
+                                selectedPlacemark = mark
+                                dismiss()
+                            }
+                    }
                 }
-                ForEach(places) { mark in
+                ForEach(searchedPlacemarks) { mark in
                     HStack {
                         Text(mark.formattedLocationAddress())
                             .font(.footnote)
                             .onTapGesture {
                                 selectedPlacemark = mark
+                                dismiss()
                             }
                     }
                 }
@@ -40,7 +45,7 @@ struct LocationSelectView: View {
         .onSubmit(of: .search) {
             Task {
                 do {
-                    places = try await geocoder.geocode(address: searchText)
+                    searchedPlacemarks = try await geocoder.geocode(address: searchText)
                 } catch {
                     self.error = error
                 }
@@ -48,12 +53,10 @@ struct LocationSelectView: View {
         }
         .navigationTitle(Text("撮影場所を選択"))
         .handle(error: $error)
-    }
-
-    private func updateUserLocation() {
-        Task {
+        .task {
             do {
-                userLocation = try await locationManager.userLocation()
+                let userLocation = try await locationManager.userLocation()
+                userPlacemarks = try await geocoder.reverseGeocode(location: userLocation)
             } catch {
                 self.error = error
             }
