@@ -6,7 +6,12 @@ public struct SpotPostGeoPoint: View {
     @Binding var place: Placemark?
 
     public var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("撮影場所")
+                    .font(.subheadline)
+                Spacer()
+            }
             NavigationLink(destination: LocationSelectView(selectedPlacemark: _place)) {
                 if let place = place {
                     Text(place.formattedLocationAddress())

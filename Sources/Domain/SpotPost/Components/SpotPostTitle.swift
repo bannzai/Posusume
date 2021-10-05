@@ -5,7 +5,7 @@ public struct SpotPostTitle: View {
     @Binding var title: String
 
     public var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("タイトル")
                 .font(.subheadline)
             TextField("ポスターのタイトル", text: _title)
