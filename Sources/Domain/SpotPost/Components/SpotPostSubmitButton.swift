@@ -42,7 +42,6 @@ public struct SpotPostSubmitButton: View {
         }
         Task {
             do {
-            // TODO: fill values
                 let uploaded = try await upload(path: .spot(userID: me.id), image: image)
                 try await mutation(
                     for: .init(
