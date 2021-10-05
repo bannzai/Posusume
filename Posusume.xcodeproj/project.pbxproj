@@ -24,7 +24,6 @@
 		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
 		2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C627094E4B007D580F /* SpotPostImage.swift */; };
-		2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */; };
 		2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CB270966C8007D580F /* SpotPostTitle.swift */; };
 		2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */; };
 		2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */; };
@@ -110,7 +109,6 @@
 		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		2035A9C627094E4B007D580F /* SpotPostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostImage.swift; sourceTree = "<group>"; };
-		2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickEventAdaptor.swift; sourceTree = "<group>"; };
 		2035A9CB270966C8007D580F /* SpotPostTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostTitle.swift; sourceTree = "<group>"; };
 		2035A9CD27096747007D580F /* SpotPostGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostGeoPoint.swift; sourceTree = "<group>"; };
 		2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostSubmitButton.swift; sourceTree = "<group>"; };
@@ -243,14 +241,6 @@
 				2035A9CF270967D4007D580F /* SpotPostSubmitButton.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		2035A9C82709589A007D580F /* ViewModifier */ = {
-			isa = PBXGroup;
-			children = (
-				2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */,
-			);
-			path = ViewModifier;
 			sourceTree = "<group>";
 		};
 		2067175226B5852100C85A25 /* GraphQL */ = {
@@ -476,7 +466,6 @@
 		BAFF701F261C3FB300584593 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2035A9C82709589A007D580F /* ViewModifier */,
 				BAFF7020261C3FB300584593 /* Atoms */,
 				BAFF7022261C3FB300584593 /* Molocules */,
 			);
@@ -745,7 +734,6 @@
 				BA317303262A6DDE00E1212C /* SpotPostView.swift in Sources */,
 				2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */,
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
-				2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */,
 				2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
 				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
