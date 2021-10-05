@@ -3,7 +3,8 @@ import SwiftUI
 import CoreLocation
 
 public struct SpotPostSubmitButton: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.me) var me
+    @Environment(\.dismiss) var dismiss
 
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
@@ -33,13 +34,16 @@ public struct SpotPostSubmitButton: View {
     }
 
     private func save() {
+        if submitButtonIsDisabled {
+            return
+        }
         guard let photoLibraryResult = photoLibraryResult, let placemark = placemark else {
             return
         }
         Task {
             do {
             // TODO: fill values
-                let uploaded = try await upload(path: .spot(userID: "", spotID: ""), image: photoLibraryResult.image)
+                let uploaded = try await upload(path: .spot(userID: me.id), image: photoLibraryResult.image)
                 try await mutation(
                     for: .init(
                         spotAddInput: .init(
