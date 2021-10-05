@@ -19,20 +19,27 @@ struct SpotPostView: View {
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 20) {
-                        SpotPostImage(
-                            width: geometry.size.width,
-                            image: image,
-                            takenPhoto: takenPhoto,
-                            selectedPhoto: selectedPhoto
-                        )
-                        SpotPostTitle(title: $title)
-                        if image != nil {
-                            SpotPostGeoPoint(place: $placemark)
+                ZStack(alignment: .top) {
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: 20) {
+                            SpotPostImage(
+                                width: geometry.size.width,
+                                image: image,
+                                takenPhoto: takenPhoto,
+                                selectedPhoto: selectedPhoto
+                            )
+                            SpotPostTitle(title: $title)
+                            if image != nil {
+                                SpotPostGeoPoint(place: $placemark)
+                            }
+                            Spacer()
+                            SpotPostSubmitButton.Spacer()
                         }
+                    }
+
+                    VStack {
                         Spacer()
-                        SpotPostSubmitButton(image: nil, title: "", placemark: nil)
+                        SpotPostSubmitButton(image: image, title: title, placemark: placemark)
                     }
                 }
             }
