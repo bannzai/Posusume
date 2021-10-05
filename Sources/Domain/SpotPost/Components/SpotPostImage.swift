@@ -7,6 +7,7 @@ struct SpotPostImage: View {
     @State var showsActionSheet: Bool = false
     @State var error: Error?
 
+    // NOTE: The size of the ScrollView will not be determined unless the size of the child(SpotPostImage) element is determined. `width` for determining the child size
     let width: CGFloat
     let image: UIImage?
     let takenPhoto: ((UIImage) -> Void)
