@@ -7,8 +7,9 @@ struct SpotPostImage: View {
     @State var showsActionSheet: Bool = false
     @State var error: Error?
 
-    @Binding var photoLibraryResult: PhotoLibraryResult?
-    @Binding var photoLibraryPlacemark: Placemark?
+    let image: UIImage?
+    let takenPhoto: ((UIImage) -> Void)
+    let selectedPhoto: (PhotoLibraryResult) -> Void
 
     var body: some View {
         Button (
@@ -16,7 +17,7 @@ struct SpotPostImage: View {
                 showsActionSheet = true
             },
             label: {
-                if let image = photoLibraryResult?.image {
+                if let image = image {
                     Image(uiImage: image)
                         .resizable()
                         .frame(width: .infinity)
@@ -43,17 +44,9 @@ struct SpotPostImage: View {
             .buttonStyle(PlainButtonStyle())
             .adaptImagePickEvent(
                 showsActionSheet: $showsActionSheet,
-                photoLibraryResult: Binding(get: {
-                    photoLibraryResult
-                }, set: { photoLibraryResult in
-                    Task {
-                        if let photoLibraryResultLocation = photoLibraryResult?.location {
-                            photoLibraryPlacemark = try? await geocoder.reverseGeocode(location: photoLibraryResultLocation).first
-                        }
-                        self.photoLibraryResult = photoLibraryResult
-                    }
-                }),
-                error: $error
+                error: $error,
+                takenPhoto: takenPhoto,
+                selectedPhoto: selectedPhoto
             )
             .handle(error: $error)
     }
@@ -61,9 +54,7 @@ struct SpotPostImage: View {
 
 
 private struct Preview: PreviewProvider {
-    @State static var photoLibraryResult: PhotoLibraryResult?
-    @State static var photoLibraryResultPlacemark: Placemark?
     static var previews: some View {
-        SpotPostImage(photoLibraryResult: $photoLibraryResult, photoLibraryPlacemark: $photoLibraryResultPlacemark)
+        SpotPostImage(image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in })
     }
 }

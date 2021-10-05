@@ -12,26 +12,27 @@ struct SpotPostView: View {
     @Environment(\.dismiss) private var dismiss
 
     @State var error: Error?
-    @State var photoLibraryResult: PhotoLibraryResult?
-    @State var photoLibraryPlacemark: Placemark?
     @State var title: String = ""
-    @State var userInputPlacemark: Placemark?
+    @State var image: UIImage?
+    @State var placemark: Placemark?
 
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
-                        SpotPostImage(photoLibraryResult: $photoLibraryResult, photoLibraryPlacemark: $photoLibraryPlacemark)
+                        SpotPostImage(
+                            image: image,
+                            takenPhoto: takenPhoto,
+                            selectedPhoto: selectedPhoto
+                        )
                         SpotPostTitle(title: $title)
-                        if isUnknownPhotoLibraryResultLocation {
-                            SpotPostGeoPoint(place: $userInputPlacemark)
-                        }
+                        SpotPostGeoPoint(place: $placemark)
                         Spacer()
                         SpotPostSubmitButton(
-                            photoLibraryResult: photoLibraryResult,
+                            image: image,
                             title: title,
-                            placemark: photoLibraryPlacemark ?? userInputPlacemark
+                            placemark: placemark
                         )
                     }
                     .frame(minHeight: geometry.size.height)
@@ -47,16 +48,27 @@ struct SpotPostView: View {
                 })
             )
             .navigationBarTitle("", displayMode: .inline)
-            .task {
-                if userInputPlacemark == nil, let userLocation = try? await locationManager.userLocation() {
-                    userInputPlacemark = try? await geocoder.reverseGeocode(location: userLocation).first
-                }
-            }
         }
     }
 
-    private var isUnknownPhotoLibraryResultLocation: Bool {
-        photoLibraryResult != nil && photoLibraryPlacemark == nil
+    private func takenPhoto(image: UIImage) {
+        Task {
+            if let userLocation = try? await locationManager.userLocation(),
+               let placemark = try? await geocoder.reverseGeocode(location: userLocation).first {
+                self.placemark = placemark
+            }
+            self.image = image
+        }
+    }
+
+    private func selectedPhoto(photoLibraryResult: PhotoLibraryResult) {
+        Task {
+            if let location = photoLibraryResult.location,
+               let placemark = try? await geocoder.reverseGeocode(location: location).first {
+                self.placemark = placemark
+            }
+            image = photoLibraryResult.image
+        }
     }
 }
 
