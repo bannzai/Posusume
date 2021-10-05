@@ -4,19 +4,13 @@ import SwiftUI
 public struct ImagePickEventAdaptor: ViewModifier {
     @Environment(\.dismiss) private var dismiss
 
-    @State private var selectedImageSourceType: ImageSourceType?
+    @State private var isCameraPresented = false
+    @State private var isPhotoLibraryPresented = false
     @State private var presentingAlertType: AlertType?
 
     @Binding var showsActionSheet: Bool
     @Binding var photoLibraryResult: PhotoLibraryResult?
     @Binding var error: Error?
-
-    enum ImageSourceType: Int, Identifiable {
-        case camera
-        case photoLibrary
-
-        var id: Self { self }
-    }
 
     enum AlertType: Int, Identifiable {
         case openSetting
@@ -34,12 +28,12 @@ public struct ImagePickEventAdaptor: ViewModifier {
                         title: Text("写真を1枚選んでください"),
                         buttons: [
                             .default(Text("撮影する"), action: {
-                                selectedImageSourceType = .camera
+                                isCameraPresented = true
                             }),
                             .default(Text("写真から選択"), action: {
                                 switch photoLibrary.prepareActionType() {
                                 case nil:
-                                    selectedImageSourceType = .photoLibrary
+                                    isPhotoLibraryPresented = true
                                 case .openSettingApp:
                                     presentingAlertType = .openSetting
                                 case .requestAuthorization:
@@ -47,7 +41,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
                                         let status = await photoLibrary.requestAuthorization()
                                         switch status {
                                         case .authorized, .limited:
-                                            selectedImageSourceType = .photoLibrary
+                                            isPhotoLibraryPresented = true
                                         case .denied, .restricted, .notDetermined:
                                             presentingAlertType = .choseNoPermission
                                         @unknown default:
@@ -61,25 +55,19 @@ public struct ImagePickEventAdaptor: ViewModifier {
                     )
                 }
             )
-            .sheet(
-                item: $selectedImageSourceType,
-                content: { imageSourceType -> AnyView in
-                    switch imageSourceType {
-                    case .camera:
-                        return AnyView(
-                            PhotoCameraView(captured: { image in
+            .fullScreenCover(isPresented: $isCameraPresented, content: {
+                PhotoCameraView(captured: { image in
 
-                            })
-                        )
-                    case .photoLibrary:
-                        return AnyView(
-                            PhotoLibraryView(
-                                photoLibrary: photoLibrary,
-                                photoLibraryResult: $photoLibraryResult,
-                                error: $error
-                            )
-                        )
-                    }
+                }).ignoresSafeArea()
+            })
+            .sheet(
+                isPresented: $isPhotoLibraryPresented,
+                content: {
+                    PhotoLibraryView(
+                        photoLibrary: photoLibrary,
+                        photoLibraryResult: $photoLibraryResult,
+                        error: $error
+                    )
                 }
             )
             .alert(item: $presentingAlertType, content: { alertType in
