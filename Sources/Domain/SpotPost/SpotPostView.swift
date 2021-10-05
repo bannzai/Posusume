@@ -22,6 +22,7 @@ struct SpotPostView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 20) {
                         SpotPostImage(
+                            width: geometry.size.width,
                             image: image,
                             takenPhoto: takenPhoto,
                             selectedPhoto: selectedPhoto
@@ -31,15 +32,11 @@ struct SpotPostView: View {
                             SpotPostGeoPoint(place: $placemark)
                         }
                         Spacer()
-                        SpotPostSubmitButton(
-                            image: image,
-                            title: title,
-                            placemark: placemark
-                        )
+                        SpotPostSubmitButton(image: nil, title: "", placemark: nil)
                     }
-                    .frame(minHeight: geometry.size.height)
                 }
             }
+            .frame(maxWidth: .infinity)
             .padding(EdgeInsets.init(top: 16, leading: 20, bottom: 32, trailing: 20))
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .navigationBarItems(
