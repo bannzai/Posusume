@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseStorage
+import FirebaseStorageSwift
 import Combine
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
@@ -41,11 +42,12 @@ extension CloudStorage {
         return try await withCheckedThrowingContinuation { continuation in
             reference
                 .child(path.path)
-                .putData(jpegImage, metadata: .init(dictionary: ["Content-Type": "image/jpeg"])) { metadata, error in
-                    if let error = error {
+                .putData(jpegImage, metadata: .init(dictionary: ["Content-Type": "image/jpeg"])) { result in
+                    switch result {
+                    case let .failure(error):
                         continuation.resume(throwing: error)
-                    } else {
-                        guard let _metadata = metadata, let path = _metadata.path else {
+                    case let .success(metadata):
+                        guard let path = metadata.path else {
                             continuation.resume(throwing: UploadError.cloudStoragePathNotFound)
                             return
                         }
