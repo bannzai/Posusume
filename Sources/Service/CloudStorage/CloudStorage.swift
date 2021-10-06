@@ -33,11 +33,11 @@ extension CloudStorage {
         case convertToJPEG
     }
 
-    public func upload(path: PathKind, image: UIImage) async throws -> Uploaded {
+    public func upload(path: PathKind, imageName: String = UUID().uuidString, image: UIImage) async throws -> Uploaded {
         guard let jpegImage = image.jpegData(compressionQuality: 1) else {
             throw UploadError.convertToJPEG
         }
-        let reference = rootReference.child(path.path)
+        let reference = rootReference.child("\(path.path)/\(imageName)")
 
         return try await withCheckedThrowingContinuation { continuation in
             reference
