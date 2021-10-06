@@ -46,6 +46,7 @@ public struct SpotPostSubmitButton: View {
                 try await mutation(
                     for: .init(
                         spotAddInput: .init(
+                            id: generateDatabaseID(),
                             title: title,
                             imageUrl: uploaded.url,
                             latitude: placemark.location.latitude,
