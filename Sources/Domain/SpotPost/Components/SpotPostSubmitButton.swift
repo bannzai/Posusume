@@ -42,11 +42,12 @@ public struct SpotPostSubmitButton: View {
         }
         Task {
             do {
-                let uploaded = try await upload(path: .spot(userID: me.id), image: image)
+                let spotID = generateDatabaseID()
+                let uploaded = try await upload(path: .spot(userID: me.id, spotID: spotID), image: image)
                 try await mutation(
                     for: .init(
                         spotAddInput: .init(
-                            id: generateDatabaseID(),
+                            id: spotID,
                             title: title,
                             imageUrl: uploaded.url,
                             latitude: placemark.location.latitude,

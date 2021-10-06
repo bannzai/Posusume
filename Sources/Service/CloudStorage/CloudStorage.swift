@@ -13,12 +13,12 @@ public struct CloudStorage {
 // MARK: - asinc/await
 extension CloudStorage {
     public enum PathKind {
-        case spot(userID: Me.ID)
+        case spot(userID: Me.ID, spotID: String)
 
         var path: String {
             switch self {
-            case let .spot(userID):
-                return "users/\(userID.rawValue)/spots"
+            case let .spot(userID, spotID):
+                return "users/\(userID.rawValue)/spots/\(spotID)"
             }
         }
     }
