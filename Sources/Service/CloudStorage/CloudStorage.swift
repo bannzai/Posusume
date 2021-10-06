@@ -41,7 +41,7 @@ extension CloudStorage {
         return try await withCheckedThrowingContinuation { continuation in
             reference
                 .child(path.path)
-                .putData(jpegImage, metadata: nil) { metadata, error in
+                .putData(jpegImage, metadata: .init(dictionary: ["Content-Type": "image/jpeg"])) { metadata, error in
                     if let error = error {
                         continuation.resume(throwing: error)
                     } else {

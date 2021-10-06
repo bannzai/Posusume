@@ -7,8 +7,13 @@ struct SpotPostImage: View {
     @State var showsActionSheet: Bool = false
     @State var error: Error?
 
-    @Binding var photoLibraryResult: PhotoLibraryResult?
-    @Binding var photoLibraryPlacemark: Placemark?
+    // NOTE: The size of the ScrollView will not be determined unless the size of the child(SpotPostImage) element is determined. `width` for determining the child size
+    // And it is difficult to use GeometryReader inside ScrollView
+    // See also: https://stackoverflow.com/questions/58965503/geometryreader-in-swiftui-scrollview-causes-weird-behaviour-and-random-offset
+    let width: CGFloat
+    let image: UIImage?
+    let takenPhoto: ((UIImage) -> Void)
+    let selectedPhoto: (PhotoLibraryResult) -> Void
 
     var body: some View {
         Button (
@@ -16,44 +21,36 @@ struct SpotPostImage: View {
                 showsActionSheet = true
             },
             label: {
-                if let image = photoLibraryResult?.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: .infinity)
-                        .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
-                        .clipped()
-                } else {
-                    VStack {
-                        Spacer()
-                        Image("anyPicture")
+                Group {
+                    if let image = image {
+                        Image(uiImage: image)
                             .resizable()
-                            .renderingMode(.template)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 40, height: 40)
-                        Text("画像を選択")
-                            .font(.footnote)
-                        Spacer()
+                    } else {
+                        VStack {
+                            Spacer()
+                            Image("anyPicture")
+                                .resizable()
+                                .renderingMode(.template)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                            Text("画像を選択")
+                                .font(.footnote)
+                            Spacer()
+                        }
+                        .foregroundColor(.placeholder)
                     }
-                    .frame(maxWidth: .infinity)
-                    .aspectRatio(.init(width: 4, height: 3), contentMode: .fit)
-                    .foregroundColor(.placeholder)
-                    .background(Color.white)
                 }
+                .scaledToFill()
+                .frame(width: width, height: width / 3 * 4)
+                .background(Color.white)
             })
             .buttonStyle(PlainButtonStyle())
+            .clipped()
             .adaptImagePickEvent(
                 showsActionSheet: $showsActionSheet,
-                photoLibraryResult: Binding(get: {
-                    photoLibraryResult
-                }, set: { photoLibraryResult in
-                    Task {
-                        if let photoLibraryResultLocation = photoLibraryResult?.location {
-                            photoLibraryPlacemark = try? await geocoder.reverseGeocode(location: photoLibraryResultLocation).first
-                        }
-                        self.photoLibraryResult = photoLibraryResult
-                    }
-                }),
-                error: $error
+                error: $error,
+                takenPhoto: takenPhoto,
+                selectedPhoto: selectedPhoto
             )
             .handle(error: $error)
     }
@@ -61,9 +58,7 @@ struct SpotPostImage: View {
 
 
 private struct Preview: PreviewProvider {
-    @State static var photoLibraryResult: PhotoLibraryResult?
-    @State static var photoLibraryResultPlacemark: Placemark?
     static var previews: some View {
-        SpotPostImage(photoLibraryResult: $photoLibraryResult, photoLibraryPlacemark: $photoLibraryResultPlacemark)
+        SpotPostImage(width: UIScreen.main.bounds.width - 40, image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in })
     }
 }

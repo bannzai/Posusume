@@ -8,12 +8,22 @@ public struct SpotAddInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
+  ///   - id
   ///   - title
   ///   - imageUrl
   ///   - latitude
   ///   - longitude
-  public init(title: String, imageUrl: URL, latitude: Latitude, longitude: Longitude) {
-    graphQLMap = ["title": title, "imageURL": imageUrl, "latitude": latitude, "longitude": longitude]
+  public init(id: Swift.Optional<GraphQLID?> = nil, title: String, imageUrl: URL, latitude: Latitude, longitude: Longitude) {
+    graphQLMap = ["id": id, "title": title, "imageURL": imageUrl, "latitude": latitude, "longitude": longitude]
+  }
+
+  public var id: Swift.Optional<GraphQLID?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<GraphQLID?> ?? Swift.Optional<GraphQLID?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
   }
 
   public var title: String {

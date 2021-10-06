@@ -8,10 +8,10 @@ import Combine
 struct PhotoLibraryView: UIViewControllerRepresentable {
     @Environment(\.dismiss) private var dismiss
 
-    let photoLibrary: PhotoLibrary
-
-    @Binding var photoLibraryResult: PhotoLibraryResult?
     @Binding var error: Error?
+
+    let photoLibrary: PhotoLibrary
+    let selected: (PhotoLibraryResult) -> Void
 
     func makeUIViewController(context: Context) -> PHPickerViewController {
         let controller = PHPickerViewController(configuration: sharedPhotoLibraryConfiguration)
@@ -57,21 +57,20 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
                         return
                     }
                 }, receiveValue: { [weak self] (result) in
-                    self?.parent.photoLibraryResult = result
+                    self?.parent.selected(result)
                 })
         }
     }
 }
 
 struct PhotoLibraryView_Previews: PreviewProvider {
-    @State static var photoLibraryResult: PhotoLibraryResult? = nil
     @State static var error: Error? = nil
 
     static var previews: some View {
         PhotoLibraryView(
+            error: $error,
             photoLibrary: MockPhotoLibrary(),
-            photoLibraryResult: $photoLibraryResult,
-            error: $error
+            selected: { _ in }
         )
     }
 }
