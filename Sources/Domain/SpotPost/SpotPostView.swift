@@ -33,7 +33,7 @@ struct SpotPostView: View {
                         }
                         Spacer()
 
-                        SpotPostSubmitButton(image: image, title: title, placemark: placemark)
+                        SpotPostSubmitButton(image: image, title: title, placemark: placemark, dismiss: dismiss)
                     }
                     .padding(.vertical, 24)
                 }

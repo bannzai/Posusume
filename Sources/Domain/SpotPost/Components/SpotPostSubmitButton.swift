@@ -4,7 +4,6 @@ import CoreLocation
 
 public struct SpotPostSubmitButton: View {
     @Environment(\.me) var me
-    @Environment(\.dismiss) var dismiss
 
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
@@ -14,6 +13,7 @@ public struct SpotPostSubmitButton: View {
     let image: UIImage?
     let title: String
     let placemark: Placemark?
+    let dismiss: DismissAction
 
     var submitButtonIsDisabled: Bool {
         image == nil || title.isEmpty || placemark == nil
