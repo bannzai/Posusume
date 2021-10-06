@@ -35,10 +35,11 @@ struct SpotPostView: View {
 
                         SpotPostSubmitButton(image: image, title: title, placemark: placemark)
                     }
+                    .padding(.vertical, 24)
                 }
             }
             .frame(maxWidth: .infinity)
-            .padding(EdgeInsets.init(top: 16, leading: 20, bottom: 32, trailing: 20))
+            .padding(.horizontal, 20)
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .navigationBarItems(
                 leading: Button(action: dismiss.callAsFunction, label: {
