@@ -4,7 +4,6 @@ import CoreLocation
 
 public struct SpotPostSubmitButton: View {
     @Environment(\.me) var me
-    @Environment(\.dismiss) var dismiss
 
     @StateObject var upload = Upload()
     @StateObject var mutation = Mutation<SpotAddMutation>()
@@ -14,6 +13,7 @@ public struct SpotPostSubmitButton: View {
     let image: UIImage?
     let title: String
     let placemark: Placemark?
+    let dismiss: DismissAction
 
     var submitButtonIsDisabled: Bool {
         image == nil || title.isEmpty || placemark == nil
@@ -42,10 +42,12 @@ public struct SpotPostSubmitButton: View {
         }
         Task {
             do {
-                let uploaded = try await upload(path: .spot(userID: me.id), image: image)
+                let spotID = generateDatabaseID()
+                let uploaded = try await upload(path: .spot(userID: me.id, spotID: spotID), image: image)
                 try await mutation(
                     for: .init(
                         spotAddInput: .init(
+                            id: spotID,
                             title: title,
                             imageUrl: uploaded.url,
                             latitude: placemark.location.latitude,
