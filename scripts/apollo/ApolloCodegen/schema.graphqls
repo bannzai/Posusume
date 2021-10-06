@@ -51,6 +51,7 @@ type Me implements Node {
 }
 
 input SpotAddInput {
+  id: ID
   title: String!
   imageURL: URL!
   latitude: Latitude!
