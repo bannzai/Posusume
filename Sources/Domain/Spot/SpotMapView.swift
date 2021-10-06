@@ -15,7 +15,7 @@ struct SpotMapView: View {
     @State var response: SpotsQuery.Data?
     @State var error: Error?
     @State var region: MKCoordinateRegion = defaultRegion
-    @State var isAddSpotPresented = false;
+    @State var isPresentingSpotPost = false;
 
     var spots: [SpotsQuery.Data.Me.Spot] {
         response?.me?.spots ?? []
@@ -38,7 +38,7 @@ struct SpotMapView: View {
                 HStack(alignment: .bottom) {
                     Spacer()
                     Button {
-                        isAddSpotPresented = true
+                        isPresentingSpotPost = true
                     } label: {
                         Image("addSpot")
                             .frame(width: 64, height: 64, alignment: .center)
@@ -58,7 +58,7 @@ struct SpotMapView: View {
             }
         }
         .sheet(
-            isPresented: $isAddSpotPresented,
+            isPresented: $isPresentingSpotPost,
             content: {
                 SpotPostView()
             }
