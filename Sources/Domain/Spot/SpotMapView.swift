@@ -25,16 +25,16 @@ struct SpotMapView: View {
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
-            Map(
-                coordinateRegion: $region,
+            Map(coordinateRegion: $region,
                 showsUserLocation: true,
                 annotationItems: spots,
                 annotationContent: { spot in
-                    MapAnnotation(coordinate: spot.coordinate) {
-                        Text(spot.title)
-                    }
+                MapAnnotation(coordinate: spot.coordinate) {
+                    Text(spot.title)
                 }
-            )
+            }).onChange(of: region) { newRegion in
+                print("newRegion: ", newRegion)
+            }
 
             VStack(spacing: -32) {
                 HStack(alignment: .bottom) {
