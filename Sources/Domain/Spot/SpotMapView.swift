@@ -9,6 +9,8 @@ extension SpotsQuery.Data.Me.Spot: Identifiable {
 }
 
 struct SpotMapView: View {
+    @Environment(\.locationManager) var locationManager
+
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
 
@@ -68,6 +70,8 @@ struct SpotMapView: View {
             response = await cache(for: .init())
 
             do {
+                let userLocation = try await locationManager.userLocation()
+                region = .init(center: userLocation.coordinate, span: region.span)
                 response = try await query(for: .init())
             } catch {
                 self.error = error
