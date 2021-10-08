@@ -17,18 +17,23 @@ public final class SpotsQuery: GraphQLQuery {
       ) {
         __typename
         id
-        title
-        imageURL
         geoPoint {
           __typename
           latitude
           longitude
         }
+        ...SpotImageFragment
       }
     }
     """
 
   public let operationName: String = "Spots"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + SpotImageFragment.fragmentDefinition)
+    return document
+  }
 
   public var spotsMinLatitude: Latitude
   public var spotsMinLongitude: Longitude
@@ -81,9 +86,10 @@ public final class SpotsQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("title", type: .nonNull(.scalar(String.self))),
-          GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
           GraphQLField("geoPoint", type: .nonNull(.object(GeoPoint.selections))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
         ]
       }
 
@@ -93,8 +99,8 @@ public final class SpotsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, title: String, imageUrl: URL, geoPoint: GeoPoint) {
-        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "title": title, "imageURL": imageUrl, "geoPoint": geoPoint.resultMap])
+      public init(id: GraphQLID, geoPoint: GeoPoint, imageUrl: URL) {
+        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "geoPoint": geoPoint.resultMap, "imageURL": imageUrl])
       }
 
       public var __typename: String {
@@ -115,12 +121,12 @@ public final class SpotsQuery: GraphQLQuery {
         }
       }
 
-      public var title: String {
+      public var geoPoint: GeoPoint {
         get {
-          return resultMap["title"]! as! String
+          return GeoPoint(unsafeResultMap: resultMap["geoPoint"]! as! ResultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "title")
+          resultMap.updateValue(newValue.resultMap, forKey: "geoPoint")
         }
       }
 
@@ -133,12 +139,29 @@ public final class SpotsQuery: GraphQLQuery {
         }
       }
 
-      public var geoPoint: GeoPoint {
+      public var fragments: Fragments {
         get {
-          return GeoPoint(unsafeResultMap: resultMap["geoPoint"]! as! ResultMap)
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "geoPoint")
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var spotImageFragment: SpotImageFragment {
+          get {
+            return SpotImageFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
 
@@ -190,6 +213,65 @@ public final class SpotsQuery: GraphQLQuery {
           }
         }
       }
+    }
+  }
+}
+
+public struct SpotImageFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment SpotImageFragment on Spot {
+      __typename
+      id
+      imageURL
+    }
+    """
+
+  public static let possibleTypes: [String] = ["Spot"]
+
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+    ]
+  }
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(id: GraphQLID, imageUrl: URL) {
+    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var id: GraphQLID {
+    get {
+      return resultMap["id"]! as! GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var imageUrl: URL {
+    get {
+      return resultMap["imageURL"]! as! URL
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "imageURL")
     }
   }
 }
