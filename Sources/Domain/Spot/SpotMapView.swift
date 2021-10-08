@@ -51,14 +51,6 @@ struct SpotMapView: View {
                     }
                 }
                 .padding(.trailing, 20)
-
-                ZStack {
-                    BarnBottomSheet()
-                    SpotList()
-                    .frame(alignment: .bottom)
-                    .padding()
-                }
-                .frame(width: UIScreen.main.bounds.width, height: BarnBottomSheet.height, alignment: .bottom)
             }
         }
         .sheet(
