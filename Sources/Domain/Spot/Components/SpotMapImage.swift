@@ -12,7 +12,7 @@ struct SpotMapImage: View {
         } placeholder: {
             ProgressView()
         }
-        .frame(width: 30, height: 40)
-        .clipShape(Rectangle())
+        .frame(width: 40, height: 40)
+        .clipShape(Circle())
     }
 }
