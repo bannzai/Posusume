@@ -14,18 +14,25 @@ extension MKCoordinateRegion: Equatable {
 }
 
 extension MKCoordinateRegion {
-    func cornerDigresses() -> (topLeft: CLLocationCoordinate2D, topRight: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
-        let lat = convertIfLatitudeDegressReachedBoundary
-        let lon = convertIfLongitudeDegressReachedBoundary
-        let left = lon(center.longitude - span.longitudeDelta / 2)
-        let right = lon(center.longitude + span.longitudeDelta / 2)
-        let top = lat(center.latitude + span.latitudeDelta / 2)
-        let bottom = lat(center.latitude - span.latitudeDelta / 2)
-        return (
-            topLeft: .init(latitude: left, longitude: top),
-            topRight: .init(latitude: right, longitude: top),
-            bottomLeft: .init(latitude: left, longitude: bottom),
-            bottomRight: .init(latitude: right, longitude: bottom)
+    var minLatitude: Latitude {
+        convertIfLatitudeDegressReachedBoundary(center.latitude - span.latitudeDelta / 2)
+    }
+    var minLongitude: Longitude {
+        convertIfLongitudeDegressReachedBoundary(center.longitude - span.longitudeDelta / 2)
+    }
+    var maxLatitude: Latitude {
+        convertIfLatitudeDegressReachedBoundary(center.latitude + span.latitudeDelta / 2)
+    }
+    var maxLongitude: Longitude {
+        convertIfLongitudeDegressReachedBoundary(center.longitude + span.longitudeDelta / 2)
+    }
+
+    var cornerDigresses: (topLeft: CLLocationCoordinate2D, topRight: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+        (
+            topLeft: .init(latitude: minLatitude, longitude: maxLongitude),
+            topRight: .init(latitude: maxLatitude, longitude: maxLongitude),
+            bottomLeft: .init(latitude: minLatitude, longitude: minLongitude),
+            bottomRight: .init(latitude: maxLatitude, longitude: minLongitude)
         )
     }
 
