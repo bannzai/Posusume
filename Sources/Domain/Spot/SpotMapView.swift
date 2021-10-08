@@ -2,12 +2,6 @@ import SwiftUI
 import Combine
 import MapKit
 
-extension SpotsQuery.Data.Me.Spot: Identifiable {
-    var coordinate: CLLocationCoordinate2D {
-        .init()
-    }
-}
-
 struct SpotMapView: View {
     @Environment(\.locationManager) var locationManager
 
@@ -19,8 +13,8 @@ struct SpotMapView: View {
     @State var region: MKCoordinateRegion = defaultRegion
     @State var isPresentingSpotPost = false;
 
-    var spots: [SpotsQuery.Data.Me.Spot] {
-        response?.me?.spots ?? []
+    var spots: [SpotsQuery.Data.Spot] {
+        response?.spots ?? []
     }
 
     var body: some View {
@@ -30,7 +24,15 @@ struct SpotMapView: View {
                 annotationItems: spots,
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
-                    Text(spot.title)
+                    AsyncImage(url: spot.imageUrl) { image in
+                        image
+                            .resizable()
+                            .scaledToFill()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
                 }
             }).onChange(of: region) { newRegion in
                 print("newRegion: ", newRegion)
@@ -65,14 +67,14 @@ struct SpotMapView: View {
                 SpotPostView()
             }
         )
+        .handle(error: $error)
         .edgesIgnoringSafeArea(.all)
         .task {
-            response = await cache(for: .init())
-
+            response = await cache(for: .init(region: region))
             do {
                 let userLocation = try await locationManager.userLocation()
                 region = .init(center: userLocation.coordinate, span: region.span)
-                response = try await query(for: .init())
+                response = try await query(for: .init(region: region))
             } catch {
                 self.error = error
             }
@@ -84,5 +86,22 @@ struct SpotMapView: View {
 struct SpotMapView_Previews: PreviewProvider {
     static var previews: some View {
         SpotMapView()
+    }
+}
+
+extension SpotsQuery.Data.Spot: Identifiable {
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
+    }
+}
+
+extension SpotsQuery {
+    convenience init(region: MKCoordinateRegion) {
+        self.init(
+            spotsMinLatitude: region.minLatitude,
+            spotsMinLongitude: region.minLongitude,
+            spotsMaxLatitude: region.maxLatitude,
+            spotsMaxLongitude: region.maxLongitude
+        )
     }
 }
