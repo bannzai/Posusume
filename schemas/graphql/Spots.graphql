@@ -3,5 +3,9 @@ query Spots($spotsMinLatitude: Latitude!, $spotsMinLongitude: Longitude!, $spots
     id
     title
     imageURL
+    geoPoint {
+     latitude
+     longitude
+    }
   }
 }
