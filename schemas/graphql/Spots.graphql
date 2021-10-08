@@ -5,11 +5,11 @@ query Spots($spotsMinLatitude: Latitude!, $spotsMinLongitude: Longitude!, $spots
       latitude
       longitude
     }
-    ...SpotImageFragment
+    ...SpotMapImageFragment
   }
 }
 
-fragment SpotImageFragment on Spot {
+fragment SpotMapImageFragment on Spot {
   id
   imageURL
 }

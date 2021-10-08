@@ -22,7 +22,7 @@ public final class SpotsQuery: GraphQLQuery {
           latitude
           longitude
         }
-        ...SpotImageFragment
+        ...SpotMapImageFragment
       }
     }
     """
@@ -31,7 +31,7 @@ public final class SpotsQuery: GraphQLQuery {
 
   public var queryDocument: String {
     var document: String = operationDefinition
-    document.append("\n" + SpotImageFragment.fragmentDefinition)
+    document.append("\n" + SpotMapImageFragment.fragmentDefinition)
     return document
   }
 
@@ -155,9 +155,9 @@ public final class SpotsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public var spotImageFragment: SpotImageFragment {
+        public var spotMapImageFragment: SpotMapImageFragment {
           get {
-            return SpotImageFragment(unsafeResultMap: resultMap)
+            return SpotMapImageFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -217,11 +217,11 @@ public final class SpotsQuery: GraphQLQuery {
   }
 }
 
-public struct SpotImageFragment: GraphQLFragment {
+public struct SpotMapImageFragment: GraphQLFragment {
   /// The raw GraphQL definition of this fragment.
   public static let fragmentDefinition: String =
     """
-    fragment SpotImageFragment on Spot {
+    fragment SpotMapImageFragment on Spot {
       __typename
       id
       imageURL
