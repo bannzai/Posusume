@@ -24,15 +24,7 @@ struct SpotMapView: View {
                 annotationItems: spots,
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
-                    AsyncImage(url: spot.imageUrl) { image in
-                        image
-                            .resizable()
-                            .scaledToFill()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
+                    SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
             }).onChange(of: region) { newRegion in
                 print("newRegion: ", newRegion)
