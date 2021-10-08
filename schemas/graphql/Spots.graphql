@@ -1,9 +1,15 @@
-query Spots {
-  me {
+query Spots($spotsMinLatitude: Latitude!, $spotsMinLongitude: Longitude!, $spotsMaxLatitude: Latitude!, $spotsMaxLongitude: Longitude!) {
+  spots(minLatitude: $spotsMinLatitude, minLongitude: $spotsMinLongitude, maxLatitude: $spotsMaxLatitude, maxLongitude: $spotsMaxLongitude) {
     id
-    spots {
-      id
-      title
+    geoPoint {
+      latitude
+      longitude
     }
+    ...SpotMapImageFragment
   }
+}
+
+fragment SpotMapImageFragment on Spot {
+  id
+  imageURL
 }

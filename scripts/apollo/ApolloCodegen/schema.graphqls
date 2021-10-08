@@ -14,6 +14,7 @@ scalar Longitude
 
 type Query {
   me: Me
+  spots(minLatitude: Latitude!, minLongitude: Longitude!, maxLatitude: Latitude!, maxLongitude: Longitude!, limit: Int! = 100): [Spot!]!
 }
 
 type Mutation {
