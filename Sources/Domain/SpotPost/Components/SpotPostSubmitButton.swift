@@ -29,7 +29,7 @@ public struct SpotPostSubmitButton: View {
                     .fontWeight(.medium)
             })
             .disabled(submitButtonIsDisabled)
-            .buttonStyle(PrimaryButtonStyle(isLoading: mutation.isProcessing))
+            .buttonStyle(PrimaryButtonStyle(isLoading: upload.isProcessing || mutation.isProcessing))
             .handle(error: $error)
     }
 
