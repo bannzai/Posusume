@@ -7,7 +7,7 @@ struct SpotMapImage: View {
     var body: some View {
         NavigationLink(
             destination: {
-                SpotDetailPage()
+                SpotDetailPage(spotID: fragment.id)
             },
             label: {
                 AsyncImage(url: fragment.resizedSpotImageUrLs.thumbnail ?? fragment.imageUrl) { image in
