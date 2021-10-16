@@ -10,6 +10,7 @@ query Spot($spotId: ID!) {
     author {
       id
     }
+    ...SpotDetailImageFragment
   }
 }
 

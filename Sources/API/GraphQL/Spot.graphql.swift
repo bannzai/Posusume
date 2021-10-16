@@ -23,11 +23,18 @@ public final class SpotQuery: GraphQLQuery {
           __typename
           id
         }
+        ...SpotDetailImageFragment
       }
     }
     """
 
   public let operationName: String = "Spot"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + SpotDetailImageFragment.fragmentDefinition)
+    return document
+  }
 
   public var spotId: GraphQLID
 
@@ -78,6 +85,9 @@ public final class SpotQuery: GraphQLQuery {
           GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
           GraphQLField("geoPoint", type: .nonNull(.object(GeoPoint.selections))),
           GraphQLField("author", type: .nonNull(.object(Author.selections))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
         ]
       }
 
@@ -142,6 +152,32 @@ public final class SpotQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue.resultMap, forKey: "author")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var spotDetailImageFragment: SpotDetailImageFragment {
+          get {
+            return SpotDetailImageFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
 
