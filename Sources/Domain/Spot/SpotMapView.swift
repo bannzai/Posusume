@@ -37,7 +37,7 @@ struct SpotMapView: View {
                 } label: {
                     Image("addSpot")
                         .frame(width: 64, height: 64, alignment: .center)
-                        .background(GradientColor.lower)
+                        .background(GradientColor.barn)
                         .clipShape(Circle())
                 }
             }
