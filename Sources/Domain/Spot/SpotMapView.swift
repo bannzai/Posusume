@@ -46,6 +46,11 @@ struct SpotMapView: View {
         }
         .sheet(
             isPresented: $isPresentingSpotPost,
+            onDismiss: {
+                Task {
+                    try? await query(for: .init(region: region))
+                }
+            },
             content: {
                 SpotPostView()
             }
