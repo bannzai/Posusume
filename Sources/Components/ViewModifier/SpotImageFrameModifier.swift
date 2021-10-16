@@ -15,6 +15,6 @@ public struct SpotImageFrameModifier: ViewModifier {
 
 extension View {
     public func spotImageFrame(width: CGFloat) -> some View {
-        modifier(spotImageFrame(width: width))
+        modifier(SpotImageFrameModifier(width: width))
     }
 }
