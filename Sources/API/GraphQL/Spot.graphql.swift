@@ -235,3 +235,62 @@ public final class SpotQuery: GraphQLQuery {
     }
   }
 }
+
+public struct SpotDetailImageFragment: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment SpotDetailImageFragment on Spot {
+      __typename
+      id
+      imageURL
+    }
+    """
+
+  public static let possibleTypes: [String] = ["Spot"]
+
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+    ]
+  }
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(id: GraphQLID, imageUrl: URL) {
+    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var id: GraphQLID {
+    get {
+      return resultMap["id"]! as! GraphQLID
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var imageUrl: URL {
+    get {
+      return resultMap["imageURL"]! as! URL
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "imageURL")
+    }
+  }
+}

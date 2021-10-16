@@ -12,3 +12,8 @@ query Spot($spotId: ID!) {
     }
   }
 }
+
+fragment SpotDetailImageFragment on Spot {
+  id
+  imageURL
+}
