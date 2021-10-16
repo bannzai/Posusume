@@ -14,5 +14,6 @@ struct SpotMapImage: View {
         }
         .frame(width: 40, height: 40)
         .clipShape(Circle())
+        .overlay(Circle().stroke(GradientColor.barn, lineWidth: 1))
     }
 }
