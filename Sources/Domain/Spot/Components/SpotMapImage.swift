@@ -5,7 +5,7 @@ struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
 
     var body: some View {
-        AsyncImage(url: fragment.imageUrl) { image in
+        AsyncImage(url: fragment.resizedSpotImageUrLs.thumbnail ?? fragment.imageUrl) { image in
             image
                 .resizable()
                 .scaledToFill()

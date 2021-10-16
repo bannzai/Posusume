@@ -30,23 +30,29 @@ struct SpotMapView: View {
                 print("newRegion: ", newRegion)
             }
 
-            VStack(spacing: -32) {
-                HStack(alignment: .bottom) {
-                    Spacer()
-                    Button {
-                        isPresentingSpotPost = true
-                    } label: {
-                        Image("addSpot")
-                            .frame(width: 64, height: 64, alignment: .center)
-                            .background(GradientColor.lower)
-                            .clipShape(Circle())
-                    }
+            HStack(alignment: .bottom) {
+                Spacer()
+                Button {
+                    isPresentingSpotPost = true
+                } label: {
+                    Image("addSpot")
+                        .frame(width: 64, height: 64, alignment: .center)
+                        .background(GradientColor.lower)
+                        .clipShape(Circle())
                 }
-                .padding(.trailing, 20)
             }
+            .padding(.trailing, 20)
+            .padding(.bottom, 60)
         }
         .sheet(
             isPresented: $isPresentingSpotPost,
+            onDismiss: {
+                Task {
+                    if let response = try? await query(for: .init(region: region)) {
+                        self.response = response
+                    }
+                }
+            },
             content: {
                 SpotPostView()
             }

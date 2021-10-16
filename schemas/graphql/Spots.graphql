@@ -12,4 +12,7 @@ query Spots($spotsMinLatitude: Latitude!, $spotsMinLongitude: Longitude!, $spots
 fragment SpotMapImageFragment on Spot {
   id
   imageURL
+  resizedSpotImageURLs {
+    thumbnail
+  }
 }
