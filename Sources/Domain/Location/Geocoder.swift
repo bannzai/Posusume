@@ -66,7 +66,8 @@ private struct _Geocoder: Geocoder {
 
 }
 
-public struct Placemark {
+public struct Placemark: Equatable, Identifiable {
+    public let id: UUID = .init()
     public let name: String?
     public let country: String?
     public let isoCountryCode: String?
