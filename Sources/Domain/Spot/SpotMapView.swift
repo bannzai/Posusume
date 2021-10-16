@@ -48,7 +48,9 @@ struct SpotMapView: View {
             isPresented: $isPresentingSpotPost,
             onDismiss: {
                 Task {
-                    try? await query(for: .init(region: region))
+                    if let response = try? await query(for: .init(region: region)) {
+                        self.response = response
+                    }
                 }
             },
             content: {
