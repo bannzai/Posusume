@@ -14,7 +14,7 @@ scalar Longitude
 
 type Query {
   me: Me
-  spots(minLatitude: Latitude!, minLongitude: Longitude!, maxLatitude: Latitude!, maxLongitude: Longitude!, limit: Int! = 100): [Spot!]!
+  spots(minLatitude: Latitude!, minLongitude: Longitude!, maxLatitude: Latitude!, maxLongitude: Longitude!): [Spot!]!
 }
 
 type Mutation {
@@ -35,6 +35,16 @@ type Spot implements Node {
   authorID: ID!
   author: User!
   geoPoint: GeoPoint!
+  resizedSpotImageURLs: ResizedSpotImageURLs!
+}
+
+"""
+ResizedSpotImageURLs container of resized image URLs on Cloud Functions
+All of these properties are optional because they are determined asynchronously.
+Also, the newly added ResizedImageURL type will be null.
+"""
+type ResizedSpotImageURLs {
+  thumbnail: URL
 }
 
 type GeoPoint {

@@ -90,6 +90,7 @@ public final class SpotsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+          GraphQLField("resizedSpotImageURLs", type: .nonNull(.object(ResizedSpotImageUrl.selections))),
         ]
       }
 
@@ -99,8 +100,8 @@ public final class SpotsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, geoPoint: GeoPoint, imageUrl: URL) {
-        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "geoPoint": geoPoint.resultMap, "imageURL": imageUrl])
+      public init(id: GraphQLID, geoPoint: GeoPoint, imageUrl: URL, resizedSpotImageUrLs: ResizedSpotImageUrl) {
+        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "geoPoint": geoPoint.resultMap, "imageURL": imageUrl, "resizedSpotImageURLs": resizedSpotImageUrLs.resultMap])
       }
 
       public var __typename: String {
@@ -136,6 +137,15 @@ public final class SpotsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "imageURL")
+        }
+      }
+
+      public var resizedSpotImageUrLs: ResizedSpotImageUrl {
+        get {
+          return ResizedSpotImageUrl(unsafeResultMap: resultMap["resizedSpotImageURLs"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "resizedSpotImageURLs")
         }
       }
 
@@ -213,6 +223,45 @@ public final class SpotsQuery: GraphQLQuery {
           }
         }
       }
+
+      public struct ResizedSpotImageUrl: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ResizedSpotImageURLs"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("thumbnail", type: .scalar(URL.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(thumbnail: URL? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ResizedSpotImageURLs", "thumbnail": thumbnail])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var thumbnail: URL? {
+          get {
+            return resultMap["thumbnail"] as? URL
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "thumbnail")
+          }
+        }
+      }
     }
   }
 }
@@ -225,6 +274,10 @@ public struct SpotMapImageFragment: GraphQLFragment {
       __typename
       id
       imageURL
+      resizedSpotImageURLs {
+        __typename
+        thumbnail
+      }
     }
     """
 
@@ -235,6 +288,7 @@ public struct SpotMapImageFragment: GraphQLFragment {
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
       GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+      GraphQLField("resizedSpotImageURLs", type: .nonNull(.object(ResizedSpotImageUrl.selections))),
     ]
   }
 
@@ -244,8 +298,8 @@ public struct SpotMapImageFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, imageUrl: URL) {
-    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl])
+  public init(id: GraphQLID, imageUrl: URL, resizedSpotImageUrLs: ResizedSpotImageUrl) {
+    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl, "resizedSpotImageURLs": resizedSpotImageUrLs.resultMap])
   }
 
   public var __typename: String {
@@ -272,6 +326,54 @@ public struct SpotMapImageFragment: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "imageURL")
+    }
+  }
+
+  public var resizedSpotImageUrLs: ResizedSpotImageUrl {
+    get {
+      return ResizedSpotImageUrl(unsafeResultMap: resultMap["resizedSpotImageURLs"]! as! ResultMap)
+    }
+    set {
+      resultMap.updateValue(newValue.resultMap, forKey: "resizedSpotImageURLs")
+    }
+  }
+
+  public struct ResizedSpotImageUrl: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ResizedSpotImageURLs"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("thumbnail", type: .scalar(URL.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(thumbnail: URL? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ResizedSpotImageURLs", "thumbnail": thumbnail])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var thumbnail: URL? {
+      get {
+        return resultMap["thumbnail"] as? URL
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "thumbnail")
+      }
     }
   }
 }
