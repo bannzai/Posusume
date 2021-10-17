@@ -9,7 +9,7 @@ public struct SpotImageFrameModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .scaledToFill()
-            .frame(width: width, height: width / 3 * 4)
+            .frame(width: width, height: width / 5 * 7)
     }
 }
 
