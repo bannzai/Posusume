@@ -50,6 +50,7 @@ public struct SpotDetailPage: View {
                     self.error = error
                 }
             }
+            .handle(error: $error)
         }
     }
 }
