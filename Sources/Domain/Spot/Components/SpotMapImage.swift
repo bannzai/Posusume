@@ -11,18 +11,18 @@ struct SpotMapImage: View {
             image
                 .resizable()
                 .scaledToFill()
+                .clipShape(Circle())
+                .overlay(Circle().stroke(GradientColor.barn, lineWidth: 1))
+                .onTapGesture {
+                    isPresentingSpotDetail = true
+                }
+                .sheet(isPresented: $isPresentingSpotDetail) {
+                    SpotDetailPage(spotID: fragment.id)
+                }
         } placeholder: {
             ProgressView()
         }
         .frame(width: 40, height: 40)
-        .clipShape(Circle())
-        .overlay(Circle().stroke(GradientColor.barn, lineWidth: 1))
-        .onTapGesture {
-            isPresentingSpotDetail = true
-        }
-        .sheet(isPresented: $isPresentingSpotDetail) {
-            SpotDetailPage(spotID: fragment.id)
-        }
     }
 
     private var imageURL: URL {
