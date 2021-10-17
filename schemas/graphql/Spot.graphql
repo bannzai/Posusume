@@ -1,0 +1,20 @@
+query Spot($spotId: ID!) {
+  spot(id: $spotId) {
+    id
+    title
+    imageURL
+    geoPoint {
+      latitude
+      longitude
+    }
+    author {
+      id
+    }
+    ...SpotDetailImageFragment
+  }
+}
+
+fragment SpotDetailImageFragment on Spot {
+  id
+  imageURL
+}

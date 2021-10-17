@@ -7,9 +7,6 @@ struct SpotPostImage: View {
     @State var showsActionSheet: Bool = false
     @State var error: Error?
 
-    // NOTE: The size of the ScrollView will not be determined unless the size of the child(SpotPostImage) element is determined. `width` for determining the child size
-    // And it is difficult to use GeometryReader inside ScrollView
-    // See also: https://stackoverflow.com/questions/58965503/geometryreader-in-swiftui-scrollview-causes-weird-behaviour-and-random-offset
     let width: CGFloat
     let image: UIImage?
     let takenPhoto: ((UIImage) -> Void)
@@ -40,8 +37,7 @@ struct SpotPostImage: View {
                         .foregroundColor(.placeholder)
                     }
                 }
-                .scaledToFill()
-                .frame(width: width, height: width / 3 * 4)
+                .spotImageFrame(width: width)
                 .background(Color.white)
             })
             .buttonStyle(PlainButtonStyle())
