@@ -10,6 +10,7 @@ public struct Loading<Content: View, Value>: View {
             content(value)
         } else {
             ProgressView("Now Loading...")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
