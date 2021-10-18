@@ -16,7 +16,7 @@ public struct SpotPostEditorPage: View {
                         .spotImageFrame(width: geometry.size.width)
                         .clipped()
                 }
-                SpotPostEditorCover()
+                SpotPostEditorEffectCover()
             }
 
             ScrollView(.horizontal) {

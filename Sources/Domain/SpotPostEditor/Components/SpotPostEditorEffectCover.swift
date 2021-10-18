@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-struct SpotPostEditorCover: View {
+struct SpotPostEditorEffectCover: View {
     var body: some View {
         EmptyView()
     }
