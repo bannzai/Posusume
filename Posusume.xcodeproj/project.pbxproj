@@ -45,6 +45,7 @@
 		20A96B9E271B965A00E1765B /* SpotDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9D271B965A00E1765B /* SpotDetailImage.swift */; };
 		20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */; };
 		20A96BA3271B989D00E1765B /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96BA2271B989D00E1765B /* Loading.swift */; };
+		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -138,6 +139,7 @@
 		20A96B9D271B965A00E1765B /* SpotDetailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImage.swift; sourceTree = "<group>"; };
 		20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageFrameModifier.swift; sourceTree = "<group>"; };
 		20A96BA2271B989D00E1765B /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */,
+				20B09168271D0C830015F0F3 /* Tansaku.swift */,
 			);
 			path = Molocules;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */,
+				20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				2035A9C32709229F007D580F /* Upload.swift in Sources */,
