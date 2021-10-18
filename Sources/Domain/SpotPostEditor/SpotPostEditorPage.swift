@@ -3,32 +3,54 @@ import SwiftUI
 
 public struct SpotPostEditorPage: View {
     let image: UIImage
+    init(image: UIImage) {
+        self.image = image
+    }
+
+    @State var modifierType: ModifierType = .text
 
     public var body: some View {
-        ZStack(alignment: .bottom) {
+        VStack {
             GeometryReader { geometry in
                 Image(uiImage: image)
                     .resizable()
                     .spotImageFrame(width: geometry.size.width)
                     .clipped()
             }
-            .padding()
+
+            switch modifierType {
+            case .text:
+                SpotPostEditorText(sources: ["翼", "陽炎", "スターください", "麻婆豆腐"], onTap: { _ in
+
+                })
+            case .verticalText:
+                SpotPostEditorVerticalText(sources: ["翼", "陽炎", "スターください", "麻婆豆腐"], onTap: { _ in
+
+                })
+            case .emoji:
+                SpotPostEditorEmoji(onTap: { _ in
+
+                })
+            }
 
             ScrollView(.horizontal) {
                 HStack {
                     Image(systemName: "textbox")
+                        .onTapGesture { modifierType = .text }
+                    Image(systemName: "textbox")
+                        .onTapGesture { modifierType = .verticalText }
                     Image(systemName: "face.smiling")
+                        .onTapGesture { modifierType = .emoji }
                 }
-                .padding()
             }
         }
+        .padding()
     }
 
     enum ModifierType {
         case text
         case verticalText
         case emoji
-        case asciiArt
     }
 }
 
