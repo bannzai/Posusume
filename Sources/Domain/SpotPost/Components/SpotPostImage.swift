@@ -6,6 +6,7 @@ struct SpotPostImage: View {
 
     @State var showsActionSheet: Bool = false
     @State var error: Error?
+    @State var isPresentingEditor = false
 
     let width: CGFloat
     let image: UIImage?
@@ -18,27 +19,44 @@ struct SpotPostImage: View {
                 showsActionSheet = true
             },
             label: {
-                Group {
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                    } else {
-                        VStack {
-                            Spacer()
-                            Image("anyPicture")
+                ZStack(alignment: .topTrailing) {
+                    Group {
+                        if let image = image {
+                            Image(uiImage: image)
                                 .resizable()
-                                .renderingMode(.template)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 40, height: 40)
-                            Text("画像を選択")
-                                .font(.footnote)
-                            Spacer()
+                        } else {
+                            VStack {
+                                Spacer()
+                                Image("anyPicture")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40)
+                                Text("画像を選択")
+                                    .font(.footnote)
+                                Spacer()
+                            }
+                            .foregroundColor(.placeholder)
                         }
-                        .foregroundColor(.placeholder)
+                    }
+                    .spotImageFrame(width: width)
+                    .background(Color.white)
+
+                    if let image = image {
+                        Button(action: {
+                            isPresentingEditor = true
+                        }, label: {
+                            Image(systemName: "pencil.and.outline")
+                                .foregroundColor(Color.black)
+                                .frame(width: 22, height: 22)
+                                .padding(.all, 4)
+                                .overlay(Circle().stroke(Color.black, lineWidth: 1))
+                        }).sheet(isPresented: $isPresentingEditor) {
+                            SpotPostEditorPage(image: image)
+                        }
+                        .padding([.top, .trailing], 12)
                     }
                 }
-                .spotImageFrame(width: width)
-                .background(Color.white)
             })
             .buttonStyle(PlainButtonStyle())
             .clipped()
