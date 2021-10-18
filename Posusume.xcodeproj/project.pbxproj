@@ -522,18 +522,18 @@
 				2035A9C427094DE6007D580F /* SpotPost */,
 				BA906C32264109E400ACE02F /* Location */,
 				BA317331262BC1D500E1212C /* Photo */,
-				BADF52FF261D303400431FEB /* Spot */,
+				BADF52FF261D303400431FEB /* SpotMap */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		BADF52FF261D303400431FEB /* Spot */ = {
+		BADF52FF261D303400431FEB /* SpotMap */ = {
 			isa = PBXGroup;
 			children = (
 				20ECE50127105835009E7025 /* Components */,
 				BA249E672625E12D000DA60F /* SpotMapView.swift */,
 			);
-			path = Spot;
+			path = SpotMap;
 			sourceTree = "<group>";
 		};
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
