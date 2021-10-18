@@ -9,18 +9,23 @@ public struct SpotPostEditorPage: View {
 
     public var body: some View {
         VStack {
-            GeometryReader { geometry in
-                Image(uiImage: image)
-                    .resizable()
-                    .spotImageFrame(width: geometry.size.width)
-                    .clipped()
+            ZStack {
+                GeometryReader { geometry in
+                    Image(uiImage: image)
+                        .resizable()
+                        .spotImageFrame(width: geometry.size.width)
+                        .clipped()
+                }
+                SpotPostEditorCover()
             }
 
             ScrollView(.horizontal) {
                 HStack {
-                    Image(systemName: "textbox")
-                    Image(systemName: "textbox")
-                    Image(systemName: "face.smiling")
+                    Image(systemName: "textformat")
+                        .font(.system(size: 32))
+                        .onTapGesture {
+
+                        }
                 }
             }
         }
