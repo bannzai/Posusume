@@ -7,8 +7,6 @@ public struct SpotPostEditorPage: View {
         self.image = image
     }
 
-    @State var modifierType: ModifierType = .text
-
     public var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -18,39 +16,15 @@ public struct SpotPostEditorPage: View {
                     .clipped()
             }
 
-            switch modifierType {
-            case .text:
-                SpotPostEditorText(sources: ["翼", "陽炎", "スターください", "麻婆豆腐"], onTap: { _ in
-
-                })
-            case .verticalText:
-                SpotPostEditorVerticalText(sources: ["翼", "陽炎", "スターください", "麻婆豆腐"], onTap: { _ in
-
-                })
-            case .emoji:
-                SpotPostEditorEmoji(onTap: { _ in
-
-                })
-            }
-
             ScrollView(.horizontal) {
                 HStack {
                     Image(systemName: "textbox")
-                        .onTapGesture { modifierType = .text }
                     Image(systemName: "textbox")
-                        .onTapGesture { modifierType = .verticalText }
                     Image(systemName: "face.smiling")
-                        .onTapGesture { modifierType = .emoji }
                 }
             }
         }
         .padding()
-    }
-
-    enum ModifierType {
-        case text
-        case verticalText
-        case emoji
     }
 }
 
