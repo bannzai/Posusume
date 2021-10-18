@@ -4,6 +4,10 @@ import SwiftUI
 public struct Tansaku: View {
     let string: String
 
+    public init(_ string: String) {
+        self.string = string
+    }
+
     public var body: some View {
         VStack {
             ForEach(0..<string.count) { offset in
@@ -16,8 +20,8 @@ public struct Tansaku: View {
 struct Tansaku_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
-            Tansaku(string: "こんにちは")
-            Tansaku(string: "abcdefg")
+            Tansaku("こんにちは")
+            Tansaku("abcdefg")
         }
     }
 }
