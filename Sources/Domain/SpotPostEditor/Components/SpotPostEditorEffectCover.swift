@@ -2,18 +2,18 @@ import Foundation
 import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
-    @Binding var elements: [SpotPostEditorEffectCoverElement]
+    @Binding var elements: [SpotPostEditorEffectCoverElementValue]
 
     var body: some View {
         ZStack {
             ForEach(elements) { element in
-                Element(text: element.text)
+                SpotPostEditorEffectCoverElement(text: element.text)
             }
         }
     }
 }
 
-struct Element: View {
+struct SpotPostEditorEffectCoverElement: View {
     let text: String
 
     @State private var location: CGPoint = CGPoint(x: 50, y: 50)
@@ -38,14 +38,14 @@ struct Element: View {
     }
 }
 
-struct SpotPostEditorEffectCoverElement: Identifiable {
+struct SpotPostEditorEffectCoverElementValue: Identifiable {
     let id: UUID = .init()
     let text: String
 }
 
 
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var elements: [SpotPostEditorEffectCoverElement] = [.init(text: "Hello, world")]
+    @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world")]
     static var previews: some View {
         SpotPostEditorEffectCover(elements: $elements)
     }
