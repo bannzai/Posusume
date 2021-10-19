@@ -18,18 +18,17 @@ struct SpotPostEditorEffectCoverElement: View {
 
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var angle: Angle = .init(degrees: 0)
+    @State private var isGesturing = false
     @GestureState private var startLocation: CGPoint? = nil
-    @GestureState private var fingerLocation: CGPoint? = nil
 
     var body: some View {
         Text(element.text)
             .font(.title)
-            .border(fingerLocation != nil ? Color.blue : Color.clear, width: 2)
+            .padding(4)
+            .border(isGesturing ? Color.blue : Color.clear, width: 2)
             .rotationEffect(.degrees(angle.degrees))
             .position(location)
-            .gesture(
-                drag.simultaneously(with: rotate).simultaneously(with: fingerDrag)
-            )
+            .gesture(drag.simultaneously(with: rotate))
 
     }
 
@@ -40,6 +39,11 @@ struct SpotPostEditorEffectCoverElement: View {
                 newLocation.x += value.translation.width
                 newLocation.y += value.translation.height
                 location = newLocation
+
+                isGesturing = true
+            }
+            .onEnded { _ in
+                isGesturing = false
             }
             .updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location
@@ -50,13 +54,10 @@ struct SpotPostEditorEffectCoverElement: View {
         RotationGesture()
             .onChanged { angle in
                 self.angle = angle
+                isGesturing = true
             }
-    }
-
-    private var fingerDrag: some Gesture {
-        DragGesture()
-            .updating($fingerLocation) { (value, fingerLocation, transaction) in
-                fingerLocation = value.location
+            .onEnded { _ in
+                isGesturing = false
             }
     }
 }
