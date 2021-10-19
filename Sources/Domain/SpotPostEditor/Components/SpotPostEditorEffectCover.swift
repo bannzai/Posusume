@@ -7,41 +7,46 @@ struct SpotPostEditorEffectCover: View {
     var body: some View {
         ZStack {
             ForEach(elements) { element in
-                Text(element.text)
-                    .font(.title)
-                    .position(element.location)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { gestureValue in
-                                guard let elementIndex = elements.firstIndex(where: { $0.id == element.id }) else {
-                                    fatalError()
-                                }
-                                elements[elementIndex].location = gestureValue.location
-                            }
-                    )
+                Element(text: element.text)
             }
         }
+    }
+}
+
+struct Element: View {
+    let text: String
+
+    @State private var location: CGPoint = CGPoint(x: 50, y: 50)
+    @GestureState private var fingerLocation: CGPoint? = nil
+    @GestureState private var startLocation: CGPoint? = nil
+
+    var body: some View {
+        Text(text)
+            .font(.title)
+            .position(location)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        var newLocation = startLocation ?? location
+                        newLocation.x += value.translation.width
+                        newLocation.y += value.translation.height
+                        location = newLocation
+                    }.updating($startLocation) { (value, startLocation, transaction) in
+                        startLocation = startLocation ?? location
+                    }
+            )
     }
 }
 
 struct SpotPostEditorEffectCoverElement: Identifiable {
     let id: UUID = .init()
     let text: String
-    var location: CGPoint = .init(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
-    let defaultLocation: CGPoint
-
-    init(text: String, location: CGPoint) {
-        self.text = text
-        self.location = location
-        self.defaultLocation = location
-    }
 }
 
 
-
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var elements: [SpotPostEditorEffectCoverElement] = [.init(text: "Hello, world", location: .zero)]
+    @State static var elements: [SpotPostEditorEffectCoverElement] = [.init(text: "Hello, world")]
     static var previews: some View {
-        V()
+        SpotPostEditorEffectCover(elements: $elements)
     }
 }
