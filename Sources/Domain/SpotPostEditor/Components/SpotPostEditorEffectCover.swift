@@ -24,8 +24,8 @@ struct SpotPostEditorEffectCoverElement: View {
     var body: some View {
         Text(element.text)
             .font(.title)
-            .position(location)
             .rotationEffect(.degrees(angle.degrees))
+            .position(location)
             .gesture(
                 drag.simultaneously(with: rotate).simultaneously(with: fingerDrag)
             )
