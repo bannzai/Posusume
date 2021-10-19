@@ -26,7 +26,7 @@ public struct SpotPostEditorPage: View {
                     Image(systemName: "textformat")
                         .font(.system(size: 32))
                         .onTapGesture {
-                            elements.append(.init(text: "Hello, world"))
+                            elements.append(.init(text: "Hello, world", initialLocation: <#T##CGPoint#>))
                         }
                 }
             }
