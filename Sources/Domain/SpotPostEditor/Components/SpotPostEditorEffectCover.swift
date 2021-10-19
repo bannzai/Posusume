@@ -2,39 +2,58 @@ import Foundation
 import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
+    @State var selected: SpotPostEditorEffectCoverElementValue?
     @Binding var elements: [SpotPostEditorEffectCoverElementValue]
 
     var body: some View {
         ZStack {
             ForEach(elements) { element in
-                SpotPostEditorEffectCoverElement(text: element.text)
+                SpotPostEditorEffectCoverElement(element: element)
+                    .when(element.id == selected?.id) {
+                        $0
+                            .border(Color.blue, width: 2)
+                            .cornerRadius(4)
+                    }
             }
         }
     }
 }
 
 struct SpotPostEditorEffectCoverElement: View {
-    let text: String
+    let element: SpotPostEditorEffectCoverElementValue
 
     @State private var location: CGPoint = CGPoint(x: 50, y: 50)
+    @State private var angle: Angle = .init(degrees: 0)
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
 
     var body: some View {
-        Text(text)
+        Text(element.text)
             .font(.title)
             .position(location)
+            .rotationEffect(angle)
             .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        var newLocation = startLocation ?? location
-                        newLocation.x += value.translation.width
-                        newLocation.y += value.translation.height
-                        location = newLocation
-                    }.updating($startLocation) { (value, startLocation, transaction) in
-                        startLocation = startLocation ?? location
-                    }
+                drag.simultaneously(with: rotate)
             )
+    }
+
+    private var drag: some Gesture {
+        DragGesture()
+            .onChanged { value in
+                var newLocation = startLocation ?? location
+                newLocation.x += value.translation.width
+                newLocation.y += value.translation.height
+                location = newLocation
+            }.updating($startLocation) { (value, startLocation, transaction) in
+                startLocation = startLocation ?? location
+            }
+    }
+
+    private var rotate: some Gesture {
+        RotationGesture()
+            .onChanged { angle in
+                self.angle = angle
+            }
     }
 }
 
