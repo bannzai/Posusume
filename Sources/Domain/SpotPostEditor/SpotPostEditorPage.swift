@@ -7,7 +7,7 @@ public struct SpotPostEditorPage: View {
         self.image = image
     }
 
-    @State var elements: [SpotPostEditorEffectCoverElement] = []
+    @State var elements: [SpotPostEditorEffectCoverElementValue] = []
 
     public var body: some View {
         VStack {
