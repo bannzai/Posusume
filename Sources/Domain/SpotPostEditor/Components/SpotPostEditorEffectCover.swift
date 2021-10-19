@@ -22,7 +22,7 @@ struct SpotPostEditorEffectCover: View {
 struct SpotPostEditorEffectCoverElement: View {
     let element: SpotPostEditorEffectCoverElementValue
 
-    @State private var location: CGPoint = CGPoint(x: UIScreen.main.bounds.midX, y: 200)
+    @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var angle: Angle = .init(degrees: 0)
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
