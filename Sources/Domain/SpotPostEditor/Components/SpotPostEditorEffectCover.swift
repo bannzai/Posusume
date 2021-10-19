@@ -19,6 +19,7 @@ struct SpotPostEditorEffectCoverElement: View {
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var angle: Angle = .init(degrees: 0)
     @State private var isGesturing = false
+    @State private var scale: CGFloat = 1.0
     @GestureState private var startLocation: CGPoint? = nil
 
     var body: some View {
@@ -27,8 +28,9 @@ struct SpotPostEditorEffectCoverElement: View {
             .padding(4)
             .border(isGesturing ? Color.blue : Color.clear, width: 2)
             .rotationEffect(.degrees(angle.degrees))
+            .scaleEffect(scale)
             .position(location)
-            .gesture(drag.simultaneously(with: rotate))
+            .gesture(drag.simultaneously(with: rotate).simultaneously(with: magnification))
 
     }
 
@@ -59,6 +61,12 @@ struct SpotPostEditorEffectCoverElement: View {
             .onEnded { _ in
                 isGesturing = false
             }
+    }
+
+    private var magnification: some Gesture {
+        MagnificationGesture().onChanged { value in
+            scale = value.magnitude
+        }
     }
 }
 
