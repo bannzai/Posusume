@@ -18,21 +18,17 @@ struct SpotPostEditorEffectCoverElement: View {
 
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var angle: Angle = .init(degrees: 0)
-    @State private var isGesturing: Bool = false
-    @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
+    @GestureState private var fingerLocation: CGPoint? = nil
 
     var body: some View {
         Text(element.text)
             .font(.title)
             .position(location)
-            .rotationEffect(angle)
+            .rotationEffect(.degrees(angle.degrees))
             .gesture(
-                drag.simultaneously(with: rotate)
+                drag.simultaneously(with: rotate).simultaneously(with: fingerDrag)
             )
-            .when(isGesturing) {
-                $0.border(Color.blue, width: 2)
-            }
     }
 
     private var drag: some Gesture {
@@ -42,11 +38,6 @@ struct SpotPostEditorEffectCoverElement: View {
                 newLocation.x += value.translation.width
                 newLocation.y += value.translation.height
                 location = newLocation
-
-                isGesturing = true
-            }
-            .onEnded { _ in
-                isGesturing = false
             }
             .updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location
@@ -57,22 +48,18 @@ struct SpotPostEditorEffectCoverElement: View {
         RotationGesture()
             .onChanged { angle in
                 self.angle = angle
-
-                isGesturing = true
             }
-            .onEnded { _ in
-                isGesturing = false
+    }
+
+    private var fingerDrag: some Gesture {
+        DragGesture()
+            .updating($fingerLocation) { (value, fingerLocation, transaction) in
+                fingerLocation = value.location
             }
     }
 }
 
-extension SpotPostEditorEffectCoverElement: Equatable {
-    static func ==(lhs: SpotPostEditorEffectCoverElement, rhs: SpotPostEditorEffectCoverElement) -> Bool {
-        lhs.element == rhs.element
-    }
-}
-
-struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
+struct SpotPostEditorEffectCoverElementValue: Identifiable {
     let id: UUID = .init()
     let text: String
 }
