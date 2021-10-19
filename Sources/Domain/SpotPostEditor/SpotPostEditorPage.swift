@@ -7,6 +7,8 @@ public struct SpotPostEditorPage: View {
         self.image = image
     }
 
+    @State var elements: [SpotPostEditorEffectCoverElement] = []
+
     public var body: some View {
         VStack {
             ZStack {
@@ -16,7 +18,7 @@ public struct SpotPostEditorPage: View {
                         .spotImageFrame(width: geometry.size.width)
                         .clipped()
                 }
-                SpotPostEditorEffectCover()
+                SpotPostEditorEffectCover(elements: $elements)
             }
 
             ScrollView(.horizontal) {
@@ -24,7 +26,7 @@ public struct SpotPostEditorPage: View {
                     Image(systemName: "textformat")
                         .font(.system(size: 32))
                         .onTapGesture {
-
+                            elements.append(.init(text: "Hello, world"))
                         }
                 }
             }
