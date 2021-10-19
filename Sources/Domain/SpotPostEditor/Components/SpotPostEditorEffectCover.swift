@@ -22,7 +22,7 @@ struct SpotPostEditorEffectCover: View {
 struct SpotPostEditorEffectCoverElement: View {
     let element: SpotPostEditorEffectCoverElementValue
 
-    @State var location: CGPoint?
+    @State private var location: CGPoint = CGPoint(x: 50, y: 50)
     @State private var angle: Angle = .init(degrees: 0)
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
@@ -30,7 +30,7 @@ struct SpotPostEditorEffectCoverElement: View {
     var body: some View {
         Text(element.text)
             .font(.title)
-            .position(location ?? element.initialLocation)
+            .position(location)
             .rotationEffect(angle)
             .gesture(
                 drag.simultaneously(with: rotate)
@@ -40,12 +40,12 @@ struct SpotPostEditorEffectCoverElement: View {
     private var drag: some Gesture {
         DragGesture()
             .onChanged { value in
-                var newLocation = startLocation ?? location ?? element.initialLocation
+                var newLocation = startLocation ?? location
                 newLocation.x += value.translation.width
                 newLocation.y += value.translation.height
                 location = newLocation
             }.updating($startLocation) { (value, startLocation, transaction) in
-                startLocation = startLocation ?? location ?? element.initialLocation
+                startLocation = startLocation ?? location
             }
     }
 
@@ -60,12 +60,11 @@ struct SpotPostEditorEffectCoverElement: View {
 struct SpotPostEditorEffectCoverElementValue: Identifiable {
     let id: UUID = .init()
     let text: String
-    let initialLocation: CGPoint
 }
 
 
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world", initialLocation: .zero)]
+    @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world")]
     static var previews: some View {
         SpotPostEditorEffectCover(elements: $elements)
     }
