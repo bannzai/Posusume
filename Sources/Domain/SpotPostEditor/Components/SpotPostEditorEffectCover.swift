@@ -2,18 +2,12 @@ import Foundation
 import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
-    @State var selected: SpotPostEditorEffectCoverElementValue?
     @Binding var elements: [SpotPostEditorEffectCoverElementValue]
 
     var body: some View {
         ZStack {
             ForEach(elements) { element in
                 SpotPostEditorEffectCoverElement(element: element)
-                    .when(element.id == selected?.id) {
-                        $0
-                            .border(Color.blue, width: 2)
-                            .cornerRadius(4)
-                    }
             }
         }
     }
@@ -24,6 +18,7 @@ struct SpotPostEditorEffectCoverElement: View {
 
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var angle: Angle = .init(degrees: 0)
+    @State private var isGesturing: Bool = false
     @GestureState private var fingerLocation: CGPoint? = nil
     @GestureState private var startLocation: CGPoint? = nil
 
@@ -35,6 +30,9 @@ struct SpotPostEditorEffectCoverElement: View {
             .gesture(
                 drag.simultaneously(with: rotate)
             )
+            .when(isGesturing) {
+                $0.border(Color.blue, width: 2)
+            }
     }
 
     private var drag: some Gesture {
@@ -44,7 +42,13 @@ struct SpotPostEditorEffectCoverElement: View {
                 newLocation.x += value.translation.width
                 newLocation.y += value.translation.height
                 location = newLocation
-            }.updating($startLocation) { (value, startLocation, transaction) in
+
+                isGesturing = true
+            }
+            .onEnded { _ in
+                isGesturing = false
+            }
+            .updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location
             }
     }
@@ -53,11 +57,22 @@ struct SpotPostEditorEffectCoverElement: View {
         RotationGesture()
             .onChanged { angle in
                 self.angle = angle
+
+                isGesturing = true
+            }
+            .onEnded { _ in
+                isGesturing = false
             }
     }
 }
 
-struct SpotPostEditorEffectCoverElementValue: Identifiable {
+extension SpotPostEditorEffectCoverElement: Equatable {
+    static func ==(lhs: SpotPostEditorEffectCoverElement, rhs: SpotPostEditorEffectCoverElement) -> Bool {
+        lhs.element == rhs.element
+    }
+}
+
+struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
     let id: UUID = .init()
     let text: String
 }
