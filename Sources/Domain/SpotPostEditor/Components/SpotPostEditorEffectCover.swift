@@ -18,10 +18,10 @@ struct SpotPostEditorEffectCoverElement: View {
 
     @State private var isGesturing = false
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
-    @State private var degrees: Double = 0
+    @State private var currentRotation: Angle = .zero
     @State private var scale: CGFloat = 1
     @GestureState private var startLocation: CGPoint? = nil
-    @GestureState private var angle: Angle = .init(degrees: 0)
+    @GestureState private var twistAngle: Angle = .zero
     @GestureState private var magnificated: CGFloat = 1
 
     var body: some View {
@@ -29,7 +29,7 @@ struct SpotPostEditorEffectCoverElement: View {
             .font(.title)
             .padding(4)
             .border(isGesturing ? Color.blue : Color.clear, width: 2)
-            .rotationEffect(.degrees(degrees))
+            .rotationEffect(currentRotation + twistAngle)
             .scaleEffect(scale)
             .position(location)
             .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
@@ -56,18 +56,15 @@ struct SpotPostEditorEffectCoverElement: View {
 
     private var rotation: some Gesture {
         RotationGesture()
-            .onChanged { value in
-                var degrees = angle.degrees
-                degrees += value.degrees
-                self.degrees = degrees
-
+            .onChanged { _ in
                 isGesturing = true
             }
-            .onEnded { _ in
+            .onEnded { value in
                 isGesturing = false
+                currentRotation += value
             }
-            .updating($angle) { (currentState, angle, transaction) in
-                angle = currentState
+            .updating($twistAngle) { (currentState, twistAngle, transaction) in
+                twistAngle = currentState
             }
     }
 
