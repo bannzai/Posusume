@@ -6,15 +6,15 @@ struct SpotPostEditorEffectCover: View {
 
     var body: some View {
         ZStack {
-            ForEach(elements) { element in
-                SpotPostEditorEffectCoverElement(element: element)
+            ForEach($elements) { $element in
+                SpotPostEditorEffectCoverElement(element: $element)
             }
         }
     }
 }
 
 struct SpotPostEditorEffectCoverElement: View {
-    let element: SpotPostEditorEffectCoverElementValue
+    @Binding var element: SpotPostEditorEffectCoverElementValue
 
     @State private var isGesturing = false
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
@@ -25,8 +25,9 @@ struct SpotPostEditorEffectCoverElement: View {
     @GestureState private var pinchMagnification: CGFloat = 1
 
     var body: some View {
-        Text(element.text)
+        TextField("", text: $element.text)
             .font(.title)
+            .fixedSize()
             .padding(4)
             .border(isGesturing ? Color.blue : Color.clear, width: 2)
             .rotationEffect(currentRotation + twistAngle)
@@ -85,7 +86,7 @@ struct SpotPostEditorEffectCoverElement: View {
 
 struct SpotPostEditorEffectCoverElementValue: Identifiable {
     let id: UUID = .init()
-    let text: String
+    var text: String
 }
 
 
