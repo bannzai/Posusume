@@ -32,7 +32,7 @@ struct SpotPostEditorEffectCoverElement: View {
             .rotationEffect(.degrees(degrees))
             .scaleEffect(scale)
             .position(location)
-            .gesture(drag.simultaneously(with: rotate).simultaneously(with: magnification))
+            .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
 
     }
 
@@ -54,7 +54,7 @@ struct SpotPostEditorEffectCoverElement: View {
             }
     }
 
-    private var rotate: some Gesture {
+    private var rotation: some Gesture {
         RotationGesture()
             .onChanged { value in
                 var degrees = angle.degrees
