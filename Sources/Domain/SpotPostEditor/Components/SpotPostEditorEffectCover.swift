@@ -16,18 +16,20 @@ struct SpotPostEditorEffectCover: View {
 struct SpotPostEditorEffectCoverElement: View {
     let element: SpotPostEditorEffectCoverElementValue
 
-    @State private var location: CGPoint = CGPoint(x: 40, y: 40)
-    @State private var angle: Angle = .init(degrees: 0)
     @State private var isGesturing = false
-    @State private var scale: CGFloat = 1.0
+    @State private var location: CGPoint = CGPoint(x: 40, y: 40)
+    @State private var degrees: Double = 0
+    @State private var scale: CGFloat = 1
     @GestureState private var startLocation: CGPoint? = nil
+    @GestureState private var angle: Angle = .init(degrees: 0)
+    @GestureState private var magnificated: CGFloat = 1
 
     var body: some View {
         Text(element.text)
             .font(.title)
             .padding(4)
             .border(isGesturing ? Color.blue : Color.clear, width: 2)
-            .rotationEffect(.degrees(angle.degrees))
+            .rotationEffect(.degrees(degrees))
             .scaleEffect(scale)
             .position(location)
             .gesture(drag.simultaneously(with: rotate).simultaneously(with: magnification))
@@ -54,19 +56,31 @@ struct SpotPostEditorEffectCoverElement: View {
 
     private var rotate: some Gesture {
         RotationGesture()
-            .onChanged { angle in
-                self.angle = angle
+            .onChanged { value in
+                var degrees = angle.degrees
+                degrees += value.degrees
+                self.degrees = degrees
+
                 isGesturing = true
             }
             .onEnded { _ in
                 isGesturing = false
             }
+            .updating($angle) { (currentState, angle, transaction) in
+                angle = currentState
+            }
     }
 
     private var magnification: some Gesture {
-        MagnificationGesture().onChanged { value in
-            scale = value.magnitude
-        }
+        MagnificationGesture()
+            .onChanged { value in
+                var scale = magnificated.magnitude
+                scale += value.magnitude
+                self.scale = scale
+            }
+            .updating($magnificated) { (currentState, magnificated, transaction) in
+                magnificated = currentState
+            }
     }
 }
 
