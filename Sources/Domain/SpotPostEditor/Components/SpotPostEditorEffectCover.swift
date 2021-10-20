@@ -19,10 +19,10 @@ struct SpotPostEditorEffectCoverElement: View {
     @State private var isGesturing = false
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var currentRotation: Angle = .zero
-    @State private var scale: CGFloat = 1
+    @State private var currentMagnification: CGFloat = 1
     @GestureState private var startLocation: CGPoint? = nil
     @GestureState private var twistAngle: Angle = .zero
-    @GestureState private var magnificated: CGFloat = 1
+    @GestureState private var pinchMagnification: CGFloat = 1
 
     var body: some View {
         Text(element.text)
@@ -30,7 +30,7 @@ struct SpotPostEditorEffectCoverElement: View {
             .padding(4)
             .border(isGesturing ? Color.blue : Color.clear, width: 2)
             .rotationEffect(currentRotation + twistAngle)
-            .scaleEffect(scale)
+            .scaleEffect(currentMagnification * pinchMagnification)
             .position(location)
             .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
 
@@ -70,13 +70,15 @@ struct SpotPostEditorEffectCoverElement: View {
 
     private var magnification: some Gesture {
         MagnificationGesture()
-            .onChanged { value in
-                var scale = magnificated.magnitude
-                scale += value.magnitude
-                self.scale = scale
+            .onChanged { _ in
+                isGesturing = true
             }
-            .updating($magnificated) { (currentState, magnificated, transaction) in
-                magnificated = currentState
+            .onEnded { value in
+                isGesturing = false
+                currentMagnification *= value
+            }
+            .updating($pinchMagnification) { (currentState, pinchMagnification, transaction) in
+                pinchMagnification = currentState
             }
     }
 }
