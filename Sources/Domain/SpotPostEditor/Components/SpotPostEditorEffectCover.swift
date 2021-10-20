@@ -3,11 +3,12 @@ import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
     @Binding var elements: [SpotPostEditorEffectCoverElementValue]
+    @FocusState.Binding var elementTextFieldIsFocused: Bool
 
     var body: some View {
         ZStack {
             ForEach($elements) { $element in
-                SpotPostEditorEffectCoverElement(element: $element)
+                SpotPostEditorEffectCoverElement(element: $element, isFocused: _elementTextFieldIsFocused)
             }
         }
     }
@@ -23,9 +24,11 @@ struct SpotPostEditorEffectCoverElement: View {
     @GestureState private var startLocation: CGPoint? = nil
     @GestureState private var twistAngle: Angle = .zero
     @GestureState private var pinchMagnification: CGFloat = 1
+    @FocusState.Binding var isFocused: Bool
 
     var body: some View {
         TextField("", text: $element.text)
+            .focused(_isFocused)
             .font(.title)
             .fixedSize()
             .padding(4)
@@ -92,7 +95,8 @@ struct SpotPostEditorEffectCoverElementValue: Identifiable {
 
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
     @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world")]
+    @FocusState static var elementIsFocused: Bool
     static var previews: some View {
-        SpotPostEditorEffectCover(elements: $elements)
+        SpotPostEditorEffectCover(elements: $elements, elementTextFieldIsFocused: $elementIsFocused)
     }
 }

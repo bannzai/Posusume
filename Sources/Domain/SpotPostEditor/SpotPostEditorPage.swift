@@ -8,6 +8,7 @@ public struct SpotPostEditorPage: View {
     }
 
     @State var elements: [SpotPostEditorEffectCoverElementValue] = []
+    @FocusState var elementTextFieldIsFocused: Bool
 
     public var body: some View {
         VStack {
@@ -18,7 +19,10 @@ public struct SpotPostEditorPage: View {
                         .spotImageFrame(width: geometry.size.width)
                         .clipped()
                 }
-                SpotPostEditorEffectCover(elements: $elements)
+                SpotPostEditorEffectCover(elements: $elements, elementTextFieldIsFocused: $elementTextFieldIsFocused)
+            }
+            .onTapGesture {
+                elementTextFieldIsFocused = false
             }
 
             ScrollView(.horizontal) {
