@@ -3,12 +3,23 @@ import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
     @Binding var elements: [SpotPostEditorEffectCoverElementValue]
+    @Binding var selected: SpotPostEditorEffectCoverElementValue?
     @FocusState.Binding var elementTextFieldIsFocused: Bool
 
     var body: some View {
         ZStack {
             ForEach($elements) { $element in
-                SpotPostEditorEffectCoverElement(element: $element, isFocused: _elementTextFieldIsFocused)
+                SpotPostEditorEffectCoverElement(
+                    element: $element,
+                    isSelected: .init(get: { element.id == selected?.id }, set: { value in
+                        if value {
+                            selected = element
+                        } else {
+                            selected = nil
+                        }
+                    }),
+                    isFocused: _elementTextFieldIsFocused
+                )
             }
         }
     }
@@ -16,8 +27,8 @@ struct SpotPostEditorEffectCover: View {
 
 struct SpotPostEditorEffectCoverElement: View {
     @Binding var element: SpotPostEditorEffectCoverElementValue
+    @Binding var isSelected: Bool
 
-    @State private var isGesturing = false
     @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var currentRotation: Angle = .zero
     @State private var currentMagnification: CGFloat = 1
@@ -32,7 +43,7 @@ struct SpotPostEditorEffectCoverElement: View {
             .font(.title)
             .fixedSize()
             .padding(4)
-            .border(isGesturing ? Color.blue : Color.clear, width: 2)
+            .border(isSelected ? Color.blue : Color.clear, width: 2)
             .rotationEffect(currentRotation + twistAngle)
             .scaleEffect(currentMagnification * pinchMagnification)
             .position(location)
@@ -48,10 +59,7 @@ struct SpotPostEditorEffectCoverElement: View {
                 newLocation.y += value.translation.height
                 location = newLocation
 
-                isGesturing = true
-            }
-            .onEnded { _ in
-                isGesturing = false
+                isSelected = true
             }
             .updating($startLocation) { (value, startLocation, transaction) in
                 startLocation = startLocation ?? location
@@ -61,10 +69,9 @@ struct SpotPostEditorEffectCoverElement: View {
     private var rotation: some Gesture {
         RotationGesture()
             .onChanged { _ in
-                isGesturing = true
+                isSelected = true
             }
             .onEnded { value in
-                isGesturing = false
                 currentRotation += value
             }
             .updating($twistAngle) { (currentState, twistAngle, transaction) in
@@ -75,10 +82,9 @@ struct SpotPostEditorEffectCoverElement: View {
     private var magnification: some Gesture {
         MagnificationGesture()
             .onChanged { _ in
-                isGesturing = true
+                isSelected = true
             }
             .onEnded { value in
-                isGesturing = false
                 currentMagnification *= value
             }
             .updating($pinchMagnification) { (currentState, pinchMagnification, transaction) in
@@ -97,6 +103,8 @@ struct SpotPostEditorEffectCover_Previews: PreviewProvider {
     @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world")]
     @FocusState static var elementIsFocused: Bool
     static var previews: some View {
-        SpotPostEditorEffectCover(elements: $elements, elementTextFieldIsFocused: $elementIsFocused)
+        SpotPostEditorEffectCover(elements: $elements,
+                                  selected: .constant(nil),
+                                  elementTextFieldIsFocused: $elementIsFocused)
     }
 }

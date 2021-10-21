@@ -8,6 +8,7 @@ public struct SpotPostEditorPage: View {
     }
 
     @State var elements: [SpotPostEditorEffectCoverElementValue] = []
+    @State var selectedElement: SpotPostEditorEffectCoverElementValue?
     @FocusState var elementTextFieldIsFocused: Bool
 
     public var body: some View {
@@ -19,10 +20,15 @@ public struct SpotPostEditorPage: View {
                         .spotImageFrame(width: geometry.size.width)
                         .clipped()
                 }
-                SpotPostEditorEffectCover(elements: $elements, elementTextFieldIsFocused: $elementTextFieldIsFocused)
+                SpotPostEditorEffectCover(
+                    elements: $elements,
+                    selected: $selectedElement,
+                    elementTextFieldIsFocused: $elementTextFieldIsFocused
+                )
             }
             .onTapGesture {
                 elementTextFieldIsFocused = false
+                selectedElement = nil
             }
 
             ScrollView(.horizontal) {
@@ -30,7 +36,9 @@ public struct SpotPostEditorPage: View {
                     Image(systemName: "textformat")
                         .font(.system(size: 32))
                         .onTapGesture {
-                            elements.append(.init(text: "Hello, world"))
+                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world")
+                            elements.append(element)
+                            selectedElement = element
                         }
                 }
             }
