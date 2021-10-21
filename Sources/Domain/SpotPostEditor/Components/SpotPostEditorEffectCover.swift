@@ -40,6 +40,7 @@ struct SpotPostEditorEffectCoverElement: View {
     var body: some View {
         TextField("", text: $element.text)
             .focused(_isFocused)
+            .foregroundColor(element.textColor)
             .font(.title)
             .fixedSize()
             .padding(4)
@@ -93,14 +94,15 @@ struct SpotPostEditorEffectCoverElement: View {
     }
 }
 
-struct SpotPostEditorEffectCoverElementValue: Identifiable {
+struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
     let id: UUID = .init()
     var text: String
+    var textColor: Color
 }
 
 
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world")]
+    @State static var elements: [SpotPostEditorEffectCoverElementValue] = [.init(text: "Hello, world", textColor: .black)]
     @FocusState static var elementIsFocused: Bool
     static var previews: some View {
         SpotPostEditorEffectCover(elements: $elements,

@@ -35,11 +35,17 @@ public struct SpotPostEditorPage: View {
                 HStack {
                     Image(systemName: "textformat")
                         .font(.system(size: 32))
+                        .frame(width: 40, height: 40)
                         .onTapGesture {
-                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world")
+                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .black)
                             elements.append(element)
                             selectedElement = element
                         }
+
+                    if let selectedElement = selectedElement {
+                        ColorPicker(selectedElement.text, selection: .init(get: { selectedElement.textColor }, set: { self.selectedElement?.textColor = $0 }))
+                            .frame(width: 40, height: 40)
+                    }
                 }
             }
         }
