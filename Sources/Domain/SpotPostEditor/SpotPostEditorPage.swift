@@ -48,7 +48,7 @@ public struct SpotPostEditorPage: View {
                                 elements[selectedElementIndex].isBold.toggle()
                             }
 
-                        ColorPicker(elements[selectedElementIndex].text, selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
+                        ColorPicker("", selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
                             elements[selectedElementIndex].textColor = $0
                         })).frame(width: 40, height: 40)
                     } else {
