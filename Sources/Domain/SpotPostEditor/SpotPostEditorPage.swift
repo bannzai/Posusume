@@ -37,14 +37,19 @@ public struct SpotPostEditorPage: View {
                         .font(.system(size: 32))
                         .frame(width: 40, height: 40)
                         .onTapGesture {
-                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .black)
+                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .red)
                             elements.append(element)
                             selectedElement = element
                         }
 
                     if let selectedElement = selectedElement {
-                        ColorPicker(selectedElement.text, selection: .init(get: { selectedElement.textColor }, set: { self.selectedElement?.textColor = $0 }))
-                            .frame(width: 40, height: 40)
+                        ColorPicker(selectedElement.text, selection: .init(get: { selectedElement.textColor }, set: {
+                            if var element = self.selectedElement {
+                                element.textColor = $0
+                                self.selectedElement = element
+                                elements[elements.firstIndex(where: { $0.id == element.id })!].textColor = $0
+                            }
+                        })).frame(width: 40, height: 40)
                     }
                 }
             }
