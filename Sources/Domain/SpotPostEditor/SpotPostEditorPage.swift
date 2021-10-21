@@ -34,37 +34,13 @@ public struct SpotPostEditorPage: View {
             ScrollView(.horizontal) {
                 HStack {
                     if let selectedTextFieldIndex = selectedTextFieldIndex {
-                        Image(systemName: "trash.fill")
-                            .font(.system(size: 32))
-                            .frame(width: 40, height: 40)
-                            .onTapGesture {
-                                textFieldValues.remove(at: selectedTextFieldIndex)
-                            }
-
-                        ColorPicker("", selection: .init(get: { textFieldValues[selectedTextFieldIndex].textColor }, set: {
-                            textFieldValues[selectedTextFieldIndex].textColor = $0
-                        })).frame(width: 40, height: 40)
-
-                        Image(systemName: "bold")
-                            .font(.system(size: 32))
-                            .frame(width: 40, height: 40)
-                            .onTapGesture {
-                                textFieldValues[selectedTextFieldIndex].isBold.toggle()
-                            }
-
-                        Image(systemName: "italic")
-                            .font(.system(size: 32))
-                            .frame(width: 40, height: 40)
-                            .onTapGesture {
-                                textFieldValues[selectedTextFieldIndex].isItalic.toggle()
-                            }
-
-                        Image(systemName: "underline")
-                            .font(.system(size: 32))
-                            .frame(width: 40, height: 40)
-                            .onTapGesture {
-                                textFieldValues[selectedTextFieldIndex].isUnderline.toggle()
-                            }
+                        TextFieldComponentModifiers(textFieldValue: .init(get: {
+                            textFieldValues[selectedTextFieldIndex]
+                        }, set: {
+                            textFieldValues[selectedTextFieldIndex] = $0
+                        }), onDelete: {
+                            textFieldValues.remove(at: selectedTextFieldIndex)
+                        })
                     } else {
                         Image(systemName: "textformat")
                             .font(.system(size: 32))
