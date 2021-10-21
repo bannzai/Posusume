@@ -15,16 +15,20 @@ struct TextFieldComponent: View {
 
     var body: some View {
         Group {
-            if value.isUnderline {
-                VStack(spacing: -2) {
-                    TextField("", text: $value.text)
-
-                    Divider()
-                        .frame(height: 1)
-                        .background(value.textColor)
-                }
+            if value.isVertical {
+                Tansaku(value.text)
             } else {
-                TextField("", text: $value.text)
+                if value.isUnderline {
+                    VStack(spacing: -2) {
+                        TextField("", text: $value.text)
+
+                        Divider()
+                            .frame(height: 1)
+                            .background(value.textColor)
+                    }
+                } else {
+                    TextField("", text: $value.text)
+                }
             }
         }
         .focused(_isFocused)
@@ -100,5 +104,12 @@ struct TextFieldComponentValue: Identifiable, Equatable {
     var isBold = false
     var isItalic = false
     var isUnderline = false
+    var isVertical = false {
+        didSet {
+            if isVertical {
+                isUnderline = false
+            }
+        }
+    }
 }
 

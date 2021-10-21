@@ -35,5 +35,12 @@ struct TextFieldComponentModifiers: View {
             .onTapGesture {
                 textFieldValue.isUnderline.toggle()
             }
+
+        Image(systemName: "v.square")
+            .font(.system(size: 32))
+            .frame(width: 40, height: 40)
+            .onTapGesture {
+                textFieldValue.isVertical.toggle()
+            }
     }
 }
