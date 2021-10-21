@@ -7,8 +7,8 @@ public struct SpotPostEditorPage: View {
         self.image = image
     }
 
-    @State var elements: [TextFieldComponentValue] = []
-    @State var selectedElementID: TextFieldComponentValue.ID?
+    @State var textFieldValues: [TextFieldComponentValue] = []
+    @State var selectedTextFieldValueID: TextFieldComponentValue.ID?
     @FocusState var elementTextFieldIsFocused: Bool
 
     public var body: some View {
@@ -20,50 +20,50 @@ public struct SpotPostEditorPage: View {
                         .clipped()
 
                     SpotPostEditorEffectCover(
-                        elements: $elements,
-                        selectedElementID: $selectedElementID,
+                        textFieldValues: $textFieldValues,
+                        selectedTextFieldValueID: $selectedTextFieldValueID,
                         elementTextFieldIsFocused: $elementTextFieldIsFocused
                     )
                 }.spotImageFrame(width: geometry.size.width)
             }
             .onTapGesture {
                 elementTextFieldIsFocused = false
-                selectedElementID = nil
+                selectedTextFieldValueID = nil
             }
 
             ScrollView(.horizontal) {
                 HStack {
-                    if let selectedElementIndex = selectedElementIndex {
+                    if let selectedTextFieldIndex = selectedTextFieldIndex {
                         Image(systemName: "trash.fill")
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                elements.remove(at: selectedElementIndex)
+                                textFieldValues.remove(at: selectedTextFieldIndex)
                             }
 
-                        ColorPicker("", selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
-                            elements[selectedElementIndex].textColor = $0
+                        ColorPicker("", selection: .init(get: { textFieldValues[selectedTextFieldIndex].textColor }, set: {
+                            textFieldValues[selectedTextFieldIndex].textColor = $0
                         })).frame(width: 40, height: 40)
 
                         Image(systemName: "bold")
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                elements[selectedElementIndex].isBold.toggle()
+                                textFieldValues[selectedTextFieldIndex].isBold.toggle()
                             }
 
                         Image(systemName: "italic")
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                elements[selectedElementIndex].isItalic.toggle()
+                                textFieldValues[selectedTextFieldIndex].isItalic.toggle()
                             }
 
                         Image(systemName: "underline")
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                elements[selectedElementIndex].isUnderline.toggle()
+                                textFieldValues[selectedTextFieldIndex].isUnderline.toggle()
                             }
                     } else {
                         Image(systemName: "textformat")
@@ -71,8 +71,8 @@ public struct SpotPostEditorPage: View {
                             .frame(width: 40, height: 40)
                             .onTapGesture {
                                 let element = TextFieldComponentValue(text: "Hello, world")
-                                elements.append(element)
-                                selectedElementID = element.id
+                                textFieldValues.append(element)
+                                selectedTextFieldValueID = element.id
                             }
                     }
                 }
@@ -81,8 +81,8 @@ public struct SpotPostEditorPage: View {
         .padding()
     }
 
-    private var selectedElementIndex: Int? {
-        elements.firstIndex(where: { $0.id == selectedElementID })
+    private var selectedTextFieldIndex: Int? {
+        textFieldValues.firstIndex(where: { $0.id == selectedTextFieldValueID })
     }
 }
 

@@ -2,21 +2,21 @@ import Foundation
 import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
-    @Binding var elements: [TextFieldComponentValue]
-    @Binding var selectedElementID: TextFieldComponentValue.ID?
+    @Binding var textFieldValues: [TextFieldComponentValue]
+    @Binding var selectedTextFieldValueID: TextFieldComponentValue.ID?
     @FocusState.Binding var elementTextFieldIsFocused: Bool
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ForEach($elements) { $element in
+                ForEach($textFieldValues) { $textFieldValue in
                     TextFieldComponent(
-                        element: $element,
-                        isSelected: .init(get: { element.id == selectedElementID }, set: { value in
+                        value: $textFieldValue,
+                        isSelected: .init(get: { textFieldValue.id == selectedTextFieldValueID }, set: { value in
                             if value {
-                                selectedElementID = element.id
+                                selectedTextFieldValueID = textFieldValue.id
                             } else {
-                                selectedElementID = nil
+                                selectedTextFieldValueID = nil
                             }
                         }),
                         location: .init(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY),
@@ -30,11 +30,11 @@ struct SpotPostEditorEffectCover: View {
 
 
 struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var elements: [TextFieldComponentValue] = [.init(text: "Hello, world", textColor: .black)]
+    @State static var textFieldValues: [TextFieldComponentValue] = [.init(text: "Hello, world", textColor: .black)]
     @FocusState static var elementIsFocused: Bool
     static var previews: some View {
-        SpotPostEditorEffectCover(elements: $elements,
-                                  selectedElementID: .constant(nil),
+        SpotPostEditorEffectCover(textFieldValues: $textFieldValues,
+                                  selectedTextFieldValueID: .constant(nil),
                                   elementTextFieldIsFocused: $elementIsFocused)
     }
 }

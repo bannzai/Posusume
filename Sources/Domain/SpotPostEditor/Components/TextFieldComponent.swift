@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct TextFieldComponent: View {
-    @Binding var element: TextFieldComponentValue
+    @Binding var value: TextFieldComponentValue
     @Binding var isSelected: Bool
     @State var location: CGPoint
     @FocusState.Binding var isFocused: Bool
@@ -15,20 +15,20 @@ struct TextFieldComponent: View {
 
     var body: some View {
         Group {
-            if element.isUnderline {
+            if value.isUnderline {
                 VStack(spacing: -2) {
-                    TextField("", text: $element.text)
+                    TextField("", text: $value.text)
 
                     Divider()
                         .frame(height: 1)
-                        .background(element.textColor)
+                        .background(value.textColor)
                 }
             } else {
-                TextField("", text: $element.text)
+                TextField("", text: $value.text)
             }
         }
         .focused(_isFocused)
-        .foregroundColor(element.textColor)
+        .foregroundColor(value.textColor)
         .font(font)
         .fixedSize()
         .padding(4)
@@ -42,10 +42,10 @@ struct TextFieldComponent: View {
 
     private var font: SwiftUI.Font {
         var font = Font.title
-        if element.isBold {
+        if value.isBold {
             font = font.weight(.bold)
         }
-        if element.isItalic {
+        if value.isItalic {
             font = font.italic()
         }
         return font
