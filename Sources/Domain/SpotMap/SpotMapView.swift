@@ -41,7 +41,7 @@ struct SpotMapView: View {
                 MapAnnotation(coordinate: spot.coordinate) {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
-            }).onChange(of: region) { newRegion in
+            }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
                 print("newRegion: ", newRegion)
             }
 
