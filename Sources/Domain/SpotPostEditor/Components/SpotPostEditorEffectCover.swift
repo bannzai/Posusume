@@ -20,8 +20,7 @@ struct SpotPostEditorEffectCover: View {
                             }
                         }),
                         location: .init(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY),
-                        isFocused: _elementTextFieldIsFocused,
-                        geometrySize: geometry.size
+                        isFocused: _elementTextFieldIsFocused
                     )
                 }
             }
@@ -34,7 +33,6 @@ struct SpotPostEditorEffectCoverElement: View {
     @Binding var isSelected: Bool
     @State var location: CGPoint
     @FocusState.Binding var isFocused: Bool
-    let geometrySize: CGSize
 
     @State private var currentRotation: Angle = .zero
     @State private var currentMagnification: CGFloat = 1
@@ -61,8 +59,8 @@ struct SpotPostEditorEffectCoverElement: View {
         DragGesture()
             .onChanged { value in
                 var newLocation = startLocation ?? location
-                newLocation.x = max(0, min(newLocation.x + value.translation.width, geometrySize.width))
-                newLocation.y = max(0, min(newLocation.y + value.translation.height, geometrySize.height))
+                newLocation.x += value.translation.width
+                newLocation.y += value.translation.height
                 location = newLocation
 
                 isSelected = true
