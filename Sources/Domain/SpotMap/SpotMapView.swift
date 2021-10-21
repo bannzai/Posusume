@@ -13,25 +13,6 @@ struct SpotMapView: View {
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false;
 
-    var spots: [SpotsQuery.Data.Spot] {
-        response?.spots ?? []
-    }
-
-    // Workaround of SwiftUI.Map unavoidable warning
-    // SwiftUI.Map(coordinateRegion: $region) is not working well
-    // After update binding property of region on View#task(async) method,
-    // SwiftUI send error about `Modifying state during view update, this will cause undefined behavior`
-    // mapCoordinateRegion avoid this runtime warnings that wrapped and proxy for getting and setting region.
-    // Reference: https://stackoverflow.com/questions/68271517/swiftui-onappear-modifying-state-during-view-update-this-will-cause-undefined-b
-    private var mapCoordinateRegion: Binding<MKCoordinateRegion> {
-        .init(get: { region ?? defaultRegion }, set: { newRegion in
-            // Lazy set region after region set first time on View#task(async)
-            if region != nil {
-                region = newRegion
-            }
-        })
-    }
-
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
             Map(coordinateRegion: mapCoordinateRegion,
@@ -86,6 +67,26 @@ struct SpotMapView: View {
             }
         }
     }
+
+    var spots: [SpotsQuery.Data.Spot] {
+        response?.spots ?? []
+    }
+
+    // Workaround of SwiftUI.Map unavoidable warning
+    // SwiftUI.Map(coordinateRegion: $region) is not working well
+    // After update binding property of region on View#task(async) method,
+    // SwiftUI send error about `Modifying state during view update, this will cause undefined behavior`
+    // mapCoordinateRegion avoid this runtime warnings that wrapped and proxy for getting and setting region.
+    // Reference: https://stackoverflow.com/questions/68271517/swiftui-onappear-modifying-state-during-view-update-this-will-cause-undefined-b
+    private var mapCoordinateRegion: Binding<MKCoordinateRegion> {
+        .init(get: { region ?? defaultRegion }, set: { newRegion in
+            // Lazy set region after region set first time on View#task(async)
+            if region != nil {
+                region = newRegion
+            }
+        })
+    }
+
 }
 
 
