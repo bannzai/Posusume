@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SpotPostEditorEffectCover: View {
     @Binding var elements: [SpotPostEditorEffectCoverElementValue]
-    @Binding var selected: SpotPostEditorEffectCoverElementValue?
+    @Binding var selectedElementID: SpotPostEditorEffectCoverElementValue.ID?
     @FocusState.Binding var elementTextFieldIsFocused: Bool
 
     var body: some View {
@@ -11,11 +11,11 @@ struct SpotPostEditorEffectCover: View {
             ForEach($elements) { $element in
                 SpotPostEditorEffectCoverElement(
                     element: $element,
-                    isSelected: .init(get: { element.id == selected?.id }, set: { value in
+                    isSelected: .init(get: { element.id == selectedElementID }, set: { value in
                         if value {
-                            selected = element
+                            selectedElementID = element.id
                         } else {
-                            selected = nil
+                            selectedElementID = nil
                         }
                     }),
                     isFocused: _elementTextFieldIsFocused
@@ -106,7 +106,7 @@ struct SpotPostEditorEffectCover_Previews: PreviewProvider {
     @FocusState static var elementIsFocused: Bool
     static var previews: some View {
         SpotPostEditorEffectCover(elements: $elements,
-                                  selected: .constant(nil),
+                                  selectedElementID: .constant(nil),
                                   elementTextFieldIsFocused: $elementIsFocused)
     }
 }
