@@ -33,21 +33,26 @@ public struct SpotPostEditorPage: View {
 
             ScrollView(.horizontal) {
                 HStack {
-                    Image(systemName: "textformat")
-                        .font(.system(size: 32))
-                        .frame(width: 40, height: 40)
-                        .onTapGesture {
-                            let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .red)
-                            elements.append(element)
-                            selectedElementID = element.id
-                        }
-
-                    if let selectedElement = selectedElement {
-                        ColorPicker(selectedElement.text, selection: .init(get: { selectedElement.textColor }, set: {
-                            if let index = elements.firstIndex(where: { $0.id == selectedElementID }) {
-                                elements[index].textColor = $0
+                    if let selectedElementIndex = selectedElementIndex {
+                        Image(systemName: "trash.fill")
+                            .font(.system(size: 32))
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                elements.remove(at: selectedElementIndex)
                             }
+
+                        ColorPicker(elements[selectedElementIndex].text, selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
+                            elements[selectedElementIndex].textColor = $0
                         })).frame(width: 40, height: 40)
+                    } else {
+                        Image(systemName: "textformat")
+                            .font(.system(size: 32))
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .red)
+                                elements.append(element)
+                                selectedElementID = element.id
+                            }
                     }
                 }
             }
@@ -55,8 +60,8 @@ public struct SpotPostEditorPage: View {
         .padding()
     }
 
-    private var selectedElement: SpotPostEditorEffectCoverElementValue? {
-        elements.first(where: { $0.id == selectedElementID })
+    private var selectedElementIndex: Int? {
+        elements.firstIndex(where: { $0.id == selectedElementID })
     }
 }
 
