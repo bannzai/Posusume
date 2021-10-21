@@ -10,16 +10,24 @@ struct SpotMapView: View {
 
     @State var response: SpotsQuery.Data?
     @State var error: Error?
-    @State var region: MKCoordinateRegion = defaultRegion
+    @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false;
 
     var spots: [SpotsQuery.Data.Spot] {
         response?.spots ?? []
     }
 
+    private var mapCoordinateRegion: Binding<MKCoordinateRegion> {
+        .init(get: { region ?? defaultRegion }, set: { newRegion in
+            if region != nil {
+                region = newRegion
+            }
+        })
+    }
+
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: $region,
+            Map(coordinateRegion: mapCoordinateRegion,
                 showsUserLocation: true,
                 annotationItems: spots,
                 annotationContent: { spot in
@@ -48,7 +56,7 @@ struct SpotMapView: View {
             isPresented: $isPresentingSpotPost,
             onDismiss: {
                 Task {
-                    if let response = try? await query(for: .init(region: region)) {
+                    if let response = try? await query(for: .init(region: mapCoordinateRegion.wrappedValue)) {
                         self.response = response
                     }
                 }
@@ -60,11 +68,12 @@ struct SpotMapView: View {
         .handle(error: $error)
         .edgesIgnoringSafeArea(.all)
         .task {
-            response = await cache(for: .init(region: region))
             do {
                 let userLocation = try await locationManager.userLocation()
-                region = .init(center: userLocation.coordinate, span: region.span)
-                response = try await query(for: .init(region: region))
+                region = .init(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
+
+                response = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))
+                response = try await query(for: .init(region: mapCoordinateRegion.wrappedValue))
             } catch {
                 self.error = error
             }
