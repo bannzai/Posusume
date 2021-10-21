@@ -44,7 +44,7 @@ struct SpotPostEditorEffectCoverElement: View {
         TextField("", text: $element.text)
             .focused(_isFocused)
             .foregroundColor(element.textColor)
-            .font(.title.weight(element.isBold ? .bold : .medium))
+            .font(font)
             .fixedSize()
             .padding(4)
             .border(isSelected ? Color.blue : Color.clear, width: 2)
@@ -54,6 +54,17 @@ struct SpotPostEditorEffectCoverElement: View {
             .clipped()
             .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
 
+    }
+
+    private var font: SwiftUI.Font {
+        var font = Font.title
+        if element.isBold {
+            font = font.weight(.bold)
+        }
+        if element.isItalic {
+            font = font.italic()
+        }
+        return font
     }
 
     private var drag: some Gesture {
@@ -103,6 +114,7 @@ struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
     var text: String
     var textColor: Color = .black
     var isBold: Bool = false
+    var isItalic: Bool = false
 }
 
 

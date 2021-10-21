@@ -41,6 +41,10 @@ public struct SpotPostEditorPage: View {
                                 elements.remove(at: selectedElementIndex)
                             }
 
+                        ColorPicker("", selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
+                            elements[selectedElementIndex].textColor = $0
+                        })).frame(width: 40, height: 40)
+
                         Image(systemName: "bold")
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
@@ -48,9 +52,12 @@ public struct SpotPostEditorPage: View {
                                 elements[selectedElementIndex].isBold.toggle()
                             }
 
-                        ColorPicker("", selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
-                            elements[selectedElementIndex].textColor = $0
-                        })).frame(width: 40, height: 40)
+                        Image(systemName: "italic")
+                            .font(.system(size: 32))
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                elements[selectedElementIndex].isItalic.toggle()
+                            }
                     } else {
                         Image(systemName: "textformat")
                             .font(.system(size: 32))
