@@ -38,14 +38,13 @@ struct TextFieldComponent: View {
         .padding(4)
         .border(isSelected ? Color.blue : Color.clear, width: 2)
         .rotationEffect(currentRotation + twistAngle)
-        .scaleEffect(currentMagnification * pinchMagnification)
         .position(location)
         .clipped()
         .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
     }
 
     private var font: SwiftUI.Font {
-        var font = Font.title
+        var font = Font.system(size: 24 * currentMagnification * pinchMagnification)
         if value.isBold {
             font = font.weight(.bold)
         }
