@@ -10,23 +10,19 @@ struct SpotMapView: View {
 
     @State var response: SpotsQuery.Data?
     @State var error: Error?
-    @State var region: MKCoordinateRegion = defaultRegion
+    @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false;
-
-    var spots: [SpotsQuery.Data.Spot] {
-        response?.spots ?? []
-    }
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: $region,
+            Map(coordinateRegion: mapCoordinateRegion,
                 showsUserLocation: true,
                 annotationItems: spots,
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
-            }).onChange(of: region) { newRegion in
+            }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
                 print("newRegion: ", newRegion)
             }
 
@@ -48,7 +44,7 @@ struct SpotMapView: View {
             isPresented: $isPresentingSpotPost,
             onDismiss: {
                 Task {
-                    if let response = try? await query(for: .init(region: region)) {
+                    if let response = try? await query(for: .init(region: mapCoordinateRegion.wrappedValue)) {
                         self.response = response
                     }
                 }
@@ -60,16 +56,37 @@ struct SpotMapView: View {
         .handle(error: $error)
         .edgesIgnoringSafeArea(.all)
         .task {
-            response = await cache(for: .init(region: region))
             do {
                 let userLocation = try await locationManager.userLocation()
-                region = .init(center: userLocation.coordinate, span: region.span)
-                response = try await query(for: .init(region: region))
+                region = .init(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
+
+                response = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))
+                response = try await query(for: .init(region: mapCoordinateRegion.wrappedValue))
             } catch {
                 self.error = error
             }
         }
     }
+
+    var spots: [SpotsQuery.Data.Spot] {
+        response?.spots ?? []
+    }
+
+    // Workaround of SwiftUI.Map unavoidable warning
+    // SwiftUI.Map(coordinateRegion: $region) is not working well
+    // After update binding property of region on View#task(async) method,
+    // SwiftUI send error about `Modifying state during view update, this will cause undefined behavior`
+    // mapCoordinateRegion avoid this runtime warnings that wrapped and proxy for getting and setting region.
+    // Reference: https://stackoverflow.com/questions/68271517/swiftui-onappear-modifying-state-during-view-update-this-will-cause-undefined-b
+    private var mapCoordinateRegion: Binding<MKCoordinateRegion> {
+        .init(get: { region ?? defaultRegion }, set: { newRegion in
+            // Lazy set region after region set first time on View#task(async)
+            if region != nil {
+                region = newRegion
+            }
+        })
+    }
+
 }
 
 

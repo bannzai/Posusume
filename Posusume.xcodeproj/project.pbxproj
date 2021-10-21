@@ -20,6 +20,9 @@
 		2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4A26FA10FC009001C7 /* ApolloWebSocket */; };
 		2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4C26FA11CB009001C7 /* Plist.swift */; };
 		2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */; };
+		2016C8BC271EFD4D00B438C6 /* When.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BB271EFD4D00B438C6 /* When.swift */; };
+		2016C8BE272202BC00B438C6 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */; };
+		2016C8C0272204AC00B438C6 /* TextFieldComponentModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */; };
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
 		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
@@ -45,6 +48,9 @@
 		20A96B9E271B965A00E1765B /* SpotDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9D271B965A00E1765B /* SpotDetailImage.swift */; };
 		20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */; };
 		20A96BA3271B989D00E1765B /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96BA2271B989D00E1765B /* Loading.swift */; };
+		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
+		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
+		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -113,6 +119,9 @@
 		2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
 		2005EE4C26FA11CB009001C7 /* Plist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plist.swift; sourceTree = "<group>"; };
 		2005EE4E26FA7D59009001C7 /* AppErrorMappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppErrorMappers.swift; sourceTree = "<group>"; };
+		2016C8BB271EFD4D00B438C6 /* When.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = When.swift; sourceTree = "<group>"; };
+		2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
+		2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentModifiers.swift; sourceTree = "<group>"; };
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
@@ -138,6 +147,9 @@
 		20A96B9D271B965A00E1765B /* SpotDetailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImage.swift; sourceTree = "<group>"; };
 		20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageFrameModifier.swift; sourceTree = "<group>"; };
 		20A96BA2271B989D00E1765B /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
+		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
+		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -264,6 +276,7 @@
 			children = (
 				2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */,
 				20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */,
+				2016C8BB271EFD4D00B438C6 /* When.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -322,6 +335,25 @@
 				20A96BA2271B989D00E1765B /* Loading.swift */,
 			);
 			path = Loading;
+			sourceTree = "<group>";
+		};
+		20B0916A271D16FA0015F0F3 /* SpotPostEditor */ = {
+			isa = PBXGroup;
+			children = (
+				20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */,
+				20B09174271DC3A50015F0F3 /* Components */,
+			);
+			path = SpotPostEditor;
+			sourceTree = "<group>";
+		};
+		20B09174271DC3A50015F0F3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */,
+				2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */,
+				2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		20CEA51326B4CB800032BBD1 /* Error */ = {
@@ -516,22 +548,23 @@
 		BADF52FE261D301E00431FEB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				20B0916A271D16FA0015F0F3 /* SpotPostEditor */,
 				20A96B97271B8EEA00E1765B /* SpotDetail */,
 				2035A9C427094DE6007D580F /* SpotPost */,
 				BA906C32264109E400ACE02F /* Location */,
 				BA317331262BC1D500E1212C /* Photo */,
-				BADF52FF261D303400431FEB /* Spot */,
+				BADF52FF261D303400431FEB /* SpotMap */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		BADF52FF261D303400431FEB /* Spot */ = {
+		BADF52FF261D303400431FEB /* SpotMap */ = {
 			isa = PBXGroup;
 			children = (
 				20ECE50127105835009E7025 /* Components */,
 				BA249E672625E12D000DA60F /* SpotMapView.swift */,
 			);
-			path = Spot;
+			path = SpotMap;
 			sourceTree = "<group>";
 		};
 		BAF1E46E26268B0C0055EBEB /* CloudStorage */ = {
@@ -565,6 +598,7 @@
 			isa = PBXGroup;
 			children = (
 				BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */,
+				20B09168271D0C830015F0F3 /* Tansaku.swift */,
 			);
 			path = Molocules;
 			sourceTree = "<group>";
@@ -796,22 +830,27 @@
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
+				20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */,
 				20A088752708FDED00D94272 /* Mutation.swift in Sources */,
 				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
 				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */,
+				20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				2035A9C32709229F007D580F /* Upload.swift in Sources */,
+				20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */,
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */,
+				2016C8BE272202BC00B438C6 /* TextFieldComponent.swift in Sources */,
 				20A96B9E271B965A00E1765B /* SpotDetailImage.swift in Sources */,
 				20A088732708FA1B00D94272 /* Cache.swift in Sources */,
 				BA26C8522621939A006555AE /* CloudStorage.swift in Sources */,
 				20A09D1B2701F2640090E22F /* Query.swift in Sources */,
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
+				2016C8C0272204AC00B438C6 /* TextFieldComponentModifiers.swift in Sources */,
 				20A96B9B271B95DE00E1765B /* Spot.graphql.swift in Sources */,
 				20A96BA3271B989D00E1765B /* Loading.swift in Sources */,
 				201F268C27009C7B00A5DD1E /* Secret.swift in Sources */,
@@ -835,6 +874,7 @@
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,
 				BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */,
 				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
+				2016C8BC271EFD4D00B438C6 /* When.swift in Sources */,
 				BA619FB326414493003713A4 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
