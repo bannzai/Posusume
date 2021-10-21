@@ -41,6 +41,13 @@ public struct SpotPostEditorPage: View {
                                 elements.remove(at: selectedElementIndex)
                             }
 
+                        Image(systemName: "bold")
+                            .font(.system(size: 32))
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                elements[selectedElementIndex].isBold.toggle()
+                            }
+
                         ColorPicker(elements[selectedElementIndex].text, selection: .init(get: { elements[selectedElementIndex].textColor }, set: {
                             elements[selectedElementIndex].textColor = $0
                         })).frame(width: 40, height: 40)
@@ -49,7 +56,7 @@ public struct SpotPostEditorPage: View {
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world", textColor: .red)
+                                let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world")
                                 elements.append(element)
                                 selectedElementID = element.id
                             }

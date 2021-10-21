@@ -44,7 +44,7 @@ struct SpotPostEditorEffectCoverElement: View {
         TextField("", text: $element.text)
             .focused(_isFocused)
             .foregroundColor(element.textColor)
-            .font(.title)
+            .font(.title.weight(element.isBold ? .bold : .medium))
             .fixedSize()
             .padding(4)
             .border(isSelected ? Color.blue : Color.clear, width: 2)
@@ -101,7 +101,8 @@ struct SpotPostEditorEffectCoverElement: View {
 struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
     let id: UUID = .init()
     var text: String
-    var textColor: Color
+    var textColor: Color = .black
+    var isBold: Bool = false
 }
 
 
