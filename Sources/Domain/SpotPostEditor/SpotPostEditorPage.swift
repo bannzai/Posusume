@@ -13,18 +13,18 @@ public struct SpotPostEditorPage: View {
 
     public var body: some View {
         VStack {
-            ZStack {
-                GeometryReader { geometry in
+            GeometryReader { geometry in
+                ZStack {
                     Image(uiImage: image)
                         .resizable()
-                        .spotImageFrame(width: geometry.size.width)
                         .clipped()
-                }
-                SpotPostEditorEffectCover(
-                    elements: $elements,
-                    selectedElementID: $selectedElementID,
-                    elementTextFieldIsFocused: $elementTextFieldIsFocused
-                )
+
+                    SpotPostEditorEffectCover(
+                        elements: $elements,
+                        selectedElementID: $selectedElementID,
+                        elementTextFieldIsFocused: $elementTextFieldIsFocused
+                    )
+                }.spotImageFrame(width: geometry.size.width)
             }
             .onTapGesture {
                 elementTextFieldIsFocused = false

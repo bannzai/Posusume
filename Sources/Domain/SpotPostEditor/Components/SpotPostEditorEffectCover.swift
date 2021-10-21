@@ -7,19 +7,22 @@ struct SpotPostEditorEffectCover: View {
     @FocusState.Binding var elementTextFieldIsFocused: Bool
 
     var body: some View {
-        ZStack {
-            ForEach($elements) { $element in
-                SpotPostEditorEffectCoverElement(
-                    element: $element,
-                    isSelected: .init(get: { element.id == selectedElementID }, set: { value in
-                        if value {
-                            selectedElementID = element.id
-                        } else {
-                            selectedElementID = nil
-                        }
-                    }),
-                    isFocused: _elementTextFieldIsFocused
-                )
+        GeometryReader { geometry in
+            ZStack {
+                ForEach($elements) { $element in
+                    SpotPostEditorEffectCoverElement(
+                        element: $element,
+                        isSelected: .init(get: { element.id == selectedElementID }, set: { value in
+                            if value {
+                                selectedElementID = element.id
+                            } else {
+                                selectedElementID = nil
+                            }
+                        }),
+                        location: .init(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY),
+                        isFocused: _elementTextFieldIsFocused
+                    )
+                }
             }
         }
     }
@@ -28,14 +31,14 @@ struct SpotPostEditorEffectCover: View {
 struct SpotPostEditorEffectCoverElement: View {
     @Binding var element: SpotPostEditorEffectCoverElementValue
     @Binding var isSelected: Bool
+    @State var location: CGPoint
+    @FocusState.Binding var isFocused: Bool
 
-    @State private var location: CGPoint = CGPoint(x: 40, y: 40)
     @State private var currentRotation: Angle = .zero
     @State private var currentMagnification: CGFloat = 1
     @GestureState private var startLocation: CGPoint? = nil
     @GestureState private var twistAngle: Angle = .zero
     @GestureState private var pinchMagnification: CGFloat = 1
-    @FocusState.Binding var isFocused: Bool
 
     var body: some View {
         TextField("", text: $element.text)
