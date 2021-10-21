@@ -4,7 +4,7 @@ import SwiftUI
 struct SpotPostEditorEffectCover: View {
     @Binding var textFieldValues: [TextFieldComponentValue]
     @Binding var selectedTextFieldValueID: TextFieldComponentValue.ID?
-    @FocusState.Binding var elementTextFieldIsFocused: Bool
+    @FocusState.Binding var textFieldIsFocused: Bool
 
     var body: some View {
         GeometryReader { geometry in
@@ -20,7 +20,7 @@ struct SpotPostEditorEffectCover: View {
                             }
                         }),
                         location: .init(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY),
-                        isFocused: _elementTextFieldIsFocused
+                        isFocused: _textFieldIsFocused
                     )
                 }
             }
@@ -35,6 +35,6 @@ struct SpotPostEditorEffectCover_Previews: PreviewProvider {
     static var previews: some View {
         SpotPostEditorEffectCover(textFieldValues: $textFieldValues,
                                   selectedTextFieldValueID: .constant(nil),
-                                  elementTextFieldIsFocused: $elementIsFocused)
+                                  textFieldIsFocused: $elementIsFocused)
     }
 }

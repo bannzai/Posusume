@@ -9,7 +9,7 @@ public struct SpotPostEditorPage: View {
 
     @State var textFieldValues: [TextFieldComponentValue] = []
     @State var selectedTextFieldValueID: TextFieldComponentValue.ID?
-    @FocusState var elementTextFieldIsFocused: Bool
+    @FocusState var textFieldIsFocused: Bool
 
     public var body: some View {
         VStack {
@@ -22,12 +22,12 @@ public struct SpotPostEditorPage: View {
                     SpotPostEditorEffectCover(
                         textFieldValues: $textFieldValues,
                         selectedTextFieldValueID: $selectedTextFieldValueID,
-                        elementTextFieldIsFocused: $elementTextFieldIsFocused
+                        textFieldIsFocused: $textFieldIsFocused
                     )
                 }.spotImageFrame(width: geometry.size.width)
             }
             .onTapGesture {
-                elementTextFieldIsFocused = false
+                textFieldIsFocused = false
                 selectedTextFieldValueID = nil
             }
 
