@@ -7,8 +7,8 @@ public struct SpotPostEditorPage: View {
         self.image = image
     }
 
-    @State var elements: [SpotPostEditorEffectCoverElementValue] = []
-    @State var selectedElementID: SpotPostEditorEffectCoverElementValue.ID?
+    @State var elements: [TextFieldComponentValue] = []
+    @State var selectedElementID: TextFieldComponentValue.ID?
     @FocusState var elementTextFieldIsFocused: Bool
 
     public var body: some View {
@@ -70,7 +70,7 @@ public struct SpotPostEditorPage: View {
                             .font(.system(size: 32))
                             .frame(width: 40, height: 40)
                             .onTapGesture {
-                                let element = SpotPostEditorEffectCoverElementValue(text: "Hello, world")
+                                let element = TextFieldComponentValue(text: "Hello, world")
                                 elements.append(element)
                                 selectedElementID = element.id
                             }
