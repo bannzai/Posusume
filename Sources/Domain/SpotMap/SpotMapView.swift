@@ -19,7 +19,7 @@ struct SpotMapView: View {
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: $region,
+            Map(coordinateRegion: .constant(region),
                 showsUserLocation: true,
                 annotationItems: spots,
                 annotationContent: { spot in
