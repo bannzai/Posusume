@@ -51,6 +51,7 @@ struct SpotPostEditorEffectCoverElement: View {
             .rotationEffect(currentRotation + twistAngle)
             .scaleEffect(currentMagnification * pinchMagnification)
             .position(location)
+            .clipped()
             .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
 
     }
