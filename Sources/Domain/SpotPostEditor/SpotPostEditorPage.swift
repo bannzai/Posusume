@@ -58,6 +58,13 @@ public struct SpotPostEditorPage: View {
                             .onTapGesture {
                                 elements[selectedElementIndex].isItalic.toggle()
                             }
+
+                        Image(systemName: "underline")
+                            .font(.system(size: 32))
+                            .frame(width: 40, height: 40)
+                            .onTapGesture {
+                                elements[selectedElementIndex].isUnderline.toggle()
+                            }
                     } else {
                         Image(systemName: "textformat")
                             .font(.system(size: 32))

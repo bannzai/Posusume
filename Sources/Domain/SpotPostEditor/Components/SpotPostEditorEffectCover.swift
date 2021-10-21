@@ -41,19 +41,30 @@ struct SpotPostEditorEffectCoverElement: View {
     @GestureState private var pinchMagnification: CGFloat = 1
 
     var body: some View {
-        TextField("", text: $element.text)
-            .focused(_isFocused)
-            .foregroundColor(element.textColor)
-            .font(font)
-            .fixedSize()
-            .padding(4)
-            .border(isSelected ? Color.blue : Color.clear, width: 2)
-            .rotationEffect(currentRotation + twistAngle)
-            .scaleEffect(currentMagnification * pinchMagnification)
-            .position(location)
-            .clipped()
-            .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
+        Group {
+            if element.isUnderline {
+                VStack(spacing: -2) {
+                    TextField("", text: $element.text)
 
+                    Divider()
+                        .frame(height: 1)
+                        .background(element.textColor)
+                }
+            } else {
+                TextField("", text: $element.text)
+            }
+        }
+        .focused(_isFocused)
+        .foregroundColor(element.textColor)
+        .font(font)
+        .fixedSize()
+        .padding(4)
+        .border(isSelected ? Color.blue : Color.clear, width: 2)
+        .rotationEffect(currentRotation + twistAngle)
+        .scaleEffect(currentMagnification * pinchMagnification)
+        .position(location)
+        .clipped()
+        .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
     }
 
     private var font: SwiftUI.Font {
@@ -113,8 +124,9 @@ struct SpotPostEditorEffectCoverElementValue: Identifiable, Equatable {
     let id: UUID = .init()
     var text: String
     var textColor: Color = .black
-    var isBold: Bool = false
-    var isItalic: Bool = false
+    var isBold = false
+    var isItalic = false
+    var isUnderline = false
 }
 
 
