@@ -18,16 +18,14 @@ struct TextFieldComponent: View {
             if value.isVertical {
                 Tansaku(value.text)
             } else {
-                if value.isUnderline {
-                    VStack(spacing: -2) {
-                        TextField("", text: $value.text)
+                VStack(spacing: -2) {
+                    TextField("", text: $value.text)
 
+                    if value.isUnderline {
                         Divider()
                             .frame(height: 1)
                             .background(value.textColor)
                     }
-                } else {
-                    TextField("", text: $value.text)
                 }
             }
         }
