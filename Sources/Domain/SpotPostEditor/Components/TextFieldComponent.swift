@@ -94,8 +94,8 @@ struct TextFieldComponent: View {
     }
 }
 
-struct TextFieldComponentValue: Identifiable, Equatable {
-    let id: UUID = .init()
+public struct TextFieldComponentValue: Identifiable, Equatable {
+    public let id: UUID = .init()
     var text: String
     var textColor: Color = .black
     var isBold = false

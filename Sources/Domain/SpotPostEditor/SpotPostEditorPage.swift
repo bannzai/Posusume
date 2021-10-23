@@ -1,13 +1,22 @@
 import Foundation
 import SwiftUI
 
+public struct SpotPostEditorPageState {
+    public internal(set) var textFieldValues: [TextFieldComponentValue] = []
+
+    public init() {
+
+    }
+}
+
 public struct SpotPostEditorPage: View {
     let image: UIImage
-    init(image: UIImage) {
+    @Binding var state: SpotPostEditorPageState
+    public init(image: UIImage, state: Binding<SpotPostEditorPageState>) {
         self.image = image
+        self._state = state
     }
 
-    @State var textFieldValues: [TextFieldComponentValue] = []
     @State var selectedTextFieldValueID: TextFieldComponentValue.ID?
     @FocusState var textFieldIsFocused: Bool
 
@@ -21,7 +30,7 @@ public struct SpotPostEditorPage: View {
                             .clipped()
 
                         SpotPostEditorEffectCover(
-                            textFieldValues: $textFieldValues,
+                            textFieldValues: $state.textFieldValues,
                             selectedTextFieldValueID: $selectedTextFieldValueID,
                             textFieldIsFocused: $textFieldIsFocused
                         )
@@ -36,11 +45,11 @@ public struct SpotPostEditorPage: View {
                     HStack {
                         if let selectedTextFieldIndex = selectedTextFieldIndex {
                             TextFieldComponentModifiers(textFieldValue: .init(get: {
-                                textFieldValues[selectedTextFieldIndex]
+                                state.textFieldValues[selectedTextFieldIndex]
                             }, set: {
-                                textFieldValues[selectedTextFieldIndex] = $0
+                                state.textFieldValues[selectedTextFieldIndex] = $0
                             }), onDelete: {
-                                textFieldValues.remove(at: selectedTextFieldIndex)
+                                state.textFieldValues.remove(at: selectedTextFieldIndex)
                             })
                         } else {
                             Image(systemName: "textformat")
@@ -48,7 +57,7 @@ public struct SpotPostEditorPage: View {
                                 .frame(width: 40, height: 40)
                                 .onTapGesture {
                                     let element = TextFieldComponentValue(text: "Hello, world")
-                                    textFieldValues.append(element)
+                                    state.textFieldValues.append(element)
                                     selectedTextFieldValueID = element.id
                                 }
                         }
@@ -60,13 +69,14 @@ public struct SpotPostEditorPage: View {
     }
 
     private var selectedTextFieldIndex: Int? {
-        textFieldValues.firstIndex(where: { $0.id == selectedTextFieldValueID })
+        state.textFieldValues.firstIndex(where: { $0.id == selectedTextFieldValueID })
     }
 }
 
 
 struct SpotPostEditorPage_Previews: PreviewProvider {
+    @State static var state: SpotPostEditorPageState = .init()
     static var previews: some View {
-        SpotPostEditorPage(image: .init(named: "IMG_0005")!)
+        SpotPostEditorPage(image:.init(named: "IMG_0005")!, state: $state)
     }
 }

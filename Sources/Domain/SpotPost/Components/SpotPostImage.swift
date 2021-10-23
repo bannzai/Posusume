@@ -12,6 +12,7 @@ struct SpotPostImage: View {
     let image: UIImage?
     let takenPhoto: ((UIImage) -> Void)
     let selectedPhoto: (PhotoLibraryResult) -> Void
+    @Binding var edtiroState: SpotPostEditorPageState
 
     var body: some View {
         Button (
@@ -52,7 +53,7 @@ struct SpotPostImage: View {
                                 .padding(.all, 4)
                                 .overlay(Circle().stroke(Color.black, lineWidth: 1))
                         }).sheet(isPresented: $isPresentingEditor) {
-                            SpotPostEditorPage(image: image)
+                            SpotPostEditorPage(image: image, state: $edtiroState)
                         }
                         .padding([.top, .trailing], 12)
                     }
@@ -72,7 +73,8 @@ struct SpotPostImage: View {
 
 
 private struct Preview: PreviewProvider {
+    @State static var edtiroState: SpotPostEditorPageState = .init()
     static var previews: some View {
-        SpotPostImage(width: UIScreen.main.bounds.width - 40, image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in })
+        SpotPostImage(width: UIScreen.main.bounds.width - 40, image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in }, edtiroState: $edtiroState)
     }
 }
