@@ -12,21 +12,24 @@ public struct SpotPostEditorPage: View {
     @FocusState var textFieldIsFocused: Bool
 
     public var body: some View {
-        ZStack(alignment: .bottom) {
-            Group {
-                SpotPostEditorImage(image: image)
+        VStack {
+            GeometryReader { geometry in
+                ZStack {
+                    Image(uiImage: image)
+                        .resizable()
+                        .clipped()
 
-                SpotPostEditorEffectCover(
-                    textFieldValues: $textFieldValues,
-                    selectedTextFieldValueID: $selectedTextFieldValueID,
-                    textFieldIsFocused: $textFieldIsFocused
-                )
+                    SpotPostEditorEffectCover(
+                        textFieldValues: $textFieldValues,
+                        selectedTextFieldValueID: $selectedTextFieldValueID,
+                        textFieldIsFocused: $textFieldIsFocused
+                    )
+                }.spotImageFrame(width: geometry.size.width)
             }
             .onTapGesture {
                 textFieldIsFocused = false
                 selectedTextFieldValueID = nil
             }
-            .edgesIgnoringSafeArea(.all)
 
             ScrollView(.horizontal) {
                 HStack {
@@ -50,9 +53,8 @@ public struct SpotPostEditorPage: View {
                     }
                 }
             }
-            .frame(width: UIScreen.main.bounds.width)
-            .padding()
         }
+        .padding()
     }
 
     private var selectedTextFieldIndex: Int? {

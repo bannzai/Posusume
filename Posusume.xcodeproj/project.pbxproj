@@ -23,7 +23,6 @@
 		2016C8BC271EFD4D00B438C6 /* When.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BB271EFD4D00B438C6 /* When.swift */; };
 		2016C8BE272202BC00B438C6 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */; };
 		2016C8C0272204AC00B438C6 /* TextFieldComponentModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */; };
-		2016C8C227240C2200B438C6 /* SpotPostEditorImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8C127240C2200B438C6 /* SpotPostEditorImage.swift */; };
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
 		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
@@ -123,7 +122,6 @@
 		2016C8BB271EFD4D00B438C6 /* When.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = When.swift; sourceTree = "<group>"; };
 		2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
 		2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentModifiers.swift; sourceTree = "<group>"; };
-		2016C8C127240C2200B438C6 /* SpotPostEditorImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorImage.swift; sourceTree = "<group>"; };
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 				20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */,
 				2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */,
 				2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */,
-				2016C8C127240C2200B438C6 /* SpotPostEditorImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -847,7 +844,6 @@
 				BA31734C262CF25100E1212C /* PhotoLibraryView.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				2035A9D0270967D4007D580F /* SpotPostSubmitButton.swift in Sources */,
-				2016C8C227240C2200B438C6 /* SpotPostEditorImage.swift in Sources */,
 				2016C8BE272202BC00B438C6 /* TextFieldComponent.swift in Sources */,
 				20A96B9E271B965A00E1765B /* SpotDetailImage.swift in Sources */,
 				20A088732708FA1B00D94272 /* Cache.swift in Sources */,
