@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 public struct SpotPostEditorPageState {
-    public internal(set) var textFieldValues: [TextFieldComponentValue] = []
+    public internal(set) var textFieldValues: [TextFieldComponentState] = []
 
     public init() {
 
@@ -17,7 +17,7 @@ public struct SpotPostEditorPage: View {
         self._state = state
     }
 
-    @State var selectedTextFieldValueID: TextFieldComponentValue.ID?
+    @State var selectedTextFieldValueID: TextFieldComponentState.ID?
     @FocusState var textFieldIsFocused: Bool
 
     public var body: some View {
@@ -30,8 +30,8 @@ public struct SpotPostEditorPage: View {
                             .clipped()
 
                         SpotPostEditorEffectCover(
-                            textFieldValues: $state.textFieldValues,
-                            selectedTextFieldValueID: $selectedTextFieldValueID,
+                            textFieldStatuses: $state.textFieldValues,
+                            selectedTextFieldStateID: $selectedTextFieldValueID,
                             textFieldIsFocused: $textFieldIsFocused
                         )
                     }.spotImageFrame(width: geometry.size.width)
@@ -56,7 +56,7 @@ public struct SpotPostEditorPage: View {
                                 .font(.system(size: 32))
                                 .frame(width: 40, height: 40)
                                 .onTapGesture {
-                                    let element = TextFieldComponentValue(text: "Hello, world")
+                                    let element = TextFieldComponentState(text: "Hello, world")
                                     state.textFieldValues.append(element)
                                     selectedTextFieldValueID = element.id
                                 }
