@@ -15,7 +15,6 @@ extension View {
         controller.view.backgroundColor = .clear
 
         let renderer = UIGraphicsImageRenderer(size: controller.view.bounds.size)
-
         return renderer.image { context in
             controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
