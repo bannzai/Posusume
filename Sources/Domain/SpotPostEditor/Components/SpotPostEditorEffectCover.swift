@@ -7,21 +7,19 @@ struct SpotPostEditorEffectCover: View {
     @FocusState.Binding var textFieldIsFocused: Bool
 
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach($textFieldStatuses) { $state in
-                    TextFieldComponent(
-                        state: $state,
-                        isSelected: .init(get: { state.id == selectedTextFieldStateID }, set: { value in
-                            if value {
-                                selectedTextFieldStateID = state.id
-                            } else {
-                                selectedTextFieldStateID = nil
-                            }
-                        }),
-                        isFocused: _textFieldIsFocused
-                    )
-                }
+        ZStack {
+            ForEach($textFieldStatuses) { $state in
+                TextFieldComponent(
+                    state: $state,
+                    isSelected: .init(get: { state.id == selectedTextFieldStateID }, set: { value in
+                        if value {
+                            selectedTextFieldStateID = state.id
+                        } else {
+                            selectedTextFieldStateID = nil
+                        }
+                    }),
+                    isFocused: _textFieldIsFocused
+                )
             }
         }
     }

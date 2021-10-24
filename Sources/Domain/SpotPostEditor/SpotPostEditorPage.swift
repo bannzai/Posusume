@@ -27,6 +27,7 @@ public struct SpotPostEditorPage: View {
                     ZStack {
                         Image(uiImage: image)
                             .resizable()
+                            .spotImageFrame(width: geometry.size.width)
                             .clipped()
 
                         SpotPostEditorEffectCover(
@@ -35,7 +36,6 @@ public struct SpotPostEditorPage: View {
                             textFieldIsFocused: $textFieldIsFocused
                         )
                     }
-                    .spotImageFrame(width: geometry.size.width)
                 }
                 .onTapGesture {
                     textFieldIsFocused = false
