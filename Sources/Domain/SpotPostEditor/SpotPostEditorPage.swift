@@ -1,70 +1,89 @@
 import Foundation
 import SwiftUI
 
+public struct SpotPostEditorPageState {
+    public internal(set) var textFieldValues: [TextFieldComponentState] = []
+
+    public init() {
+
+    }
+}
+
 public struct SpotPostEditorPage: View {
+    @Binding var state: SpotPostEditorPageState
     let image: UIImage
-    init(image: UIImage) {
+    let snapshotOnDisappear: (SpotPostEditorImage) -> Void
+    public init(state: Binding<SpotPostEditorPageState>, image: UIImage, snapshotOnDisappear: @escaping (SpotPostEditorImage) -> Void) {
+        self._state = state
         self.image = image
+        self.snapshotOnDisappear = snapshotOnDisappear
     }
 
-    @State var textFieldValues: [TextFieldComponentValue] = []
-    @State var selectedTextFieldValueID: TextFieldComponentValue.ID?
+    @State var selectedTextFieldStateID: TextFieldComponentState.ID?
     @FocusState var textFieldIsFocused: Bool
 
     public var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                ZStack {
-                    Image(uiImage: image)
-                        .resizable()
-                        .clipped()
-
-                    SpotPostEditorEffectCover(
-                        textFieldValues: $textFieldValues,
-                        selectedTextFieldValueID: $selectedTextFieldValueID,
+        NavigationView {
+            VStack {
+                GeometryReader { geometry in
+                    let width = geometry.size.width
+                    SpotPostEditorImage(
+                        width: width,
+                        image: image,
+                        textFieldStatuses: $state.textFieldValues,
+                        selectedTextFieldStateID: $selectedTextFieldStateID,
                         textFieldIsFocused: $textFieldIsFocused
-                    )
-                }.spotImageFrame(width: geometry.size.width)
-            }
-            .onTapGesture {
-                textFieldIsFocused = false
-                selectedTextFieldValueID = nil
-            }
+                    ).onDisappear(perform: {
+                        snapshotOnDisappear(
+                            .init(width: width,
+                                  image: image,
+                                  textFieldStatuses: $state.textFieldValues,
+                                  selectedTextFieldStateID: .constant(nil),
+                                  textFieldIsFocused: $textFieldIsFocused)
+                        )
+                    })
+                }
+                .onTapGesture {
+                    textFieldIsFocused = false
+                    selectedTextFieldStateID = nil
+                }
 
-            ScrollView(.horizontal) {
-                HStack {
-                    if let selectedTextFieldIndex = selectedTextFieldIndex {
-                        TextFieldComponentModifiers(textFieldValue: .init(get: {
-                            textFieldValues[selectedTextFieldIndex]
-                        }, set: {
-                            textFieldValues[selectedTextFieldIndex] = $0
-                        }), onDelete: {
-                            textFieldValues.remove(at: selectedTextFieldIndex)
-                        })
-                    } else {
-                        Image(systemName: "textformat")
-                            .font(.system(size: 32))
-                            .frame(width: 40, height: 40)
-                            .onTapGesture {
-                                let element = TextFieldComponentValue(text: "Hello, world")
-                                textFieldValues.append(element)
-                                selectedTextFieldValueID = element.id
-                            }
+                ScrollView(.horizontal) {
+                    HStack {
+                        if let selectedTextFieldIndex = selectedTextFieldIndex {
+                            TextFieldComponentModifiers(textFieldValue: .init(get: {
+                                state.textFieldValues[selectedTextFieldIndex]
+                            }, set: {
+                                state.textFieldValues[selectedTextFieldIndex] = $0
+                            }), onDelete: {
+                                state.textFieldValues.remove(at: selectedTextFieldIndex)
+                            })
+                        } else {
+                            Image(systemName: "textformat")
+                                .font(.system(size: 32))
+                                .frame(width: 40, height: 40)
+                                .onTapGesture {
+                                    let element = TextFieldComponentState(text: "Hello, world")
+                                    state.textFieldValues.append(element)
+                                    selectedTextFieldStateID = element.id
+                                }
+                        }
                     }
                 }
+                .padding(.bottom)
             }
+            .padding(.horizontal, 20)
         }
-        .padding()
     }
 
     private var selectedTextFieldIndex: Int? {
-        textFieldValues.firstIndex(where: { $0.id == selectedTextFieldValueID })
+        state.textFieldValues.firstIndex(where: { $0.id == selectedTextFieldStateID })
     }
 }
 
 
 struct SpotPostEditorPage_Previews: PreviewProvider {
     static var previews: some View {
-        SpotPostEditorPage(image: .init(named: "IMG_0005")!)
+        SpotPostEditorPage(state: .constant(.init()), image: .init(named: "IMG_0005")!, snapshotOnDisappear: { _ in })
     }
 }

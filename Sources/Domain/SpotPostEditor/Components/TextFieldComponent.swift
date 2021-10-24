@@ -2,53 +2,48 @@ import Foundation
 import SwiftUI
 
 struct TextFieldComponent: View {
-    @Binding var value: TextFieldComponentValue
+    @Binding var state: TextFieldComponentState
     @Binding var isSelected: Bool
-    @State var location: CGPoint
     @FocusState.Binding var isFocused: Bool
 
-    @State private var currentRotation: Angle = .zero
-    @State private var currentMagnification: CGFloat = 1
     @GestureState private var startLocation: CGPoint? = nil
     @GestureState private var twistAngle: Angle = .zero
     @GestureState private var pinchMagnification: CGFloat = 1
 
     var body: some View {
         Group {
-            if value.isVertical {
-                Tansaku(value.text)
+            if state.isVertical {
+                Tansaku(state.text)
             } else {
-                if value.isUnderline {
-                    VStack(spacing: -2) {
-                        TextField("", text: $value.text)
+                VStack(spacing: -2) {
+                    TextField("", text: $state.text)
 
+                    if state.isUnderline {
                         Divider()
                             .frame(height: 1)
-                            .background(value.textColor)
+                            .background(state.textColor)
                     }
-                } else {
-                    TextField("", text: $value.text)
                 }
             }
         }
         .focused(_isFocused)
-        .foregroundColor(value.textColor)
+        .foregroundColor(state.textColor)
         .font(font)
         .fixedSize()
         .padding(4)
         .border(isSelected ? Color.blue : Color.clear, width: 2)
-        .rotationEffect(currentRotation + twistAngle)
-        .position(location)
+        .rotationEffect(state.rotation + twistAngle)
+        .position(state.location)
         .clipped()
         .gesture(drag.simultaneously(with: rotation).simultaneously(with: magnification))
     }
 
     private var font: SwiftUI.Font {
-        var font = Font.system(size: 24 * currentMagnification * pinchMagnification)
-        if value.isBold {
+        var font = Font.system(size: 24 * state.maginification * pinchMagnification)
+        if state.isBold {
             font = font.weight(.bold)
         }
-        if value.isItalic {
+        if state.isItalic {
             font = font.italic()
         }
         return font
@@ -57,15 +52,15 @@ struct TextFieldComponent: View {
     private var drag: some Gesture {
         DragGesture()
             .onChanged { value in
-                var newLocation = startLocation ?? location
+                var newLocation = startLocation ?? state.location
                 newLocation.x += value.translation.width
                 newLocation.y += value.translation.height
-                location = newLocation
+                state.location = newLocation
 
                 isSelected = true
             }
             .updating($startLocation) { (value, startLocation, transaction) in
-                startLocation = startLocation ?? location
+                startLocation = startLocation ?? state.location
             }
     }
 
@@ -75,7 +70,7 @@ struct TextFieldComponent: View {
                 isSelected = true
             }
             .onEnded { value in
-                currentRotation += value
+                state.rotation += value
             }
             .updating($twistAngle) { (currentState, twistAngle, transaction) in
                 twistAngle = currentState
@@ -88,7 +83,7 @@ struct TextFieldComponent: View {
                 isSelected = true
             }
             .onEnded { value in
-                currentMagnification *= value
+                state.maginification *= value
             }
             .updating($pinchMagnification) { (currentState, pinchMagnification, transaction) in
                 pinchMagnification = currentState
@@ -96,8 +91,8 @@ struct TextFieldComponent: View {
     }
 }
 
-struct TextFieldComponentValue: Identifiable, Equatable {
-    let id: UUID = .init()
+public struct TextFieldComponentState: Identifiable, Equatable {
+    public let id: UUID = .init()
     var text: String
     var textColor: Color = .black
     var isBold = false
@@ -109,6 +104,15 @@ struct TextFieldComponentValue: Identifiable, Equatable {
                 isUnderline = false
             }
         }
+    }
+
+    // Keep gesture state
+    var location: CGPoint = .init(x: UIScreen.main.bounds.width, y: 200)
+    var rotation: Angle = .zero
+    var maginification: CGFloat = 1
+
+    public init(text: String) {
+        self.text = text
     }
 }
 

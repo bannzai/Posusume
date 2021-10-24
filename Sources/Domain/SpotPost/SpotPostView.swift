@@ -15,6 +15,8 @@ struct SpotPostView: View {
     @State var title: String = ""
     @State var image: UIImage?
     @State var placemark: Placemark?
+    @State var editorState: SpotPostEditorPageState = .init()
+    @State var editingSnapshot: UIImage?
 
     var body: some View {
         NavigationView {
@@ -25,7 +27,9 @@ struct SpotPostView: View {
                             width: geometry.size.width,
                             image: image,
                             takenPhoto: takenPhoto,
-                            selectedPhoto: selectedPhoto
+                            selectedPhoto: selectedPhoto,
+                            edtiroState: $editorState,
+                            editingSnapshot: $editingSnapshot
                         )
                         SpotPostTitle(title: $title)
                         if image != nil {
@@ -33,7 +37,7 @@ struct SpotPostView: View {
                         }
                         Spacer()
 
-                        SpotPostSubmitButton(image: image, title: title, placemark: placemark, dismiss: dismiss)
+                        SpotPostSubmitButton(image: editingSnapshot ?? image, title: title, placemark: placemark, dismiss: dismiss)
                     }
                     .padding(.vertical, 24)
                 }

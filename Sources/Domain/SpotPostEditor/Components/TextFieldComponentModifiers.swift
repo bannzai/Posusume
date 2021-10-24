@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 struct TextFieldComponentModifiers: View {
-    @Binding var textFieldValue: TextFieldComponentValue
+    @Binding var textFieldValue: TextFieldComponentState
     let onDelete: () -> Void
 
     var body: some View {

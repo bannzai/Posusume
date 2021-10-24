@@ -23,6 +23,8 @@
 		2016C8BC271EFD4D00B438C6 /* When.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BB271EFD4D00B438C6 /* When.swift */; };
 		2016C8BE272202BC00B438C6 /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */; };
 		2016C8C0272204AC00B438C6 /* TextFieldComponentModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */; };
+		2016C8C52724ED8A00B438C6 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8C42724ED8A00B438C6 /* Snapshot.swift */; };
+		2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8C62724F18300B438C6 /* SpotPostEditorImage.swift */; };
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
 		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
@@ -122,6 +124,8 @@
 		2016C8BB271EFD4D00B438C6 /* When.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = When.swift; sourceTree = "<group>"; };
 		2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
 		2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentModifiers.swift; sourceTree = "<group>"; };
+		2016C8C42724ED8A00B438C6 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		2016C8C62724F18300B438C6 /* SpotPostEditorImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorImage.swift; sourceTree = "<group>"; };
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
@@ -251,6 +255,14 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		2016C8C32724ED7F00B438C6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				2016C8C42724ED8A00B438C6 /* Snapshot.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		2035A9C427094DE6007D580F /* SpotPost */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +352,7 @@
 		20B0916A271D16FA0015F0F3 /* SpotPostEditor */ = {
 			isa = PBXGroup;
 			children = (
+				2016C8C32724ED7F00B438C6 /* Utility */,
 				20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */,
 				20B09174271DC3A50015F0F3 /* Components */,
 			);
@@ -352,6 +365,7 @@
 				20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */,
 				2016C8BD272202BC00B438C6 /* TextFieldComponent.swift */,
 				2016C8BF272204AC00B438C6 /* TextFieldComponentModifiers.swift */,
+				2016C8C62724F18300B438C6 /* SpotPostEditorImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -822,6 +836,7 @@
 				2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */,
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
+				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
@@ -861,6 +876,7 @@
 				BA906C3F26410F0400ACE02F /* Geocoder.swift in Sources */,
 				2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */,
 				2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */,
+				2016C8C52724ED8A00B438C6 /* Snapshot.swift in Sources */,
 				BA906C3626410A6B00ACE02F /* DefaultLocation.swift in Sources */,
 				20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */,
 				20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */,

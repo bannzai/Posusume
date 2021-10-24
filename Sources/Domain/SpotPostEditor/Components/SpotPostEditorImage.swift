@@ -1,13 +1,21 @@
 import Foundation
 import SwiftUI
 
-struct SpotPostEditorEffectCover: View {
+public struct SpotPostEditorImage: View {
+    let width: CGFloat
+    let image: UIImage
+
     @Binding var textFieldStatuses: [TextFieldComponentState]
     @Binding var selectedTextFieldStateID: TextFieldComponentState.ID?
     @FocusState.Binding var textFieldIsFocused: Bool
 
-    var body: some View {
+    public var body: some View {
         ZStack {
+            Image(uiImage: image)
+                .resizable()
+                .spotImageFrame(width: width)
+                .clipped()
+
             ForEach($textFieldStatuses) { $state in
                 TextFieldComponent(
                     state: $state,
@@ -22,16 +30,6 @@ struct SpotPostEditorEffectCover: View {
                 )
             }
         }
-    }
-}
-
-
-struct SpotPostEditorEffectCover_Previews: PreviewProvider {
-    @State static var textFieldStatuses: [TextFieldComponentState] = [.init(text: "Hello, world")]
-    @FocusState static var elementIsFocused: Bool
-    static var previews: some View {
-        SpotPostEditorEffectCover(textFieldStatuses: $textFieldStatuses,
-                                  selectedTextFieldStateID: .constant(nil),
-                                  textFieldIsFocused: $elementIsFocused)
+        .spotImageFrame(width: width)
     }
 }
