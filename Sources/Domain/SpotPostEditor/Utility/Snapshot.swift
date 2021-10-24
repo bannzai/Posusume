@@ -4,17 +4,20 @@ import UIKit
 
 extension View {
     func snapshot() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        let view = controller.view
+        // NOTE: If it is not Remove status bar and safe area insets,
+        // Snapshot contains statusbar and safearea frame as black box frame
+        let controller = UIHostingController(rootView: self
+                                                        .edgesIgnoringSafeArea(.all)
+                                                        .statusBar(hidden: true))
 
         let targetSize = controller.view.intrinsicContentSize
-        view?.bounds = CGRect(origin: .zero, size: targetSize)
-        view?.backgroundColor = .clear
+        controller.view.bounds = CGRect(origin: .zero, size: targetSize)
+        controller.view.backgroundColor = .clear
 
-        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let renderer = UIGraphicsImageRenderer(size: controller.view.bounds.size)
 
-        return renderer.image { _ in
-            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+        return renderer.image { context in
+            controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
 }
