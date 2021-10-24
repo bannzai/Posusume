@@ -70,9 +70,8 @@ public struct SpotPostEditorPage: View {
                         }
                     }
                 }
-                .padding(.bottom)
             }
-            .padding(.horizontal)
+            .padding()
         }
     }
 

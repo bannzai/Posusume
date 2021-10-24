@@ -15,7 +15,6 @@ public struct SpotPostEditorImage: View {
                 .resizable()
                 .spotImageFrame(width: width)
                 .clipped()
-                .border(Color.red)
 
             ForEach($textFieldStatuses) { $state in
                 TextFieldComponent(
@@ -31,6 +30,5 @@ public struct SpotPostEditorImage: View {
                 )
             }
         }
-        .spotImageFrame(width: width)
     }
 }
