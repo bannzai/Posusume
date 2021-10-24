@@ -22,27 +22,28 @@ struct SpotPostImage: View {
             },
             label: {
                 ZStack(alignment: .topTrailing) {
-                    Group {
-                        if let image = editingSnapshot ?? image {
-                            Image(uiImage: image)
+                    if let image = editingSnapshot {
+                        Image(uiImage: image)
+                    } else if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .spotImageFrame(width: width)
+                    } else {
+                        VStack {
+                            Spacer()
+                            Image("anyPicture")
                                 .resizable()
-                        } else {
-                            VStack {
-                                Spacer()
-                                Image("anyPicture")
-                                    .resizable()
-                                    .renderingMode(.template)
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40)
-                                Text("画像を選択")
-                                    .font(.footnote)
-                                Spacer()
-                            }
-                            .foregroundColor(.placeholder)
+                                .renderingMode(.template)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 40, height: 40)
+                            Text("画像を選択")
+                                .font(.footnote)
+                            Spacer()
                         }
+                        .foregroundColor(.placeholder)
+                        .spotImageFrame(width: width)
+                        .background(Color.white)
                     }
-                    .spotImageFrame(width: width)
-                    .background(Color.white)
 
                     if let image = image {
                         Button(action: {
