@@ -107,7 +107,7 @@ public struct TextFieldComponentState: Identifiable, Equatable {
     }
 
     // Keep gesture state
-    var location: CGPoint = .init(x: UIScreen.main.bounds.midX, y: 200)
+    var location: CGPoint = .init(x: UIScreen.main.bounds.width, y: 200)
     var rotation: Angle = .zero
     var maginification: CGFloat = 1
 
