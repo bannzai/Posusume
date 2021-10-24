@@ -25,10 +25,7 @@ public struct SpotPostEditorPage: View {
             VStack {
                 GeometryReader { geometry in
                     ZStack {
-                        Image(uiImage: image)
-                            .resizable()
-                            .spotImageFrame(width: geometry.size.width)
-                            .clipped()
+                        SpotPostEditorImage(width: geometry.size.width, image: image)
 
                         SpotPostEditorEffectCover(
                             textFieldStatuses: $state.textFieldValues,
