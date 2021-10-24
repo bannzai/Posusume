@@ -34,7 +34,8 @@ public struct SpotPostEditorPage: View {
                             selectedTextFieldStateID: $selectedTextFieldValueID,
                             textFieldIsFocused: $textFieldIsFocused
                         )
-                    }.spotImageFrame(width: geometry.size.width)
+                    }
+                    .spotImageFrame(width: geometry.size.width)
                 }
                 .onTapGesture {
                     textFieldIsFocused = false
