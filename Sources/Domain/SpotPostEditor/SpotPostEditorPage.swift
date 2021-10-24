@@ -10,33 +10,42 @@ public struct SpotPostEditorPageState {
 }
 
 public struct SpotPostEditorPage: View {
-    let image: UIImage
     @Binding var state: SpotPostEditorPageState
-    public init(image: UIImage, state: Binding<SpotPostEditorPageState>) {
-        self.image = image
+    let image: UIImage
+    let snapshotOnDisappear: (SpotPostEditorImage) -> Void
+    public init(state: Binding<SpotPostEditorPageState>, image: UIImage, snapshotOnDisappear: @escaping (SpotPostEditorImage) -> Void) {
         self._state = state
+        self.image = image
+        self.snapshotOnDisappear = snapshotOnDisappear
     }
 
-    @State var selectedTextFieldValueID: TextFieldComponentState.ID?
+    @State var selectedTextFieldStateID: TextFieldComponentState.ID?
     @FocusState var textFieldIsFocused: Bool
 
     public var body: some View {
         NavigationView {
             VStack {
                 GeometryReader { geometry in
-                    ZStack {
-                        SpotPostEditorImage(width: geometry.size.width, image: image)
-
-                        SpotPostEditorEffectCover(
-                            textFieldStatuses: $state.textFieldValues,
-                            selectedTextFieldStateID: $selectedTextFieldValueID,
-                            textFieldIsFocused: $textFieldIsFocused
+                    let width = geometry.size.width
+                    SpotPostEditorImage(
+                        width: width,
+                        image: image,
+                        textFieldStatuses: $state.textFieldValues,
+                        selectedTextFieldStateID: $selectedTextFieldStateID,
+                        textFieldIsFocused: $textFieldIsFocused
+                    ).onDisappear(perform: {
+                        snapshotOnDisappear(
+                            .init(width: width,
+                                  image: image,
+                                  textFieldStatuses: $state.textFieldValues,
+                                  selectedTextFieldStateID: .constant(nil),
+                                  textFieldIsFocused: $textFieldIsFocused)
                         )
-                    }
+                    })
                 }
                 .onTapGesture {
                     textFieldIsFocused = false
-                    selectedTextFieldValueID = nil
+                    selectedTextFieldStateID = nil
                 }
 
                 ScrollView(.horizontal) {
@@ -56,7 +65,7 @@ public struct SpotPostEditorPage: View {
                                 .onTapGesture {
                                     let element = TextFieldComponentState(text: "Hello, world")
                                     state.textFieldValues.append(element)
-                                    selectedTextFieldValueID = element.id
+                                    selectedTextFieldStateID = element.id
                                 }
                         }
                     }
@@ -67,14 +76,13 @@ public struct SpotPostEditorPage: View {
     }
 
     private var selectedTextFieldIndex: Int? {
-        state.textFieldValues.firstIndex(where: { $0.id == selectedTextFieldValueID })
+        state.textFieldValues.firstIndex(where: { $0.id == selectedTextFieldStateID })
     }
 }
 
 
 struct SpotPostEditorPage_Previews: PreviewProvider {
-    @State static var state: SpotPostEditorPageState = .init()
     static var previews: some View {
-        SpotPostEditorPage(image:.init(named: "IMG_0005")!, state: $state)
+        SpotPostEditorPage(state: .constant(.init()), image: .init(named: "IMG_0005")!, snapshotOnDisappear: { _ in })
     }
 }

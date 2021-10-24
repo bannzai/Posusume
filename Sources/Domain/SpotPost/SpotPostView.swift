@@ -16,6 +16,7 @@ struct SpotPostView: View {
     @State var image: UIImage?
     @State var placemark: Placemark?
     @State var editorState: SpotPostEditorPageState = .init()
+    @State var editingSnapshot: UIImage?
 
     var body: some View {
         NavigationView {
@@ -27,7 +28,8 @@ struct SpotPostView: View {
                             image: image,
                             takenPhoto: takenPhoto,
                             selectedPhoto: selectedPhoto,
-                            edtiroState: $editorState
+                            edtiroState: $editorState,
+                            editingSnapshot: $editingSnapshot
                         )
                         SpotPostTitle(title: $title)
                         if image != nil {
