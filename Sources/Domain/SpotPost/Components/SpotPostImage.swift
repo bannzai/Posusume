@@ -12,7 +12,7 @@ struct SpotPostImage: View {
     let image: UIImage?
     let takenPhoto: ((UIImage) -> Void)
     let selectedPhoto: (PhotoLibraryResult) -> Void
-    @Binding var edtiroState: SpotPostEditorPageState
+    @Binding var editorState: SpotPostEditorPageState
 
     var body: some View {
         Button (
@@ -22,7 +22,7 @@ struct SpotPostImage: View {
             label: {
                 ZStack(alignment: .topTrailing) {
                     Group {
-                        if let image = image {
+                        if let image = editorState.snapshotImage ?? image {
                             Image(uiImage: image)
                                 .resizable()
                         } else {
@@ -53,7 +53,7 @@ struct SpotPostImage: View {
                                 .padding(.all, 4)
                                 .overlay(Circle().stroke(Color.black, lineWidth: 1))
                         }).sheet(isPresented: $isPresentingEditor) {
-                            SpotPostEditorPage(image: image, state: $edtiroState)
+                            SpotPostEditorPage(image: image, state: $editorState)
                         }
                         .padding([.top, .trailing], 12)
                     }
@@ -73,8 +73,8 @@ struct SpotPostImage: View {
 
 
 private struct Preview: PreviewProvider {
-    @State static var edtiroState: SpotPostEditorPageState = .init()
+    @State static var editorState: SpotPostEditorPageState = .init()
     static var previews: some View {
-        SpotPostImage(width: UIScreen.main.bounds.width - 40, image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in }, edtiroState: $edtiroState)
+        SpotPostImage(width: UIScreen.main.bounds.width - 40, image: nil, takenPhoto: { _ in }, selectedPhoto: { _ in }, editorState: $editorState)
     }
 }

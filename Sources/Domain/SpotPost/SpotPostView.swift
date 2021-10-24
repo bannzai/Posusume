@@ -27,7 +27,7 @@ struct SpotPostView: View {
                             image: image,
                             takenPhoto: takenPhoto,
                             selectedPhoto: selectedPhoto,
-                            edtiroState: $editorState
+                            editorState: $editorState
                         )
                         SpotPostTitle(title: $title)
                         if image != nil {
