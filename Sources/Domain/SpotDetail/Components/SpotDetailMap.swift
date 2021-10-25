@@ -3,12 +3,15 @@ import SwiftUI
 import MapKit
 
 struct SpotDetailMap: View {
+    @Environment(\.geocoder) var geocoder
     let fragment: SpotDetailMapFragment
+
+    @State var locationName: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("スポット")
-                .font(.subheadline)
+            Text(locationName ?? "スポット")
+                .font(.title)
 
             Map(
                 mapRect: .constant(mapRect),
@@ -18,6 +21,9 @@ struct SpotDetailMap: View {
                 })
                 .frame(maxWidth: .infinity, idealHeight: 200)
                 .cornerRadius(4.0)
+        }
+        .task {
+            locationName = try? await geocoder.reverseGeocode(location: .init(latitude: fragment.geoPoint.latitude, longitude: fragment.geoPoint.longitude)).first?.formattedLocationAddress()
         }
     }
 
