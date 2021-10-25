@@ -6,14 +6,18 @@ struct SpotDetailMap: View {
     let response: SpotQuery.Data
 
     var body: some View {
-        VStack(spacing: 10) {
-            Text("スポット").font(.subheadline)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("スポット")
+                .font(.subheadline)
 
-            Map(mapRect: .constant(mapRect),
+            Map(
+                mapRect: .constant(mapRect),
                 annotationItems: [response.spot],
                 annotationContent: { spot in
-                MapPin(coordinate: .init(latitude: spot.geoPoint.latitude, longitude: spot.geoPoint.longitude))
-            }).frame(maxWidth: .infinity, idealHeight: 200)
+                    MapPin(coordinate: .init(latitude: spot.geoPoint.latitude, longitude: spot.geoPoint.longitude))
+                })
+                .frame(maxWidth: .infinity, idealHeight: 200)
+                .cornerRadius(4.0)
         }
     }
 

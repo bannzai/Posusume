@@ -19,11 +19,13 @@ public struct SpotDetailPage: View {
             Loading(value: response) { response in
                 GeometryReader { geometry in
                     ScrollView(showsIndicators: false) {
-                        VStack(spacing: 20) {
+                        VStack {
                             SpotDetailImage(
                                 width: geometry.size.width,
                                 fragment: response.spot.fragments.spotDetailImageFragment
                             )
+
+                            Spacer(minLength: 20)
 
                             SpotDetailMap(response: response)
                         }
