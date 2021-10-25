@@ -7,112 +7,19 @@ public protocol Geocoder {
     func reverseGeocode(location: CLLocation) async throws -> [Placemark]
 }
 
-private struct _Geocoder: Geocoder {
-    func geocode(address: String) async throws -> [Placemark] {
-        try await CLGeocoder()
-            .geocodeAddressString(address)
-            .compactMap { mark in
-                guard let location = mark.location else {
-                    return nil
-                }
-                return Placemark(
-                    name: mark.name,
-                    country: mark.country,
-                    isoCountryCode: mark.isoCountryCode,
-                    postalCode: mark.postalCode,
-                    inlandWater: mark.inlandWater,
-                    ocean: mark.ocean,
-                    areasOfInterest: mark.areasOfInterest,
-                    address: .init(
-                        administrativeArea: mark.administrativeArea,
-                        subAdministrativeArea: mark.subAdministrativeArea,
-                        locality: mark.locality,
-                        subLocality: mark.subLocality,
-                        thoroughfare: mark.thoroughfare,
-                        subThoroughfare: mark.subThoroughfare
-                    ),
-                location: location.coordinate
-            )
-        }
+
+
+extension CLGeocoder: Geocoder {
+    public func geocode(address: String) async throws -> [Placemark] {
+        try await geocodeAddressString(address).map(Placemark.init)
     }
-
-    func reverseGeocode(location: CLLocation) async throws -> [Placemark] {
-        try await CLGeocoder()
-            .reverseGeocodeLocation(location)
-            .compactMap { mark in
-                guard let location = mark.location else {
-                    return nil
-                }
-                return Placemark(
-                    name: mark.name,
-                    country: mark.country,
-                    isoCountryCode: mark.isoCountryCode,
-                    postalCode: mark.postalCode,
-                    inlandWater: mark.inlandWater,
-                    ocean: mark.ocean,
-                    areasOfInterest: mark.areasOfInterest,
-                    address: .init(
-                        administrativeArea: mark.administrativeArea,
-                        subAdministrativeArea: mark.subAdministrativeArea,
-                        locality: mark.locality,
-                        subLocality: mark.subLocality,
-                        thoroughfare: mark.thoroughfare,
-                        subThoroughfare: mark.subThoroughfare
-                    ),
-                    location: location.coordinate
-                )
-            }
-    }
-
-}
-
-public struct Placemark: Equatable, Identifiable {
-    public let id: UUID = .init()
-    public let name: String?
-    public let country: String?
-    public let isoCountryCode: String?
-    public let postalCode: String?
-    public let inlandWater: String?
-    public let ocean: String?
-    public let areasOfInterest: [String]?
-    public let address: Address
-    public let location: CLLocationCoordinate2D
-
-    public struct Address: Equatable  {
-        // 東京都
-        public let administrativeArea: String?
-
-        public let subAdministrativeArea: String?
-
-        // 渋谷区
-        public let locality: String?
-
-        // neighborhood, common name, eg. Mission District
-        public let subLocality: String?
-
-        // X町 4丁目
-        public let thoroughfare: String?
-        // 1番1号
-        public let subThoroughfare: String?
-
-        // 東京都渋谷区X町 4丁目1番1号
-        public var address: String {
-            [administrativeArea, locality, thoroughfare, subThoroughfare]
-                .compactMap{ $0 }
-                .joined()
-        }
-    }
-
-    func formattedLocationAddress() -> String {
-        if let name = name, !name.isEmpty, !address.address.contains(name) {
-            return "\(name) \(address.address)"
-        }
-        return address.address
+    public func reverseGeocode(location: CLLocation) async throws -> [Placemark] {
+        try await reverseGeocodeLocation(location).map(Placemark.init)
     }
 }
 
 public struct GeocoderEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: Geocoder = _Geocoder()
+    public static var defaultValue: Geocoder = CLGeocoder()
 }
 
 extension EnvironmentValues {
@@ -126,3 +33,38 @@ extension EnvironmentValues {
     }
 }
 
+@dynamicMemberLookup public struct Placemark: Identifiable {
+    public let id = UUID()
+    internal let placemark: CLPlacemark
+
+    // NOTE: location is not nil when instantiate through from geocoder methods
+    // https://developer.apple.com/documentation/corelocation/clplacemark
+    public var location: CLLocation {
+        placemark.location!
+    }
+
+    public init(placemark: CLPlacemark) {
+        self.placemark = placemark
+    }
+
+    public subscript<U>(dynamicMember keyPath: KeyPath<CLPlacemark, U>) -> U {
+        return placemark[keyPath: keyPath]
+    }
+
+    public func formattedLocationAddress() -> String {
+        if let name = placemark.name, !name.isEmpty, !placemark.address.contains(name) {
+            return "\(name) \(placemark.address)"
+        }
+        return placemark.address
+    }
+}
+
+
+extension CLPlacemark {
+    // 東京都渋谷区X町 4丁目1番1号
+    public var address: String {
+        [administrativeArea, locality, thoroughfare, subThoroughfare]
+            .compactMap{ $0 }
+            .joined()
+    }
+}

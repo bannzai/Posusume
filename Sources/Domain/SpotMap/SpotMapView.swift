@@ -1,6 +1,7 @@
 import SwiftUI
 import Combine
 import MapKit
+import Apollo
 
 struct SpotMapView: View {
     @Environment(\.locationManager) var locationManager

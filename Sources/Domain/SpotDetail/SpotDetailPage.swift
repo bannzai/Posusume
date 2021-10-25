@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Apollo
+import MapKit
 
 public struct SpotDetailPage: View {
     @Environment(\.dismiss) var dismiss
@@ -18,11 +19,15 @@ public struct SpotDetailPage: View {
             Loading(value: response) { response in
                 GeometryReader { geometry in
                     ScrollView(showsIndicators: false) {
-                        VStack(spacing: 20) {
+                        VStack {
                             SpotDetailImage(
                                 width: geometry.size.width,
                                 fragment: response.spot.fragments.spotDetailImageFragment
                             )
+
+                            Spacer(minLength: 20)
+
+                            SpotDetailMap(fragment: response.spot.fragments.spotDetailMapFragment)
                         }
                         .padding(.vertical, 24)
                     }
@@ -53,4 +58,6 @@ public struct SpotDetailPage: View {
             .handle(error: $error)
         }
     }
+
 }
+
