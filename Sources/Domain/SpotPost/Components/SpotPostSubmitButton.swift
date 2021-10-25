@@ -23,7 +23,7 @@ public struct SpotPostSubmitButton: View {
         Button(
             action: save,
             label: {
-                Text("保存")
+                Text("ぽすすめする")
                     .foregroundColor(.white)
                     .font(.body)
                     .fontWeight(.medium)
