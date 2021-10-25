@@ -13,7 +13,6 @@ struct SpotMapView: View {
     @State var error: Error?
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false;
-    @State var selectedSpotID: GraphQLID?
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -22,7 +21,7 @@ struct SpotMapView: View {
                 annotationItems: spots,
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
-                    SpotMapImage(fragment: spot.fragments.spotMapImageFragment, selectedSpotID: $selectedSpotID)
+                    SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
                 print("newRegion: ", newRegion)
