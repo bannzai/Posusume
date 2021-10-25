@@ -6,11 +6,11 @@ struct SpotDetailMap: View {
     @Environment(\.geocoder) var geocoder
     let fragment: SpotDetailMapFragment
 
-    @State var locationName: String?
+    @State var placemark: Placemark?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(locationName ?? "スポット")
+            Text(placemark?.formattedLocationAddress() ?? "スポット")
                 .font(.title)
 
             Map(
@@ -23,7 +23,7 @@ struct SpotDetailMap: View {
                 .cornerRadius(4.0)
         }
         .task {
-            locationName = try? await geocoder.reverseGeocode(location: .init(latitude: fragment.geoPoint.latitude, longitude: fragment.geoPoint.longitude)).first?.formattedLocationAddress()
+            placemark = try? await geocoder.reverseGeocode(location: .init(latitude: fragment.geoPoint.latitude, longitude: fragment.geoPoint.longitude)).first
         }
     }
 
