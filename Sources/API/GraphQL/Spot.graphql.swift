@@ -24,6 +24,7 @@ public final class SpotQuery: GraphQLQuery {
           id
         }
         ...SpotDetailImageFragment
+        ...SpotMapImageFragment
       }
     }
     """
@@ -33,6 +34,7 @@ public final class SpotQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + SpotDetailImageFragment.fragmentDefinition)
+    document.append("\n" + SpotMapImageFragment.fragmentDefinition)
     return document
   }
 
@@ -88,6 +90,10 @@ public final class SpotQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
+          GraphQLField("resizedSpotImageURLs", type: .nonNull(.object(ResizedSpotImageUrl.selections))),
         ]
       }
 
@@ -97,8 +103,8 @@ public final class SpotQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: GraphQLID, title: String, imageUrl: URL, geoPoint: GeoPoint, author: Author) {
-        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "title": title, "imageURL": imageUrl, "geoPoint": geoPoint.resultMap, "author": author.resultMap])
+      public init(id: GraphQLID, title: String, imageUrl: URL, geoPoint: GeoPoint, author: Author, resizedSpotImageUrLs: ResizedSpotImageUrl) {
+        self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "title": title, "imageURL": imageUrl, "geoPoint": geoPoint.resultMap, "author": author.resultMap, "resizedSpotImageURLs": resizedSpotImageUrLs.resultMap])
       }
 
       public var __typename: String {
@@ -155,6 +161,15 @@ public final class SpotQuery: GraphQLQuery {
         }
       }
 
+      public var resizedSpotImageUrLs: ResizedSpotImageUrl {
+        get {
+          return ResizedSpotImageUrl(unsafeResultMap: resultMap["resizedSpotImageURLs"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "resizedSpotImageURLs")
+        }
+      }
+
       public var fragments: Fragments {
         get {
           return Fragments(unsafeResultMap: resultMap)
@@ -174,6 +189,15 @@ public final class SpotQuery: GraphQLQuery {
         public var spotDetailImageFragment: SpotDetailImageFragment {
           get {
             return SpotDetailImageFragment(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
+
+        public var spotMapImageFragment: SpotMapImageFragment {
+          get {
+            return SpotMapImageFragment(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap
@@ -265,6 +289,45 @@ public final class SpotQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+      }
+
+      public struct ResizedSpotImageUrl: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ResizedSpotImageURLs"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("thumbnail", type: .scalar(URL.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(thumbnail: URL? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ResizedSpotImageURLs", "thumbnail": thumbnail])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var thumbnail: URL? {
+          get {
+            return resultMap["thumbnail"] as? URL
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "thumbnail")
           }
         }
       }

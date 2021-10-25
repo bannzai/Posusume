@@ -1,0 +1,7 @@
+fragment SpotMapImageFragment on Spot {
+  id
+  imageURL
+  resizedSpotImageURLs {
+    thumbnail
+  }
+}
