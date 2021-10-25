@@ -11,7 +11,7 @@ struct SpotDetailMap: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(placemark?.formattedLocationAddress() ?? "スポット")
-                .font(.title)
+                .font(.subheadline)
 
             Map(
                 mapRect: .constant(mapRect),
