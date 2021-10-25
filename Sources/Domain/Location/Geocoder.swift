@@ -3,18 +3,18 @@ import Combine
 import SwiftUI
 
 public protocol Geocoder {
-    func geocode(address: String) async throws -> [CLPlacemark]
-    func reverseGeocode(location: CLLocation) async throws -> [CLPlacemark]
+    func geocode(address: String) async throws -> [Placemark]
+    func reverseGeocode(location: CLLocation) async throws -> [Placemark]
 }
 
 
 
 extension CLGeocoder: Geocoder {
-    public func geocode(address: String) async throws -> [CLPlacemark] {
-        try await geocodeAddressString(address)
+    public func geocode(address: String) async throws -> [Placemark] {
+        try await geocodeAddressString(address).map(Placemark.init)
     }
-    public func reverseGeocode(location: CLLocation) async throws -> [CLPlacemark] {
-        try await reverseGeocodeLocation(location)
+    public func reverseGeocode(location: CLLocation) async throws -> [Placemark] {
+        try await reverseGeocodeLocation(location).map(Placemark.init)
     }
 }
 
@@ -33,6 +33,31 @@ extension EnvironmentValues {
     }
 }
 
+@dynamicMemberLookup public struct Placemark: Identifiable {
+    public let id = UUID()
+    internal let placemark: CLPlacemark
+
+    // NOTE: location is not nil when instantiate through from geocoder methods
+    // https://developer.apple.com/documentation/corelocation/clplacemark
+    public var location: CLLocation {
+        placemark.location!
+    }
+
+    public init(placemark: CLPlacemark) {
+        self.placemark = placemark
+    }
+
+    public subscript<U>(dynamicMember keyPath: KeyPath<CLPlacemark, U>) -> U {
+        return placemark[keyPath: keyPath]
+    }
+
+    public func formattedLocationAddress() -> String {
+        if let name = placemark.name, !name.isEmpty, !placemark.address.contains(name) {
+            return "\(name) \(placemark.address)"
+        }
+        return placemark.address
+    }
+}
 
 
 extension CLPlacemark {
@@ -41,12 +66,5 @@ extension CLPlacemark {
         [administrativeArea, locality, thoroughfare, subThoroughfare]
             .compactMap{ $0 }
             .joined()
-    }
-
-    public func formattedLocationAddress() -> String {
-        if let name = name, !name.isEmpty, !address.contains(name) {
-            return "\(name) \(address)"
-        }
-        return address
     }
 }

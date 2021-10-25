@@ -50,8 +50,8 @@ public struct SpotPostSubmitButton: View {
                             id: spotID,
                             title: title,
                             imageUrl: uploaded.url,
-                            latitude: placemark.location.latitude,
-                            longitude: placemark.location.longitude
+                            latitude: placemark.location.coordinate.latitude,
+                            longitude: placemark.location.coordinate.longitude
                         )
                     )
                 )
