@@ -25,11 +25,11 @@ public struct SpotDetailPage: View {
                                 fragment: response.spot.fragments.spotDetailImageFragment
                             )
 
-                            Map(mapRect: .constant(mapRect(response: response)),
+                            Map(mapRect: .constant(mapRect(response: response, geometryWidth: geometry.size.width)),
                                 annotationItems: [response.spot],
                                 annotationContent: { spot in
                                 MapPin(coordinate: .init(latitude: spot.geoPoint.latitude, longitude: spot.geoPoint.longitude))
-                            })
+                            }).frame(maxWidth: .infinity, idealHeight: 200)
                         }
                         .padding(.vertical, 24)
                     }
@@ -61,8 +61,9 @@ public struct SpotDetailPage: View {
         }
     }
 
-    private func mapRect(response: SpotQuery.Data) -> MKMapRect {
-        .init(origin: .init(.init(latitude: response.spot.geoPoint.latitude, longitude: response.spot.geoPoint.longitude)), size: .init(width: 200, height: 200))
+    private func mapRect(response: SpotQuery.Data, geometryWidth: CGFloat) -> MKMapRect {
+        // NOTE: size: .init() means fitting to SwiftUI frame
+        .init(origin: .init(.init(latitude: response.spot.geoPoint.latitude, longitude: response.spot.geoPoint.longitude)), size: .init())
     }
 }
 
