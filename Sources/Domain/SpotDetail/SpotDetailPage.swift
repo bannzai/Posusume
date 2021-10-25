@@ -27,7 +27,7 @@ public struct SpotDetailPage: View {
 
                             Spacer(minLength: 20)
 
-                            SpotDetailMap(response: response)
+                            SpotDetailMap(fragment: response.spot.fragments.spotDetailMapFragment)
                         }
                         .padding(.vertical, 24)
                     }
@@ -58,10 +58,6 @@ public struct SpotDetailPage: View {
             .handle(error: $error)
         }
     }
-
-}
-
-extension SpotQuery.Data.Spot: Identifiable {
 
 }
 
