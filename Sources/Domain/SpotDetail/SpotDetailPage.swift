@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Apollo
+import MapKit
 
 public struct SpotDetailPage: View {
     @Environment(\.dismiss) var dismiss
@@ -23,6 +24,12 @@ public struct SpotDetailPage: View {
                                 width: geometry.size.width,
                                 fragment: response.spot.fragments.spotDetailImageFragment
                             )
+
+                            Map(mapRect: .constant(mapRect(response: response)),
+                                annotationItems: [response.spot],
+                                annotationContent: { spot in
+                                MapPin(coordinate: .init(latitude: spot.geoPoint.latitude, longitude: spot.geoPoint.longitude))
+                            })
                         }
                         .padding(.vertical, 24)
                     }
@@ -53,4 +60,12 @@ public struct SpotDetailPage: View {
             .handle(error: $error)
         }
     }
+
+    private func mapRect(response: SpotQuery.Data) -> MKMapRect {
+        .init(origin: .init(.init(latitude: response.spot.geoPoint.latitude, longitude: response.spot.geoPoint.longitude)), size: .init(width: 200, height: 200))
+    }
+}
+
+extension SpotQuery.Data.Spot: Identifiable {
+
 }
