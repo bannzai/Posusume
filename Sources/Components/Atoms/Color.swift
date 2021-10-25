@@ -11,7 +11,7 @@ extension Color {
     static let disabled: Color = Color(white: 192 / 255)
 }
 
-fileprivate extension Color {
+extension Color {
     // #FFAB8B
     static let barnEnd: Color = Color(red: 255 / 255, green: 171 / 255, blue: 139 / 255)
     // #E95468

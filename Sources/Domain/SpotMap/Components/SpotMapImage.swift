@@ -1,8 +1,10 @@
 import Foundation
 import SwiftUI
+import Apollo
 
 struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
+    @Binding var selectedSpotID: GraphQLID?
 
     @State var isPresentingSpotDetail: Bool = false
 
@@ -12,9 +14,10 @@ struct SpotMapImage: View {
                 .resizable()
                 .scaledToFill()
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                .overlay(Circle().stroke(selectedSpotID == fragment.id ? Color.barnEnd : Color.white, lineWidth: 1))
                 .onTapGesture {
                     isPresentingSpotDetail = true
+                    selectedSpotID = fragment.id
                 }
                 .sheet(isPresented: $isPresentingSpotDetail) {
                     SpotDetailPage(spotID: fragment.id)
