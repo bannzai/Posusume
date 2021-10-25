@@ -12,7 +12,7 @@ struct SpotMapImage: View {
                 .resizable()
                 .scaledToFill()
                 .clipShape(Circle())
-                .overlay(Circle().stroke(GradientColor.barn, lineWidth: 1))
+                .overlay(Circle().stroke(Color.white, lineWidth: 1))
                 .onTapGesture {
                     isPresentingSpotDetail = true
                 }
