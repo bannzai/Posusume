@@ -579,9 +579,9 @@
 		BAFF701F261C3FB300584593 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2035A9C82709589A007D580F /* ViewModifier */,
 				BAFF7020261C3FB300584593 /* Style */,
-				BAFF7022261C3FB300584593 /* Molocules */,
+				BAFF7022261C3FB300584593 /* Molcules */,
+				2035A9C82709589A007D580F /* ViewModifier */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -595,13 +595,13 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
-		BAFF7022261C3FB300584593 /* Molocules */ = {
+		BAFF7022261C3FB300584593 /* Molcules */ = {
 			isa = PBXGroup;
 			children = (
 				BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */,
 				20B09168271D0C830015F0F3 /* Tansaku.swift */,
 			);
-			path = Molocules;
+			path = Molcules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
