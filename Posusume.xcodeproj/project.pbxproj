@@ -385,6 +385,7 @@
 		20CEA51726B4D18A0032BBD1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 				20A09D192701F25B0090E22F /* ObservableObject */,
 				20ECE4FB270E4620009E7025 /* Database */,
 				2067175226B5852100C85A25 /* GraphQL */,
@@ -504,7 +505,6 @@
 				20CEA51326B4CB800032BBD1 /* Error */,
 				BADF52FE261D301E00431FEB /* Features */,
 				BA26C8642621A03D006555AE /* StdLib */,
-				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B12610B72F00676F22 /* RootView.swift */,
@@ -544,14 +544,6 @@
 				BAD9A8CE2610B73200676F22 /* Info.plist */,
 			);
 			path = PosusumeUITests;
-			sourceTree = "<group>";
-		};
-		BADF52FC261D2FE300431FEB /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		BADF52FE261D301E00431FEB /* Features */ = {
