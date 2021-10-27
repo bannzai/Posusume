@@ -382,7 +382,7 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
-		20CEA51726B4D18A0032BBD1 /* API */ = {
+		20CEA51726B4D18A0032BBD1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				20A09D192701F25B0090E22F /* ObservableObject */,
@@ -391,7 +391,7 @@
 				2005EE3C26F9D416009001C7 /* Interceptors */,
 				2067175E26B641F100C85A25 /* APIClient.swift */,
 			);
-			path = API;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		20ECE4FB270E4620009E7025 /* Database */ = {
@@ -507,7 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				2005EE4226FA0A41009001C7 /* Core */,
-				20CEA51726B4D18A0032BBD1 /* API */,
+				20CEA51726B4D18A0032BBD1 /* Network */,
 				20A96BA1271B989500E1765B /* Loading */,
 				20CEA51326B4CB800032BBD1 /* Error */,
 				BADF52FE261D301E00431FEB /* Domain */,
