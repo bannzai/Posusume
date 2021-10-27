@@ -80,8 +80,6 @@
 		BAD9A8C22610B73100676F22 /* posusumeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8C12610B73100676F22 /* posusumeTests.swift */; };
 		BAD9A8CD2610B73200676F22 /* posusumeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */; };
 		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
-		BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */; };
-		BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */; };
 		BAFF7024261C3FB300584593 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7021261C3FB300584593 /* Color.swift */; };
 		BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */; };
 /* End PBXBuildFile section */
@@ -188,8 +186,6 @@
 		BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeUITests.swift; sourceTree = "<group>"; };
 		BAD9A8CE2610B73200676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-dev.plist"; sourceTree = "<group>"; };
-		BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		BAFF7021261C3FB300584593 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BAFF7023261C3FB300584593 /* BarnBottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarnBottomSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -509,8 +505,6 @@
 				2035A9DC270BAB68007D580F /* RootViewModel.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
-				BAD9AA8A2610E0A100676F22 /* GoogleService-Info-dev.plist */,
-				BAD9AA8B2610E0A100676F22 /* GoogleService-Info-prod.plist */,
 				BAD9A8B52610B73100676F22 /* Preview Content */,
 				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
 			);
@@ -725,9 +719,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD9AA8D2610E0A100676F22 /* GoogleService-Info-prod.plist in Resources */,
 				BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */,
-				BAD9AA8C2610E0A100676F22 /* GoogleService-Info-dev.plist in Resources */,
 				BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
