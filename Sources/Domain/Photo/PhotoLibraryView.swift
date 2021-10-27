@@ -63,7 +63,6 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
     }
 }
 
-#if DEBUG
 struct PhotoLibraryView_Previews: PreviewProvider {
     @State static var error: Error? = nil
 
@@ -75,4 +74,3 @@ struct PhotoLibraryView_Previews: PreviewProvider {
         )
     }
 }
-#endif
