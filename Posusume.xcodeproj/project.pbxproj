@@ -510,7 +510,7 @@
 				20CEA51726B4D18A0032BBD1 /* Network */,
 				20A96BA1271B989500E1765B /* Loading */,
 				20CEA51326B4CB800032BBD1 /* Error */,
-				BADF52FE261D301E00431FEB /* Domain */,
+				BADF52FE261D301E00431FEB /* Features */,
 				BA26C8642621A03D006555AE /* Utility */,
 				BADF52FC261D2FE300431FEB /* Service */,
 				BAFF701F261C3FB300584593 /* Components */,
@@ -562,7 +562,7 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		BADF52FE261D301E00431FEB /* Domain */ = {
+		BADF52FE261D301E00431FEB /* Features */ = {
 			isa = PBXGroup;
 			children = (
 				20B0916A271D16FA0015F0F3 /* SpotPostEditor */,
@@ -572,7 +572,7 @@
 				BA317331262BC1D500E1212C /* Photo */,
 				BADF52FF261D303400431FEB /* SpotMap */,
 			);
-			path = Domain;
+			path = Features;
 			sourceTree = "<group>";
 		};
 		BADF52FF261D303400431FEB /* SpotMap */ = {
