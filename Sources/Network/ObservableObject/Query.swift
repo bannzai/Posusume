@@ -1,5 +1,6 @@
 import Foundation
 import Apollo
+import SwiftUI
 
 /// Query fetch data from server with `GraphQL Query` and published data
 ///
@@ -16,6 +17,8 @@ import Apollo
 /// ```
 @MainActor
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
+    @Environment(\.apollo) var apollo
+
     @Published public private(set) var isFetching = false
 
     internal func fetch(query: Query) async throws -> Query.Data {
@@ -24,7 +27,7 @@ public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
             isFetching = false
         }
 
-        return try await AppApolloClient.shared.fetchFromServer(query: query)
+        return try await apollo.fetchFromServer(query: query)
     }
 
     public func callAsFunction(for query: Query) async throws -> Query.Data {
