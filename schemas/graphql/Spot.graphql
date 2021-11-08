@@ -11,19 +11,10 @@ query Spot($spotId: ID!) {
       id
     }
     ...SpotDetailImageFragment
-    ...SpotDetailMapFragment
   }
 }
 
 fragment SpotDetailImageFragment on Spot {
   id
   imageURL
-}
-
-fragment SpotDetailMapFragment on Spot {
-  id
-  geoPoint {
-    latitude
-    longitude
-  }
 }
