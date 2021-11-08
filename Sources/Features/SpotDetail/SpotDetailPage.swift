@@ -26,8 +26,6 @@ public struct SpotDetailPage: View {
                             )
 
                             Spacer(minLength: 20)
-
-                            SpotDetailMap(fragment: response.spot.fragments.spotDetailMapFragment)
                         }
                         .padding(.vertical, 24)
                     }
