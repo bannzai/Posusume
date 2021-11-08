@@ -1,8 +1,11 @@
 import Foundation
 import Apollo
+import SwiftUI
 
 @MainActor
 public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
+    @Environment(\.apollo) var apollo
+
     @Published public private(set) var isProcessing = false
 
     internal func perform(mutation: Mutation) async throws -> Mutation.Data {
@@ -11,12 +14,12 @@ public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
             isProcessing = false
         }
 
-        return try await AppApolloClient.shared.perform(mutation: mutation)
+        return try await apollo.perform(mutation: mutation)
     }
 
     internal func perform<Query: GraphQLQuery>(mutation: Mutation, queryAfterPerform query: Query) async throws -> Mutation.Data {
         let response = try await perform(mutation: mutation)
-        _ = try? await AppApolloClient.shared.fetchFromServer(query: query)
+        _ = try? await apollo.fetchFromServer(query: query)
         return response
     }
 

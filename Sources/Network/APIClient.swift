@@ -1,10 +1,10 @@
 import Apollo
 import Foundation
 import ApolloSQLite
+import SwiftUI
 
 public final class AppApolloClient {
-    public static let shared = AppApolloClient()
-    private init() { }
+    fileprivate init() { }
 
     private lazy var interceptorProvider = AppApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
 
@@ -117,3 +117,19 @@ extension AppApolloClient {
         }
     }
 }
+
+public struct AppApolloClientEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: AppApolloClient = .init()
+}
+
+public extension EnvironmentValues {
+    var apollo: AppApolloClient {
+        get {
+            self[AppApolloClientEnvironmentKey.self]
+        }
+        set {
+            self[AppApolloClientEnvironmentKey.self] = newValue
+        }
+    }
+}
+

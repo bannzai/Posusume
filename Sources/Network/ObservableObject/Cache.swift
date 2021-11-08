@@ -1,5 +1,6 @@
 import Foundation
 import Apollo
+import SwiftUI
 
 /// Cache retrieve data from local storage with `GraphQL Query` and published data
 ///
@@ -20,6 +21,8 @@ import Apollo
 /// ```
 @MainActor
 public final class Cache<Query: Apollo.GraphQLQuery>: ObservableObject {
+    @Environment(\.apollo) var apollo
+
     @Published public private(set) var isFetching = false
 
     internal func retrieve(query: Query) async -> Query.Data? {
@@ -29,7 +32,7 @@ public final class Cache<Query: Apollo.GraphQLQuery>: ObservableObject {
         }
 
         do {
-            return try await AppApolloClient.shared.fetchFromCache(query: query)
+            return try await apollo.fetchFromCache(query: query)
         } catch {
             return nil
         }
