@@ -41,7 +41,6 @@
 		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
-		20887E40272753A400A7E39E /* SpotDetailMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20887E3F272753A400A7E39E /* SpotDetailMap.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		20A088732708FA1B00D94272 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088722708FA1B00D94272 /* Cache.swift */; };
 		20A088752708FDED00D94272 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088742708FDED00D94272 /* Mutation.swift */; };
@@ -142,7 +141,6 @@
 		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		20887E3F272753A400A7E39E /* SpotDetailMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailMap.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20A088722708FA1B00D94272 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		20A088742708FDED00D94272 /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
@@ -337,7 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				20A96B9D271B965A00E1765B /* SpotDetailImage.swift */,
-				20887E3F272753A400A7E39E /* SpotDetailMap.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -866,7 +863,6 @@
 				BAFF7025261C3FB300584593 /* BarnBottomSheet.swift in Sources */,
 				2035A9D227096EB8007D580F /* Buttons.swift in Sources */,
 				BA906C3C26410E4D00ACE02F /* LocationSelectView.swift in Sources */,
-				20887E40272753A400A7E39E /* SpotDetailMap.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
