@@ -9,7 +9,7 @@ struct SpotMapView: View {
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
 
-    @State var response: SpotsQuery.Data?
+    @State var spots: [SpotsQuery.Data.Spot] = []
     @State var error: Error?
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false;
@@ -46,7 +46,7 @@ struct SpotMapView: View {
             onDismiss: {
                 Task {
                     if let response = try? await query(for: .init(region: mapCoordinateRegion.wrappedValue)) {
-                        self.response = response
+                        self.spots += response.spots
                     }
                 }
             },
@@ -61,16 +61,12 @@ struct SpotMapView: View {
                 let userLocation = try await locationManager.userLocation()
                 region = .init(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
 
-                response = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))
-                response = try await query(for: .init(region: mapCoordinateRegion.wrappedValue))
+                spots = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))?.spots ?? []
+                spots += try await query(for: .init(region: mapCoordinateRegion.wrappedValue)).spots
             } catch {
                 self.error = error
             }
         }
-    }
-
-    var spots: [SpotsQuery.Data.Spot] {
-        response?.spots ?? []
     }
 
     // Workaround of SwiftUI.Map unavoidable warning
