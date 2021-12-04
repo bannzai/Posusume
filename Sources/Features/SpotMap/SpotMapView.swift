@@ -88,6 +88,7 @@ struct SpotMapView: View {
         if query.isFetching {
             return
         }
+        // NOTE: これだと新しいSpotを取得できなかった場合に何度も呼ばれてしまう
         if spots.isOutOfRange(region: region) {
             Task {
                 if let response = try? await query(for: .init(region: region)) {
