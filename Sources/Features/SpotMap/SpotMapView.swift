@@ -9,10 +9,10 @@ struct SpotMapView: View {
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
 
-    @State var response: SpotsQuery.Data?
+    @State var spots: [SpotsQuery.Data.Spot] = []
     @State var error: Error?
     @State var region: MKCoordinateRegion?
-    @State var isPresentingSpotPost = false;
+    @State var isPresentingSpotPost = false
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -24,7 +24,7 @@ struct SpotMapView: View {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
-                print("newRegion: ", newRegion)
+                fetchIfNeeded(region: newRegion)
             }
 
             HStack(alignment: .bottom) {
@@ -46,7 +46,7 @@ struct SpotMapView: View {
             onDismiss: {
                 Task {
                     if let response = try? await query(for: .init(region: mapCoordinateRegion.wrappedValue)) {
-                        self.response = response
+                        self.spots += response.spots
                     }
                 }
             },
@@ -61,16 +61,12 @@ struct SpotMapView: View {
                 let userLocation = try await locationManager.userLocation()
                 region = .init(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
 
-                response = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))
-                response = try await query(for: .init(region: mapCoordinateRegion.wrappedValue))
+                spots = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))?.spots ?? []
+                spots += try await query(for: .init(region: mapCoordinateRegion.wrappedValue)).spots
             } catch {
                 self.error = error
             }
         }
-    }
-
-    var spots: [SpotsQuery.Data.Spot] {
-        response?.spots ?? []
     }
 
     // Workaround of SwiftUI.Map unavoidable warning
@@ -88,6 +84,19 @@ struct SpotMapView: View {
         })
     }
 
+    private func fetchIfNeeded(region: MKCoordinateRegion) {
+        if query.isFetching {
+            return
+        }
+        // NOTE: これだと新しいSpotを取得できなかった場合に何度も呼ばれてしまう
+        if spots.isOutOfRange(region: region) {
+            Task {
+                if let response = try? await query(for: .init(region: region)) {
+                    spots += response.spots
+                }
+            }
+        }
+    }
 }
 
 
@@ -111,5 +120,45 @@ extension SpotsQuery {
             spotsMaxLatitude: region.maxLatitude,
             spotsMaxLongitude: region.maxLongitude
         )
+    }
+}
+
+fileprivate struct SpotRange {
+    var minLatitude: Latitude
+    var minLongitude: Longitude
+    var maxLatitude: Latitude
+    var maxLongitude: Longitude
+}
+fileprivate extension Array where Element == SpotsQuery.Data.Spot {
+    func spotRange() -> SpotRange? {
+        guard let first = first else {
+            return nil
+        }
+        let spotRange = SpotRange(minLatitude: first.geoPoint.latitude, minLongitude: first.geoPoint.longitude, maxLatitude: first.geoPoint.latitude, maxLongitude: first.geoPoint.longitude)
+        return reduce(into: spotRange) { partialResult, spot in
+            if partialResult.minLatitude > spot.geoPoint.latitude {
+                partialResult.minLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.maxLatitude < spot.geoPoint.latitude {
+                partialResult.maxLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.minLongitude > spot.geoPoint.longitude {
+                partialResult.minLongitude = spot.geoPoint.longitude
+            }
+            if partialResult.maxLongitude < spot.geoPoint.longitude {
+                partialResult.maxLongitude = spot.geoPoint.longitude
+            }
+        }
+    }
+
+    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
+        guard let spotRange = spotRange() else {
+            return false
+        }
+
+        return region.center.latitude < spotRange.minLatitude ||
+            region.center.latitude > spotRange.maxLatitude ||
+            region.center.longitude < spotRange.minLongitude ||
+            region.center.longitude > spotRange.maxLongitude
     }
 }
