@@ -88,7 +88,7 @@ struct SpotMapView: View {
         if query.isFetching {
             return
         }
-        if spots.isInRange(region: region) {
+        if spots.isOutOfRange(region: region) {
             Task {
                 if let response = try? await query(for: .init(region: region)) {
                     spots += response.spots
@@ -150,15 +150,14 @@ fileprivate extension Array where Element == SpotsQuery.Data.Spot {
         }
     }
 
-    func isInRange(region: MKCoordinateRegion) -> Bool {
+    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
         guard let spotRange = spotRange() else {
             return false
         }
 
-        let isOutOfRange = region.center.latitude < spotRange.minLatitude ||
+        return region.center.latitude < spotRange.minLatitude ||
             region.center.latitude > spotRange.maxLatitude ||
             region.center.longitude < spotRange.minLongitude ||
             region.center.longitude > spotRange.maxLongitude
-        return !isOutOfRange
     }
 }
