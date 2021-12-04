@@ -57,6 +57,7 @@
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
+		20FB28A9275C276200BD4E54 /* Ref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FB28A8275C276200BD4E54 /* Ref.swift */; };
 		BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E672625E12D000DA60F /* SpotMapView.swift */; };
 		BA249E752625E217000DA60F /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E742625E217000DA60F /* Me.swift */; };
 		BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */; };
@@ -157,6 +158,7 @@
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
+		20FB28A8275C276200BD4E54 /* Ref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ref.swift; sourceTree = "<group>"; };
 		BA249E672625E12D000DA60F /* SpotMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapView.swift; sourceTree = "<group>"; };
 		BA249E742625E217000DA60F /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		BA249E802625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				2005EE5026FA825A009001C7 /* Error */,
 				BA249E742625E217000DA60F /* Me.swift */,
 				2005EE4C26FA11CB009001C7 /* Plist.swift */,
+				20FB28A8275C276200BD4E54 /* Ref.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
 				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
+				20FB28A9275C276200BD4E54 /* Ref.swift in Sources */,
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,
 				BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */,
 				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
