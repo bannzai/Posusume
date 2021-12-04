@@ -155,4 +155,16 @@ fileprivate extension Array where Element == SpotsQuery.Data.Spot {
             }
         }
     }
+
+    func isInRange(region: MKCoordinateRegion) -> Bool {
+        guard let spotRange = spotRange() else {
+            return false
+        }
+
+        let isOutOfRange = region.center.latitude < spotRange.minLatitude ||
+            region.center.latitude > spotRange.maxLatitude ||
+            region.center.longitude < spotRange.minLongitude ||
+            region.center.longitude > spotRange.maxLongitude
+        return !isOutOfRange
+    }
 }
