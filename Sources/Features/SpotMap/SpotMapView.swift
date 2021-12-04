@@ -9,10 +9,14 @@ struct SpotMapView: View {
     @StateObject var cache = Cache<SpotsQuery>()
     @StateObject var query = Query<SpotsQuery>()
 
-    @State var spots: [SpotsQuery.Data.Spot] = []
+    @State var spots: [SpotsQuery.Data.Spot] = [] {
+        didSet { updateFetchedSpotRange() }
+    }
     @State var error: Error?
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false
+
+    @Ref private var fetchedSpotRange: SpotRange? = nil
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
@@ -84,16 +88,35 @@ struct SpotMapView: View {
         })
     }
 
+    private func updateFetchedSpotRange() {
+        if let fetchedSpotRange = fetchedSpotRange {
+            if partialResult.minLatitude > spot.geoPoint.latitude {
+                partialResult.minLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.maxLatitude < spot.geoPoint.latitude {
+                partialResult.maxLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.minLongitude > spot.geoPoint.longitude {
+                partialResult.minLongitude = spot.geoPoint.longitude
+            }
+            if partialResult.maxLongitude < spot.geoPoint.longitude {
+                partialResult.maxLongitude = spot.geoPoint.longitude
+            }
+        } else {
+            fetchedSpotRange = spots.spotRange()
+        }
+    }
+
     private func fetchIfNeeded(region: MKCoordinateRegion) {
         if query.isFetching {
             return
         }
-        // NOTE: これだと新しいSpotを取得できなかった場合に何度も呼ばれてしまう
-        if spots.isOutOfRange(region: region) {
-            Task {
-                if let response = try? await query(for: .init(region: region)) {
-                    spots += response.spots
-                }
+        guard let fetchedSpotRange = fetchedSpotRange, !fetchedSpotRange.isOutOfRange(region: region) else {
+            return
+        }
+        Task {
+            if let response = try? await query(for: .init(region: region)) {
+                spots += response.spots
             }
         }
     }
@@ -128,7 +151,15 @@ fileprivate struct SpotRange {
     var minLongitude: Longitude
     var maxLatitude: Latitude
     var maxLongitude: Longitude
+
+    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
+        return region.center.latitude < minLatitude ||
+        region.center.latitude > maxLatitude ||
+        region.center.longitude < minLongitude ||
+        region.center.longitude > maxLongitude
+    }
 }
+
 fileprivate extension Array where Element == SpotsQuery.Data.Spot {
     func spotRange() -> SpotRange? {
         guard let first = first else {
@@ -149,16 +180,5 @@ fileprivate extension Array where Element == SpotsQuery.Data.Spot {
                 partialResult.maxLongitude = spot.geoPoint.longitude
             }
         }
-    }
-
-    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
-        guard let spotRange = spotRange() else {
-            return false
-        }
-
-        return region.center.latitude < spotRange.minLatitude ||
-            region.center.latitude > spotRange.maxLatitude ||
-            region.center.longitude < spotRange.minLongitude ||
-            region.center.longitude > spotRange.maxLongitude
     }
 }
