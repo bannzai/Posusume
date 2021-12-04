@@ -6,29 +6,22 @@ import Apollo
 struct SpotMapView: View {
     @Environment(\.locationManager) var locationManager
 
-    @StateObject var cache = Cache<SpotsQuery>()
-    @StateObject var query = Query<SpotsQuery>()
+    @StateObject var viewModel = SpotMapViewModel()
 
-    @State var spots: [SpotsQuery.Data.Spot] = [] {
-        didSet { updateFetchedSpotRange() }
-    }
-    @State var error: Error?
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false
-
-    @Ref private var fetchedSpotRange: SpotRange? = nil
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
             Map(coordinateRegion: mapCoordinateRegion,
                 showsUserLocation: true,
-                annotationItems: spots,
+                annotationItems: viewModel.spots,
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
-                fetchIfNeeded(region: newRegion)
+                viewModel.fetch(region: newRegion)
             }
 
             HStack(alignment: .bottom) {
@@ -48,27 +41,23 @@ struct SpotMapView: View {
         .sheet(
             isPresented: $isPresentingSpotPost,
             onDismiss: {
-                Task {
-                    if let response = try? await query(for: .init(region: mapCoordinateRegion.wrappedValue)) {
-                        self.spots += response.spots
-                    }
-                }
+                viewModel.fetch(region: mapCoordinateRegion.wrappedValue)
             },
             content: {
                 SpotPostView()
             }
         )
-        .handle(error: $error)
+        .handle(error: $viewModel.error)
         .edgesIgnoringSafeArea(.all)
         .task {
             do {
                 let userLocation = try await locationManager.userLocation()
-                region = .init(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
+                let region = MKCoordinateRegion(center: userLocation.coordinate, span: mapCoordinateRegion.wrappedValue.span)
+                self.region = region
 
-                spots = await cache(for: .init(region: mapCoordinateRegion.wrappedValue))?.spots ?? []
-                spots += try await query(for: .init(region: mapCoordinateRegion.wrappedValue)).spots
+                viewModel.fetch(region: region)
             } catch {
-                self.error = error
+                viewModel.error = error
             }
         }
     }
@@ -87,39 +76,6 @@ struct SpotMapView: View {
             }
         })
     }
-
-    private func updateFetchedSpotRange() {
-        if let fetchedSpotRange = fetchedSpotRange {
-            if partialResult.minLatitude > spot.geoPoint.latitude {
-                partialResult.minLatitude = spot.geoPoint.latitude
-            }
-            if partialResult.maxLatitude < spot.geoPoint.latitude {
-                partialResult.maxLatitude = spot.geoPoint.latitude
-            }
-            if partialResult.minLongitude > spot.geoPoint.longitude {
-                partialResult.minLongitude = spot.geoPoint.longitude
-            }
-            if partialResult.maxLongitude < spot.geoPoint.longitude {
-                partialResult.maxLongitude = spot.geoPoint.longitude
-            }
-        } else {
-            fetchedSpotRange = spots.spotRange()
-        }
-    }
-
-    private func fetchIfNeeded(region: MKCoordinateRegion) {
-        if query.isFetching {
-            return
-        }
-        guard let fetchedSpotRange = fetchedSpotRange, !fetchedSpotRange.isOutOfRange(region: region) else {
-            return
-        }
-        Task {
-            if let response = try? await query(for: .init(region: region)) {
-                spots += response.spots
-            }
-        }
-    }
 }
 
 
@@ -132,53 +88,5 @@ struct SpotMapView_Previews: PreviewProvider {
 extension SpotsQuery.Data.Spot: Identifiable {
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: geoPoint.latitude, longitude: geoPoint.longitude)
-    }
-}
-
-extension SpotsQuery {
-    convenience init(region: MKCoordinateRegion) {
-        self.init(
-            spotsMinLatitude: region.minLatitude,
-            spotsMinLongitude: region.minLongitude,
-            spotsMaxLatitude: region.maxLatitude,
-            spotsMaxLongitude: region.maxLongitude
-        )
-    }
-}
-
-fileprivate struct SpotRange {
-    var minLatitude: Latitude
-    var minLongitude: Longitude
-    var maxLatitude: Latitude
-    var maxLongitude: Longitude
-
-    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
-        return region.center.latitude < minLatitude ||
-        region.center.latitude > maxLatitude ||
-        region.center.longitude < minLongitude ||
-        region.center.longitude > maxLongitude
-    }
-}
-
-fileprivate extension Array where Element == SpotsQuery.Data.Spot {
-    func spotRange() -> SpotRange? {
-        guard let first = first else {
-            return nil
-        }
-        let spotRange = SpotRange(minLatitude: first.geoPoint.latitude, minLongitude: first.geoPoint.longitude, maxLatitude: first.geoPoint.latitude, maxLongitude: first.geoPoint.longitude)
-        return reduce(into: spotRange) { partialResult, spot in
-            if partialResult.minLatitude > spot.geoPoint.latitude {
-                partialResult.minLatitude = spot.geoPoint.latitude
-            }
-            if partialResult.maxLatitude < spot.geoPoint.latitude {
-                partialResult.maxLatitude = spot.geoPoint.latitude
-            }
-            if partialResult.minLongitude > spot.geoPoint.longitude {
-                partialResult.minLongitude = spot.geoPoint.longitude
-            }
-            if partialResult.maxLongitude < spot.geoPoint.longitude {
-                partialResult.maxLongitude = spot.geoPoint.longitude
-            }
-        }
     }
 }
