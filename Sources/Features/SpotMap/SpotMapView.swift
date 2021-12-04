@@ -84,6 +84,26 @@ struct SpotMapView: View {
         })
     }
 
+    private func fetchIfNeeded() {
+        guard let region = region else {
+            return
+        }
+        if query.isFetching {
+            return
+        }
+        if spots.contains(where: { spot in
+            region.minLatitude < spot.geoPoint.latitude &&
+            region.maxLatitude > spot.geoPoint.latitude &&
+            region.minLongitude < spot.geoPoint.longitude &&
+            region.maxLongitude > spot.geoPoint.longitude
+        }) {
+            Task {
+                if let response = try? await query(for: .init(region: region)) {
+                    spots += response.spots
+                }
+            }
+        }
+    }
 }
 
 
