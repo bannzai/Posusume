@@ -127,3 +127,32 @@ extension SpotsQuery {
         )
     }
 }
+
+fileprivate struct SpotRange {
+    var minLatitude: Latitude
+    var minLongitude: Longitude
+    var maxLatitude: Latitude
+    var maxLongitude: Longitude
+}
+fileprivate extension Array where Element == SpotsQuery.Data.Spot {
+    func spotRange() -> SpotRange? {
+        guard let first = first else {
+            return nil
+        }
+        let spotRange = SpotRange(minLatitude: first.geoPoint.latitude, minLongitude: first.geoPoint.longitude, maxLatitude: first.geoPoint.latitude, maxLongitude: first.geoPoint.longitude)
+        return reduce(into: spotRange) { partialResult, spot in
+            if partialResult.minLatitude > spot.geoPoint.latitude {
+                partialResult.minLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.maxLatitude < spot.geoPoint.latitude {
+                partialResult.maxLatitude = spot.geoPoint.latitude
+            }
+            if partialResult.minLongitude > spot.geoPoint.longitude {
+                partialResult.minLongitude = spot.geoPoint.longitude
+            }
+            if partialResult.maxLongitude < spot.geoPoint.longitude {
+                partialResult.maxLongitude = spot.geoPoint.longitude
+            }
+        }
+    }
+}
