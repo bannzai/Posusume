@@ -24,7 +24,7 @@ struct SpotMapView: View {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
                 }
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
-                print("newRegion: ", newRegion)
+                fetchIfNeeded(region: newRegion)
             }
 
             HStack(alignment: .bottom) {
@@ -84,18 +84,16 @@ struct SpotMapView: View {
         })
     }
 
-    private func fetchIfNeeded() {
-        guard let region = region else {
-            return
-        }
+    private func fetchIfNeeded(region: MKCoordinateRegion) {
         if query.isFetching {
             return
         }
+
         if spots.contains(where: { spot in
-            region.minLatitude < spot.geoPoint.latitude &&
-            region.maxLatitude > spot.geoPoint.latitude &&
-            region.minLongitude < spot.geoPoint.longitude &&
-            region.maxLongitude > spot.geoPoint.longitude
+            region.minLatitude <= spot.geoPoint.latitude &&
+            region.maxLatitude >= spot.geoPoint.latitude &&
+            region.minLongitude <= spot.geoPoint.longitude &&
+            region.maxLongitude >= spot.geoPoint.longitude
         }) {
             Task {
                 if let response = try? await query(for: .init(region: region)) {
