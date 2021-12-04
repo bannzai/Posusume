@@ -12,7 +12,7 @@ struct SpotMapView: View {
     @State var spots: [SpotsQuery.Data.Spot] = []
     @State var error: Error?
     @State var region: MKCoordinateRegion?
-    @State var isPresentingSpotPost = false;
+    @State var isPresentingSpotPost = false
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
