@@ -88,7 +88,7 @@ fileprivate struct SpotCoordinateRange {
     var maxLongitude: Longitude
 
     func isOutOfRange(region: MKCoordinateRegion) -> Bool {
-        return region.center.latitude < minLatitude ||
+        region.center.latitude < minLatitude ||
         region.center.latitude > maxLatitude ||
         region.center.longitude < minLongitude ||
         region.center.longitude > maxLongitude
