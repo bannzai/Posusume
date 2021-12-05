@@ -18,12 +18,12 @@ final class SpotMapViewModel: ObservableObject {
         if !shouldFetchNewSpots(region: region) {
             return
         }
+        updateFetchedSpotCoordinateRange(region: region)
 
         Task {
             do {
                 spots += await cache(for: .init(region: region))?.spots ?? []
                 spots += try await query(for: .init(region: region)).spots
-                updateFetchedSpotCoordinateRange(region: region)
             } catch {
                 self.error = error
             }
@@ -34,10 +34,13 @@ final class SpotMapViewModel: ObservableObject {
         guard let spotCoordinateRange = fetchedSpotCoordinateRange else {
             return true
         }
-        return spotCoordinateRange.minLatitude > region.minLatitude ||
-        spotCoordinateRange.minLongitude > region.minLongitude ||
-        spotCoordinateRange.maxLatitude < region.maxLatitude ||
-        spotCoordinateRange.maxLongitude < region.maxLongitude
+        let offsetLatitudeDelta: CLLocationDegrees = region.span.latitudeDelta / 2
+        let offsetLongitudeDelta: CLLocationDegrees = region.span.longitudeDelta / 2
+
+        return spotCoordinateRange.minLatitude > region.minLatitude + offsetLatitudeDelta ||
+        spotCoordinateRange.minLongitude > region.minLongitude + offsetLongitudeDelta ||
+        spotCoordinateRange.maxLatitude < region.maxLatitude - offsetLatitudeDelta ||
+        spotCoordinateRange.maxLongitude < region.maxLongitude - offsetLongitudeDelta
     }
 
     private func updateFetchedSpotCoordinateRange(region: MKCoordinateRegion) {
@@ -45,17 +48,17 @@ final class SpotMapViewModel: ObservableObject {
         let offsetLongitudeDelta: CLLocationDegrees = region.span.longitudeDelta / 2
 
         if var spotCoordinateRange = fetchedSpotCoordinateRange {
-            if spotCoordinateRange.minLatitude > region.minLatitude {
-                spotCoordinateRange.minLatitude = region.minLatitude - offsetLatitudeDelta
+            if spotCoordinateRange.minLatitude > region.minLatitude + offsetLatitudeDelta {
+                spotCoordinateRange.minLatitude = region.minLatitude
             }
-            if spotCoordinateRange.minLongitude > region.minLongitude {
-                spotCoordinateRange.minLongitude = region.minLongitude - offsetLongitudeDelta
+            if spotCoordinateRange.maxLatitude < region.maxLatitude - offsetLatitudeDelta {
+                spotCoordinateRange.maxLatitude = region.maxLatitude
             }
-            if spotCoordinateRange.maxLatitude < region.maxLatitude {
-                spotCoordinateRange.maxLatitude = region.maxLatitude + offsetLatitudeDelta
+            if spotCoordinateRange.minLongitude > region.minLongitude + offsetLongitudeDelta {
+                spotCoordinateRange.minLongitude = region.minLongitude
             }
-            if spotCoordinateRange.maxLongitude < region.maxLongitude {
-                spotCoordinateRange.maxLongitude = region.maxLongitude + offsetLongitudeDelta
+            if spotCoordinateRange.maxLongitude < region.maxLongitude - offsetLongitudeDelta {
+                spotCoordinateRange.maxLongitude = region.maxLongitude
             }
 
             self.fetchedSpotCoordinateRange = spotCoordinateRange
@@ -86,13 +89,6 @@ fileprivate struct SpotCoordinateRange {
     var minLongitude: Longitude
     var maxLatitude: Latitude
     var maxLongitude: Longitude
-
-    func isOutOfRange(region: MKCoordinateRegion) -> Bool {
-        region.center.latitude < minLatitude ||
-        region.center.latitude > maxLatitude ||
-        region.center.longitude < minLongitude ||
-        region.center.longitude > maxLongitude
-    }
 }
 
 fileprivate extension Array where Element == SpotsQuery.Data.Spot {
