@@ -64,10 +64,10 @@ final class SpotMapViewModel: ObservableObject {
             self.fetchedSpotCoordinateRange = spotCoordinateRange
         } else {
             fetchedSpotCoordinateRange = .init(
-                minLatitude: region.minLatitude - offsetLatitudeDelta,
-                minLongitude: region.minLongitude - offsetLongitudeDelta,
-                maxLatitude: region.maxLatitude + offsetLatitudeDelta,
-                maxLongitude: region.maxLongitude + offsetLongitudeDelta
+                minLatitude: region.minLatitude,
+                minLongitude: region.minLongitude,
+                maxLatitude: region.maxLatitude,
+                maxLongitude: region.maxLongitude
             )
         }
     }
