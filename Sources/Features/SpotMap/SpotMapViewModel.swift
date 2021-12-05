@@ -9,7 +9,7 @@ final class SpotMapViewModel: ObservableObject {
     @Published var spots: [SpotsQuery.Data.Spot] = []
     @Published var error: Error?
 
-    private var fetchedSpotRange: SpotRange? = nil
+    private var fetchedSpotCoordinateRange: SpotCoordinateRange? = nil
 
     func fetch(region: MKCoordinateRegion) {
         if cache.isFetching || query.isFetching {
@@ -23,7 +23,7 @@ final class SpotMapViewModel: ObservableObject {
             do {
                 spots += await cache(for: .init(region: region))?.spots ?? []
                 spots += try await query(for: .init(region: region)).spots
-                updateFetchedSpotRange(region: region)
+                updateFetchedSpotCoordinateRange(region: region)
             } catch {
                 self.error = error
             }
@@ -31,36 +31,36 @@ final class SpotMapViewModel: ObservableObject {
     }
 
     private func shouldFetchNewSpots(region: MKCoordinateRegion) -> Bool {
-        guard let fetchedSpotRange = fetchedSpotRange else {
+        guard let spotCoordinateRange = fetchedSpotCoordinateRange else {
             return true
         }
-        return fetchedSpotRange.minLatitude > region.minLatitude ||
-        fetchedSpotRange.minLongitude > region.minLongitude ||
-        fetchedSpotRange.maxLatitude < region.maxLatitude ||
-        fetchedSpotRange.maxLongitude < region.maxLongitude
+        return spotCoordinateRange.minLatitude > region.minLatitude ||
+        spotCoordinateRange.minLongitude > region.minLongitude ||
+        spotCoordinateRange.maxLatitude < region.maxLatitude ||
+        spotCoordinateRange.maxLongitude < region.maxLongitude
     }
 
-    private func updateFetchedSpotRange(region: MKCoordinateRegion) {
+    private func updateFetchedSpotCoordinateRange(region: MKCoordinateRegion) {
         let offsetLatitudeDelta: CLLocationDegrees = region.span.latitudeDelta / 2
         let offsetLongitudeDelta: CLLocationDegrees = region.span.longitudeDelta / 2
 
-        if var fetchedSpotRange = fetchedSpotRange {
-            if fetchedSpotRange.minLatitude > region.minLatitude {
-                fetchedSpotRange.minLatitude = region.minLatitude - offsetLatitudeDelta
+        if var spotCoordinateRange = fetchedSpotCoordinateRange {
+            if spotCoordinateRange.minLatitude > region.minLatitude {
+                spotCoordinateRange.minLatitude = region.minLatitude - offsetLatitudeDelta
             }
-            if fetchedSpotRange.minLongitude > region.minLongitude {
-                fetchedSpotRange.minLongitude = region.minLongitude - offsetLongitudeDelta
+            if spotCoordinateRange.minLongitude > region.minLongitude {
+                spotCoordinateRange.minLongitude = region.minLongitude - offsetLongitudeDelta
             }
-            if fetchedSpotRange.maxLatitude < region.maxLatitude {
-                fetchedSpotRange.maxLatitude = region.maxLatitude + offsetLatitudeDelta
+            if spotCoordinateRange.maxLatitude < region.maxLatitude {
+                spotCoordinateRange.maxLatitude = region.maxLatitude + offsetLatitudeDelta
             }
-            if fetchedSpotRange.maxLongitude < region.maxLongitude {
-                fetchedSpotRange.maxLongitude = region.maxLongitude + offsetLongitudeDelta
+            if spotCoordinateRange.maxLongitude < region.maxLongitude {
+                spotCoordinateRange.maxLongitude = region.maxLongitude + offsetLongitudeDelta
             }
 
-            self.fetchedSpotRange = fetchedSpotRange
+            self.fetchedSpotCoordinateRange = spotCoordinateRange
         } else {
-            fetchedSpotRange = .init(
+            fetchedSpotCoordinateRange = .init(
                 minLatitude: region.minLatitude - offsetLatitudeDelta,
                 minLongitude: region.minLongitude - offsetLongitudeDelta,
                 maxLatitude: region.maxLatitude + offsetLatitudeDelta,
@@ -81,7 +81,7 @@ extension SpotsQuery {
     }
 }
 
-fileprivate struct SpotRange {
+fileprivate struct SpotCoordinateRange {
     var minLatitude: Latitude
     var minLongitude: Longitude
     var maxLatitude: Latitude
@@ -96,11 +96,11 @@ fileprivate struct SpotRange {
 }
 
 fileprivate extension Array where Element == SpotsQuery.Data.Spot {
-    func spotRange() -> SpotRange? {
+    func spotRange() -> SpotCoordinateRange? {
         guard let first = first else {
             return nil
         }
-        let spotRange = SpotRange(minLatitude: first.geoPoint.latitude, minLongitude: first.geoPoint.longitude, maxLatitude: first.geoPoint.latitude, maxLongitude: first.geoPoint.longitude)
+        let spotRange = SpotCoordinateRange(minLatitude: first.geoPoint.latitude, minLongitude: first.geoPoint.longitude, maxLatitude: first.geoPoint.latitude, maxLongitude: first.geoPoint.longitude)
         return reduce(into: spotRange) { partialResult, spot in
             if partialResult.minLatitude > spot.geoPoint.latitude {
                 partialResult.minLatitude = spot.geoPoint.latitude
