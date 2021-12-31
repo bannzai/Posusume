@@ -90,7 +90,6 @@ public final class SpotsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
-          GraphQLField("geoPoint", type: .nonNull(.object(GeoPoint.selections))),
           GraphQLField("resizedSpotImageURLs", type: .nonNull(.object(ResizedSpotImageUrl.selections))),
         ]
       }
@@ -181,9 +180,6 @@ public final class SpotsQuery: GraphQLQuery {
 
         public static var selections: [GraphQLSelection] {
           return [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("latitude", type: .nonNull(.scalar(Latitude.self))),
-            GraphQLField("longitude", type: .nonNull(.scalar(Longitude.self))),
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("latitude", type: .nonNull(.scalar(Latitude.self))),
             GraphQLField("longitude", type: .nonNull(.scalar(Longitude.self))),
@@ -278,11 +274,6 @@ public struct SpotMapImageFragment: GraphQLFragment {
       __typename
       id
       imageURL
-      geoPoint {
-        __typename
-        latitude
-        longitude
-      }
       resizedSpotImageURLs {
         __typename
         thumbnail
@@ -297,7 +288,6 @@ public struct SpotMapImageFragment: GraphQLFragment {
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
       GraphQLField("imageURL", type: .nonNull(.scalar(URL.self))),
-      GraphQLField("geoPoint", type: .nonNull(.object(GeoPoint.selections))),
       GraphQLField("resizedSpotImageURLs", type: .nonNull(.object(ResizedSpotImageUrl.selections))),
     ]
   }
@@ -308,8 +298,8 @@ public struct SpotMapImageFragment: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: GraphQLID, imageUrl: URL, geoPoint: GeoPoint, resizedSpotImageUrLs: ResizedSpotImageUrl) {
-    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl, "geoPoint": geoPoint.resultMap, "resizedSpotImageURLs": resizedSpotImageUrLs.resultMap])
+  public init(id: GraphQLID, imageUrl: URL, resizedSpotImageUrLs: ResizedSpotImageUrl) {
+    self.init(unsafeResultMap: ["__typename": "Spot", "id": id, "imageURL": imageUrl, "resizedSpotImageURLs": resizedSpotImageUrLs.resultMap])
   }
 
   public var __typename: String {
@@ -339,70 +329,12 @@ public struct SpotMapImageFragment: GraphQLFragment {
     }
   }
 
-  public var geoPoint: GeoPoint {
-    get {
-      return GeoPoint(unsafeResultMap: resultMap["geoPoint"]! as! ResultMap)
-    }
-    set {
-      resultMap.updateValue(newValue.resultMap, forKey: "geoPoint")
-    }
-  }
-
   public var resizedSpotImageUrLs: ResizedSpotImageUrl {
     get {
       return ResizedSpotImageUrl(unsafeResultMap: resultMap["resizedSpotImageURLs"]! as! ResultMap)
     }
     set {
       resultMap.updateValue(newValue.resultMap, forKey: "resizedSpotImageURLs")
-    }
-  }
-
-  public struct GeoPoint: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["GeoPoint"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("latitude", type: .nonNull(.scalar(Latitude.self))),
-        GraphQLField("longitude", type: .nonNull(.scalar(Longitude.self))),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(latitude: Latitude, longitude: Longitude) {
-      self.init(unsafeResultMap: ["__typename": "GeoPoint", "latitude": latitude, "longitude": longitude])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var latitude: Latitude {
-      get {
-        return resultMap["latitude"]! as! Latitude
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "latitude")
-      }
-    }
-
-    public var longitude: Longitude {
-      get {
-        return resultMap["longitude"]! as! Longitude
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "longitude")
-      }
     }
   }
 

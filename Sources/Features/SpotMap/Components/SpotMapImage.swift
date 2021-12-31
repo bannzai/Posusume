@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 import Apollo
-import MapKit
 
 struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
@@ -24,8 +23,7 @@ struct SpotMapImage: View {
         } placeholder: {
             ProgressView()
         }
-        .frame(width: 48, height: 48)
-        .allowsHitTesting(true)
+        .frame(width: 40, height: 40)
     }
 
     private var imageURL: URL {
