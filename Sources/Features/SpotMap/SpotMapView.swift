@@ -19,6 +19,7 @@ struct SpotMapView: View {
                 annotationContent: { spot in
                 MapAnnotation(coordinate: spot.coordinate) {
                     SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
+                        .equatable()
                 }
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
                 viewModel.fetch(region: newRegion)
