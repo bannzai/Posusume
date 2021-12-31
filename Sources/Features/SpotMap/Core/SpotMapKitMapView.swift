@@ -21,7 +21,6 @@ public struct SpotMapKitMapView: UIViewRepresentable {
         view.showsUserLocation = true
         view.showsCompass = false
 
-
         view.register(SpotMapImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
         view.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
 
