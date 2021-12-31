@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import MapKit
 
-public struct MapKitMapView: UIViewRepresentable {
+public struct SpotMapKitMapView: UIViewRepresentable {
     public typealias UIViewType = MKMapView
 
     let items: [SpotMapImageFragment]
@@ -35,9 +35,9 @@ public struct MapKitMapView: UIViewRepresentable {
     }
 
     public class Coordinator: NSObject {
-        let mapView: MapKitMapView
+        let mapView: SpotMapKitMapView
 
-        init(mapView: MapKitMapView) {
+        init(mapView: SpotMapKitMapView) {
             self.mapView = mapView
         }
     }
@@ -48,7 +48,7 @@ public struct MapKitMapView: UIViewRepresentable {
 }
 
 
-extension MapKitMapView.Coordinator: MKMapViewDelegate {
+extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             // NOTE: Current user/device location
