@@ -60,9 +60,6 @@ final class SpotMapImageAnnotationView: MKAnnotationView {
             content.view.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
 
-        content.view.backgroundColor = .red
-        backgroundColor = .blue
-
         content.view.setNeedsLayout()
         content.view.layoutIfNeeded()
         self.content = content
