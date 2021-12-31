@@ -18,6 +18,10 @@ public struct MapKitMapView: UIViewRepresentable {
         view.userTrackingMode = .follow
         view.showsUserLocation = true
         view.showsCompass = false
+
+
+        view.register(SpotMapImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
+        view.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         return view
     }
 
@@ -60,7 +64,7 @@ extension MapKitMapView.Coordinator: MKMapViewDelegate {
         }
 
         annotationView.translatesAutoresizingMaskIntoConstraints = false
-        annotationView.setup(spotMapImage: mapView.annotationContent(annotation.fragment))
+        annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment))
         return annotationView
     }
 }
