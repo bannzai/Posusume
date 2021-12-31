@@ -8,14 +8,12 @@ final class ClusterAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 
         collisionMode = .circle
-        centerOffset = CGPoint(x: 0, y: -10) // Offset center point to animate better with marker annotations
+        canShowCallout = false
 
         addSubview(spotCountLabel)
         spotCountLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            spotCountLabel.widthAnchor.constraint(equalToConstant: 72),
-            spotCountLabel.heightAnchor.constraint(equalToConstant: 101),
             spotCountLabel.topAnchor.constraint(equalTo: topAnchor),
             spotCountLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             spotCountLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
