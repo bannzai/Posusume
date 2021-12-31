@@ -13,9 +13,18 @@ final class SpotMapImageAnnotation: NSObject, MKAnnotation {
 }
 
 final class SpotMapImageAnnotationView: MKAnnotationView {
-    static let reusableIdentifier = "SpotMapImageAnnotationView"
-
+    static let reuseIdentifier = "SpotMapImageAnnotationView"
     private var content: UIHostingController<SpotMapImage>?
+
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+
+        canShowCallout = false
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     func setup(spotMapImage: SpotMapImage) {
         content?.view.removeFromSuperview()
