@@ -5,6 +5,7 @@ import MapKit
 public struct SpotMapKitMapView: UIViewRepresentable {
     public typealias UIViewType = MKMapView
 
+    let coordinateRegion: Binding<MKCoordinateRegion>
     let annotationItems: [SpotMapImageFragment]
     let annotationContent: (SpotMapImageFragment) -> SpotMapImage
 
@@ -20,16 +21,18 @@ public struct SpotMapKitMapView: UIViewRepresentable {
         view.showsUserLocation = true
         view.showsCompass = false
 
-
         view.register(SpotMapImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
         view.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
 
         view.addAnnotations(annotationItems.map(SpotMapImageAnnotation.init))
 
+
         return view
     }
 
     public func updateUIView(_ uiView: MKMapView, context: Context) {
+        uiView.region = coordinateRegion.wrappedValue
+
         uiView.removeAnnotations(uiView.annotations)
         uiView.addAnnotations(annotationItems.map(SpotMapImageAnnotation.init))
     }
