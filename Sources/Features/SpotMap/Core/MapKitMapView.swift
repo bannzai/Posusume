@@ -26,15 +26,15 @@ public struct MapKitMapView: UIViewRepresentable {
     }
 
     public class Coordinator: NSObject {
-        let view: MapKitMapView
+        let mapView: MapKitMapView
 
-        init(view: MapKitMapView) {
-            self.view = view
+        init(mapView: MapKitMapView) {
+            self.mapView = mapView
         }
     }
 
     public func makeCoordinator() -> Coordinator {
-        .init(view: self)
+        .init(mapView: self)
     }
 }
 
@@ -60,7 +60,7 @@ extension MapKitMapView.Coordinator: MKMapViewDelegate {
         }
 
         annotationView.translatesAutoresizingMaskIntoConstraints = false
-        annotationView.setup(spotMapImage: view.annotationContent(annotation.fragment))
+        annotationView.setup(spotMapImage: mapView.annotationContent(annotation.fragment))
         return annotationView
     }
 }
