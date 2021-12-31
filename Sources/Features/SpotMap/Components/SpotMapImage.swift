@@ -16,9 +16,6 @@ struct SpotMapImage: View {
                 .scaledToFill()
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
-        } placeholder: {
-            ProgressView()
-        }
                 .onTapGesture {
                     // NOTE: AnnotationView should clear if want to enable touch again
                     mapView.selectedAnnotations.forEach {
@@ -30,7 +27,11 @@ struct SpotMapImage: View {
                 .sheet(isPresented: $isPresentingSpotDetail) {
                     SpotDetailPage(spotID: fragment.id)
                 }
+        } placeholder: {
+            ProgressView()
+        }
         .frame(width: 48, height: 48)
+        .allowsHitTesting(true)
     }
 
     private var imageURL: URL {
