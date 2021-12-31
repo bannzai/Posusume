@@ -16,8 +16,8 @@ struct SpotMapView: View {
             SpotMapKitMapView(
                 coordinateRegion: mapCoordinateRegion,
                 annotationItems: viewModel.spots.map(\.fragments.spotMapImageFragment),
-                annotationContent: { fragment, mapView in
-                    SpotMapImage(fragment: fragment, mapView: mapView)
+                annotationContent: { fragment in
+                    SpotMapImage(fragment: fragment)
 
                 })
                 .onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in

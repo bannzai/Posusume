@@ -7,7 +7,7 @@ public struct SpotMapKitMapView: UIViewRepresentable {
 
     @Binding var coordinateRegion: MKCoordinateRegion
     let annotationItems: [SpotMapImageFragment]
-    let annotationContent: (SpotMapImageFragment, MapKit.MKMapView) -> (SpotMapImage)
+    let annotationContent: (SpotMapImageFragment) -> (SpotMapImage)
 
     public func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView()
@@ -80,7 +80,7 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
 
         annotationView.annotation = annotation
         annotationView.frame.size =  .init(width: 48, height: 48)
-        annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment, mapView))
+        annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment))
         return annotationView
     }
 

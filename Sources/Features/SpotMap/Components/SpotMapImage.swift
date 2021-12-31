@@ -5,7 +5,6 @@ import MapKit
 
 struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
-    let mapView: MapKit.MKMapView
 
     @State var isPresentingSpotDetail: Bool = false
 
