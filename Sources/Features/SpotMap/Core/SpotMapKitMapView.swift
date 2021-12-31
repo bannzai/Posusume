@@ -26,7 +26,6 @@ public struct SpotMapKitMapView: UIViewRepresentable {
 
         view.addAnnotations(annotationItems.map(SpotMapImageAnnotation.init))
 
-
         return view
     }
 
