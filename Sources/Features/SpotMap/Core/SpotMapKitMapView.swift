@@ -7,7 +7,7 @@ public struct SpotMapKitMapView: UIViewRepresentable {
 
     @Binding var coordinateRegion: MKCoordinateRegion
     let annotationItems: [SpotMapImageFragment]
-    let annotationContent: (SpotMapImageFragment) -> SpotMapImage
+    let annotationContent: (SpotMapImageFragment, MapKit.MKMapView) -> (SpotMapImage)
 
     public func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView()
@@ -79,12 +79,27 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
         }
 
         annotationView.annotation = annotation
-        annotationView.translatesAutoresizingMaskIntoConstraints = false
-        annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment))
+        annotationView.frame.size =  .init(width: 48, height: 48)
+        annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment, mapView))
         return annotationView
     }
 
+    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        DispatchQueue.main.async {
+            mapView.selectedAnnotations.forEach {
+                mapView.deselectAnnotation($0, animated: false)
+            }
+        }
+        guard let spotMapImageView = view as? SpotMapImageAnnotationView else {
+            return
+        }
+        print("tapped")
+    }
     public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        self.mapView.coordinateRegion = mapView.region
+       self.mapView.coordinateRegion = mapView.region
+
+        mapView.selectedAnnotations.forEach {
+            mapView.deselectAnnotation($0, animated: false)
+        }
     }
 }
