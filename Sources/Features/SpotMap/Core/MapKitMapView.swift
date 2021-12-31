@@ -62,6 +62,5 @@ extension MapKitMapView.Coordinator: MKMapViewDelegate {
         annotationView.translatesAutoresizingMaskIntoConstraints = false
         annotationView.setup(spotMapImage: view.annotationContent(annotation.fragment))
         return annotationView
-
     }
 }
