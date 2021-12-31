@@ -66,21 +66,6 @@ final class SpotMapImageAnnotationView: MKAnnotationView {
         content.view.setNeedsLayout()
         content.view.layoutIfNeeded()
         self.content = content
-
-
-//        let content = UIHostingController(rootView: spotMapImage)
-//        addSubview(content.view)
-//
-//        content.view.isUserInteractionEnabled = true
-//        content.view.subviews.forEach {
-//            $0.isUserInteractionEnabled = true
-//        }
-//        content.view.frame.size = .init(width: 48, height: 48)
-//        content.view.center = center
-//        content.view.backgroundColor = .red
-//
-//        backgroundColor = .blue
-//        self.content = content
     }
 }
 
