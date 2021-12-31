@@ -7,7 +7,15 @@ public struct MapKitMapView: UIViewRepresentable {
 
     public func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView()
+        view.isZoomEnabled = true
+        view.isScrollEnabled = true
+        view.isPitchEnabled = true
+        view.isRotateEnabled = true
         view.delegate = context.coordinator
+        view.mapType = .standard
+        view.userTrackingMode = .follow
+        view.showsUserLocation = true
+        view.showsCompass = false
         return view
     }
 
@@ -15,7 +23,7 @@ public struct MapKitMapView: UIViewRepresentable {
 
     }
 
-    public class Coordinator: NSObject, MKMapViewDelegate {
+    public class Coordinator: NSObject {
         let view: MapKitMapView
 
         init(view: MapKitMapView) {
@@ -29,4 +37,7 @@ public struct MapKitMapView: UIViewRepresentable {
 }
 
 
+extension MapKitMapView.Coordinator: MKMapViewDelegate {
+
+}
 
