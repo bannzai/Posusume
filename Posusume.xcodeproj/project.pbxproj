@@ -54,7 +54,7 @@
 		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
 		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
-		20E50FBA277E20790084ED24 /* MapKitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FB9277E20790084ED24 /* MapKitMapView.swift */; };
+		20E50FBA277E20790084ED24 /* SpotMapKitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */; };
 		20E50FBD277E26CC0084ED24 /* ClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FBC277E26CC0084ED24 /* ClusterAnnotationView.swift */; };
 		20E50FBF277EAF250084ED24 /* SpotMapImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FBE277EAF250084ED24 /* SpotMapImageAnnotation.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
@@ -159,7 +159,7 @@
 		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
 		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
-		20E50FB9277E20790084ED24 /* MapKitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitMapView.swift; sourceTree = "<group>"; };
+		20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapKitMapView.swift; sourceTree = "<group>"; };
 		20E50FBC277E26CC0084ED24 /* ClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAnnotationView.swift; sourceTree = "<group>"; };
 		20E50FBE277EAF250084ED24 /* SpotMapImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImageAnnotation.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				20E50FBB277E26C40084ED24 /* Annotation */,
-				20E50FB9277E20790084ED24 /* MapKitMapView.swift */,
+				20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -851,7 +851,7 @@
 				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
-				20E50FBA277E20790084ED24 /* MapKitMapView.swift in Sources */,
+				20E50FBA277E20790084ED24 /* SpotMapKitMapView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
