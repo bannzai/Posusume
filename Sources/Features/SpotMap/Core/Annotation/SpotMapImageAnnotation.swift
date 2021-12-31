@@ -20,6 +20,7 @@ final class SpotMapImageAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 
         canShowCallout = false
+        clusteringIdentifier = "SpotMapImageAnnotationView"
     }
 
     required init?(coder aDecoder: NSCoder) {

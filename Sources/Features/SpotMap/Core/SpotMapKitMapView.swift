@@ -11,15 +11,16 @@ public struct SpotMapKitMapView: UIViewRepresentable {
 
     public func makeUIView(context: Context) -> MKMapView {
         let view = MKMapView()
+        view.delegate = context.coordinator
         view.isZoomEnabled = true
         view.isScrollEnabled = true
         view.isPitchEnabled = true
         view.isRotateEnabled = true
-        view.delegate = context.coordinator
         view.mapType = .standard
         view.userTrackingMode = .follow
         view.showsUserLocation = true
         view.showsCompass = false
+
 
         view.register(SpotMapImageAnnotationView.self, forAnnotationViewWithReuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
         view.register(ClusterAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
@@ -32,8 +33,17 @@ public struct SpotMapKitMapView: UIViewRepresentable {
     public func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.region = coordinateRegion
 
-        uiView.removeAnnotations(uiView.annotations)
-        uiView.addAnnotations(annotationItems.map(SpotMapImageAnnotation.init))
+        let mapViewAnnotations = uiView
+            .annotations
+            .compactMap { $0 as? SpotMapImageAnnotation }
+        let differenceAnnotations = annotationItems
+            .reduce(into: [SpotMapImageAnnotation]()) { partialResult, fragment in
+                if !mapViewAnnotations.contains(where: { $0.fragment.id == fragment.id }) {
+                    partialResult.append(SpotMapImageAnnotation(fragment: fragment))
+                }
+            }
+
+        uiView.addAnnotations(differenceAnnotations)
     }
 
     public class Coordinator: NSObject {
@@ -58,7 +68,7 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
         }
 
         if annotation is MKClusterAnnotation {
-            return mapView.dequeueReusableAnnotationView(withIdentifier: SpotMapImageAnnotationView.reuseIdentifier, for: annotation)
+            return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
         }
 
         guard let annotation = annotation as? SpotMapImageAnnotation else {

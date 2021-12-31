@@ -1,6 +1,7 @@
 import MapKit
 
 final class ClusterAnnotationView: MKAnnotationView {
+    static let reuseIdentifier = "ClusterAnnotationView"
     let spotCountLabel = UILabel()
 
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
