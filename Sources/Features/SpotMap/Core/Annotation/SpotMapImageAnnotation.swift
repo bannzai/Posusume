@@ -12,8 +12,9 @@ final class SpotMapImageAnnotation: NSObject, MKAnnotation {
     }
 }
 
-
 final class SpotMapImageAnnotationView: MKAnnotationView {
+    static let reusableIdentifier = "SpotMapImageAnnotationView"
+
     private var content: UIHostingController<SpotMapImage>?
 
     func setup(spotMapImage: SpotMapImage) {
