@@ -5,7 +5,7 @@ import MapKit
 public struct SpotMapKitMapView: UIViewRepresentable {
     public typealias UIViewType = MKMapView
 
-    let coordinateRegion: Binding<MKCoordinateRegion>
+    @Binding var coordinateRegion: MKCoordinateRegion
     let annotationItems: [SpotMapImageFragment]
     let annotationContent: (SpotMapImageFragment) -> SpotMapImage
 
@@ -30,14 +30,14 @@ public struct SpotMapKitMapView: UIViewRepresentable {
     }
 
     public func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.region = coordinateRegion.wrappedValue
+        uiView.region = coordinateRegion
 
         uiView.removeAnnotations(uiView.annotations)
         uiView.addAnnotations(annotationItems.map(SpotMapImageAnnotation.init))
     }
 
     public class Coordinator: NSObject {
-        let mapView: SpotMapKitMapView
+        var mapView: SpotMapKitMapView
 
         init(mapView: SpotMapKitMapView) {
             self.mapView = mapView
@@ -68,14 +68,18 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
         let annotationView: SpotMapImageAnnotationView
         switch mapView.dequeueReusableAnnotationView(withIdentifier: SpotMapImageAnnotationView.reuseIdentifier) as? SpotMapImageAnnotationView {
         case nil:
-            annotationView = SpotMapImageAnnotationView(annotation: annotation, reuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
+             annotationView = SpotMapImageAnnotationView(annotation: annotation, reuseIdentifier: SpotMapImageAnnotationView.reuseIdentifier)
         case let _annotationView?:
             annotationView = _annotationView
-            annotationView.annotation = annotation
         }
 
+        annotationView.annotation = annotation
         annotationView.translatesAutoresizingMaskIntoConstraints = false
         annotationView.setup(spotMapImage: self.mapView.annotationContent(annotation.fragment))
         return annotationView
+    }
+
+    public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        self.mapView.coordinateRegion = mapView.region
     }
 }
