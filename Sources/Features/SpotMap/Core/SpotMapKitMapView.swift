@@ -66,10 +66,6 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
             return nil;
         }
 
-        if annotation is MKClusterAnnotation {
-            return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
-        }
-
         guard let annotation = annotation as? SpotMapImageAnnotation else {
             return nil
         }
