@@ -85,21 +85,22 @@ extension SpotMapKitMapView.Coordinator: MKMapViewDelegate {
     }
 
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        DispatchQueue.main.async {
-            mapView.selectedAnnotations.forEach {
-                mapView.deselectAnnotation($0, animated: false)
-            }
-        }
-        guard let spotMapImageView = view as? SpotMapImageAnnotationView else {
-            return
-        }
         print("tapped")
+
+        mapView.clearSelection()
     }
     public func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
        self.mapView.coordinateRegion = mapView.region
 
-        mapView.selectedAnnotations.forEach {
-            mapView.deselectAnnotation($0, animated: false)
+        mapView.clearSelection()
+    }
+}
+
+extension MKMapView {
+    // NOTE: AnnotationView should clear if want to enable touch again
+    func clearSelection() {
+        selectedAnnotations.forEach {
+            deselectAnnotation($0, animated: false)
         }
     }
 }

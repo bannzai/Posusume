@@ -17,11 +17,7 @@ struct SpotMapImage: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                 .onTapGesture {
-                    // NOTE: AnnotationView should clear if want to enable touch again
-                    mapView.selectedAnnotations.forEach {
-                        mapView.deselectAnnotation($0, animated: false)
-                    }
-
+                    mapView.clearSelection()
                     isPresentingSpotDetail = true
                 }
                 .sheet(isPresented: $isPresentingSpotDetail) {
