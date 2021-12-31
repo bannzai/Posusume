@@ -13,16 +13,16 @@ struct SpotMapView: View {
 
     var body: some View {
         ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
-            Map(coordinateRegion: mapCoordinateRegion,
-                showsUserLocation: true,
-                annotationItems: viewModel.spots,
-                annotationContent: { spot in
-                MapAnnotation(coordinate: spot.coordinate) {
-                    SpotMapImage(fragment: spot.fragments.spotMapImageFragment)
+            SpotMapKitMapView(
+                coordinateRegion: mapCoordinateRegion,
+                annotationItems: viewModel.spots.map(\.fragments.spotMapImageFragment),
+                annotationContent: { fragment in
+                    SpotMapImage(fragment: fragment)
+
+                })
+                .onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
+                    viewModel.fetch(region: newRegion)
                 }
-            }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
-                viewModel.fetch(region: newRegion)
-            }
 
             HStack(alignment: .bottom) {
                 Spacer()

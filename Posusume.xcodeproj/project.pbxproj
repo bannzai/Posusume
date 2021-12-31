@@ -54,6 +54,9 @@
 		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
 		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
+		20E50FBA277E20790084ED24 /* SpotMapKitMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */; };
+		20E50FBD277E26CC0084ED24 /* ClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FBC277E26CC0084ED24 /* ClusterAnnotationView.swift */; };
+		20E50FBF277EAF250084ED24 /* SpotMapImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E50FBE277EAF250084ED24 /* SpotMapImageAnnotation.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -156,6 +159,9 @@
 		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
 		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
+		20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapKitMapView.swift; sourceTree = "<group>"; };
+		20E50FBC277E26CC0084ED24 /* ClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterAnnotationView.swift; sourceTree = "<group>"; };
+		20E50FBE277EAF250084ED24 /* SpotMapImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImageAnnotation.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -395,6 +401,24 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		20E50FB8277E206E0084ED24 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				20E50FBB277E26C40084ED24 /* Annotation */,
+				20E50FB9277E20790084ED24 /* SpotMapKitMapView.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		20E50FBB277E26C40084ED24 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				20E50FBC277E26CC0084ED24 /* ClusterAnnotationView.swift */,
+				20E50FBE277EAF250084ED24 /* SpotMapImageAnnotation.swift */,
+			);
+			path = Annotation;
+			sourceTree = "<group>";
+		};
 		20ECE4FB270E4620009E7025 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +583,7 @@
 		BADF52FF261D303400431FEB /* SpotMap */ = {
 			isa = PBXGroup;
 			children = (
+				20E50FB8277E206E0084ED24 /* Core */,
 				20ECE50127105835009E7025 /* Components */,
 				BA249E672625E12D000DA60F /* SpotMapView.swift */,
 				20FB28AC275C2B2300BD4E54 /* SpotMapViewModel.swift */,
@@ -826,6 +851,7 @@
 				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
+				20E50FBA277E20790084ED24 /* SpotMapKitMapView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
@@ -833,6 +859,7 @@
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
 				20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */,
+				20E50FBF277EAF250084ED24 /* SpotMapImageAnnotation.swift in Sources */,
 				20A088752708FDED00D94272 /* Mutation.swift in Sources */,
 				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
 				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
@@ -873,6 +900,7 @@
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
+				20E50FBD277E26CC0084ED24 /* ClusterAnnotationView.swift in Sources */,
 				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
 				20FB28A9275C276200BD4E54 /* Ref.swift in Sources */,
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,
