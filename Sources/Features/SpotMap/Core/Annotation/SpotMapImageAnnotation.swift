@@ -18,7 +18,10 @@ final class SpotMapImageAnnotationView: MKAnnotationView {
 
     func setup(spotMapImage: SpotMapImage) {
         content?.view.removeFromSuperview()
-        content = .init(rootView: spotMapImage)
+
+        let content = UIHostingController(rootView: spotMapImage)
+        addSubview(content.view)
+        self.content = content
     }
 }
 
