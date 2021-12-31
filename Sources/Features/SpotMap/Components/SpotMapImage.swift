@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Apollo
+import MapKit
 
 struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
@@ -8,6 +9,7 @@ struct SpotMapImage: View {
     @State var isPresentingSpotDetail: Bool = false
 
     var body: some View {
+        let _ = Self._printChanges()
         AsyncImage(url: imageURL) { image in
             image
                 .resizable()
@@ -26,7 +28,16 @@ struct SpotMapImage: View {
         .frame(width: 40, height: 40)
     }
 
-    private var imageURL: URL {
+    fileprivate var imageURL: URL {
         fragment.resizedSpotImageUrLs.thumbnail ?? fragment.imageUrl
     }
 }
+
+
+extension SpotMapImage: Equatable {
+    static func ==(lhs: SpotMapImage, rhs: SpotMapImage) -> Bool {
+        lhs.imageURL == rhs.imageURL
+    }
+}
+
+extension SpotMapImageFragment: Identifiable { }
