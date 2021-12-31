@@ -16,7 +16,6 @@ struct SpotMapImage: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                 .onTapGesture {
-                    mapView.clearSelection()
                     isPresentingSpotDetail = true
                 }
                 .sheet(isPresented: $isPresentingSpotDetail) {
