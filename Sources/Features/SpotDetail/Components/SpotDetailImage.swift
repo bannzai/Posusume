@@ -6,7 +6,7 @@ struct SpotDetailImage: View {
     let fragment: SpotDetailImageFragment
 
     var body: some View {
-        AsyncImageView(url: fragment.imageUrl) { image in
+        AsyncImage(url: fragment.imageUrl) { image in
             image
                 .resizable()
                 .scaledToFill()

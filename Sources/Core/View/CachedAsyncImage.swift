@@ -12,7 +12,7 @@ private var urlSession: URLSession = {
     return .init(configuration: configuration)
 }()
 
-public struct CachedAsyncImageView<Content: View>: View {
+public struct CachedAsyncImage<Content: View>: View {
     @State var phase: SwiftUI.AsyncImagePhase
 
     let url: URL?
@@ -89,4 +89,4 @@ public struct CachedAsyncImageView<Content: View>: View {
 }
 
 
-public typealias AsyncImageView = CachedAsyncImageView
+public typealias AsyncImage = CachedAsyncImage
