@@ -44,6 +44,7 @@
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		208FE939277F839B00C43DC1 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */; };
 		208FE93C278091FD00C43DC1 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 208FE93B278091FD00C43DC1 /* FirebaseFunctions */; };
+		208FE93F2780931300C43DC1 /* Emoist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE93E2780931300C43DC1 /* Emoist.swift */; };
 		20A088732708FA1B00D94272 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088722708FA1B00D94272 /* Cache.swift */; };
 		20A088752708FDED00D94272 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088742708FDED00D94272 /* Mutation.swift */; };
 		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
@@ -147,6 +148,7 @@
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
+		208FE93E2780931300C43DC1 /* Emoist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoist.swift; sourceTree = "<group>"; };
 		20A088722708FA1B00D94272 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		20A088742708FDED00D94272 /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		20A09D1A2701F2640090E22F /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
@@ -336,6 +338,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		208FE93D278092FB00C43DC1 /* Emoist */ = {
+			isa = PBXGroup;
+			children = (
+				208FE93E2780931300C43DC1 /* Emoist.swift */,
+			);
+			path = Emoist;
+			sourceTree = "<group>";
+		};
 		20A09D192701F25B0090E22F /* ObservableObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +530,7 @@
 		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				208FE93D278092FB00C43DC1 /* Emoist */,
 				2005EE4226FA0A41009001C7 /* Core */,
 				20CEA51726B4D18A0032BBD1 /* Network */,
 				BAFF701F261C3FB300584593 /* Components */,
@@ -846,6 +857,7 @@
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
+				208FE93F2780931300C43DC1 /* Emoist.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
