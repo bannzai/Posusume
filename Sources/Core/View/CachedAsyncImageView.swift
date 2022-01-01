@@ -1,6 +1,17 @@
 import Foundation
 import SwiftUI
 
+// For example, SwiftUI.Map recreates AsyncImage every time it zooms. Therefore, instead of having a URLSession in the View, we'll make it common and make it easier to cache.
+private var urlSession: URLSession = {
+    // URLCache.shared memoryCapacity 4MB, diskCapacity: 20MB in document. But actually memoryCapacity 512KB, diskCapacity: 10MB
+    // Posusume loads a lot of images, so it is increasing the capacity
+    let configuration = URLSessionConfiguration.default
+    configuration.urlCache = .init(memoryCapacity: 20 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: nil)
+    configuration.requestCachePolicy = .returnCacheDataElseLoad
+
+    return .init(configuration: configuration)
+}()
+
 public struct CachedAsyncImageView<Content: View>: View {
     @State var phase: SwiftUI.AsyncImagePhase = .empty
 
