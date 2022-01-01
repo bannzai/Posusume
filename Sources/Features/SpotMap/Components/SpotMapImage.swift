@@ -9,7 +9,8 @@ struct SpotMapImage: View {
     @State var isPresentingSpotDetail: Bool = false
 
     var body: some View {
-        AsyncImageView(url: imageURL) { image in
+        let _ = Self._printChanges()
+        AsyncImage(url: imageURL) { image in
             image
                 .resizable()
                 .scaledToFill()
