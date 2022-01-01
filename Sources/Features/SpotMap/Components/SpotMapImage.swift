@@ -10,7 +10,7 @@ struct SpotMapImage: View {
 
     var body: some View {
         let _ = Self._printChanges()
-        CachedAsyncImageView(url: imageURL) { image in
+        AsyncImageView(url: imageURL) { image in
             image
                 .resizable()
                 .scaledToFill()
