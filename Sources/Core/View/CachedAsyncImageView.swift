@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-public struct NetworkAsyncImageView<Content: View>: View {
+public struct CachedAsyncImageView<Content: View>: View {
     @State var phase: SwiftUI.AsyncImagePhase = .empty
 
     let url: URL?
