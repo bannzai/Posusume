@@ -43,6 +43,7 @@
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		208FE939277F839B00C43DC1 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */; };
+		208FE93C278091FD00C43DC1 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 208FE93B278091FD00C43DC1 /* FirebaseFunctions */; };
 		20A088732708FA1B00D94272 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088722708FA1B00D94272 /* Cache.swift */; };
 		20A088752708FDED00D94272 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088742708FDED00D94272 /* Mutation.swift */; };
 		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
@@ -204,6 +205,7 @@
 				2004BA3B26B18DA0007D3E82 /* FirebaseStorageSwift-Beta in Frameworks */,
 				2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */,
 				2005EE4726FA10FC009001C7 /* Apollo in Frameworks */,
+				208FE93C278091FD00C43DC1 /* FirebaseFunctions in Frameworks */,
 				2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */,
 				2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */,
 				2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */,
@@ -325,6 +327,13 @@
 				208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		208FE93A278091FD00C43DC1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		20A09D192701F25B0090E22F /* ObservableObject */ = {
@@ -494,6 +503,7 @@
 				BAD9A8C02610B73100676F22 /* PosusumeTests */,
 				BAD9A8CB2610B73200676F22 /* PosusumeUITests */,
 				BAD9A8AD2610B72F00676F22 /* Products */,
+				208FE93A278091FD00C43DC1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -641,6 +651,7 @@
 				2005EE4626FA10FC009001C7 /* Apollo */,
 				2005EE4826FA10FC009001C7 /* ApolloSQLite */,
 				2005EE4A26FA10FC009001C7 /* ApolloWebSocket */,
+				208FE93B278091FD00C43DC1 /* FirebaseFunctions */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
@@ -1278,6 +1289,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2005EE4526FA10FC009001C7 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = ApolloWebSocket;
+		};
+		208FE93B278091FD00C43DC1 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2004BA3126B18DA0007D3E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
