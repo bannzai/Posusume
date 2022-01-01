@@ -134,6 +134,10 @@ class Emoist {
         Emoment(name: "Ruins", role: .supporting, word: "太古の"),
     ]
 
+    struct VisionImageLabel {
+        let text: String
+    }
+
     func emiful(labels: [VisionImageLabel]) -> Result {
         let sub = labels.compactMap { label -> Emoment? in
             Emoist.emoments.filter {$0.role == .subject}.filter {
