@@ -32,12 +32,3 @@ struct SpotMapImage: View {
         fragment.resizedSpotImageUrLs.thumbnail ?? fragment.imageUrl
     }
 }
-
-
-extension SpotMapImage: Equatable {
-    static func ==(lhs: SpotMapImage, rhs: SpotMapImage) -> Bool {
-        lhs.imageURL == rhs.imageURL
-    }
-}
-
-extension SpotMapImageFragment: Identifiable { }
