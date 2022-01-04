@@ -24,9 +24,9 @@ public struct CloudVision {
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             throw LabelDetectionError.imageCannotConvertToJPEG
         }
-        let base64encodedImage = imageData.base64EncodedString()
+        let base64EncodedImage = imageData.base64EncodedString()
         let requestData: [String: Any] = [
-            "image": ["content": base64encodedImage],
+            "image": ["content": base64EncodedImage],
             "features": [["maxResults": 5, "type": "LABEL_DETECTION"]]
         ]
 
