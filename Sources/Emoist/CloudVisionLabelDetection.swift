@@ -31,7 +31,7 @@ public struct CloudVision {
         ]
 
         return try await withCheckedThrowingContinuation { continuation in
-            functions.httpsCallable("emotionalise").call(requestData) { (result, error) in
+            functions.httpsCallable("detectLabel").call(requestData) { (result, error) in
                 if let error = error {
                     continuation.resume(
                         throwing: LabelDetectionError.emotionaliseError(
