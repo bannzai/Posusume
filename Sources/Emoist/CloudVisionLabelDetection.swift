@@ -3,6 +3,7 @@ import Firebase
 import UIKit
 import SwiftUI
 
+// Cloud vision iOS doc: https://firebase.google.com/docs/ml/ios/recognize-landmarks
 public struct CloudVision {
     let functions = Functions.functions()
 
