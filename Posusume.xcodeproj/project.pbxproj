@@ -57,6 +57,7 @@
 		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
 		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
+		20B67E4227848EAC00AAB89D /* CloudVisionLabelDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -161,6 +162,7 @@
 		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
 		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
+		20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVisionLabelDetection.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				208FE93E2780931300C43DC1 /* Emoist.swift */,
+				20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */,
 			);
 			path = Emoist;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
 				2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */,
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
+				20B67E4227848EAC00AAB89D /* CloudVisionLabelDetection.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
 				208FE93F2780931300C43DC1 /* Emoist.swift in Sources */,
