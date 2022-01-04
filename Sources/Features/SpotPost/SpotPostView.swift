@@ -65,9 +65,8 @@ struct SpotPostView: View {
                 self.placemark = placemark
             }
 
+            await emotionalise(image: image)
             self.image = image
-
-            emotionalise(image: image)
         }
     }
 
@@ -79,17 +78,14 @@ struct SpotPostView: View {
             }
 
             let image = photoLibraryResult.image
+            await emotionalise(image: image)
             self.image = image
-
-            emotionalise(image: image)
         }
     }
 
-    private func emotionalise(image: UIImage) {
-        Task { @MainActor in
-            if let labels = try? await cloudVision.detectLabel(uiImage: image) {
-                editorState.emo = emoist.emiful(labels: labels)
-            }
+    private func emotionalise(image: UIImage) async {
+        if let labels = try? await cloudVision.detectLabel(uiImage: image) {
+            editorState.emo = emoist.emiful(labels: labels)
         }
     }
 }
