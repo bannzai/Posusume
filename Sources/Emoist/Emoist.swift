@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import SwiftUI
 
-class Emoist {
+public class Emoist {
     struct Emoment {
         enum Role {
             case subject
@@ -25,18 +25,18 @@ class Emoist {
     }
 
     struct Phrase {
-        let sub: Emoment?
-        let sup: Emoment?
+        let subject: Emoment?
+        let supporting: Emoment?
 
         func str() -> Result {
             return [
-                Result(firstLine: "\(sub?.word ?? randSub())", secondLine: "それは\(randSub())"),
-                Result(firstLine: "\(sub?.word ?? randSub())は", secondLine: "\(sup?.word ?? randSup())もの"),
-                Result(firstLine: "\(sup?.word ?? randSup())", secondLine: "\(sub?.word ?? randSub())を見た"),
-                Result(firstLine: "全部\(sub?.word ?? randSub())のせいだ", secondLine: nil),
-                Result(firstLine: "いつか見たような\(sub?.word ?? randSub())", secondLine: nil),
-                Result(firstLine: "今日もまた\(sub?.word ?? randSub())を", secondLine: "求め彷徨う"),
-                Result(firstLine: "\(sup?.word ?? randSup())の", secondLine: "\(sub?.word ?? randSub())の忘れがたさ"),
+                Result(firstLine: "\(subject?.word ?? randSub())", secondLine: "それは\(randSub())"),
+                Result(firstLine: "\(subject?.word ?? randSub())は", secondLine: "\(supporting?.word ?? randSup())もの"),
+                Result(firstLine: "\(supporting?.word ?? randSup())", secondLine: "\(subject?.word ?? randSub())を見た"),
+                Result(firstLine: "全部\(subject?.word ?? randSub())のせいだ", secondLine: nil),
+                Result(firstLine: "いつか見たような\(subject?.word ?? randSub())", secondLine: nil),
+                Result(firstLine: "今日もまた\(subject?.word ?? randSub())を", secondLine: "求め彷徨う"),
+                Result(firstLine: "\(supporting?.word ?? randSup())の", secondLine: "\(subject?.word ?? randSub())の忘れがたさ"),
             ].randomElement()!
         }
 
@@ -65,7 +65,7 @@ class Emoist {
         }
     }
 
-    struct Result {
+    public struct Result {
         let firstLine: String
         let secondLine: String?
     }
@@ -147,7 +147,7 @@ class Emoist {
                 label.description == $0.name
             }.first
         }.first
-        return Phrase(sub: sub, sup: sup).str()
+        return Phrase(subject: sub, supporting: sup).str()
     }
 }
 
