@@ -6,10 +6,6 @@ public struct CloudVision {
     let functions = Functions.functions()
 
     // See https://cloud.google.com/vision/docs/labels
-    internal struct LabelResponse {
-        let responses: [Label]
-    }
-
     public struct Label {
         public let mid: String
         public let description: String
