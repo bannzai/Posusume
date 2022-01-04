@@ -10,8 +10,6 @@ struct SpotPostView: View {
     @Environment(\.locationManager) var locationManager
     @Environment(\.geocoder) var geocoder
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.cloudVision) private var cloudVision
-    @Environment(\.emoist) private var emoist
 
     @State var error: Error?
     @State var title: String = ""
@@ -65,7 +63,6 @@ struct SpotPostView: View {
                 self.placemark = placemark
             }
 
-            await emotionalise(image: image)
             self.image = image
         }
     }
@@ -78,14 +75,7 @@ struct SpotPostView: View {
             }
 
             let image = photoLibraryResult.image
-            await emotionalise(image: image)
             self.image = image
-        }
-    }
-
-    private func emotionalise(image: UIImage) async {
-        if let labels = try? await cloudVision.detectLabel(uiImage: image) {
-            editorState.emo = emoist.emiful(labels: labels)
         }
     }
 }

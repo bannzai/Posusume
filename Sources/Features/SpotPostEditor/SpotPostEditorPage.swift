@@ -2,7 +2,6 @@ import Foundation
 import SwiftUI
 
 public struct SpotPostEditorPageState {
-    public internal(set) var emo: Emoist.Result?
     public internal(set) var textFieldValues: [TextFieldComponentState] = []
 
     public init() {
