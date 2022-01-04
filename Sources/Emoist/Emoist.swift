@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 class Emoist {
     struct Emoment {
@@ -149,3 +150,19 @@ class Emoist {
         return Phrase(sub: sub, sup: sup).str()
     }
 }
+
+struct EmoistEnvironmentKey: EnvironmentKey {
+    static var defaultValue: Emoist = .init()
+}
+
+extension EnvironmentValues {
+    var emoist: Emoist {
+        get {
+            self[EmoistEnvironmentKey.self]
+        }
+        set {
+            self[EmoistEnvironmentKey.self] = newValue
+        }
+    }
+}
+
