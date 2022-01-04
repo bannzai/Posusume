@@ -20,7 +20,7 @@ public struct CloudVision {
         case labelDecodedError(rawData: Any?)
     }
 
-    public func emotionalise(uiImage image: UIImage) async throws ->  [Label] {
+    public func detectLabel(uiImage image: UIImage) async throws ->  [Label] {
         guard let imageData = image.jpegData(compressionQuality: 1.0) else {
             throw LabelDetectionError.imageCannotConvertToJPEG
         }
