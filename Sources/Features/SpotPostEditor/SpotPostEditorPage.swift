@@ -26,8 +26,9 @@ public struct SpotPostEditorPage: View {
         NavigationView {
             VStack {
                 GeometryReader { geometry in
+                    let width = geometry.size.width
                     SpotPostEditorImage(
-                        width: geometry.size.width,
+                        width: width,
                         image: image,
                         textFieldStatuses: $state.textFieldValues,
                         selectedTextFieldStateID: $selectedTextFieldStateID,
