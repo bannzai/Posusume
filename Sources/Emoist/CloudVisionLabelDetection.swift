@@ -1,6 +1,7 @@
 import Foundation
 import Firebase
 import UIKit
+import SwiftUI
 
 public struct CloudVision {
     let functions = Functions.functions()
@@ -59,6 +60,21 @@ public struct CloudVision {
                     }
                 }
             }
+        }
+    }
+}
+
+public struct CloudVisionEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: CloudVision = .init()
+}
+
+public extension EnvironmentValues {
+    var cloudVision: CloudVision {
+        get {
+            self[CloudVisionEnvironmentKey.self]
+        }
+        set {
+            self[CloudVisionEnvironmentKey.self] = newValue
         }
     }
 }
