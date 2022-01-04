@@ -10,6 +10,8 @@ struct SpotPostView: View {
     @Environment(\.locationManager) var locationManager
     @Environment(\.geocoder) var geocoder
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.cloudVision) private var cloudVision
+    @Environment(\.emoist) private var emoist
 
     @State var error: Error?
     @State var title: String = ""
@@ -62,7 +64,10 @@ struct SpotPostView: View {
                let placemark = try? await geocoder.reverseGeocode(location: userLocation).first {
                 self.placemark = placemark
             }
+
             self.image = image
+
+            emotionalise(image: image)
         }
     }
 
@@ -72,7 +77,19 @@ struct SpotPostView: View {
                let placemark = try? await geocoder.reverseGeocode(location: location).first {
                 self.placemark = placemark
             }
-            image = photoLibraryResult.image
+
+            let image = photoLibraryResult.image
+            self.image = image
+
+            emotionalise(image: image)
+        }
+    }
+
+    private func emotionalise(image: UIImage) {
+        Task { @MainActor in
+            if let labels = try? await cloudVision.detectLabel(uiImage: image) {
+                editorState.emo = emoist.emiful(labels: labels)
+            }
         }
     }
 }
