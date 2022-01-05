@@ -26,6 +26,7 @@ public struct SpotPostEditorPage: View {
         NavigationView {
             VStack {
                 GeometryReader { geometry in
+                    // Keep view geometry width for snapshot. If get geometry.size.width directoly when snapshot, return difference width
                     let width = geometry.size.width
                     SpotPostEditorImage(
                         width: width,

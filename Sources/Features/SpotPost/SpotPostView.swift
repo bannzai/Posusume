@@ -57,22 +57,25 @@ struct SpotPostView: View {
     }
 
     private func takenPhoto(image: UIImage) {
-        Task {
+        Task { @MainActor in
             if let userLocation = try? await locationManager.userLocation(),
                let placemark = try? await geocoder.reverseGeocode(location: userLocation).first {
                 self.placemark = placemark
             }
+
             self.image = image
         }
     }
 
     private func selectedPhoto(photoLibraryResult: PhotoLibraryResult) {
-        Task {
+        Task { @MainActor in
             if let location = photoLibraryResult.location,
                let placemark = try? await geocoder.reverseGeocode(location: location).first {
                 self.placemark = placemark
             }
-            image = photoLibraryResult.image
+
+            let image = photoLibraryResult.image
+            self.image = image
         }
     }
 }
