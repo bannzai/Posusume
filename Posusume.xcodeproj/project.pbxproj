@@ -44,7 +44,6 @@
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		208FE939277F839B00C43DC1 /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */; };
 		208FE93C278091FD00C43DC1 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 208FE93B278091FD00C43DC1 /* FirebaseFunctions */; };
-		208FE93F2780931300C43DC1 /* Emoist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE93E2780931300C43DC1 /* Emoist.swift */; };
 		20A088732708FA1B00D94272 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088722708FA1B00D94272 /* Cache.swift */; };
 		20A088752708FDED00D94272 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A088742708FDED00D94272 /* Mutation.swift */; };
 		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
@@ -57,8 +56,6 @@
 		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
 		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
-		20B67E4227848EAC00AAB89D /* CloudVisionLabelDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */; };
-		20B67E442785108A00AAB89D /* String+Romaji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B67E432785108A00AAB89D /* String+Romaji.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -150,7 +147,6 @@
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		208FE938277F839B00C43DC1 /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
-		208FE93E2780931300C43DC1 /* Emoist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoist.swift; sourceTree = "<group>"; };
 		20A088722708FA1B00D94272 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		20A088742708FDED00D94272 /* Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		20A09D1A2701F2640090E22F /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
@@ -163,8 +159,6 @@
 		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
 		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
-		20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVisionLabelDetection.swift; sourceTree = "<group>"; };
-		20B67E432785108A00AAB89D /* String+Romaji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Romaji.swift"; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -340,16 +334,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		208FE93D278092FB00C43DC1 /* Emoist */ = {
-			isa = PBXGroup;
-			children = (
-				208FE93E2780931300C43DC1 /* Emoist.swift */,
-				20B67E432785108A00AAB89D /* String+Romaji.swift */,
-				20B67E4127848EAC00AAB89D /* CloudVisionLabelDetection.swift */,
-			);
-			path = Emoist;
 			sourceTree = "<group>";
 		};
 		20A09D192701F25B0090E22F /* ObservableObject */ = {
@@ -536,7 +520,6 @@
 		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				208FE93D278092FB00C43DC1 /* Emoist */,
 				2005EE4226FA0A41009001C7 /* Core */,
 				20CEA51726B4D18A0032BBD1 /* Network */,
 				BAFF701F261C3FB300584593 /* Components */,
@@ -861,10 +844,8 @@
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
 				2035A9CC270966C8007D580F /* SpotPostTitle.swift in Sources */,
 				2005EE4F26FA7D59009001C7 /* AppErrorMappers.swift in Sources */,
-				20B67E4227848EAC00AAB89D /* CloudVisionLabelDetection.swift in Sources */,
 				BA249E872625F1BB000DA60F /* LocationMeters.swift in Sources */,
 				2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */,
-				208FE93F2780931300C43DC1 /* Emoist.swift in Sources */,
 				BA26C896262293C9006555AE /* Future+Extension.swift in Sources */,
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
@@ -873,7 +854,6 @@
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,
-				20B67E442785108A00AAB89D /* String+Romaji.swift in Sources */,
 				20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */,
 				20A088752708FDED00D94272 /* Mutation.swift in Sources */,
 				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
