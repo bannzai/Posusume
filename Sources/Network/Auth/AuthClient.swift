@@ -36,6 +36,15 @@ public struct AuthClient {
             }
         }
     }
+
+    // MARK: - Link
+    public enum LinkAccountType {
+        case apple
+        case twitter
+    }
+    public func link(for accountType: LinkAccountType) {
+
+    }
 }
 
 public struct AuthClientKey: SwiftUI.EnvironmentKey {

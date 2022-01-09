@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200132DD278B17660005BDC6 /* SpotMapAccountIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200132DC278B17660005BDC6 /* SpotMapAccountIconView.swift */; };
+		200132E1278B1AA60005BDC6 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200132E0278B1AA60005BDC6 /* AuthClient.swift */; };
 		2004BA3326B18DA0007D3E82 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3226B18DA0007D3E82 /* FirebaseCrashlytics */; };
 		2004BA3526B18DA0007D3E82 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3426B18DA0007D3E82 /* FirebaseMessaging */; };
 		2004BA3726B18DA0007D3E82 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2004BA3626B18DA0007D3E82 /* FirebaseAuth */; };
@@ -119,6 +121,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		200132DC278B17660005BDC6 /* SpotMapAccountIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapAccountIconView.swift; sourceTree = "<group>"; };
+		200132E0278B1AA60005BDC6 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		2005EE3D26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationHeaderAddingInterceptor.swift; sourceTree = "<group>"; };
 		2005EE4026FA0A37009001C7 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		2005EE4326FA0C43009001C7 /* RequestLoggingInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggingInterceptor.swift; sourceTree = "<group>"; };
@@ -231,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200132DF278B1AA10005BDC6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				200132E0278B1AA60005BDC6 /* AuthClient.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		2005EE3C26F9D416009001C7 /* Interceptors */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +417,7 @@
 		20CEA51726B4D18A0032BBD1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				200132DF278B1AA10005BDC6 /* Auth */,
 				BAF1E46E26268B0C0055EBEB /* CloudStorage */,
 				20A09D192701F25B0090E22F /* ObservableObject */,
 				20ECE4FB270E4620009E7025 /* Database */,
@@ -435,6 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				20ECE50227105840009E7025 /* SpotMapImage.swift */,
+				200132DC278B17660005BDC6 /* SpotMapAccountIconView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -850,6 +864,7 @@
 				2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */,
 				20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */,
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
+				200132DD278B17660005BDC6 /* SpotMapAccountIconView.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
@@ -899,6 +914,7 @@
 				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
 				20FB28A9275C276200BD4E54 /* Ref.swift in Sources */,
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,
+				200132E1278B1AA60005BDC6 /* AuthClient.swift in Sources */,
 				BA26C88526227C62006555AE /* IdentifiableError.swift in Sources */,
 				2005EE4126FA0A37009001C7 /* AppError.swift in Sources */,
 				2016C8BC271EFD4D00B438C6 /* When.swift in Sources */,
