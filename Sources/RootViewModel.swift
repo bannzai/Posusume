@@ -6,15 +6,29 @@ import CoreLocation
 @MainActor
 final class RootViewModel: ObservableObject {
     @Environment(\.locationManager) var locationManager
+    @Environment(\.auth) var auth
 
     @Published var locationAuthorizationStatus: CLAuthorizationStatus?
     @Published var me: Me?
+
+    var streamTask: Task<Void, Never>?
 
     func process() async throws {
         if case .requiredAutentification = locationManager.invalidationReason() {
             locationAuthorizationStatus = await locationManager.requestAuthorization()
         }
-        me = try await signInAnonymously()
+        me = try await signIn()
+
+        streamTask?.cancel()
+        streamTask = Task { @MainActor in
+            for await user in auth.stateDidChange() {
+                if let user = user {
+                    self.me = .init(id: .init(rawValue: user.uid), isAnonymous: user.isAnonymous)
+                } else {
+                    self.me = nil
+                }
+            }
+        }
     }
 
     var viewKind: ViewKind {
@@ -38,24 +52,13 @@ final class RootViewModel: ObservableObject {
         case main(me: Me)
     }
 
-    func signInAnonymously() async throws -> Me {
-        try await withCheckedThrowingContinuation { continuation in
-            FirebaseAuth.Auth.auth().signInAnonymously() { (result, error) in
-                if let error = error {
-                    continuation.resume(throwing: (mappedAppError(from: error)))
-                    return
-                } else {
-                    guard let result = result else {
-                        fatalError("unexpected pattern about result and error is nil")
-                    }
-                    let id = Me.ID(rawValue: result.user.uid)
-                    self.store(meID: id)
+    func signIn() async throws -> Me {
+        let authentificatedUser = try await auth.signIn()
 
-                    let me = Me(id: id)
-                    continuation.resume(returning: me)
-                }
-            }
-        }
+        let id = Me.ID(rawValue: authentificatedUser.uid)
+        self.store(meID: id)
+
+        return .init(id: id, isAnonymous: authentificatedUser.isAnonymous)
     }
 
     // MARK: - Private
@@ -64,9 +67,11 @@ final class RootViewModel: ObservableObject {
     }
     // TODO: Use Keychain when production
     private func store(meID: Me.ID) {
+        #if DEBUG
         guard UserDefaults.standard.string(forKey: StoreKey.firebaseUserID) == nil else {
             return
         }
         UserDefaults.standard.setValue(meID.rawValue, forKey: StoreKey.firebaseUserID)
+        #endif
     }
 }
