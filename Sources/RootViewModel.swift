@@ -23,7 +23,7 @@ final class RootViewModel: ObservableObject {
         streamTask = Task { @MainActor in
             for await user in auth.stateDidChange() {
                 if let user = user {
-                    self.me = .init(id: .init(rawValue: user.uid), isAnonymous: user.isAnonymous)
+                    self.me = .init(id: .init(rawValue: user.uid))
                 } else {
                     self.me = nil
                 }
@@ -58,7 +58,7 @@ final class RootViewModel: ObservableObject {
         let id = Me.ID(rawValue: authentificatedUser.uid)
         self.store(meID: id)
 
-        return .init(id: id, isAnonymous: authentificatedUser.isAnonymous)
+        return .init(id: id)
     }
 
     // MARK: - Private
