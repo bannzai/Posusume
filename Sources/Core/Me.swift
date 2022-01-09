@@ -2,7 +2,8 @@ import SwiftUI
 import Foundation
 
 public struct Me: Identifiable, Equatable {
-    public var id: ID
+    public let id: ID
+    public var isAnonymous: Bool
 
     public struct ID: RawRepresentable, Equatable, Hashable {
         public let rawValue: String
