@@ -1,5 +1,8 @@
 import Foundation
 import Apollo
+import os.log
+
+private let networkLogger = Logger(subsystem: "com.posusume.log", category: "Network")
 
 public struct RequestLoggingInterceptor: ApolloInterceptor {
     public func interceptAsync<Operation: GraphQLOperation>(

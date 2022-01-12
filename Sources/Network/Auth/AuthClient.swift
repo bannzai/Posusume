@@ -1,6 +1,9 @@
 import Foundation
 import Firebase
 import SwiftUI
+import os.log
+
+private let authLogger = Logger(subsystem: "com.posusume.log", category: "Auth")
 
 public struct AuthClient {
     private var client: FirebaseAuth.Auth { .auth() }
