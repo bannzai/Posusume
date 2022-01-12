@@ -7,12 +7,13 @@ public struct RequestLoggingInterceptor: ApolloInterceptor {
         request: HTTPRequest<Operation>,
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-        print(
-            "========= Begin \(request.operation.operationName) =========",
-            "\(request)",
-            "========= End \(request.operation.operationName) =========",
-            separator: "\n"
-        )
-        chain.proceedAsync(request: request, response: response, completion: completion)
+            networkLogger.debug(
+"""
+========= Begin \(request.operation.operationName) =========
+\(request.debugDescription)
+========= End \(request.operation.operationName) =========
+"""
+            )
+            chain.proceedAsync(request: request, response: response, completion: completion)
     }
 }

@@ -58,6 +58,7 @@
 		20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09168271D0C830015F0F3 /* Tansaku.swift */; };
 		20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */; };
 		20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */; };
+		20C5F5D1278F81720092977B /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5F5D0278F81720092977B /* Logger.swift */; };
 		20ECE4FD270E4627009E7025 /* IDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FC270E4627009E7025 /* IDGenerator.swift */; };
 		20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */; };
 		20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECE50227105840009E7025 /* SpotMapImage.swift */; };
@@ -163,6 +164,7 @@
 		20B09168271D0C830015F0F3 /* Tansaku.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tansaku.swift; sourceTree = "<group>"; };
 		20B0916B271D17060015F0F3 /* SpotPostEditorPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorPage.swift; sourceTree = "<group>"; };
 		20B09175271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorEffectCover.swift; sourceTree = "<group>"; };
+		20C5F5D0278F81720092977B /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		20ECE4FC270E4627009E7025 /* IDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDGenerator.swift; sourceTree = "<group>"; };
 		20ECE4FF270F1045009E7025 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 		20ECE50227105840009E7025 /* SpotMapImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotMapImage.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				BAD9A8B52610B73100676F22 /* Preview Content */,
 				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
 				208F8AEC272907B300D604DA /* GoogleService-Info.plist */,
+				20C5F5D0278F81720092977B /* Logger.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
+				20C5F5D1278F81720092977B /* Logger.swift in Sources */,
 				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
 				20FB28A9275C276200BD4E54 /* Ref.swift in Sources */,
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,

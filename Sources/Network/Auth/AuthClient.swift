@@ -11,6 +11,7 @@ public struct AuthClient {
     public func stateDidChange() -> AsyncStream<User?> {
         .init { continuation in
             client.addStateDidChangeListener { auth, user in
+                authLogger.debug("[DEBUG] auth state did changed. user is not nil: \(user != nil), user id \(String(describing: user?.uid))")
                 continuation.yield(user)
             }
         }
@@ -20,16 +21,19 @@ public struct AuthClient {
     public func signIn() async throws -> User {
         try await withCheckedThrowingContinuation { continuation in
             if let user = client.currentUser {
+                authLogger.debug("[DEBUG] SignIn: user is already exists")
                 continuation.resume(returning: user)
             } else {
                 client.signInAnonymously() { (result, error) in
                     if let error = error {
+                        authLogger.debug("[DEBUG] SignIn: got error")
                         continuation.resume(throwing: (mappedAppError(from: error)))
                         return
                     } else {
                         guard let result = result else {
                             fatalError("unexpected pattern about result and error is nil")
                         }
+                        authLogger.debug("[DEBUG] SignIn: SignIn: Done signin via signInAnonymously")
                         continuation.resume(returning: result.user)
                     }
                 }
