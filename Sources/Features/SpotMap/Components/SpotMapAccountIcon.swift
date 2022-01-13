@@ -12,6 +12,5 @@ struct SpotMapAccountIcon: View {
                 .resizable()
                 .frame(width: 44, height: 44)
         }
-
     }
 }
