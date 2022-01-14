@@ -13,7 +13,7 @@ A field whose value is a valid decimal degrees longitude number (53.471): https:
 scalar Longitude
 
 type Query {
-  me: Me
+  me: Me!
   spots(minLatitude: Latitude!, minLongitude: Longitude!, maxLatitude: Latitude!, maxLongitude: Longitude!): [Spot!]!
   spot(id: ID!): Spot!
 }
