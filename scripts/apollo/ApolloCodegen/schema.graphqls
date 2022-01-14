@@ -55,10 +55,23 @@ type GeoPoint {
 
 type User implements Node {
   id: ID!
+  name: String!
+  profileImageURL: URL
+  resizedProfileImageURLs: ResizedUserProfileImageURLs!
+}
+
+"""
+ResizedUserProfileImageURLs container of resized image URLs on Cloud Functions
+All of these properties are optional because they are determined asynchronously.
+Also, the newly added ResizedImageURL type will be null.
+"""
+type ResizedUserProfileImageURLs {
+  thumbnail: URL
 }
 
 type Me implements Node {
   id: ID!
+  user: User!
   spots: [Spot!]!
 }
 
