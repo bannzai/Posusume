@@ -498,7 +498,7 @@ public final class SpotMapIconQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("me", type: .object(Me.selections)),
+        GraphQLField("me", type: .nonNull(.object(Me.selections))),
       ]
     }
 
@@ -508,16 +508,16 @@ public final class SpotMapIconQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(me: Me? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "me": me.flatMap { (value: Me) -> ResultMap in value.resultMap }])
+    public init(me: Me) {
+      self.init(unsafeResultMap: ["__typename": "Query", "me": me.resultMap])
     }
 
-    public var me: Me? {
+    public var me: Me {
       get {
-        return (resultMap["me"] as? ResultMap).flatMap { Me(unsafeResultMap: $0) }
+        return Me(unsafeResultMap: resultMap["me"]! as! ResultMap)
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "me")
+        resultMap.updateValue(newValue.resultMap, forKey: "me")
       }
     }
 
