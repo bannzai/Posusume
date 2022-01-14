@@ -7,7 +7,7 @@ func codegen() throws {
         with: cliPath,
         options: ApolloCodegenOptions(
             includes: "schemas/graphql/*.graphql",
-            namespace: "GraphQL",
+            namespace: nil,
             outputFormat: .singleFile(atFileURL: appPath.appendingPathComponent("Sources/Network/GraphQL/GraphQL.swift")),
             customScalarFormat: .passthrough,
             urlToSchemaFile: schemaPath
