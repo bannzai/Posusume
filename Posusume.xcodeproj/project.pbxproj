@@ -28,7 +28,6 @@
 		2016C8C52724ED8A00B438C6 /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8C42724ED8A00B438C6 /* Snapshot.swift */; };
 		2016C8C72724F18300B438C6 /* SpotPostEditorImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016C8C62724F18300B438C6 /* SpotPostEditorImage.swift */; };
 		201F268C27009C7B00A5DD1E /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201F268B27009C7B00A5DD1E /* Secret.swift */; };
-		2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */; };
 		2035A9C32709229F007D580F /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C22709229F007D580F /* Upload.swift */; };
 		2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C627094E4B007D580F /* SpotPostImage.swift */; };
 		2035A9CA270958A2007D580F /* ImagePickEventAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */; };
@@ -39,8 +38,7 @@
 		2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */; };
 		2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */; };
 		2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DC270BAB68007D580F /* RootViewModel.swift */; };
-		2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175326B5852100C85A25 /* Spots.graphql.swift */; };
-		2067175626B5852200C85A25 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175426B5852100C85A25 /* Types.graphql.swift */; };
+		205359F42791B25400F0EC65 /* GraphQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205359F32791B25400F0EC65 /* GraphQL.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
@@ -51,7 +49,6 @@
 		20A09D1B2701F2640090E22F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1A2701F2640090E22F /* Query.swift */; };
 		20A09D1D2702186F0090E22F /* InterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A09D1C2702186F0090E22F /* InterceptorProvider.swift */; };
 		20A96B99271B8EFC00E1765B /* SpotDetailPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B98271B8EFC00E1765B /* SpotDetailPage.swift */; };
-		20A96B9B271B95DE00E1765B /* Spot.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9A271B95DE00E1765B /* Spot.graphql.swift */; };
 		20A96B9E271B965A00E1765B /* SpotDetailImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9D271B965A00E1765B /* SpotDetailImage.swift */; };
 		20A96BA0271B96DB00E1765B /* SpotImageFrameModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */; };
 		20A96BA3271B989D00E1765B /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A96BA2271B989D00E1765B /* Loading.swift */; };
@@ -135,7 +132,6 @@
 		2016C8C42724ED8A00B438C6 /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
 		2016C8C62724F18300B438C6 /* SpotPostEditorImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostEditorImage.swift; sourceTree = "<group>"; };
 		201F268B27009C7B00A5DD1E /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
-		2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotAdd.graphql.swift; sourceTree = "<group>"; };
 		2035A9C22709229F007D580F /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		2035A9C627094E4B007D580F /* SpotPostImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotPostImage.swift; sourceTree = "<group>"; };
 		2035A9C9270958A2007D580F /* ImagePickEventAdaptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickEventAdaptor.swift; sourceTree = "<group>"; };
@@ -146,8 +142,7 @@
 		2035A9D3270A3167007D580F /* ErrorHandleModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandleModifier.swift; sourceTree = "<group>"; };
 		2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireLocationAuthorizationView.swift; sourceTree = "<group>"; };
 		2035A9DC270BAB68007D580F /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
-		2067175326B5852100C85A25 /* Spots.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spots.graphql.swift; sourceTree = "<group>"; };
-		2067175426B5852100C85A25 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
+		205359F32791B25400F0EC65 /* GraphQL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQL.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -157,7 +152,6 @@
 		20A09D1A2701F2640090E22F /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		20A09D1C2702186F0090E22F /* InterceptorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptorProvider.swift; sourceTree = "<group>"; };
 		20A96B98271B8EFC00E1765B /* SpotDetailPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailPage.swift; sourceTree = "<group>"; };
-		20A96B9A271B95DE00E1765B /* Spot.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spot.graphql.swift; sourceTree = "<group>"; };
 		20A96B9D271B965A00E1765B /* SpotDetailImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailImage.swift; sourceTree = "<group>"; };
 		20A96B9F271B96DB00E1765B /* SpotImageFrameModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageFrameModifier.swift; sourceTree = "<group>"; };
 		20A96BA2271B989D00E1765B /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
@@ -318,11 +312,8 @@
 		2067175226B5852100C85A25 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
+				205359F32791B25400F0EC65 /* GraphQL.swift */,
 				2067175726B59BFB00C85A25 /* Scalar */,
-				2067175326B5852100C85A25 /* Spots.graphql.swift */,
-				20A96B9A271B95DE00E1765B /* Spot.graphql.swift */,
-				2035A9C027091CD9007D580F /* SpotAdd.graphql.swift */,
-				2067175426B5852100C85A25 /* Types.graphql.swift */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -863,7 +854,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2067175526B5852200C85A25 /* Spots.graphql.swift in Sources */,
 				20FB28AD275C2B2300BD4E54 /* SpotMapViewModel.swift in Sources */,
 				20A96B99271B8EFC00E1765B /* SpotDetailPage.swift in Sources */,
 				2067175F26B641F100C85A25 /* APIClient.swift in Sources */,
@@ -883,11 +873,11 @@
 				20B0916C271D17060015F0F3 /* SpotPostEditorPage.swift in Sources */,
 				20A088752708FDED00D94272 /* Mutation.swift in Sources */,
 				2005EE3E26F9D41D009001C7 /* AuthorizationHeaderAddingInterceptor.swift in Sources */,
-				2067175626B5852200C85A25 /* Types.graphql.swift in Sources */,
 				BA249E682625E12D000DA60F /* SpotMapView.swift in Sources */,
 				2035A9CE27096747007D580F /* SpotPostGeoPoint.swift in Sources */,
 				20B09169271D0C830015F0F3 /* Tansaku.swift in Sources */,
 				BAD9A8B22610B72F00676F22 /* RootView.swift in Sources */,
+				205359F42791B25400F0EC65 /* GraphQL.swift in Sources */,
 				BA249E812625EFD4000DA60F /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				2035A9C32709229F007D580F /* Upload.swift in Sources */,
 				20B09176271DC3CE0015F0F3 /* SpotPostEditorEffectCover.swift in Sources */,
@@ -903,7 +893,6 @@
 				BAFF7024261C3FB300584593 /* Color.swift in Sources */,
 				20C5F5D4279060580092977B /* AccountPage.swift in Sources */,
 				2016C8C0272204AC00B438C6 /* TextFieldComponentModifiers.swift in Sources */,
-				20A96B9B271B95DE00E1765B /* Spot.graphql.swift in Sources */,
 				20A96BA3271B989D00E1765B /* Loading.swift in Sources */,
 				201F268C27009C7B00A5DD1E /* Secret.swift in Sources */,
 				20ECE500270F1045009E7025 /* MKCoordinateRegion+Extension.swift in Sources */,
@@ -923,7 +912,6 @@
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 				BA31733A262BC87900E1212C /* PhotoLibrary.swift in Sources */,
 				2035A9D4270A3167007D580F /* ErrorHandleModifier.swift in Sources */,
-				2035A9C127091CD9007D580F /* SpotAdd.graphql.swift in Sources */,
 				20FB28A9275C276200BD4E54 /* Ref.swift in Sources */,
 				20ECE50327105840009E7025 /* SpotMapImage.swift in Sources */,
 				200132E1278B1AA60005BDC6 /* AuthClient.swift in Sources */,
