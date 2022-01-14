@@ -12,7 +12,7 @@ struct SpotMapView: View {
     @State var isPresentingSpotPost = false
 
     var body: some View {
-        ZStack(alignment: .init(horizontal: .center, vertical: .bottom)) {
+        ZStack {
             Map(coordinateRegion: mapCoordinateRegion,
                 showsUserLocation: true,
                 annotationItems: viewModel.spots,
@@ -23,9 +23,14 @@ struct SpotMapView: View {
             }).onChange(of: mapCoordinateRegion.wrappedValue) { newRegion in
                 viewModel.fetch(region: newRegion)
             }
+            .edgesIgnoringSafeArea(.all)
 
-            HStack(alignment: .bottom) {
+            VStack {
+                SpotMapAccountIcon()
+                    .frame(alignment: .top)
+
                 Spacer()
+
                 Button {
                     isPresentingSpotPost = true
                 } label: {
@@ -34,9 +39,11 @@ struct SpotMapView: View {
                         .background(GradientColor.barn)
                         .clipShape(Circle())
                 }
+                .frame(alignment: .bottom)
+                .padding(.trailing, 20)
+                .padding(.bottom, 60)
             }
-            .padding(.trailing, 20)
-            .padding(.bottom, 60)
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .sheet(
             isPresented: $isPresentingSpotPost,
@@ -48,7 +55,6 @@ struct SpotMapView: View {
             }
         )
         .handle(error: $viewModel.error)
-        .edgesIgnoringSafeArea(.all)
         .task {
             do {
                 let userLocation = try await locationManager.userLocation()

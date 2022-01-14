@@ -1,0 +1,13 @@
+query SpotMapIcon {
+  me {
+     id
+     user {
+       id
+       name
+       profileImageURL
+       resizedProfileImageURLs {
+          thumbnail
+       }
+     }
+  }
+}

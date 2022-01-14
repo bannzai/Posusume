@@ -2,7 +2,7 @@ import SwiftUI
 import Foundation
 
 public struct Me: Identifiable, Equatable {
-    public var id: ID
+    public let id: ID
 
     public struct ID: RawRepresentable, Equatable, Hashable {
         public let rawValue: String
@@ -13,7 +13,7 @@ public struct Me: Identifiable, Equatable {
 }
 
 @dynamicMemberLookup
-public struct MeMembers {
+public struct MeProxy {
     public let me: Me!
     
     public init(me: Me) {
@@ -30,11 +30,11 @@ public struct MeMembers {
 }
 
 public struct MeEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: MeMembers = .init()
+    public static var defaultValue: MeProxy = .init()
 }
 
 public extension EnvironmentValues {
-    var me: MeMembers {
+    var me: MeProxy {
         get {
             self[MeEnvironmentKey.self]
         }

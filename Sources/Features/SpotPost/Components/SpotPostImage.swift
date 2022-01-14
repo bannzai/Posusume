@@ -31,7 +31,7 @@ struct SpotPostImage: View {
                     } else {
                         VStack {
                             Spacer()
-                            Image("anyPicture")
+                            Image(systemName: "photo")
                                 .resizable()
                                 .renderingMode(.template)
                                 .aspectRatio(contentMode: .fit)
