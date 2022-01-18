@@ -38,6 +38,7 @@ public struct AccountPage: View {
                 username = data.me.user.name
             }
         }
+        .handle(error: $error)
     }
 
     private var profileImageURL: URL? {
