@@ -1,5 +1,5 @@
-mutation EditMyName($input: EditMyNameInput!) {
-  editMyName(input: $input) {
+mutation UserNameUpdate($input: UserNameUpdateInput!) {
+  userNameUpdate(input: $input) {
      me {
        user {
         id

@@ -4,7 +4,7 @@
 import Apollo
 import Foundation
 
-public struct EditMyNameInput: GraphQLMapConvertible {
+public struct UserNameUpdateInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
@@ -324,12 +324,12 @@ public final class AccountPageQuery: GraphQLQuery {
   }
 }
 
-public final class EditMyNameMutation: GraphQLMutation {
+public final class UserNameUpdateMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation EditMyName($input: EditMyNameInput!) {
-      editMyName(input: $input) {
+    mutation UserNameUpdate($input: UserNameUpdateInput!) {
+      userNameUpdate(input: $input) {
         __typename
         me {
           __typename
@@ -343,11 +343,11 @@ public final class EditMyNameMutation: GraphQLMutation {
     }
     """
 
-  public let operationName: String = "EditMyName"
+  public let operationName: String = "UserNameUpdate"
 
-  public var input: EditMyNameInput
+  public var input: UserNameUpdateInput
 
-  public init(input: EditMyNameInput) {
+  public init(input: UserNameUpdateInput) {
     self.input = input
   }
 
@@ -360,7 +360,7 @@ public final class EditMyNameMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("editMyName", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.object(EditMyName.selections))),
+        GraphQLField("userNameUpdate", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.object(UserNameUpdate.selections))),
       ]
     }
 
@@ -370,21 +370,21 @@ public final class EditMyNameMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(editMyName: EditMyName) {
-      self.init(unsafeResultMap: ["__typename": "Mutation", "editMyName": editMyName.resultMap])
+    public init(userNameUpdate: UserNameUpdate) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "userNameUpdate": userNameUpdate.resultMap])
     }
 
-    public var editMyName: EditMyName {
+    public var userNameUpdate: UserNameUpdate {
       get {
-        return EditMyName(unsafeResultMap: resultMap["editMyName"]! as! ResultMap)
+        return UserNameUpdate(unsafeResultMap: resultMap["userNameUpdate"]! as! ResultMap)
       }
       set {
-        resultMap.updateValue(newValue.resultMap, forKey: "editMyName")
+        resultMap.updateValue(newValue.resultMap, forKey: "userNameUpdate")
       }
     }
 
-    public struct EditMyName: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["EditMyNamePayload"]
+    public struct UserNameUpdate: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["UserNameUpdatePayload"]
 
       public static var selections: [GraphQLSelection] {
         return [
@@ -400,7 +400,7 @@ public final class EditMyNameMutation: GraphQLMutation {
       }
 
       public init(me: Me) {
-        self.init(unsafeResultMap: ["__typename": "EditMyNamePayload", "me": me.resultMap])
+        self.init(unsafeResultMap: ["__typename": "UserNameUpdatePayload", "me": me.resultMap])
       }
 
       public var __typename: String {
