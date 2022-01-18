@@ -3,9 +3,11 @@ import SwiftUI
 
 public struct AccountPage: View {
     @StateObject var watch = Watch<AccountPageQuery>()
+    @StateObject var userNameUpdate = Mutation<UserNameUpdateMutation>()
 
     @State var user: AccountPageQuery.Data.Me.User?
     @State var username: String = ""
+    @State var error: Error?
 
     public var body: some View {
         Loading(value: user) { user in
@@ -16,7 +18,13 @@ public struct AccountPage: View {
                 TextField("", text: $username)
                     .multilineTextAlignment(.center)
                     .onSubmit {
-                        print("Submit")
+                        Task { @MainActor in
+                            do {
+                                try await userNameUpdate(for: .init(input: .init(name: username)))
+                            } catch {
+                                self.error = error
+                            }
+                        }
                     }
             }
             .navigationTitle(user.name)
