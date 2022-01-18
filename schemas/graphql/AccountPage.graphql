@@ -1,0 +1,10 @@
+query AccountPage {
+  me {
+     id
+     user {
+       ...ProfileImageFragment
+       name
+     }
+  }
+}
+
