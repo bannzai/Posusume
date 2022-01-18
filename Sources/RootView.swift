@@ -18,8 +18,10 @@ struct RootView: View {
             case .requireLocationPermission:
                 RequireLocationAuthorizationView()
             case let .main(me):
-                SpotMapView()
-                    .environment(\.me, .init(me: me))
+                NavigationView {
+                    SpotMapView()
+                        .environment(\.me, .init(me: me))
+                }
             }
         }
         .task {
