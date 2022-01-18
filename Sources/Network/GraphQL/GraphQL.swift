@@ -4,6 +4,25 @@
 import Apollo
 import Foundation
 
+public struct EditMyNameInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - name
+  public init(name: String) {
+    graphQLMap = ["name": name]
+  }
+
+  public var name: String {
+    get {
+      return graphQLMap["name"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+}
+
 public struct SpotAddInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -297,6 +316,194 @@ public final class AccountPageQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "thumbnail")
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class EditMyNameMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation EditMyName($input: EditMyNameInput!) {
+      editMyName(input: $input) {
+        __typename
+        me {
+          __typename
+          user {
+            __typename
+            id
+            name
+          }
+        }
+      }
+    }
+    """
+
+  public let operationName: String = "EditMyName"
+
+  public var input: EditMyNameInput
+
+  public init(input: EditMyNameInput) {
+    self.input = input
+  }
+
+  public var variables: GraphQLMap? {
+    return ["input": input]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Mutation"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("editMyName", arguments: ["input": GraphQLVariable("input")], type: .nonNull(.object(EditMyName.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(editMyName: EditMyName) {
+      self.init(unsafeResultMap: ["__typename": "Mutation", "editMyName": editMyName.resultMap])
+    }
+
+    public var editMyName: EditMyName {
+      get {
+        return EditMyName(unsafeResultMap: resultMap["editMyName"]! as! ResultMap)
+      }
+      set {
+        resultMap.updateValue(newValue.resultMap, forKey: "editMyName")
+      }
+    }
+
+    public struct EditMyName: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["EditMyNamePayload"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("me", type: .nonNull(.object(Me.selections))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(me: Me) {
+        self.init(unsafeResultMap: ["__typename": "EditMyNamePayload", "me": me.resultMap])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var me: Me {
+        get {
+          return Me(unsafeResultMap: resultMap["me"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "me")
+        }
+      }
+
+      public struct Me: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Me"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("user", type: .nonNull(.object(User.selections))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(user: User) {
+          self.init(unsafeResultMap: ["__typename": "Me", "user": user.resultMap])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var user: User {
+          get {
+            return User(unsafeResultMap: resultMap["user"]! as! ResultMap)
+          }
+          set {
+            resultMap.updateValue(newValue.resultMap, forKey: "user")
+          }
+        }
+
+        public struct User: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["User"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+              GraphQLField("name", type: .nonNull(.scalar(String.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(id: GraphQLID, name: String) {
+            self.init(unsafeResultMap: ["__typename": "User", "id": id, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var id: GraphQLID {
+            get {
+              return resultMap["id"]! as! GraphQLID
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "id")
+            }
+          }
+
+          public var name: String {
+            get {
+              return resultMap["name"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
             }
           }
         }
