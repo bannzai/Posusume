@@ -21,11 +21,30 @@ import SwiftUI
 @MainActor public final class Watch<Query: Apollo.GraphQLQuery>: ObservableObject {
     @Environment(\.apollo) var apollo
 
-    internal func watch(query: Query) -> AsyncThrowingStream<Query.Data, Swift.Error> {
-        apollo.watch(query: query)
+    @Published public private(set) var isFirstFetching = false
+
+    internal func watch(query: Query) -> AsyncStream<Query.Data> {
+        isFirstFetching = true
+        defer {
+            isFirstFetching = false
+        }
+
+
+        return .init { continuation in
+            Task { @MainActor in
+                do {
+                    for try await data in apollo.watch(query: query) {
+                        isFirstFetching = false
+                        continuation.yield(with: .success(data))
+                    }
+                } catch {
+                    isFirstFetching = false
+                }
+            }
+        }
     }
 
-    public func callAsFunction(query: Query) -> AsyncThrowingStream<Query.Data, Swift.Error> {
+    public func callAsFunction(for query: Query) -> AsyncStream<Query.Data> {
         watch(query: query)
     }
 }
