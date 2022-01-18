@@ -39,6 +39,7 @@
 		2035A9DB270BA9BF007D580F /* RequireLocationAuthorizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */; };
 		2035A9DD270BAB68007D580F /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2035A9DC270BAB68007D580F /* RootViewModel.swift */; };
 		205359F42791B25400F0EC65 /* GraphQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205359F32791B25400F0EC65 /* GraphQL.swift */; };
+		20571E512796D71A003BDA5C /* Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20571E502796D719003BDA5C /* Watch.swift */; };
 		2067175D26B5A32F00C85A25 /* Scalar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175C26B5A32F00C85A25 /* Scalar.swift */; };
 		2067175F26B641F100C85A25 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2067175E26B641F100C85A25 /* APIClient.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
@@ -143,6 +144,7 @@
 		2035A9DA270BA9BF007D580F /* RequireLocationAuthorizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireLocationAuthorizationView.swift; sourceTree = "<group>"; };
 		2035A9DC270BAB68007D580F /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		205359F32791B25400F0EC65 /* GraphQL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphQL.swift; sourceTree = "<group>"; };
+		20571E502796D719003BDA5C /* Watch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Watch.swift; sourceTree = "<group>"; };
 		2067175C26B5A32F00C85A25 /* Scalar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scalar.swift; sourceTree = "<group>"; };
 		2067175E26B641F100C85A25 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				20A09D1A2701F2640090E22F /* Query.swift */,
+				20571E502796D719003BDA5C /* Watch.swift */,
 				20A088722708FA1B00D94272 /* Cache.swift */,
 				20A088742708FDED00D94272 /* Mutation.swift */,
 				2035A9C22709229F007D580F /* Upload.swift */,
@@ -867,6 +870,7 @@
 				2035A9C727094E4B007D580F /* SpotPostImage.swift in Sources */,
 				200132DD278B17660005BDC6 /* SpotMapAccountIcon.swift in Sources */,
 				BA39F855263AAF0E00A17E0A /* PhotoCameraView.swift in Sources */,
+				20571E512796D71A003BDA5C /* Watch.swift in Sources */,
 				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				2005EE4D26FA11CB009001C7 /* Plist.swift in Sources */,
 				BA249E752625E217000DA60F /* Me.swift in Sources */,

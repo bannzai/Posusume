@@ -6,7 +6,6 @@ import MapKit
 public struct SpotDetailPage: View {
     @Environment(\.dismiss) var dismiss
 
-    @StateObject var cache = Cache<SpotQuery>()
     @StateObject var query = Query<SpotQuery>()
 
     @State var response: SpotQuery.Data?
@@ -43,7 +42,7 @@ public struct SpotDetailPage: View {
             .padding(.horizontal, 20)
             .background(Color.screenBackground.edgesIgnoringSafeArea(.all))
             .task {
-                if let response = await cache(for: .init(spotId: spotID)) {
+                if let response = await query.cache(for: .init(spotId: spotID)) {
                     self.response = response
                 }
 

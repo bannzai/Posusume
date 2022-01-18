@@ -3,8 +3,9 @@ import SwiftUI
 
 struct SpotMapAccountIcon: View {
     @Environment(\.me) var me
-    @StateObject var query = Query<SpotMapIconQuery>()
-    @StateObject var cache = Cache<SpotMapIconQuery>()
+
+    @StateObject var watch = Watch<SpotMapIconQuery>()
+
     @State var user: SpotMapIconQuery.Data.Me.User?
 
     var body: some View {
@@ -24,8 +25,9 @@ struct SpotMapAccountIcon: View {
             .frame(width: 44, height: 44)
         }
         .task {
-            user = await cache(for: .init())?.me.user
-            user = try? await query(for: .init()).me.user
+            for await data in watch(for: .init()) {
+                user = data.me.user
+            }
         }
     }
 

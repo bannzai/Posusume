@@ -3,7 +3,6 @@ import MapKit
 
 @MainActor
 final class SpotMapViewModel: ObservableObject {
-    let cache = Cache<SpotsQuery>()
     let query = Query<SpotsQuery>()
 
     @Published var spots: [SpotsQuery.Data.Spot] = []
@@ -12,7 +11,7 @@ final class SpotMapViewModel: ObservableObject {
     private var fetchedSpotCoordinateRange: SpotCoordinateRange? = nil
 
     func fetch(region: MKCoordinateRegion) {
-        if cache.isFetching || query.isFetching {
+        if query.isFetching {
             return
         }
         if !shouldFetchNewSpots(region: region) {
@@ -22,7 +21,7 @@ final class SpotMapViewModel: ObservableObject {
 
         Task {
             do {
-                spots += await cache(for: .init(region: region))?.spots ?? []
+                spots += await query.cache(for: .init(region: region))?.spots ?? []
                 spots += try await query(for: .init(region: region)).spots
             } catch {
                 self.error = error
