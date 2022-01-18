@@ -20,7 +20,9 @@ struct SpotMapImage: View {
                     isPresentingSpotDetail = true
                 }
                 .sheet(isPresented: $isPresentingSpotDetail) {
-                    SpotDetailPage(spotID: fragment.id)
+                    NavigationView {
+                        SpotDetailPage(spotID: fragment.id)
+                    }
                 }
         } placeholder: {
             ProgressView()
