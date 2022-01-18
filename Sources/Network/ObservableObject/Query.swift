@@ -19,12 +19,28 @@ import SwiftUI
 public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
     @Environment(\.apollo) var apollo
 
-    @Published public private(set) var isFetching = false
+    @Published public private(set) var isFetchingFromCache = false
+    @Published public private(set) var isFetchingFromServer = false
+
+    public var isFetching: Bool { isFetchingFromCache || isFetchingFromServer }
+
+    public func cache(for query: Query) async -> Query.Data? {
+        isFetchingFromCache = true
+        defer {
+            isFetchingFromCache = false
+        }
+
+        do {
+            return try await apollo.fetchFromCache(query: query)
+        } catch {
+            return nil
+        }
+    }
 
     internal func fetch(query: Query) async throws -> Query.Data {
-        isFetching = true
+        isFetchingFromServer = true
         defer {
-            isFetching = false
+            isFetchingFromServer = false
         }
 
         return try await apollo.fetchFromServer(query: query)
