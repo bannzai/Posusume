@@ -10,5 +10,15 @@ public struct IdentifiableError: LocalizedError, Identifiable {
     public var id: AnyHashable {
         "\(error._domain)\(error._code)"
     }
-    public var localizedDescription: String { error.localizedDescription }
+    public var localizedDescription: String {
+        if let graphQLError = error as? AppApolloClient.AppGraphQLError {
+            if let firstError = graphQLError.applicationErrors.first {
+                return firstError.localizedDescription
+            } else {
+                return graphQLError.localizedDescription
+            }
+        } else {
+            return error.localizedDescription
+        }
+    }
 }
