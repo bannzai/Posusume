@@ -2,8 +2,6 @@ import Foundation
 import SwiftUI
 
 struct SpotMapAccountIcon: View {
-    @Environment(\.me) var me
-
     @StateObject var watch = Watch<SpotMapIconQuery>()
 
     @State var user: SpotMapIconQuery.Data.Me.User?
@@ -12,17 +10,8 @@ struct SpotMapAccountIcon: View {
         NavigationLink {
             AccountPage()
         } label: {
-            AsyncImage(url: imageURL) { phase in
-                switch phase {
-                case let .success(image):
-                    image
-                        .resizable()
-                case _:
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                }
-            }
-            .frame(width: 44, height: 44)
+            ProfileImage(fragment: user?.fragments.profileImageFragment)
+                .frame(width: 44, height: 44)
         }
         .task {
             for await data in watch(for: .init()) {

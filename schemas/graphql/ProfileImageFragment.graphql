@@ -1,0 +1,7 @@
+fragment ProfileImageFragment on User {
+  id
+  profileImageURL
+  resizedProfileImageURLs {
+    thumbnail
+  }
+}

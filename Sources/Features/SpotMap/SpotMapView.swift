@@ -66,6 +66,7 @@ struct SpotMapView: View {
                 viewModel.error = error
             }
         }
+        .navigationBarHidden(true)
     }
 
     // Workaround of SwiftUI.Map unavoidable warning

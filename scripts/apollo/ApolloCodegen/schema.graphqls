@@ -20,6 +20,7 @@ type Query {
 
 type Mutation {
   spotAdd(input: SpotAddInput!): SpotAddPayload!
+  userNameUpdate(input: UserNameUpdateInput!): UserNameUpdatePayload!
 }
 
 interface Node {
@@ -85,4 +86,12 @@ input SpotAddInput {
 
 type SpotAddPayload {
   spot: Spot!
+}
+
+input UserNameUpdateInput {
+  name: String!
+}
+
+type UserNameUpdatePayload {
+  me: Me!
 }
