@@ -116,6 +116,30 @@ extension AppApolloClient {
             }
         }
     }
+
+    func watch<Query: GraphQLQuery>(query: Query) -> AsyncThrowingStream<Query.Data, Swift.Error> {
+        AsyncThrowingStream { continuation in
+            let canceller = apollo.watch(query: query) { result in
+                do {
+                    let response = try result.get()
+                    if let data = response.data {
+                        continuation.yield(with: .success(data))
+                    } else if let errors = response.errors, !errors.isEmpty {
+                        continuation.yield(with: .failure(AppGraphQLError(errors)))
+                    } else {
+                        // NOTE: Skip stream when Release build
+                        assertionFailure("Unexpected result.data and result.errors not found. Maybe apollo-ios or server side application bug")
+                    }
+                } catch {
+                    continuation.yield(with: .failure(error))
+                }
+            }
+
+            continuation.onTermination = { @Sendable _ in
+                canceller.cancel()
+            }
+        }
+    }
 }
 
 public struct AppApolloClientEnvironmentKey: EnvironmentKey {
