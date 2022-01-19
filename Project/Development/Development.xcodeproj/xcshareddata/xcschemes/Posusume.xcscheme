@@ -17,7 +17,7 @@
                BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
                BuildableName = "Posusume.app"
                BlueprintName = "Posusume"
-               ReferencedContainer = "container:Posusume.xcodeproj">
+               ReferencedContainer = "container:Development.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
             BuildableName = "Posusume.app"
             BlueprintName = "Posusume"
-            ReferencedContainer = "container:Posusume.xcodeproj">
+            ReferencedContainer = "container:Development.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "BAD9A8AB2610B72F00676F22"
             BuildableName = "Posusume.app"
             BlueprintName = "Posusume"
-            ReferencedContainer = "container:Posusume.xcodeproj">
+            ReferencedContainer = "container:Development.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
