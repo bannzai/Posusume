@@ -59,15 +59,15 @@
 /* Begin PBXFileReference section */
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA317351262CF28000E1212C /* MockPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrary.swift; sourceTree = "<group>"; };
-		BAD9A8AC2610B72F00676F22 /* Posusume.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Posusume.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD9A8AC2610B72F00676F22 /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosusumeApp.swift; sourceTree = "<group>"; };
 		BAD9A8B32610B73100676F22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAD9A8B82610B73100676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAD9A8BD2610B73100676F22 /* PosusumeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PosusumeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD9A8BD2610B73100676F22 /* DevelopmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8C12610B73100676F22 /* posusumeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeTests.swift; sourceTree = "<group>"; };
 		BAD9A8C32610B73100676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAD9A8C82610B73200676F22 /* PosusumeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PosusumeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAD9A8C82610B73200676F22 /* DevelopmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeUITests.swift; sourceTree = "<group>"; };
 		BAD9A8CE2610B73200676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,9 +136,9 @@
 		BAD9A8AD2610B72F00676F22 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BAD9A8AC2610B72F00676F22 /* Posusume.app */,
-				BAD9A8BD2610B73100676F22 /* PosusumeTests.xctest */,
-				BAD9A8C82610B73200676F22 /* PosusumeUITests.xctest */,
+				BAD9A8AC2610B72F00676F22 /* Development.app */,
+				BAD9A8BD2610B73100676F22 /* DevelopmentTests.xctest */,
+				BAD9A8C82610B73200676F22 /* DevelopmentUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,9 +186,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BAD9A8AB2610B72F00676F22 /* Posusume */ = {
+		BAD9A8AB2610B72F00676F22 /* Development */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BAD9A8D12610B73200676F22 /* Build configuration list for PBXNativeTarget "Posusume" */;
+			buildConfigurationList = BAD9A8D12610B73200676F22 /* Build configuration list for PBXNativeTarget "Development" */;
 			buildPhases = (
 				BAD9A8A82610B72F00676F22 /* Sources */,
 				BAD9A8A92610B72F00676F22 /* Frameworks */,
@@ -199,7 +199,7 @@
 			);
 			dependencies = (
 			);
-			name = Posusume;
+			name = Development;
 			packageProductDependencies = (
 				2004BA3226B18DA0007D3E82 /* FirebaseCrashlytics */,
 				2004BA3426B18DA0007D3E82 /* FirebaseMessaging */,
@@ -212,12 +212,12 @@
 				208FE93B278091FD00C43DC1 /* FirebaseFunctions */,
 			);
 			productName = posusume;
-			productReference = BAD9A8AC2610B72F00676F22 /* Posusume.app */;
+			productReference = BAD9A8AC2610B72F00676F22 /* Development.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BAD9A8BC2610B73100676F22 /* PosusumeTests */ = {
+		BAD9A8BC2610B73100676F22 /* DevelopmentTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BAD9A8D42610B73200676F22 /* Build configuration list for PBXNativeTarget "PosusumeTests" */;
+			buildConfigurationList = BAD9A8D42610B73200676F22 /* Build configuration list for PBXNativeTarget "DevelopmentTests" */;
 			buildPhases = (
 				A132B1F70723FCEF53E3C1D4 /* [CP] Check Pods Manifest.lock */,
 				BAD9A8B92610B73100676F22 /* Sources */,
@@ -229,14 +229,14 @@
 			dependencies = (
 				BAD9A8BF2610B73100676F22 /* PBXTargetDependency */,
 			);
-			name = PosusumeTests;
+			name = DevelopmentTests;
 			productName = posusumeTests;
-			productReference = BAD9A8BD2610B73100676F22 /* PosusumeTests.xctest */;
+			productReference = BAD9A8BD2610B73100676F22 /* DevelopmentTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BAD9A8C72610B73100676F22 /* PosusumeUITests */ = {
+		BAD9A8C72610B73100676F22 /* DevelopmentUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BAD9A8D72610B73200676F22 /* Build configuration list for PBXNativeTarget "PosusumeUITests" */;
+			buildConfigurationList = BAD9A8D72610B73200676F22 /* Build configuration list for PBXNativeTarget "DevelopmentUITests" */;
 			buildPhases = (
 				B52A510BBD1ACFA1A8181750 /* [CP] Check Pods Manifest.lock */,
 				BAD9A8C42610B73100676F22 /* Sources */,
@@ -249,9 +249,9 @@
 			dependencies = (
 				BAD9A8CA2610B73200676F22 /* PBXTargetDependency */,
 			);
-			name = PosusumeUITests;
+			name = DevelopmentUITests;
 			productName = posusumeUITests;
-			productReference = BAD9A8C82610B73200676F22 /* PosusumeUITests.xctest */;
+			productReference = BAD9A8C82610B73200676F22 /* DevelopmentUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -293,9 +293,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BAD9A8AB2610B72F00676F22 /* Posusume */,
-				BAD9A8BC2610B73100676F22 /* PosusumeTests */,
-				BAD9A8C72610B73100676F22 /* PosusumeUITests */,
+				BAD9A8AB2610B72F00676F22 /* Development */,
+				BAD9A8BC2610B73100676F22 /* DevelopmentTests */,
+				BAD9A8C72610B73100676F22 /* DevelopmentUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -423,12 +423,12 @@
 /* Begin PBXTargetDependency section */
 		BAD9A8BF2610B73100676F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BAD9A8AB2610B72F00676F22 /* Posusume */;
+			target = BAD9A8AB2610B72F00676F22 /* Development */;
 			targetProxy = BAD9A8BE2610B73100676F22 /* PBXContainerItemProxy */;
 		};
 		BAD9A8CA2610B73200676F22 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BAD9A8AB2610B72F00676F22 /* Posusume */;
+			target = BAD9A8AB2610B72F00676F22 /* Development */;
 			targetProxy = BAD9A8C92610B73200676F22 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -619,7 +619,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Posusume.app/Posusume";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Development.app/Development";
 			};
 			name = Debug;
 		};
@@ -641,7 +641,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Posusume.app/Posusume";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Development.app/Development";
 			};
 			name = Release;
 		};
@@ -697,7 +697,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BAD9A8D12610B73200676F22 /* Build configuration list for PBXNativeTarget "Posusume" */ = {
+		BAD9A8D12610B73200676F22 /* Build configuration list for PBXNativeTarget "Development" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BAD9A8D22610B73200676F22 /* Debug */,
@@ -706,7 +706,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BAD9A8D42610B73200676F22 /* Build configuration list for PBXNativeTarget "PosusumeTests" */ = {
+		BAD9A8D42610B73200676F22 /* Build configuration list for PBXNativeTarget "DevelopmentTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BAD9A8D52610B73200676F22 /* Debug */,
@@ -715,7 +715,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BAD9A8D72610B73200676F22 /* Build configuration list for PBXNativeTarget "PosusumeUITests" */ = {
+		BAD9A8D72610B73200676F22 /* Build configuration list for PBXNativeTarget "DevelopmentUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BAD9A8D82610B73200676F22 /* Debug */,
