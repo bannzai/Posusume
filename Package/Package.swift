@@ -9,10 +9,17 @@ let package = Package(
         .iOS(.v15),
     ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "Package",
-            targets: ["Package"]),
+        .library(name: "Application", targets: ["Application"]),
+        .library(name: "Auth", targets: ["Auth"]),
+        .library(name: "CloudStorage", targets: ["CloudStorage"]),
+        .library(name: "Components", targets: ["Components"]),
+        .library(name: "Core", targets: ["Core"]),
+        .library(name: "Error", targets: ["Error"]),
+        .library(name: "Features", targets: ["Features"]),
+        .library(name: "GraphQL", targets: ["GraphQL"]),
+        .library(name: "Resource", targets: ["Resource"]),
+        .library(name: "StdLib", targets: ["StdLib"]),
+        .library(name: "Style", targets: ["Style"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
