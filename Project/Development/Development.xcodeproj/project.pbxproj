@@ -21,8 +21,8 @@
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
 		BAD9A8B42610B73100676F22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B32610B73100676F22 /* Assets.xcassets */; };
 		BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */; };
-		BAD9A8C22610B73100676F22 /* posusumeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8C12610B73100676F22 /* posusumeTests.swift */; };
-		BAD9A8CD2610B73200676F22 /* posusumeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */; };
+		BAD9A8C22610B73100676F22 /* DevelopmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8C12610B73100676F22 /* DevelopmentTests.swift */; };
+		BAD9A8CD2610B73200676F22 /* DevelopmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8CC2610B73200676F22 /* DevelopmentUITests.swift */; };
 		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,10 +65,10 @@
 		BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BAD9A8B82610B73100676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAD9A8BD2610B73100676F22 /* DevelopmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAD9A8C12610B73100676F22 /* posusumeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeTests.swift; sourceTree = "<group>"; };
+		BAD9A8C12610B73100676F22 /* DevelopmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentTests.swift; sourceTree = "<group>"; };
 		BAD9A8C32610B73100676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAD9A8C82610B73200676F22 /* DevelopmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = posusumeUITests.swift; sourceTree = "<group>"; };
+		BAD9A8CC2610B73200676F22 /* DevelopmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentUITests.swift; sourceTree = "<group>"; };
 		BAD9A8CE2610B73200676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				BAD9A8AE2610B72F00676F22 /* Sources */,
-				BAD9A8C02610B73100676F22 /* PosusumeTests */,
-				BAD9A8CB2610B73200676F22 /* PosusumeUITests */,
+				BAD9A8C02610B73100676F22 /* DevelopmentTests */,
+				BAD9A8CB2610B73200676F22 /* DevelopmentUITests */,
 				BAD9A8AD2610B72F00676F22 /* Products */,
 				208FE93A278091FD00C43DC1 /* Frameworks */,
 			);
@@ -165,22 +165,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		BAD9A8C02610B73100676F22 /* PosusumeTests */ = {
+		BAD9A8C02610B73100676F22 /* DevelopmentTests */ = {
 			isa = PBXGroup;
 			children = (
-				BAD9A8C12610B73100676F22 /* posusumeTests.swift */,
+				BAD9A8C12610B73100676F22 /* DevelopmentTests.swift */,
 				BAD9A8C32610B73100676F22 /* Info.plist */,
 			);
-			path = PosusumeTests;
+			path = DevelopmentTests;
 			sourceTree = "<group>";
 		};
-		BAD9A8CB2610B73200676F22 /* PosusumeUITests */ = {
+		BAD9A8CB2610B73200676F22 /* DevelopmentUITests */ = {
 			isa = PBXGroup;
 			children = (
-				BAD9A8CC2610B73200676F22 /* posusumeUITests.swift */,
+				BAD9A8CC2610B73200676F22 /* DevelopmentUITests.swift */,
 				BAD9A8CE2610B73200676F22 /* Info.plist */,
 			);
-			path = PosusumeUITests;
+			path = DevelopmentUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,7 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD9A8C22610B73100676F22 /* posusumeTests.swift in Sources */,
+				BAD9A8C22610B73100676F22 /* DevelopmentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD9A8CD2610B73200676F22 /* posusumeUITests.swift in Sources */,
+				BAD9A8CD2610B73200676F22 /* DevelopmentUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,7 +608,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
-				INFOPLIST_FILE = posusumeTests/Info.plist;
+				INFOPLIST_FILE = DevelopmentTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -630,7 +630,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
-				INFOPLIST_FILE = posusumeTests/Info.plist;
+				INFOPLIST_FILE = DevelopmentTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -651,7 +651,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
-				INFOPLIST_FILE = posusumeUITests/Info.plist;
+				INFOPLIST_FILE = DevelopmentUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -671,7 +671,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TQPN82UBBY;
-				INFOPLIST_FILE = posusumeUITests/Info.plist;
+				INFOPLIST_FILE = DevelopmentUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
