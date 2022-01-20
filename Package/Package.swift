@@ -36,6 +36,12 @@ let package = Package(
             "Auth",
         ]),
 
+        // MARK: - Error
+        .target(name: "AppError", dependencies: [
+            .product(name: "Apollo", package: "Apollo"),
+            .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
+        ]),
+
         // MARK: - Domain
         .target(name: "Account", dependencies: [
             "GraphQL",
@@ -69,10 +75,6 @@ let package = Package(
 
         // MARK: - Component
         .target(name: "Components", dependencies: []),
-        .target(name: "AppError", dependencies: [
-            .product(name: "Apollo", package: "Apollo"),
-            .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
-        ]),
         .target(name: "Location", dependencies: []),
         .target(name: "Photo", dependencies: []),
         .target(name: "Resource", dependencies: []),
