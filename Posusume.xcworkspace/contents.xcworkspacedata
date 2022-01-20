@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Posusume.xcodeproj">
+      location = "group:Package">
+   </FileRef>
+   <FileRef
+      location = "group:Project/Development/Development.xcodeproj">
    </FileRef>
 </Workspace>
