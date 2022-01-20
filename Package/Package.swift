@@ -46,22 +46,28 @@ let package = Package(
         // MARK: - Domain
         .target(name: "Account", dependencies: [
             "GraphQL",
+            "Components",
             "AppError",
         ]),
         .target(name: "SpotDetail", dependencies: [
             "GraphQL",
+            "Components",
         ]),
         .target(name: "SpotMap", dependencies: [
             "GraphQL",
+            "Components",
         ]),
         .target(name: "SpotPost", dependencies: [
             "GraphQL",
+            "Components",
         ]),
         .target(name: "SpotPostEditor", dependencies: [
             "GraphQL",
+            "Components",
         ]),
         .target(name: "LocationSelect", dependencies: [
             "GraphQL",
+            "Components",
             "AppError",
         ]),
 

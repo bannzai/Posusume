@@ -2,6 +2,8 @@ import Foundation
 import SwiftUI
 import Apollo
 import MapKit
+import GraphQL
+import Components
 
 public struct SpotDetailPage: View {
     @Environment(\.dismiss) var dismiss

@@ -24,6 +24,8 @@ public final class Query<Query: Apollo.GraphQLQuery>: ObservableObject {
 
     public var isFetching: Bool { isFetchingFromCache || isFetchingFromServer }
 
+    public init() { }
+
     public func cache(for query: Query) async -> Query.Data? {
         isFetchingFromCache = true
         defer {
