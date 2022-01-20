@@ -1,5 +1,6 @@
 import Foundation
 import MapKit
+import GraphQL
 
 extension MKCoordinateSpan: Equatable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {

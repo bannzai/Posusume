@@ -82,7 +82,9 @@ let package = Package(
             .product(name: "Apollo", package: "Apollo"),
             .product(name: "ApolloSQLite", package: "Apollo"),
         ]),
-        .target(name: "StdLib", dependencies: []),
+        .target(name: "StdLib", dependencies: [
+            "GraphQL",
+        ]),
 
         // MARK: - Component
         .target(name: "Components", dependencies: []),
