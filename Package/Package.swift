@@ -77,6 +77,8 @@ let package = Package(
         ]),
         .target(name: "GraphQL", dependencies: [
             "AppError",
+            "Resource",
+            "Auth",
             .product(name: "Apollo", package: "Apollo"),
             .product(name: "ApolloSQLite", package: "Apollo"),
         ]),

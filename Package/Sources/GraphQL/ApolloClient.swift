@@ -2,6 +2,7 @@ import Apollo
 import Foundation
 import ApolloSQLite
 import SwiftUI
+import Resource
 
 public final class ApolloClient {
     fileprivate init() { }
@@ -19,7 +20,7 @@ public final class ApolloClient {
         if let semanticVersion = Plist.shared[.semanticVersion] {
             headers["X-Posusume-Version"] = semanticVersion
         }
-        if let buildNumber = Plist.shared[.semanticVersion] {
+        if let buildNumber = Plist.shared[.buildNumber] {
             headers["X-Posusume-Build-Number"] = buildNumber
         }
         if let languageCode = Locale.autoupdatingCurrent.languageCode {
@@ -29,7 +30,7 @@ public final class ApolloClient {
     }
 
     public lazy var apollo: ApolloClient = {
-        let endpointURL = URL(string: Secret.apiEndpoint)!
+        let endpointURL = URL(string: Config.endpoint)!
 
         let networkTransport = RequestChainNetworkTransport(
             interceptorProvider: interceptorProvider,
@@ -126,6 +127,12 @@ extension ApolloClient {
                 canceller.cancel()
             }
         }
+    }
+}
+
+extension ApolloClient {
+    public struct Config {
+        public static var endpoint: String!
     }
 }
 

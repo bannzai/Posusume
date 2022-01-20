@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Plist {
-    enum OptionalKey: String {
+    public enum OptionalKey: String {
         case semanticVersion = "CFBundleShortVersionString"
         case buildNumber = "CFBundleVersion"
     }
@@ -11,7 +11,7 @@ public struct Plist {
 
     internal var plist: [String: Any] = Bundle.main.infoDictionary!
 
-    subscript(key: OptionalKey) -> String? {
+    public subscript(key: OptionalKey) -> String? {
         plist[key.rawValue] as? String
     }
 }
