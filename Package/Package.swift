@@ -39,7 +39,7 @@ let package = Package(
         // MARK: - Error
         .target(name: "AppError", dependencies: [
             .product(name: "Apollo", package: "Apollo"),
-            .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
+            .product(name: "FirebaseAuth", package: "Firebase"),
         ]),
 
         // MARK: - Domain
