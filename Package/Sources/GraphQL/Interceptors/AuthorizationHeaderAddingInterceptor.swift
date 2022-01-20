@@ -1,6 +1,6 @@
 import Foundation
 import Apollo
-import FirebaseAuth
+import Error
 
 public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
     public func interceptAsync<Operation: GraphQLOperation>(
