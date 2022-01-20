@@ -17,6 +17,7 @@ let package = Package(
         .library(name: "AppError", targets: ["AppError"]),
         .library(name: "GraphQL", targets: ["GraphQL"]),
         .library(name: "Location", targets: ["Location"]),
+        .library(name: "LocationSelect", targets: ["LocationSelect"]),
         .library(name: "Photo", targets: ["Photo"]),
         .library(name: "Resource", targets: ["Resource"]),
         .library(name: "SpotDetail", targets: ["SpotDetail"]),
@@ -58,6 +59,10 @@ let package = Package(
         ]),
         .target(name: "SpotPostEditor", dependencies: [
             "GraphQL",
+        ]),
+        .target(name: "LocationSelect", dependencies: [
+            "GraphQL",
+            "AppError",
         ]),
 
         // MARK: - Library
