@@ -62,6 +62,7 @@ let package = Package(
 
         // MARK: - Library
         .target(name: "Auth", dependencies: [
+            "AppError",
             .product(name: "FirebaseAuth", package: "Firebase"),
         ]),
         .target(name: "CloudStorage", dependencies: [

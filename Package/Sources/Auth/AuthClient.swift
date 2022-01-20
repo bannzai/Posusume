@@ -1,6 +1,7 @@
 import Foundation
-import Firebase
+import FirebaseAuth
 import SwiftUI
+import AppError
 import os.log
 
 private let authLogger = Logger(subsystem: "com.posusume.log", category: "Auth")
