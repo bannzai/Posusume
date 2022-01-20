@@ -1,6 +1,6 @@
 import Foundation
 import Apollo
-import Error
+import AppError
 
 public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
     public func interceptAsync<Operation: GraphQLOperation>(

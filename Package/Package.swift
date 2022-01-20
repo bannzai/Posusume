@@ -76,6 +76,7 @@ let package = Package(
             .product(name: "FirebaseStorageSwift-Beta", package: "Firebase"),
         ]),
         .target(name: "GraphQL", dependencies: [
+            "AppError",
             .product(name: "Apollo", package: "Apollo"),
             .product(name: "ApolloSQLite", package: "Apollo"),
         ]),
