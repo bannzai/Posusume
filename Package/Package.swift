@@ -35,6 +35,9 @@ let package = Package(
         // MARK: - Main
         .target(name: "Application", dependencies: [
             "Auth",
+            "Location",
+            "SpotMap",
+            "Entity",
         ]),
 
         // MARK: - Error

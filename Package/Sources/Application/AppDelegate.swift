@@ -19,7 +19,6 @@ func setupAppearance() {
     appearance.backgroundImage = nil
     UINavigationBar.appearance().standardAppearance = appearance
     UINavigationBar.appearance().scrollEdgeAppearance = appearance
-
 }
 
 let isPreview = ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"

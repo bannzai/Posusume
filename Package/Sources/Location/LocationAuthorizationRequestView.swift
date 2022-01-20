@@ -3,6 +3,8 @@ import SwiftUI
 import MapKit
 
 public struct LocationAuthorizationRequestView: View {
+    public init( ) { }
+    
     public var body: some View {
         EmptyView()
     }

@@ -4,6 +4,10 @@ import Foundation
 public struct Me: Identifiable, Equatable {
     public let id: ID
 
+    public init(id: ID) {
+        self.id = id
+    }
+
     public struct ID: RawRepresentable, Equatable, Hashable {
         public let rawValue: String
         public init(rawValue: String) {

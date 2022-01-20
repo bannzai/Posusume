@@ -6,7 +6,7 @@ import GraphQL
 import SpotPost
 import Components
 
-struct SpotMapView: View {
+public struct SpotMapView: View {
     @Environment(\.locationManager) var locationManager
 
     @StateObject var viewModel = SpotMapViewModel()
@@ -14,7 +14,9 @@ struct SpotMapView: View {
     @State var region: MKCoordinateRegion?
     @State var isPresentingSpotPost = false
 
-    var body: some View {
+    public init() { }
+
+    public var body: some View {
         ZStack {
             Map(coordinateRegion: mapCoordinateRegion,
                 showsUserLocation: true,

@@ -1,6 +1,9 @@
 import SwiftUI
 import MapKit
 import Combine
+import Location
+import AppError
+import SpotMap
 
 struct RootView: View {
     @Environment(\.locationManager) var locationManager
@@ -16,7 +19,7 @@ struct RootView: View {
                 Map(coordinateRegion: .init(get: { defaultRegion }, set: { _ in }))
                     .edgesIgnoringSafeArea(.all)
             case .requireLocationPermission:
-                RequireLocationAuthorizationView()
+                LocationAuthorizationRequestView()
             case let .main(me):
                 NavigationView {
                     SpotMapView()

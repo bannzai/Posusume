@@ -64,7 +64,7 @@ public struct AuthClientKey: SwiftUI.EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    var auth: Auth {
+    public var auth: Auth {
         get {
             self[AuthClientKey.self]
         }
