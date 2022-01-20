@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
-import CoreLocation
+import Location
+import LocationSelect
 
 public struct SpotPostGeoPoint: View {
     @Binding var place: Placemark?

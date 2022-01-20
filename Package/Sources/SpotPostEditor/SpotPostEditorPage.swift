@@ -4,9 +4,7 @@ import SwiftUI
 public struct SpotPostEditorPageState {
     public internal(set) var textFieldValues: [TextFieldComponentState] = []
 
-    public init() {
-
-    }
+    public init() { }
 }
 
 public struct SpotPostEditorPage: View {

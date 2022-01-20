@@ -87,6 +87,3 @@ public struct CachedAsyncImage<Content: View>: View {
         }
     }
 }
-
-
-public typealias AsyncImage = CachedAsyncImage

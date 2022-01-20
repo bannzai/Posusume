@@ -5,7 +5,7 @@ import CoreLocation
 import Location
 import AppError
 
-struct LocationSelectView: View {
+public struct LocationSelectView: View {
     @Environment(\.locationManager) var locationManager
     @Environment(\.geocoder) var geocoder
     @Environment(\.dismiss) var dismiss
@@ -16,8 +16,11 @@ struct LocationSelectView: View {
     @State var userPlacemarks: [Placemark] = []
 
     @Binding var selectedPlacemark: Placemark?
+    public init(selectedPlacemark: Binding<Placemark?>) {
+        self._selectedPlacemark = selectedPlacemark
+    }
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             List {
                 ForEach(userPlacemarks) { mark in

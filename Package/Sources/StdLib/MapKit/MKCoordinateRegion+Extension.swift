@@ -15,20 +15,20 @@ extension MKCoordinateRegion: Equatable {
 }
 
 extension MKCoordinateRegion {
-    var minLatitude: Latitude {
+    public var minLatitude: Latitude {
         convertIfLatitudeDegressReachedBoundary(center.latitude - span.latitudeDelta / 2)
     }
-    var minLongitude: Longitude {
+    public var minLongitude: Longitude {
         convertIfLongitudeDegressReachedBoundary(center.longitude - span.longitudeDelta / 2)
     }
-    var maxLatitude: Latitude {
+    public var maxLatitude: Latitude {
         convertIfLatitudeDegressReachedBoundary(center.latitude + span.latitudeDelta / 2)
     }
-    var maxLongitude: Longitude {
+    public var maxLongitude: Longitude {
         convertIfLongitudeDegressReachedBoundary(center.longitude + span.longitudeDelta / 2)
     }
 
-    var cornerDigresses: (topLeft: CLLocationCoordinate2D, topRight: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
+    public var cornerDigresses: (topLeft: CLLocationCoordinate2D, topRight: CLLocationCoordinate2D, bottomLeft: CLLocationCoordinate2D, bottomRight: CLLocationCoordinate2D) {
         (
             topLeft: .init(latitude: minLatitude, longitude: maxLongitude),
             topRight: .init(latitude: maxLatitude, longitude: maxLongitude),

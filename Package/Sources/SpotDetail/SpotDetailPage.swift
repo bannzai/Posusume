@@ -15,6 +15,10 @@ public struct SpotDetailPage: View {
 
     let spotID: String
 
+    public init(spotID: String) {
+        self.spotID = spotID
+    }
+
     public var body: some View {
         Loading(value: response) { response in
             GeometryReader { geometry in

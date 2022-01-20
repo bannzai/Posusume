@@ -28,7 +28,7 @@ extension Color {
     }
 }
 
-struct GradientColor {
+public struct GradientColor {
     public static let upper = LinearGradient(
         gradient: Gradient(colors: [.barnEnd, Color.barnEnd.opacity(0.01)]),
         startPoint: .bottom,

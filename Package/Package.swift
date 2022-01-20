@@ -52,14 +52,23 @@ let package = Package(
         .target(name: "SpotDetail", dependencies: [
             "GraphQL",
             "Components",
+            "Account",
         ]),
         .target(name: "SpotMap", dependencies: [
             "GraphQL",
             "Components",
+            "StdLib",
+            "Location",
+            "SpotDetail",
+            "SpotPost",
         ]),
         .target(name: "SpotPost", dependencies: [
             "GraphQL",
             "Components",
+            "Photo",
+            "CloudStorage",
+            "SpotPostEditor",
+            "LocationSelect",
         ]),
         .target(name: "SpotPostEditor", dependencies: [
             "GraphQL",
@@ -93,7 +102,9 @@ let package = Package(
         ]),
 
         // MARK: - Component
-        .target(name: "Components", dependencies: []),
+        .target(name: "Components", dependencies: [
+            "GraphQL",
+        ]),
         .target(name: "Location", dependencies: []),
         .target(name: "Photo", dependencies: []),
         .target(name: "Resource", dependencies: []),

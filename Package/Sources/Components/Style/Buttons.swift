@@ -6,6 +6,10 @@ public struct PrimaryButtonStyle: ButtonStyle {
 
     let isLoading: Bool
 
+    public init(isLoading: Bool) {
+        self.isLoading = isLoading
+    }
+
     public func makeBody(configuration: Configuration) -> some View {
         if isLoading {
             ProgressView()

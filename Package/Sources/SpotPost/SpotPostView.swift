@@ -3,10 +3,12 @@ import Combine
 import CoreLocation
 import PhotosUI
 import Photos
+import Photo
 import MapKit
-import FirebaseStorageSwift
+import Location
+import SpotPostEditor
 
-struct SpotPostView: View {
+public struct SpotPostView: View {
     @Environment(\.locationManager) var locationManager
     @Environment(\.geocoder) var geocoder
     @Environment(\.dismiss) private var dismiss
@@ -18,7 +20,9 @@ struct SpotPostView: View {
     @State var editorState: SpotPostEditorPageState = .init()
     @State var editingSnapshot: UIImage?
 
-    var body: some View {
+    public init() { }
+
+    public var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: false) {

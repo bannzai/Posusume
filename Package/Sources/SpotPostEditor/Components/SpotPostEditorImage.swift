@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Components
 
 public struct SpotPostEditorImage: View {
     let width: CGFloat

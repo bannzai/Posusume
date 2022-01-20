@@ -1,5 +1,7 @@
 import Foundation
 import SwiftUI
+import Photo
+import SpotPostEditor
 
 struct SpotPostImage: View {
     @Environment(\.geocoder) var geocoder

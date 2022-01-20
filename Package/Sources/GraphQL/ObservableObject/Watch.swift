@@ -23,6 +23,8 @@ import SwiftUI
 
     @Published public private(set) var isFirstFetching = false
 
+    public init() { }
+
     internal func watch(query: Query) -> AsyncStream<Query.Data> {
         isFirstFetching = true
         defer {

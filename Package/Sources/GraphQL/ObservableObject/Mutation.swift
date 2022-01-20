@@ -8,6 +8,8 @@ public final class Mutation<Mutation: GraphQLMutation>: ObservableObject {
 
     @Published public private(set) var isProcessing = false
 
+    public init() { }
+
     internal func perform(mutation: Mutation) async throws -> Mutation.Data {
         isProcessing = true
         defer {

@@ -6,6 +6,8 @@ import class UIKit.UIImage
 public final class Upload: ObservableObject {
     @Published public private(set) var isProcessing = false
 
+    public init() { }
+
     internal func upload(path: CloudStorage.PathKind, image: UIImage) async throws -> CloudStorage.Uploaded {
         isProcessing = true
         defer {

@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 
 extension View {
-    func snapshot() -> UIImage {
+    public func snapshot() -> UIImage {
         // NOTE: If it is not Remove status bar and safe area insets,
         // Snapshot contains statusbar and safearea frame as black box frame
         let controller = UIHostingController(rootView: self

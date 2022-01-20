@@ -1,5 +1,7 @@
 import Foundation
 import SwiftUI
+import GraphQL
+import Components
 
 public struct AccountPage: View {
     @StateObject var watch = Watch<AccountPageQuery>()
@@ -8,6 +10,8 @@ public struct AccountPage: View {
     @State var user: AccountPageQuery.Data.Me.User?
     @State var username: String = ""
     @State var error: Error?
+
+    public init() { }
 
     public var body: some View {
         Loading(value: user) { user in

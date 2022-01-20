@@ -1,10 +1,15 @@
 import SwiftUI
+import GraphQL
 
 public struct ProfileImage: View {
     let fragment: ProfileImageFragment?
 
+    public init(fragment: ProfileImageFragment?) {
+        self.fragment = fragment
+    }
+
     public var body: some View {
-        AsyncImage(url: imageURL) { phase in
+        CachedAsyncImage(url: imageURL) { phase in
             switch phase {
             case let .success(image):
                 image

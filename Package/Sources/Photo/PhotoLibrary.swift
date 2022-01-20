@@ -4,12 +4,12 @@ import PhotosUI
 import Photos
 import CoreLocation
 
-enum PhotoLibraryPrepareAction {
+public enum PhotoLibraryPrepareAction {
     case openSettingApp
     case requestAuthorization
 }
 
-enum PhotoLibraryPickedError: LocalizedError {
+public enum PhotoLibraryPickedError: LocalizedError {
     case convertError
     
     var localizedDescription: String {
@@ -20,13 +20,13 @@ enum PhotoLibraryPickedError: LocalizedError {
     }
 }
 
-struct PhotoLibraryResult {
-    let image: UIImage
-    let location: CLLocation?
-    let takeDate: Date?
+public struct PhotoLibraryResult {
+    public let image: UIImage
+    public let location: CLLocation?
+    public let takeDate: Date?
 }
 
-protocol PhotoLibrary {
+public protocol PhotoLibrary {
     func prepareActionType() -> PhotoLibraryPrepareAction?
     func requestAuthorization() async -> PHAuthorizationStatus
     func convert(pickerResult: PHPickerResult) -> AnyPublisher<PhotoLibraryResult, Error>

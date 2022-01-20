@@ -1,7 +1,9 @@
 import Foundation
 import SwiftUI
-import Apollo
 import MapKit
+import Components
+import GraphQL
+import SpotDetail
 
 struct SpotMapImage: View {
     let fragment: SpotMapImageFragment
@@ -10,7 +12,7 @@ struct SpotMapImage: View {
 
     var body: some View {
         let _ = Self._printChanges()
-        AsyncImage(url: imageURL) { image in
+        CachedAsyncImage(url: imageURL) { image in
             image
                 .resizable()
                 .scaledToFill()

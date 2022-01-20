@@ -1,5 +1,8 @@
 import SwiftUI
 import MapKit
+import GraphQL
+import Location
+import StdLib
 
 @MainActor
 final class SpotMapViewModel: ObservableObject {

@@ -1,5 +1,8 @@
 import Foundation
 import SwiftUI
+import GraphQL
+import Components
+import Account
 
 struct SpotMapAccountIcon: View {
     @StateObject var watch = Watch<SpotMapIconQuery>()

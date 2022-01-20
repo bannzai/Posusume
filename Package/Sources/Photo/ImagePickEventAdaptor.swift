@@ -93,7 +93,7 @@ public struct ImagePickEventAdaptor: ViewModifier {
 }
 
 extension View {
-    func adaptImagePickEvent(
+    public func adaptImagePickEvent(
         showsActionSheet: Binding<Bool>,
         error: Binding<Error?>,
         takenPhoto: @escaping (UIImage) -> Void,
