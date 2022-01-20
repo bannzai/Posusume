@@ -11,7 +11,7 @@ public struct Auth {
 
     public typealias User = FirebaseAuth.User
 
-    public static var currentUser: User? {
+    public static var firebaseCurrentUser: User? {
         FirebaseAuth.Auth.auth().currentUser
     }
 

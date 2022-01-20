@@ -9,7 +9,7 @@ public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
         request: HTTPRequest<Operation>,
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-        guard let currentUser = Auth.currentUser else {
+        guard let currentUser = Auth.firebaseCurrentUser else {
             chain.handleErrorAsync(AppError.unstableNetwork, request: request, response: response, completion: completion)
             return
         }
