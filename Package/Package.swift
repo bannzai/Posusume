@@ -27,7 +27,7 @@ let package = Package(
         .library(name: "Style", targets: ["Style"]),
     ],
     dependencies: [
-        .package(name: "Apollo", url: "https://github.com/apollographql/apollo-ios", .upToNextMinor(from: "0.49.0")),
+        .package(name: "Apollo", url: "https://github.com/apollographql/apollo-ios", .upToNextMinor(from: "0.50.0")),
         .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk", .upToNextMinor(from: "8.10.0")),
     ],
     targets: [
@@ -69,7 +69,10 @@ let package = Package(
 
         // MARK: - Component
         .target(name: "Components", dependencies: []),
-        .target(name: "AppError", dependencies: []),
+        .target(name: "AppError", dependencies: [
+            .product(name: "Apollo", package: "Apollo"),
+            .product(name: "FirebaseAuth", package: "Firebase", condition: .when(platforms: [.iOS])),
+        ]),
         .target(name: "Location", dependencies: []),
         .target(name: "Photo", dependencies: []),
         .target(name: "Resource", dependencies: []),

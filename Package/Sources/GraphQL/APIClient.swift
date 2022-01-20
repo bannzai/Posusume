@@ -44,19 +44,6 @@ public final class AppApolloClient {
     }()
 }
 
-// MARK: - Error
-extension AppApolloClient {
-    // Named error for Posusume app
-    public struct AppGraphQLError: Error {
-        // Application error caused by server side application
-        public let applicationErrors: [Apollo.GraphQLError]
-
-        internal init(_ errors: [Apollo.GraphQLError]) {
-            self.applicationErrors = errors
-        }
-    }
-}
-
 // MARK: - async/await
 extension AppApolloClient {
     func fetchFromCache<Query: GraphQLQuery>(query: Query) async throws -> Query.Data? {

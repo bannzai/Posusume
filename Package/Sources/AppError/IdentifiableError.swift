@@ -11,7 +11,7 @@ public struct IdentifiableError: LocalizedError, Identifiable {
         "\(error._domain)\(error._code)"
     }
     public var localizedDescription: String {
-        if let graphQLError = error as? AppApolloClient.AppGraphQLError {
+        if let graphQLError = error as? AppGraphQLError {
             if let firstError = graphQLError.applicationErrors.first {
                 return firstError.localizedDescription
             } else {
