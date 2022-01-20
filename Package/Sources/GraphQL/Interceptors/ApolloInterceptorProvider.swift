@@ -3,7 +3,7 @@ import Apollo
 
 /// See also apollo-ios DefaultInterceptorProvider
 ///  https://github.com/apollographql/apollo-ios/blob/88ee167f247eedad81114da28311df17e8ad2afc/Sources/Apollo/DefaultInterceptorProvider.swift
-public struct AppApolloInterceptorProvider: InterceptorProvider {
+public struct ApolloInterceptorProvider: InterceptorProvider {
     private let store: ApolloStore
     private let client: URLSessionClient
 

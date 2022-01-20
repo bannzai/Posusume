@@ -3,10 +3,10 @@ import Foundation
 import ApolloSQLite
 import SwiftUI
 
-public final class AppApolloClient {
+public final class ApolloClient {
     fileprivate init() { }
 
-    private lazy var interceptorProvider = AppApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
+    private lazy var interceptorProvider = ApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
 
     private let store: ApolloStore = {
         let documentsURL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
@@ -45,7 +45,7 @@ public final class AppApolloClient {
 }
 
 // MARK: - async/await
-extension AppApolloClient {
+extension ApolloClient {
     func fetchFromCache<Query: GraphQLQuery>(query: Query) async throws -> Query.Data? {
         try await withCheckedThrowingContinuation { continuation in
             apollo.fetch(query: query, cachePolicy: .returnCacheDataDontFetch) { result in
@@ -129,17 +129,17 @@ extension AppApolloClient {
     }
 }
 
-public struct AppApolloClientEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: AppApolloClient = .init()
+public struct ApolloClientEnvironmentKey: EnvironmentKey {
+    public static var defaultValue: ApolloClient = .init()
 }
 
 public extension EnvironmentValues {
-    var apollo: AppApolloClient {
+    var apollo: ApolloClient {
         get {
-            self[AppApolloClientEnvironmentKey.self]
+            self[ApolloClientEnvironmentKey.self]
         }
         set {
-            self[AppApolloClientEnvironmentKey.self] = newValue
+            self[ApolloClientEnvironmentKey.self] = newValue
         }
     }
 }
