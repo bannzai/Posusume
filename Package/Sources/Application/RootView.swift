@@ -5,14 +5,16 @@ import Location
 import AppError
 import SpotMap
 
-struct RootView: View {
+public struct RootView: View {
     @Environment(\.locationManager) var locationManager
 
     @StateObject private var viewModel = RootViewModel()
 
     @State var error: IdentifiableError?
 
-    var body: some View {
+    public init() { }
+    
+    public var body: some View {
         Group {
             switch viewModel.viewKind {
             case .waiting:
