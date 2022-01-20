@@ -4,7 +4,7 @@ import ApolloSQLite
 import SwiftUI
 import Resource
 
-public final class ApolloClient {
+public final class AppApolloClient {
     fileprivate init() { }
 
     private lazy var interceptorProvider = ApolloInterceptorProvider(store: store, client: .init(sessionConfiguration: .default, callbackQueue: .main))
@@ -29,7 +29,7 @@ public final class ApolloClient {
         return headers
     }
 
-    public lazy var apollo: ApolloClient = {
+    public lazy var apollo: AppApolloClient = {
         let endpointURL = URL(string: Config.endpoint)!
 
         let networkTransport = RequestChainNetworkTransport(
@@ -46,7 +46,7 @@ public final class ApolloClient {
 }
 
 // MARK: - async/await
-extension ApolloClient {
+extension AppApolloClient {
     func fetchFromCache<Query: GraphQLQuery>(query: Query) async throws -> Query.Data? {
         try await withCheckedThrowingContinuation { continuation in
             apollo.fetch(query: query, cachePolicy: .returnCacheDataDontFetch) { result in
@@ -130,18 +130,18 @@ extension ApolloClient {
     }
 }
 
-extension ApolloClient {
+extension AppApolloClient {
     public struct Config {
         public static var endpoint: String!
     }
 }
 
 public struct ApolloClientEnvironmentKey: EnvironmentKey {
-    public static var defaultValue: ApolloClient = .init()
+    public static var defaultValue: AppApolloClient = .init()
 }
 
 public extension EnvironmentValues {
-    var apollo: ApolloClient {
+    var apollo: AppApolloClient {
         get {
             self[ApolloClientEnvironmentKey.self]
         }
