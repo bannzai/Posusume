@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import MapKit
 
-public struct RequireLocationAuthorizationView: View {
+public struct LocationAuthorizationRequestView: View {
     public var body: some View {
         EmptyView()
     }
