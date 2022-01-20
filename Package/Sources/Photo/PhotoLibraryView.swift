@@ -63,14 +63,3 @@ struct PhotoLibraryView: UIViewControllerRepresentable {
     }
 }
 
-struct PhotoLibraryView_Previews: PreviewProvider {
-    @State static var error: Error? = nil
-
-    static var previews: some View {
-        PhotoLibraryView(
-            error: $error,
-            photoLibrary: MockPhotoLibrary(),
-            selected: { _ in }
-        )
-    }
-}
