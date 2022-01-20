@@ -15,6 +15,7 @@
 		2005EE4726FA10FC009001C7 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4626FA10FC009001C7 /* Apollo */; };
 		2005EE4926FA10FC009001C7 /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4826FA10FC009001C7 /* ApolloSQLite */; };
 		2005EE4B26FA10FC009001C7 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2005EE4A26FA10FC009001C7 /* ApolloWebSocket */; };
+		204E4784279A2C8700D6CB6B /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204E4783279A2C8700D6CB6B /* Secret.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		208FE93C278091FD00C43DC1 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 208FE93B278091FD00C43DC1 /* FirebaseFunctions */; };
 		BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA317351262CF28000E1212C /* MockPhotoLibrary.swift */; };
@@ -23,7 +24,6 @@
 		BAD9A8B72610B73100676F22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD9A8B62610B73100676F22 /* Preview Assets.xcassets */; };
 		BAD9A8C22610B73100676F22 /* DevelopmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8C12610B73100676F22 /* DevelopmentTests.swift */; };
 		BAD9A8CD2610B73200676F22 /* DevelopmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8CC2610B73200676F22 /* DevelopmentUITests.swift */; };
-		BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9AA852610DE2B00676F22 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		204E4783279A2C8700D6CB6B /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA317351262CF28000E1212C /* MockPhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPhotoLibrary.swift; sourceTree = "<group>"; };
 		BAD9A8AC2610B72F00676F22 /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +71,6 @@
 		BAD9A8C82610B73200676F22 /* DevelopmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD9A8CC2610B73200676F22 /* DevelopmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentUITests.swift; sourceTree = "<group>"; };
 		BAD9A8CE2610B73200676F22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAD9AA852610DE2B00676F22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,11 +146,11 @@
 		BAD9A8AE2610B72F00676F22 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				204E4783279A2C8700D6CB6B /* Secret.swift */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
 				BAD9A8B52610B73100676F22 /* Preview Content */,
-				BAD9AA852610DE2B00676F22 /* AppDelegate.swift */,
 				208F8AEC272907B300D604DA /* GoogleService-Info.plist */,
 			);
 			path = Sources;
@@ -396,8 +396,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD9AA862610DE2B00676F22 /* AppDelegate.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
+				204E4784279A2C8700D6CB6B /* Secret.swift in Sources */,
 				BA317352262CF28000E1212C /* MockPhotoLibrary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

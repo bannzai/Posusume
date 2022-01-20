@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Application
 
 @main
 struct PosusumeApp: App {
