@@ -24,7 +24,6 @@ let package = Package(
         .library(name: "SpotPost", targets: ["SpotPost"]),
         .library(name: "SpotPostEditor", targets: ["SpotPostEditor"]),
         .library(name: "StdLib", targets: ["StdLib"]),
-        .library(name: "Style", targets: ["Style"]),
     ],
     dependencies: [
         .package(name: "Apollo", url: "https://github.com/apollographql/apollo-ios", .upToNextMinor(from: "0.50.0")),
@@ -79,6 +78,5 @@ let package = Package(
         .target(name: "Location", dependencies: []),
         .target(name: "Photo", dependencies: []),
         .target(name: "Resource", dependencies: []),
-        .target(name: "Style", dependencies: []),
     ]
 )
