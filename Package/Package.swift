@@ -24,6 +24,7 @@ let package = Package(
         .library(name: "SpotPost", targets: ["SpotPost"]),
         .library(name: "SpotPostEditor", targets: ["SpotPostEditor"]),
         .library(name: "StdLib", targets: ["StdLib"]),
+        .library(name: "Entity", targets: ["Entity"]),
     ],
     dependencies: [
         .package(name: "Apollo", url: "https://github.com/apollographql/apollo-ios", .upToNextMinor(from: "0.50.0")),
@@ -65,7 +66,9 @@ let package = Package(
             .product(name: "FirebaseAuth", package: "Firebase"),
         ]),
         .target(name: "CloudStorage", dependencies: [
+            "Entity",
             .product(name: "FirebaseStorage", package: "Firebase"),
+            .product(name: "FirebaseStorageSwift-Beta", package: "Firebase"),
         ]),
         .target(name: "GraphQL", dependencies: [
             .product(name: "Apollo", package: "Apollo"),
@@ -78,5 +81,6 @@ let package = Package(
         .target(name: "Location", dependencies: []),
         .target(name: "Photo", dependencies: []),
         .target(name: "Resource", dependencies: []),
+        .target(name: "Entity", dependencies: []),
     ]
 )

@@ -1,7 +1,7 @@
-import UIKit
+import class UIKit.UIImage
 import FirebaseStorage
 import FirebaseStorageSwift
-import Combine
+import Entity
 
 private let maximumDataSize: Int64 = 10 * 1024 * 1024
 public struct CloudStorage {
