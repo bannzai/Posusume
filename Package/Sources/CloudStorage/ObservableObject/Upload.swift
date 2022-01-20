@@ -1,6 +1,6 @@
 import Foundation
 import Combine
-import UIKit
+import class UIKit.UIImage
 
 @MainActor
 public final class Upload: ObservableObject {
