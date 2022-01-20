@@ -3,6 +3,7 @@ import Foundation
 import ApolloSQLite
 import SwiftUI
 import Resource
+import AppError
 
 public final class ApolloClient {
     fileprivate init() { }

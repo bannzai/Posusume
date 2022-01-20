@@ -6,10 +6,14 @@ import os.log
 
 private let authLogger = Logger(subsystem: "com.posusume.log", category: "Auth")
 
-public struct AuthClient {
+public struct Auth {
     private var client: FirebaseAuth.Auth { .auth() }
 
     public typealias User = FirebaseAuth.User
+
+    public static var currentUser: User? {
+        FirebaseAuth.Auth.auth().currentUser
+    }
 
     // MARK: - Stream
     public func stateDidChange() -> AsyncStream<User?> {
@@ -56,11 +60,11 @@ public struct AuthClient {
 }
 
 public struct AuthClientKey: SwiftUI.EnvironmentKey {
-    public static var defaultValue: AuthClient = .init()
+    public static var defaultValue: Auth = .init()
 }
 
 extension EnvironmentValues {
-    var auth: AuthClient {
+    var auth: Auth {
         get {
             self[AuthClientKey.self]
         }

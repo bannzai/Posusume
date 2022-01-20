@@ -1,6 +1,7 @@
 import Foundation
 import Apollo
 import AppError
+import Auth
 
 public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
     public func interceptAsync<Operation: GraphQLOperation>(
@@ -8,7 +9,7 @@ public class AuthorizationHeaderAddingInterceptor: ApolloInterceptor {
         request: HTTPRequest<Operation>,
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-        guard let currentUser = Auth.auth().currentUser else {
+        guard let currentUser = Auth.currentUser else {
             chain.handleErrorAsync(AppError.unstableNetwork, request: request, response: response, completion: completion)
             return
         }
