@@ -1,5 +1,5 @@
 import SwiftUI
-import Application
+import Root
 
 @main
 struct PosusumeApp: App {

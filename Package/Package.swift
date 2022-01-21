@@ -10,7 +10,7 @@ let package = Package(
     ],
     products: [
         .library(name: "Account", targets: ["Account"]),
-        .library(name: "Application", targets: ["Application"]),
+        .library(name: "Root", targets: ["Root"]),
         .library(name: "Auth", targets: ["Auth"]),
         .library(name: "CloudStorage", targets: ["CloudStorage"]),
         .library(name: "Components", targets: ["Components"]),
@@ -33,7 +33,7 @@ let package = Package(
     ],
     targets: [
         // MARK: - Main
-        .target(name: "Application", dependencies: [
+        .target(name: "Root", dependencies: [
             "Auth",
             "Location",
             "SpotMap",
@@ -46,17 +46,17 @@ let package = Package(
             .product(name: "FirebaseAuth", package: "Firebase"),
         ]),
 
-        // MARK: - Domain
+        // MARK: - Pages
         .target(name: "Account", dependencies: [
             "GraphQL",
             "Components",
             "AppError",
-        ]),
+        ], path: "Sources/Pages/Account"),
         .target(name: "SpotDetail", dependencies: [
             "GraphQL",
             "Components",
             "Account",
-        ]),
+        ], path: "Sources/Pages/SpotDetail"),
         .target(name: "SpotMap", dependencies: [
             "GraphQL",
             "Components",
@@ -64,7 +64,7 @@ let package = Package(
             "Location",
             "SpotDetail",
             "SpotPost",
-        ]),
+        ], path: "Sources/Pages/SpotMap"),
         .target(name: "SpotPost", dependencies: [
             "GraphQL",
             "Components",
@@ -72,16 +72,16 @@ let package = Package(
             "CloudStorage",
             "SpotPostEditor",
             "LocationSelect",
-        ]),
+        ], path: "Sources/Pages/SpotPost"),
         .target(name: "SpotPostEditor", dependencies: [
             "GraphQL",
             "Components",
-        ]),
+        ], path: "Sources/Pages/SpotPostEditor"),
         .target(name: "LocationSelect", dependencies: [
             "GraphQL",
             "Components",
             "AppError",
-        ]),
+        ], path: "Sources/Pages/LocationSelect"),
 
         // MARK: - Library
         .target(name: "Auth", dependencies: [
