@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20053927279A2DF000402464 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 20053926279A2DF000402464 /* Application */; };
+		20053929279A2F0E00402464 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20053928279A2F0E00402464 /* AppDelegate.swift */; };
+		2005392B279A2F3600402464 /* GraphQL in Frameworks */ = {isa = PBXBuildFile; productRef = 2005392A279A2F3600402464 /* GraphQL */; };
 		204E4784279A2C8700D6CB6B /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204E4783279A2C8700D6CB6B /* Secret.swift */; };
 		208F8AED272907B300D604DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 208F8AEC272907B300D604DA /* GoogleService-Info.plist */; };
 		BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */; };
@@ -48,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20053928279A2F0E00402464 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		204E4783279A2C8700D6CB6B /* Secret.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		208F8AEC272907B300D604DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20A189C2279A2D8000D3E67F /* Package */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Package; path = ../../Package; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2005392B279A2F3600402464 /* GraphQL in Frameworks */,
 				20053927279A2DF000402464 /* Application in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				204E4783279A2C8700D6CB6B /* Secret.swift */,
+				20053928279A2F0E00402464 /* AppDelegate.swift */,
 				BAD9A8AF2610B72F00676F22 /* PosusumeApp.swift */,
 				BAD9A8B32610B73100676F22 /* Assets.xcassets */,
 				BAD9A8B82610B73100676F22 /* Info.plist */,
@@ -193,6 +198,7 @@
 			name = Development;
 			packageProductDependencies = (
 				20053926279A2DF000402464 /* Application */,
+				2005392A279A2F3600402464 /* GraphQL */,
 			);
 			productName = posusume;
 			productReference = BAD9A8AC2610B72F00676F22 /* Development.app */;
@@ -377,6 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20053929279A2F0E00402464 /* AppDelegate.swift in Sources */,
 				BAD9A8B02610B72F00676F22 /* PosusumeApp.swift in Sources */,
 				204E4784279A2C8700D6CB6B /* Secret.swift in Sources */,
 			);
@@ -710,6 +717,10 @@
 		20053926279A2DF000402464 /* Application */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Application;
+		};
+		2005392A279A2F3600402464 /* GraphQL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GraphQL;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

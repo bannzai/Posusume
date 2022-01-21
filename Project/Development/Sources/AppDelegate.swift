@@ -1,8 +1,11 @@
 import UIKit
 import Firebase
+import GraphQL
 
 public final class AppDelegate: NSObject, UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        GraphQL.ApolloClient.Config.endpoint = Secret.apiEndpoint
+
         setupAppearance()
         if !isPreview {
             FirebaseApp.configure()
